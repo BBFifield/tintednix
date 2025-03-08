@@ -1,3 +1,5 @@
+![](/assets/logo.png)
+
 # TintedNix
 
 TintedNix is a configuration management tool designed to handle color schemes for various applications. It provides an easy way to manage and switch between different color schemes.
