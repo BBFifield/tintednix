@@ -1,9 +1,11 @@
-self: {
+inputs: {
   config,
   pkgs,
   lib,
   ...
 }: let
+  base16-nix = pkgs.callPackage inputs.base16-nix.lib {};
+
   cfg = config.hm.tintednix;
   enabledSchemes = cfg.enabledSchemes;
 
@@ -30,7 +32,7 @@ self: {
     schemeList =
       lib.map (
         filePath: let
-          schemeAttrs = config.lib.base16.mkSchemeAttrs filePath;
+          schemeAttrs = base16-nix.mkSchemeAttrs filePath;
           slug = schemeAttrs.slug;
         in {
           name = slug;

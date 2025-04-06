@@ -21,8 +21,13 @@
       perSystem = {pkgs, ...}: {
         formatter = pkgs.alejandra;
       };
+
       flake = {
-        homeManagerModules.default = import ./nix/hm-module.nix self;
+        overlays.default = final: prev: {
+          base16 = final.callPackage ./pkgs/base16/default.nix {};
+        };
+        packages.default = {pkgs, ...}: pkgs.callPackage ./pkgs/base16/default.nix {};
+        homeManagerModules.default = import ./nix/hm-module.nix inputs;
       };
     };
 }

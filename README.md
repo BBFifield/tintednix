@@ -48,6 +48,8 @@ To install TintedNix, add this the repo to your inputs and import the home-manag
 }
 ```
 
+In addition, add the default overlay or package so you have access to all the base16 color schemes from tinted-theming. This is required to be able to define the color scheme packages you would like to install and enable in the `enabledSchemes` option.    
+
 ## Usage
 
 Here's an example I've pulled from my own home-manager configuration inside github:BBFifield/nixos-config.
@@ -201,3 +203,8 @@ tintednix = {
     };
   };
 ```
+
+## 📜 Credits
+
+### 🛠 Tools Used
+- [Base16.nix](https://github.com/ThinkChaos/base16.nix) by ThinkChaos – for the provided mkSchemeAttrs function, which makes the parsing of YAML color scheme files from tinted-theming simple and easy to use in nix.
