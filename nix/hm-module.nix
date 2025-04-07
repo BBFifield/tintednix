@@ -164,7 +164,7 @@ in {
             directory=${config.home.homeDirectory}/.config
             arg2="$2"
 
-            tintednix=/etc/profiles/per-user/brandon/bin/tintednix
+            tintednix=/etc/profiles/per-user/$(whoami)/bin/tintednix
 
             if [[ $arg1 == "get" ]]; then
               grep "$arg2=" "$directory/tintednix/settings.txt" | cut -d '=' -f 2
@@ -210,7 +210,7 @@ in {
           home = let
             schemeFilesList =
               lib.map (schemeAttrs: {
-                file.".cfg/color-schemes/${schemeAttrs.name}.txt".text = ''
+                file.".config/tintednix/color-schemes/${schemeAttrs.name}.txt".text = ''
                   color_scheme=${schemeAttrs.name}
                   base00=#${schemeAttrs.value.base00}
                   base01=#${schemeAttrs.value.base01}
