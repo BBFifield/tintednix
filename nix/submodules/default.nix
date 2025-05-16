@@ -24,7 +24,7 @@
         example = {
           enable = true;
           hotReload = ''
-            swaync load-css "$directory/swaync/style.css"
+            swaync-client -rs "$directory/swaync/style.css"
           '';
           onActivation = lib.literalExpression ''
             $${pkgs.swaync}/bin/swaync -s "/home/$(whoami)/.config/swaync/style.css"

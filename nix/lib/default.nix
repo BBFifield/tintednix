@@ -2,9 +2,12 @@
   config,
   pkgs,
   lib,
-}: let
+}:
+# Note that we use the term config in place of style/scheme/colors file because some app templates generate all encompassing configuration files.
+let
   cfg.home = config.home.homeDirectory;
 in rec {
+  # This just generates an attribute set containing the scheme name and affiliated config file contents from a provided template.
   mkConfigFromTemplate = scheme: templateSrc: templateName: let
     schemeAttrs = scheme.value;
   in {
@@ -19,6 +22,7 @@ in rec {
       else null;
   };
 
+  # This takes a target (app specific configuration for generating config/scheme files) and creates its config files before putting them in the destination directory .
   mkTargetFiles = target: let
     configs =
       lib.map (scheme: mkConfigFromTemplate scheme target.value.templateSrc target.value.templateName) (config.hm.tintednix.base16schemes);
@@ -47,6 +51,7 @@ in rec {
   in
     lib.mkMerge [(lib.foldl' (acc: item: {file = acc.file // item.file;}) {file = {};} (schemeFilesList ++ defaultSchemeFile))];
 
+  # The commands executed for switching configs per app/target.
   mkTargetHooks = targets:
     lib.map
     (target:

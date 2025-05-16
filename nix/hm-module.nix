@@ -132,7 +132,7 @@ in {
       default = {
         enable = true;
       };
-      description = ''Only the enable option is useful in this instance for the type. Disables live switching of color schemes globally.'';
+      description = ''Only the enable option is useful here from the module. Disables live switching of color schemes globally.'';
     };
     defaultScheme = lib.mkOption {
       type = lib.types.str;
@@ -143,7 +143,7 @@ in {
       type = lib.types.listOf lib.types.attrs;
       default = base16schemes;
       example = lib.literalExample ''with pkgs.base16; [catppuccin-frappe catppuccin-latte catppuccin-macchiato catppuccin-mocha dracula gruvbox-dark-hard]'';
-      description = "";
+      description = "The base16 color scheme packages to install.";
     };
     commonColors = lib.mkOption {
       type = lib.types.attrs;
@@ -239,8 +239,8 @@ in {
           home.packages = [
             (pkgs.writeShellApplication {
               name = "tintednix";
-              runtimeInputs = with pkgs; [bash coreutils gnugrep gnused gawk];
-              text = cfg.live.hooks.hotReload; # this bad, i know
+              runtimeInputs = with pkgs; [coreutils gnugrep gnused gawk];
+              text = cfg.live.hooks.hotReload;
             })
           ];
         }
