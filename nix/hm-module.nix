@@ -75,7 +75,10 @@ inputs: {
 
   mkGithubType = lib.mkOptionType {
     name = "mkGitHubType";
-    check = src: (builtins.tryEval (builtins.fetchGit src)).success;
+    check = src:
+      if (!(lib.isPath src))
+      then (builtins.tryEval (builtins.fetchGit src)).success
+      else false;
   };
 in {
   options.hm.tintednix = with lib; {

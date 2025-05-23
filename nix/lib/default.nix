@@ -19,7 +19,12 @@ in rec {
           templateRepo = builtins.fetchGit templateSrc;
           target = templateName;
         }
-      else null;
+      # else null;
+      else
+        (schemeAttrs.__functor schemeAttrs) {
+          templateRepo = templateSrc;
+          target = templateName;
+        };
   };
 
   # This takes a target (app specific configuration for generating config/scheme files) and creates its config files before putting them in the destination directory .
