@@ -6,6 +6,17 @@
 # Note that we use the term config in place of style/scheme/colors file because some app templates generate all encompassing configuration files.
 let
   cfg.home = config.home.homeDirectory;
+
+  compileSass = name: generatedConfig:
+    pkgs.runCommand name {nativeBuildInputs = with pkgs; [dart-sass jq];}
+    ''
+      #!/usr/bin/env bash
+      mkdir -p $out
+      cat > "$out/stylePre.scss" <<'EOF'
+      ${builtins.readFile generatedConfig}
+      EOF
+      sass "$out/stylePre.scss" "$out/stylePost.css"
+    '';
 in rec {
   # This just generates an attribute set containing the scheme name and affiliated config file contents from a provided template.
   mkConfigFromTemplate = scheme: templateSrc: templateName: let
@@ -29,26 +40,42 @@ in rec {
 
   # This takes a target (app specific configuration for generating config/scheme files) and creates its config files before putting them in the destination directory .
   mkTargetFiles = target: let
+    schemeExtension =
+      if target.value.schemeExtension == "scss"
+      then "css"
+      else target.value.schemeExtension;
     configs =
       lib.map (scheme: mkConfigFromTemplate scheme target.value.templateSrc target.value.templateName) (config.hm.tintednix.base16schemes);
     schemeFilesList =
       if config.hm.tintednix.targets.${target.name}.live.enable
       then
-        lib.map (config: {
-          file."${target.value.path}/color-schemes/${config.schemeName}.${target.value.schemeExtension}".source = config.generatedConfig;
+        lib.map (config: let
+          generatedConfig =
+            if target.value.schemeExtension == "scss"
+            then "${compileSass config.schemeName config.generatedConfig}/stylePost.css"
+            else config.generatedConfig;
+        in {
+          file."${target.value.path}/color-schemes/${config.schemeName}.${schemeExtension}".source =
+            generatedConfig;
         })
         configs
       else [];
 
     defaultSchemeFile = [
       {
-        file."${target.value.path}/${target.value.schemeFilename}.${target.value.schemeExtension}" = let
+        file."${target.value.path}/${target.value.schemeFilename}.${schemeExtension}" = let
           defaultConfig = let
             defaultScheme = lib.head (lib.filter (scheme: (scheme.name == config.hm.tintednix.defaultScheme)) config.hm.tintednix.base16schemes);
           in
             mkConfigFromTemplate defaultScheme target.value.templateSrc target.value.templateName;
         in {
-          source = defaultConfig.generatedConfig;
+          source = let
+            generatedConfig =
+              if target.value.schemeExtension == "scss"
+              then "${compileSass defaultConfig.schemeName defaultConfig.generatedConfig}/stylePost.css"
+              else defaultConfig.generatedConfig;
+          in
+            generatedConfig;
           onChange = target.value.live.hooks.onActivation;
         };
       }
@@ -63,9 +90,15 @@ in rec {
       if target.live.enable
       then
         lib.mkMerge [
-          (lib.mkBefore ''
-            cp -rf ${cfg.home}/${target.path}/color-schemes/"$arg2".${target.schemeExtension} ${cfg.home}/${target.path}/${target.schemeFilename}.${target.schemeExtension}
-          '')
+          (lib.mkBefore (
+            if target.schemeExtension == "scss"
+            then ''
+              cp -rf ${cfg.home}/${target.path}/color-schemes/"$arg2".css ${cfg.home}/${target.path}/${target.schemeFilename}.css
+            ''
+            else ''
+              cp -rf ${cfg.home}/${target.path}/color-schemes/"$arg2".${target.schemeExtension} ${cfg.home}/${target.path}/${target.schemeFilename}.${target.schemeExtension}
+            ''
+          ))
           (
             lib.mkAfter ''${target.live.hooks.hotReload}''
           )
