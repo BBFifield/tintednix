@@ -43,7 +43,7 @@ inputs: {
   in
     schemeList;
 
-  commonColors = let
+  schemeCommonAttrs = let
     schemeList =
       lib.map (schemeAttrs: {
         name = schemeAttrs.name;
@@ -86,6 +86,23 @@ in {
     enabledSchemes = lib.mkOption {
       type = with types; either (enum ["all"]) (listOf package);
       default = with pkgs.base16; [catppuccin-frappe];
+    };
+    gtkTheme = lib.mkOption {
+      type = types.submodule {
+        options = {
+          enable = lib.mkEnableOption "Install the base16-gtk theme package. The theme will use the default scheme's colors.";
+          name = lib.mkOption {
+            type = lib.types.str;
+            default = "";
+            description = ''Default is "" to avoid infinite recursion. Will be instantiated with the actual name in config.'';
+          };
+          package = lib.mkOption {
+            type = lib.types.nullOr lib.types.package;
+            default = null;
+            description = ''Default is null to avoid infinite recursion. Will be instantiated with the actual package in config.'';
+          };
+        };
+      };
     };
     targets = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule {
@@ -137,7 +154,7 @@ in {
       };
       description = ''Only the enable option is useful here from the module. Disables live switching of color schemes globally.'';
     };
-    defaultScheme = lib.mkOption {
+    defaultSchemeName = lib.mkOption {
       type = lib.types.str;
       default = "catppuccin-frappe";
       description = ''The default color scheme to use. You can find a list of base16 color schemes at the tinted-theming/schemes github repository.'';
@@ -148,10 +165,10 @@ in {
       example = lib.literalExample ''with pkgs.base16; [catppuccin-frappe catppuccin-latte catppuccin-macchiato catppuccin-mocha dracula gruvbox-dark-hard]'';
       description = "The base16 color scheme packages to install.";
     };
-    commonColors = lib.mkOption {
+    schemeVariantAndColors = lib.mkOption {
       type = lib.types.attrs;
-      default = commonColors;
-      description = ''A convenience option for exporting the "commonColors" set.'';
+      default = schemeCommonAttrs;
+      description = ''A convenience option for exporting the "schemeCommonAttrs" set, which contains the variant name and base colors for each scheme.'';
     };
   };
   config = lib.mkIf (cfg.enable) (
@@ -183,14 +200,23 @@ in {
           '')
       ];
       targetHooks' = lib.mkMerge [targetHooks scriptParts];
+
+      package = {
+        name = "base16-gtk";
+        package = let
+          defaultScheme = lib.head (lib.filter (scheme: (scheme.name == config.hm.tintednix.defaultSchemeName)) base16schemes);
+          colorsFile = this.lib.mkTargetFile defaultScheme "scss" ../../templates/gtk "default";
+        in
+          (pkgs.callPackage ../../pkgs/themes {inherit colorsFile;}).base16-gtk;
+      };
     in
       lib.mkMerge [
         {
           home = targetFiles;
           xdg.configFile."tintednix/settings.txt".text = let
-            bases = commonColors.${cfg.defaultScheme}.colors;
+            bases = schemeCommonAttrs.${cfg.defaultSchemeName}.colors;
           in ''
-            color_scheme=${cfg.defaultScheme}
+            color_scheme=${cfg.defaultSchemeName}
             base00=#${bases.base00}
             base01=#${bases.base01}
             base02=#${bases.base02}
@@ -236,6 +262,15 @@ in {
               base16schemes;
           in
             lib.mkMerge [(lib.foldl' (acc: item: {file = acc.file // item.file;}) {file = {};} schemeFilesList)];
+        }
+        {
+          hm.tintednix.gtkTheme = {
+            name = package.name;
+            package = package.package;
+          };
+          home.packages = [
+            config.hm.tintednix.gtkTheme.package
+          ];
         }
         {
           hm.tintednix.live.hooks.hotReload = targetHooks';

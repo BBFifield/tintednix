@@ -24,10 +24,11 @@
 
       flake = {
         overlays.default = final: prev: {
-          base16 = final.callPackage ./pkgs/base16/default.nix {};
+          base16 = final.callPackage ./pkgs/base16-schemes {};
         };
-        packages.default = {pkgs, ...}: pkgs.callPackage ./pkgs/base16/default.nix {};
-        homeManagerModules.default = import ./nix/hm-module.nix inputs;
+        packages.default = {pkgs, ...}: pkgs.callPackage ./pkgs/base16-schemes {};
+        homeManagerModules.default = import ./nix/home-manager/hm-module.nix inputs;
+        nixosModules.default = import ./nix/nixos/nixos-module.nix inputs;
       };
     };
 }
