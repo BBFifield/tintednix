@@ -191,7 +191,7 @@ in {
         name = "base16-gtk";
         package = let
           defaultScheme = lib.head (lib.filter (scheme: (scheme.name == config.tintednix.defaultSchemeName)) base16schemes);
-          colorsFile = this.lib.mkTargetFile defaultScheme "scss" ../../templates/gtk "default";
+          colorsFile = this.lib.mkTargetFile defaultScheme "scss" ../.. "gtk";
         in
           (pkgs.callPackage ../../pkgs/themes {inherit colorsFile;}).base16-gtk;
       };
