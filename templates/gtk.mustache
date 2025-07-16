@@ -15,16 +15,18 @@
 
 $variant: {{scheme-variant}}; // “dark” or “light”
 
+@function shade-thin-shadow($var-name) { @return "1px 2px 2px rgba(0, 0, 0, 0.17), 2px 4px 4px rgba(0, 0, 0, 0.2), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%)"; }
+@function color-thin-shadow($var-name) { @return "1px 2px 2px rgba(0, 0, 0, 0.17), 2px 4px 4px rgba(0, 0, 0, 0.2), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 40%)"; }
 
-@function general-thin-shadow($var-name) { @return "1px 2px 2px rgba(0, 0, 0, 0.17), 2px 4px 4px rgba(0, 0, 0, 0.2), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%)"; }
-@function bright-thin-shadow($var-name) { @return "1px 2px 2px rgba(0, 0, 0, 0.17), 2px 4px 4px rgba(0, 0, 0, 0.2), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 30%)"; }
-@function general-wide-shadow($var-name) { @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%)"; }
+@function shade-wide-shadow($var-name) { @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%)"; }
+@function color-wide-shadow($var-name) { @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 40%)"; }
 
-@function general-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
-@function progress-empty-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
-@function bg-highlight-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "0%, white 100%")}) inset"; }
-@function base02-highlight-inset-shadow() { @return "-1px -1px 0px color-mix(in oklab, var(--base02) #{if($variant == dark, "80%, white 10%", "50%, white 50%")}) inset"}
-@function base0D-highlight-inset-shadow() { @return "-1px -1px 0px color-mix(in oklab, var(--base0D) #{if($variant == dark, "80%, white 20%", "70%, white 30%")}) inset"; }
+@function top-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
+@function top-thin-inset-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
+
+@function shade-heavy-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "0%, white 100%")}) inset"; }
+@function shade-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "50%, white 50%")}) inset"; }
+@function color-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 40%", "80%, white 20%")}) inset"; }
 
 @define-color base00 #{{base00-hex}};
 @define-color base01 #{{base01-hex}};
@@ -115,22 +117,24 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --purple:            @purple;
 
 
-  --shadow-inset-base01: #{general-inset-shadow(--base01)}, #{bg-highlight-inset-shadow(--base01)};
-  --shadow-inset-base00: #{general-inset-shadow(--base00)}, #{bg-highlight-inset-shadow(--base00)};
-  --shadow-inset-base0D: #{general-inset-shadow(--base0D)}, #{base0D-highlight-inset-shadow()};
-  --shadow-inset-base02: #{general-inset-shadow(--base02)}, #{base02-highlight-inset-shadow()};
-  --shadow-inset-base0D-thin: #{progress-empty-inset-shadow(--base0D)}, #{base0D-highlight-inset-shadow()};
-  --shadow-inset-base02-thin: #{progress-empty-inset-shadow(--base02)}, #{base02-highlight-inset-shadow()};
+  --shadow-inset-base00: #{top-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)}; /* Bottom inset shadow for more extreme shades (usually base00 and base02) */
+  --shadow-inset-base01: #{top-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
+  --shadow-inset-base02: #{top-inset-shadow(--base02)}, #{shade-bottom-inset-shadow(--base02)}; /* Bottom inset shadow for duller shades (usually base02-base07) */
+  --shadow-inset-base08: #{top-inset-shadow(--base08)}, #{color-bottom-inset-shadow(--base08)};
+  --shadow-inset-base0D: #{top-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
+  --shadow-inset-base02-thin: #{top-thin-inset-shadow(--base02)}, #{shade-bottom-inset-shadow(--base02)};
+  --shadow-inset-base0D-thin: #{top-thin-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
 
-  --shadow-thin-base00: #{general-thin-shadow(--base00)};
-  --shadow-thin-base01: #{general-thin-shadow(--base01)};
-  --shadow-thin-base02: #{general-thin-shadow(--base02)};
-  --shadow-thin-base08: #{bright-thin-shadow(--base08)};
-  --shadow-thin-base09: #{bright-thin-shadow(--base09)};
-  --shadow-thin-base0A: #{bright-thin-shadow(--base0A)};
-  --shadow-thin-base0B: #{bright-thin-shadow(--base0B)};
-  --shadow-thin-base0D: #{bright-thin-shadow(--base0D)};
+  --shadow-thin-base00: #{shade-thin-shadow(--base00)};
+  --shadow-thin-base01: #{shade-thin-shadow(--base01)};
+  --shadow-thin-base02: #{shade-thin-shadow(--base02)};
+  --shadow-thin-base08: #{color-thin-shadow(--base08)};
+  --shadow-thin-base09: #{color-thin-shadow(--base09)};
+  --shadow-thin-base0A: #{color-thin-shadow(--base0A)};
+  --shadow-thin-base0B: #{color-thin-shadow(--base0B)};
+  --shadow-thin-base0D: #{color-thin-shadow(--base0D)};
 
-  --shadow-wide-base01: #{general-wide-shadow(--base01)};
-  --shadow-wide-base02: #{general-wide-shadow(--base02)};
+  --shadow-wide-base01: #{shade-wide-shadow(--base01)};
+  --shadow-wide-base02: #{shade-wide-shadow(--base02)};
+  --shadow-wide-base08: #{color-wide-shadow(--base08)};
 }

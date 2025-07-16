@@ -655,7 +655,6 @@ banner label.heading {
   color: var(--base01);
 }
 
-/*Experimental*/
 scale {
   min-height: 10px;
   min-width: 10px;
