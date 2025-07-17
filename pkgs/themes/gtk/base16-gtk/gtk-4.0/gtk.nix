@@ -65,14 +65,17 @@
     caret-color: var(--base0D);
     background-clip: padding-box;
     border-radius: 50px;
-    padding: 0px 9px 0px 9px;
-    min-height: 35px;
+    padding: 4px 9px 5px 8px;
+    margin: 1px 0px 0px 1px;
+    min-height: 24px;
     outline: none;
     box-shadow: var(--shadow-thin-base02);
   }
   entry:focus-within,
   entry button:active,
   entry button:checked {
+    padding: 5px 9px 5px 9px;
+    margin: 0px 0px 0px 0px;
     box-shadow: var(--shadow-inset-base02);
   }
   entry.search image {
@@ -627,15 +630,6 @@
     box-shadow: var(--shadow-inset-base02);
   }
 
-  spinbutton {
-    border-radius: 50px;
-    background-color: inherit;
-  }
-  spinbutton button.up,
-  spinbutton button.down {
-    border-color: transparent;
-  }
-
   row:hover button.text-button:checked,
   row:hover button.text-button:checked:hover {
     box-shadow: var(--shadow-inset-base0D);
@@ -867,7 +861,7 @@
     color: var(--base0D);
     border-radius: 50px;
     background-color: var(--base02);
-    min-height: 34px;
+    min-height: 35px;
     box-shadow: var(--shadow-thin-base02);
   }
   spinbutton:focus {
@@ -885,18 +879,24 @@
   }
   spinbutton button.up,
   spinbutton button.down {
-    padding: 0px 5px 0px 5px;
+    padding: 1px 5px 0px 6px;
+    margin: 0px;
     border-color: transparent;
-    min-height: 16px;
+    min-height: 24px;
     min-width: 24px;
   }
   spinbutton button:hover {
     color: var(--base01);
+    padding: 0px 5px 0px 5px;
+    margin: 1px 0px 0px 1px;
+    box-shadow: var(--shadow-thin-base0D);
   }
   spinbutton button.up:active,
   spinbutton button.up:hover:active,
   spinbutton button.down:active,
   spinbutton button.down:hover:active {
+    padding: 1px 5px 0px 6px;
+    margin: 0px;
     box-shadow: var(--shadow-inset-base02);
   }
   spinbutton.vertical button {
@@ -908,16 +908,13 @@
   spinbutton.vertical > entry {
     padding: 0px;
   }
-  spinbutton > * {
-    margin: 1px;
-  }
 
   button {
     color: var(--base0D);
     background-color: transparent;
     min-height: 24px;
     min-width: 24px; /*.linked modification, .image-button*/
-    padding: 5px 5px 5px 5px; /*.linked modification, .image-button*/
+    padding: 4px 5px 5px 4px; /*.linked modification, .image-button*/
     border-radius: 50px;
   }
   button:checked,
@@ -928,6 +925,7 @@
   button.image-button:hover:active,
   button.image-button:hover:active:checked {
     background-color: transparent;
+    padding: 5px 5px 5px 5px;
     box-shadow: var(--shadow-inset-base01);
   }
   button.image-button:hover:checked {
@@ -947,18 +945,23 @@
     background-color: var(--base02);
     min-height: 24px;
     min-width: 16px;
-    padding: 5px 17px 5px 17px;
+    padding: 4px 17px 5px 16px;
+    margin: 1px 0px 0px 1px;
     box-shadow: var(--shadow-thin-base02);
   }
   button.font:active,
   button.file:active {
     background-color: var(--base02);
+    padding: 5px 17px 5px 17px;
+    margin: 0px 0px 0px 0px;
     box-shadow: var(--shadow-inset-base02);
   }
   button.text-button:active,
   button.text-button:checked,
   button.text-button:active:checked {
     background-color: var(--base02);
+    padding: 5px 17px 5px 17px;
+    margin: 0px 0px 0px 0px;
     box-shadow: var(--shadow-inset-base02);
   }
   button.text-button:hover:checked {
@@ -990,7 +993,7 @@
     color: var(--base01);
   }
   button.combo {
-    padding: 5px 10px 5px 10px;
+    padding: 4px 10px 5px 9px;
   }
 
   toolbar {
@@ -1000,7 +1003,7 @@
     min-height: 24px;
     min-width: 24px;
     margin-right: 5px;
-    padding: 5px;
+    padding: 4px 5px 5px 4px;
     outline-offset: 4px;
   }
   toolbar > button:active {
@@ -1748,7 +1751,7 @@
   stackswitcher,
   viewswitcher,
   box.linked {
-    min-height: 35px;
+    min-height: 34px;
   }
   stackswitcher.linked {
     margin: 5px 0px 5px 0px;
@@ -1822,7 +1825,8 @@
   }
 
   combobox > box.linked > button {
-    padding: 2px 10px 2px 10px;
+    padding: 1px 10px 2px 9px;
+    margin: 1px 0px 0px 1px;
     min-height: 30px;
     min-width: 16px;
   }
@@ -1830,6 +1834,8 @@
   combobox > box.linked > *.combo:checked,
   combobox > box.linked > *.combo:focus-within {
     border-radius: 0px;
+    padding: 2px 10px 2px 10px;
+    margin: 0px 0px 0px 0px;
   }
   combobox > box.linked > *.combo:active:last-child,
   combobox > box.linked > *.combo:checked:last-child,
