@@ -559,20 +559,6 @@ scale slider:hover {
   background-color: var(--base0D);
 }
 
-tab {
-  border-radius: 50px;
-  background-color: inherit;
-  margin: 5px 0px 5px 0px;
-}
-tab:hover:not(:checked) {
-  color: var(--base01);
-  background-color: var(--base0D);
-  box-shadow: var(--shadow-thin-base0D);
-}
-tab:checked {
-  box-shadow: var(--shadow-inset-base01);
-}
-
 scrolledwindow:not(.sidebar),
 textview {
   border-radius: 10px;
@@ -925,6 +911,7 @@ button.image-button:hover:active,
 button.image-button:hover:active:checked {
   background-color: transparent;
   padding: 5px 5px 5px 5px;
+  margin: 0px 0px 0px 0px;
   box-shadow: var(--shadow-inset-base01);
 }
 button.image-button:hover:checked {
@@ -948,22 +935,26 @@ button.file {
   margin: 1px 0px 0px 1px;
   box-shadow: var(--shadow-thin-base02);
 }
-button.font:active,
-button.file:active {
-  background-color: var(--base02);
-  padding: 5px 17px 5px 17px;
-  margin: 0px 0px 0px 0px;
-  box-shadow: var(--shadow-inset-base02);
-}
 button.text-button:active,
+button.font:active,
+button.file:active,
 button.text-button:checked,
-button.text-button:active:checked {
+button.text-button:hover:active,
+button.text-button:active:checked,
+button.text-button:hover:active:checked,
+button.font:hover:active:checked,
+button.font:hover:active {
   background-color: var(--base02);
   padding: 5px 17px 5px 17px;
   margin: 0px 0px 0px 0px;
   box-shadow: var(--shadow-inset-base02);
 }
-button.text-button:hover:checked {
+button.text-button:hover,
+button.font:hover,
+button.file:hover,
+button.text-button:hover:checked,
+button.font:hover:checked,
+button.file:hover:checked {
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
 }
@@ -972,10 +963,13 @@ button:active label {
 }
 button.image-button {
   background-color: transparent;
+  padding: 4px 5px 5px 4px;
+  margin: 1px 0px 0px 1px;
   box-shadow: none;
 }
 button.image-button:hover {
   background-color: var(--base0D);
+  box-shadow: var(--shadow-thin-base0D);
 }
 button.image-button:active {
   background-color: transparent;
@@ -1046,9 +1040,9 @@ tab {
   border-radius: 50px;
   background-color: inherit;
   margin: 5px 0px 5px 0px;
-  padding: 3px 12px 4px 12px;
-  min-height: 30px;
-  min-width: 30px;
+  padding: 5px 17px 5px 17px;
+  min-height: 24px;
+  min-width: 100px;
   color: var(--base0D);
 }
 tab:hover label {
@@ -1060,6 +1054,8 @@ tab:checked {
 tab:hover:not(:checked) {
   color: var(--base01);
   background-color: var(--base0D);
+  padding: 4px 17px 5px 16px;
+  margin: 6px 0px 5px 1px;
   box-shadow: var(--shadow-thin-base0D);
 }
 tab:hover:checked > label {
@@ -1316,16 +1312,16 @@ popover stack > box modelbutton accelerator {
 }
 
 video {
-  background-color: var(--base00);
+  background-color: transparent;
   border-radius: 50px;
-  margin: 5px;
+  margin: 8px;
 }
 video revealer {
   background-color: var(--base00);
 }
 video controls {
-  border-radius: 50px;
-  background-color: var(--base00);
+  border-radius: 0px;
+  background-color: transparent;
   padding: 2px;
 }
 video controls button.image-button:hover:active {
@@ -1546,9 +1542,12 @@ stacksidebar.sidebar {
   border-right-width: 0px;
 }
 
-header > button {
-  margin: 1px 1px 2px 1px;
-}
+/* header > button { */
+/*   margin: 1px 1px 2px 1px; */
+/* } */
+/* header > button:active { */
+/*   margin: 0px 1px 2px 0px; */
+/* } */
 
 list.rich-list > row {
   padding: 8px 12px;
@@ -1753,7 +1752,7 @@ box.linked {
   min-height: 34px;
 }
 stackswitcher.linked {
-  margin: 5px 0px 5px 0px;
+  margin: 7px 0px 6px 0px;
 }
 /*Haven't tested when there are borders*/
 .linked button.text-button:hover:active,
@@ -1772,8 +1771,6 @@ stackswitcher.linked {
 
 .linked button.combo:hover:active,
 .linked button.combo:hover:checked,
-.linked button.combo:hover:active,
-.linked button.combo:hover:checked,
 .linked button.combo:last-child:checked {
   margin: 0px;
   min-height: 30px;
@@ -1783,18 +1780,22 @@ stackswitcher.linked {
   margin: 1px 0px 0px 1px;
   padding: 1px 10px 2px 9px;
 }
-.linked button.image-button:hover:active,
-.linked button.image-button:hover:checked,
-.linked button.image-button:hover:active,
-.linked button.image-button:hover:checked,
-.linked button.image-button:last-child:checked {
-  margin: 0px;
-  min-height: 24px;
-  padding: 5px 5px 5px 5px;
-}
+.linked button.image-button,
 .linked button.image-button:hover {
+  min-height: 24px;
   margin: 1px 0px 0px 1px;
   padding: 4px 5px 5px 4px;
+}
+.linked button.image-button:active,
+.linked button.image-button:checked,
+.linked button.image-button:hover:active,
+.linked button.image-button:hover:checked {
+  margin: 0px 0px 0px 0px;
+  padding: 5px 5px 5px 5px;
+  box-shadow: var(--shadow-inset-base02);
+}
+.linked button.image-button:active:checked {
+  box-shadow: var(--shadow-inset-base02);
 }
 
 stackswitcher.linked > button.image-button:hover {
@@ -1936,7 +1937,8 @@ viewswitcher > button:hover:checked {
 stackswitcher.linked > button:active,
 stackswitcher.linked > button:checked,
 stackswitcher.linked > button:hover:active,
-stackswitcher.linked > button:hover:checked {
+stackswitcher.linked > button:hover:checked,
+stackswitcher.linked > button:hover:active {
   color: var(--base0D);
   background-color: var(--base02);
   border-radius: 50px 50px 50px 50px;
@@ -1947,10 +1949,12 @@ stackswitcher.linked > button:hover:checked {
 .linked > button:checked *,
 .linked > button:hover:active *,
 .linked > button:hover:checked *,
+.linked > button:hover:active:checked *,
 viewswitcher > button:active *,
 viewswitcher > button:checked *,
 viewswitcher > button:hover:active *,
-viewswitcher > button:hover:checked * {
+viewswitcher > button:hover:checked *,
+viewswitcher > button:hover:active:checked * {
   color: var(--base0D);
 }
 .linked > entry:not(:focus-within) {
