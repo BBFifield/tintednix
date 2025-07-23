@@ -5,8 +5,8 @@
     font:
       normal 16px "JetBrainsMono Nerd Font",
       sans-serif;
-    outline: none;
     text-decoration: none;
+    outline: none;
     transition:
       0.1s linear background-color,
       border-color,
@@ -16,9 +16,10 @@
   }
 
   arrow {
+    border-color: transparent;
     /*For triangles above popups*/
     background-color: transparent;
-    border-color: transparent;
+
     -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
   }
   arrow.left {
@@ -37,10 +38,12 @@
   }
 
   headerbar {
-    color: var(--base0D);
-    background-color: var(--base01);
-    margin: 0px -1px 0px -1px;
     min-height: 46px;
+    margin: 0px -1px 0px -1px;
+
+    color: var(--base0D);
+
+    background-color: var(--base01);
     box-shadow:
       0px 1px 1px rgba(0, 0, 0, 0.17),
       0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -60,22 +63,24 @@
   }
 
   entry {
-    color: var(--base0D);
-    background-color: var(--base02);
-    caret-color: var(--base0D);
-    background-clip: padding-box;
-    border-radius: 50px;
-    padding: 4px 9px 5px 8px;
-    margin: 1px 0px 0px 1px;
     min-height: 24px;
+    margin: 1px 0px 0px 1px;
+    padding: 4px 9px 5px 8px;
+    border-radius: 50px;
+
+    color: var(--base0D);
+
+    background-color: var(--base02);
+    background-clip: padding-box;
     outline: none;
     box-shadow: var(--shadow-thin-base02);
+    caret-color: var(--base0D);
   }
   entry:focus-within,
   entry button:active,
   entry button:checked {
-    padding: 5px 9px 5px 9px;
     margin: 0px 0px 0px 0px;
+    padding: 5px 9px 5px 9px;
     box-shadow: var(--shadow-inset-base02);
   }
   entry.search image {
@@ -204,8 +209,8 @@
     background-color: transparent;
   }
   row.activatable:hover {
-    background-color: var(--base0D);
     color: var(--base01);
+    background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
   }
   row.activatable:active {
@@ -252,14 +257,14 @@
     box-shadow: unset;
   }
   popover listview.view > row.activatable:hover {
-    background-color: var(--base0D);
     color: var(--base01);
+    background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
   }
   popover listview.view > row.activatable:focus,
   popover listview.view > row.activatable:focus:selected {
-    background-color: var(--base01);
     color: var(--base0D);
+    background-color: var(--base01);
     box-shadow: var(--shadow-inset-base01);
   }
 
@@ -269,10 +274,10 @@
       color-mix(in srgb, currentColor var(--border-opacity), transparent);
   }
   menubar > item {
-    color: var(--base0D);
     margin: 3px;
-    border-radius: 10px;
     padding: 4px 8px 4px 8px;
+    border-radius: 10px;
+    color: var(--base0D);
   }
   menubar > item:hover {
     background-color: var(--base0D);
@@ -338,10 +343,6 @@
     color: var(--base01);
   }
 
-  button {
-    border-radius: 50px;
-    background-color: transparent;
-  }
   widget.cutout button {
     background-color: var(--base02);
   }
@@ -397,11 +398,6 @@
     color: var(--base0D);
   }
 
-  popover contents {
-    border-width: 0px;
-    box-shadow: var(--shadow-wide-base01);
-  }
-
   modelbutton {
     border-radius: 50px;
   }
@@ -429,14 +425,15 @@
     border-radius: 50px;
   }
   splitbutton > separator {
-    background-image: none;
-    min-height: 1px;
     min-width: 1px;
+    min-height: 1px;
     margin: 6px 1px 6px 0px;
     padding-right: 0px;
-    background-size: 0px 0px;
+
+    background-image: none;
     background-repeat: repeat;
     background-position: left top;
+    background-size: 0px 0px;
   }
   splitbutton:hover,
   splitbutton:hover:checked {
@@ -482,8 +479,8 @@
   }
 
   radio {
-    background-color: var(--base01);
     border: 1px solid var(--base02);
+    background-color: var(--base01);
     box-shadow: var(--shadow-thin-base01);
   }
   radio:checked {
@@ -515,8 +512,8 @@
   }
 
   switch {
-    background: var(--base02);
     border-width: 1px;
+    background: var(--base02);
     box-shadow: var(--shadow-inset-base02);
   }
   switch:checked {
@@ -524,8 +521,8 @@
     box-shadow: var(--shadow-inset-base0D);
   }
   switch slider {
-    background: var(--base00);
     border-radius: 100%;
+    background: var(--base00);
     box-shadow: var(--shadow-thin-base00);
   }
 
@@ -552,26 +549,12 @@
     background-color: var(--base0B);
   }
   scale slider {
-    background-color: var(--base02);
     border-radius: 100%;
+    background-color: var(--base02);
     box-shadow: var(--shadow-thin-base02);
   }
   scale slider:hover {
     background-color: var(--base0D);
-  }
-
-  tab {
-    border-radius: 50px;
-    background-color: inherit;
-    margin: 5px 0px 5px 0px;
-  }
-  tab:hover:not(:checked) {
-    color: var(--base01);
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base0D);
-  }
-  tab:checked {
-    box-shadow: var(--shadow-inset-base01);
   }
 
   scrolledwindow:not(.sidebar),
@@ -589,8 +572,8 @@
     box-shadow: var(--shadow-inset-base00);
   }
   progresscell progress {
-    background-color: var(--base0B);
     border-radius: 50px;
+    background-color: var(--base0B);
     box-shadow: var(--shadow-thin-base0B);
   }
   progresscell trough {
@@ -652,16 +635,16 @@
 
   /*Experimental*/
   scale {
-    min-height: 10px;
     min-width: 10px;
+    min-height: 10px;
     padding: 12px 12px 12px 12px;
   }
   scale.marks-after {
     padding: 12px 12px 0px 12px;
   }
   scale trough {
-    background-color: var(--base02);
     border-radius: 99px;
+    background-color: var(--base02);
     box-shadow: var(--shadow-inset-base02-thin);
   }
   scale highlight {
@@ -669,11 +652,12 @@
     background-color: var(--base0B);
   }
   scale slider {
-    background-color: var(--base02);
-    border-radius: 100%;
-    min-height: 20px;
     min-width: 20px;
+    min-height: 20px;
     margin: -8px;
+    border-radius: 100%;
+
+    background-color: var(--base02);
     box-shadow: var(--shadow-thin-base02);
   }
   scale slider:hover {
@@ -686,8 +670,8 @@
     margin: 6px 0px 0px 0px;
   }
   scale marks indicator {
-    min-height: 6px;
     min-width: 1px;
+    min-height: 6px;
     color: var(--base0B);
     background-color: var(--base0B);
   }
@@ -712,8 +696,8 @@
     min-width: 8px;
   }
   progressbar.horizontal trough {
-    min-height: 8px;
     min-width: 150px;
+    min-height: 8px;
   }
   progressbar text {
     color: var(--base0D);
@@ -721,8 +705,8 @@
   progressbar.horizontal trough,
   progressbar.horizontal progress,
   levelbar.horizontal block {
-    border-radius: 99px;
     min-height: 8px;
+    border-radius: 99px;
   }
   levelbar.continuous block {
     border-radius: 50px;
@@ -748,8 +732,8 @@
     background-color: var(--base0B);
   }
   progressbar progress {
-    border-radius: 50px;
     margin: 0px -1px 0px -1px;
+    border-radius: 50px;
   }
   progressbar trough,
   levelbar trough {
@@ -767,11 +751,13 @@
   }
 
   switch {
-    background: var(--base02);
+    padding: 3px;
     border-width: 1px;
     border-radius: 50px;
+
     color: transparent;
-    padding: 3px;
+
+    background: var(--base02);
     box-shadow: var(--shadow-inset-base02);
   }
   switch:checked {
@@ -779,124 +765,142 @@
     box-shadow: var(--shadow-inset-base0D);
   }
   switch slider {
-    background: var(--base00);
-    border-radius: 100%;
-    min-height: 20px;
     min-width: 20px;
+    min-height: 20px;
     border-width: 1px;
+    border-radius: 100%;
+
+    background: var(--base00);
     box-shadow: var(--shadow-thin-base00);
   }
 
   radio {
-    background-color: var(--base02);
-    border: 1px solid var(--base02);
-    border-radius: 100%;
+    min-width: 14px;
+    min-height: 14px;
     margin: 0px 4px 0px 4px;
     padding: 3px;
-    min-height: 14px;
-    min-width: 14px;
+    border: 1px solid var(--base02);
+    border-radius: 100%;
+
+    background-color: var(--base02);
     box-shadow: var(--shadow-thin-base02);
   }
   radio:checked {
     border-color: var(--base0D);
+
     color: var(--base01);
+
     background-color: var(--base0D);
+    box-shadow: var(--shadow-inset-base0D);
+
     -gtk-icon-source: -gtk-scaled(
       -gtk-recolor(url("assets/bullet-symbolic.symbolic.png")),
       -gtk-recolor(url("assets/bullet@2-symbolic.symbolic.png"))
     );
-    box-shadow: var(--shadow-inset-base0D);
   }
   radio:indeterminate {
     border-color: var(--base0D);
+
     color: var(--base01);
+
     background-color: var(--base0D);
+    box-shadow: var(--shadow-inset-base0D);
+
     -gtk-icon-source: -gtk-scaled(
       -gtk-recolor(url("assets/dash-symbolic.svg")),
       -gtk-recolor(url("assets/dash-symbolic.symbolic.png"))
     );
-    box-shadow: var(--shadow-inset-base0D);
   }
   checkbutton {
     padding: 4px;
   }
   checkbutton > label {
-    color: var(--base0D);
     margin-right: 4px;
+    color: var(--base0D);
   }
 
   check {
-    background-color: var(--base02);
-    border: 1px solid var(--base02);
-    border-radius: 6px;
+    min-width: 14px;
+    min-height: 14px;
     margin: 0px 4px 0px 4px;
     padding: 3px;
-    min-height: 14px;
-    min-width: 14px;
+    border: 1px solid var(--base02);
+    border-radius: 6px;
+
+    background-color: var(--base02);
     box-shadow: var(--shadow-thin-base02);
   }
 
   check:checked {
-    color: var(--base01);
     border-color: var(--base0D);
+
+    color: var(--base01);
+
     background-color: var(--base0D);
+    box-shadow: var(--shadow-inset-base0D);
+
     -gtk-icon-source: -gtk-scaled(
       -gtk-recolor(url("assets/check-symbolic.svg")),
       -gtk-recolor(url("assets/check-symbolic.symbolic.png"))
     );
-    box-shadow: var(--shadow-inset-base0D);
   }
   check:indeterminate {
-    color: var(--base01);
     border-color: var(--base0D);
+
+    color: var(--base01);
+
     background-color: var(--base0D);
+    box-shadow: var(--shadow-inset-base0D);
+
     -gtk-icon-source: -gtk-scaled(
       -gtk-recolor(url("assets/dash-symbolic.svg")),
       -gtk-recolor(url("assets/dash-symbolic.symbolic.png"))
     );
-    box-shadow: var(--shadow-inset-base0D);
   }
 
   spinbutton {
-    color: var(--base0D);
-    border-radius: 50px;
-    background-color: var(--base02);
     min-height: 35px;
+    border-radius: 50px;
+
+    color: var(--base0D);
+
+    background-color: var(--base02);
     box-shadow: var(--shadow-thin-base02);
   }
   spinbutton:focus {
     box-shadow: none;
   }
   spinbutton > text {
-    border-radius: 50px;
-    background-color: transparent;
-    box-shadow: none;
     min-width: 30px;
     padding: 0px 6px 0px 6px;
+    border-radius: 50px;
+
+    background-color: transparent;
+    box-shadow: none;
   }
   spinbutton > text:focus-within {
     box-shadow: var(--shadow-inset-base02);
   }
   spinbutton button.up,
   spinbutton button.down {
-    padding: 1px 5px 0px 6px;
-    margin: 0px;
-    border-color: transparent;
-    min-height: 24px;
     min-width: 24px;
+    min-height: 24px;
+    margin: 0px;
+    padding: 1px 5px 0px 6px;
+    border-color: transparent;
   }
   spinbutton button:hover {
-    color: var(--base01);
-    padding: 0px 5px 0px 5px;
     margin: 1px 0px 0px 1px;
+    padding: 0px 5px 0px 5px;
+    color: var(--base01);
     box-shadow: var(--shadow-thin-base0D);
   }
   spinbutton button.up:active,
   spinbutton button.up:hover:active,
   spinbutton button.down:active,
   spinbutton button.down:hover:active {
-    padding: 1px 5px 0px 6px;
     margin: 0px;
+    padding: 1px 5px 0px 6px;
     box-shadow: var(--shadow-inset-base02);
   }
   spinbutton.vertical button {
@@ -910,12 +914,14 @@
   }
 
   button {
-    color: var(--base0D);
-    background-color: transparent;
-    min-height: 24px;
     min-width: 24px; /*.linked modification, .image-button*/
+    min-height: 24px;
     padding: 4px 5px 5px 4px; /*.linked modification, .image-button*/
     border-radius: 50px;
+
+    color: var(--base0D);
+
+    background-color: transparent;
   }
   button:checked,
   button:active,
@@ -924,8 +930,9 @@
   button.image-button:active,
   button.image-button:hover:active,
   button.image-button:hover:active:checked {
-    background-color: transparent;
+    margin: 0px 0px 0px 0px;
     padding: 5px 5px 5px 5px;
+    background-color: transparent;
     box-shadow: var(--shadow-inset-base01);
   }
   button.image-button:hover:checked {
@@ -942,29 +949,34 @@
   button.text-button,
   button.font,
   button.file {
-    background-color: var(--base02);
-    min-height: 24px;
     min-width: 16px;
-    padding: 4px 17px 5px 16px;
+    min-height: 24px;
     margin: 1px 0px 0px 1px;
+    padding: 4px 17px 5px 16px;
+
+    background-color: var(--base02);
     box-shadow: var(--shadow-thin-base02);
   }
-  button.font:active,
-  button.file:active {
-    background-color: var(--base02);
-    padding: 5px 17px 5px 17px;
-    margin: 0px 0px 0px 0px;
-    box-shadow: var(--shadow-inset-base02);
-  }
   button.text-button:active,
+  button.font:active,
+  button.file:active,
   button.text-button:checked,
-  button.text-button:active:checked {
-    background-color: var(--base02);
-    padding: 5px 17px 5px 17px;
+  button.text-button:hover:active,
+  button.text-button:active:checked,
+  button.text-button:hover:active:checked,
+  button.font:hover:active:checked,
+  button.font:hover:active {
     margin: 0px 0px 0px 0px;
+    padding: 5px 17px 5px 17px;
+    background-color: var(--base02);
     box-shadow: var(--shadow-inset-base02);
   }
-  button.text-button:hover:checked {
+  button.text-button:hover,
+  button.font:hover,
+  button.file:hover,
+  button.text-button:hover:checked,
+  button.font:hover:checked,
+  button.file:hover:checked {
     background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
   }
@@ -972,11 +984,14 @@
     color: var(--base0D);
   }
   button.image-button {
+    margin: 1px 0px 0px 1px;
+    padding: 4px 5px 5px 4px;
     background-color: transparent;
     box-shadow: none;
   }
   button.image-button:hover {
     background-color: var(--base0D);
+    box-shadow: var(--shadow-thin-base0D);
   }
   button.image-button:active {
     background-color: transparent;
@@ -1000,10 +1015,11 @@
     background-color: var(--base01);
   }
   toolbutton > button {
-    min-height: 24px;
     min-width: 24px;
+    min-height: 24px;
     margin-right: 5px;
     padding: 4px 5px 5px 4px;
+
     outline-offset: 4px;
   }
   toolbar > button:active {
@@ -1012,27 +1028,28 @@
 
   button separator,
   button:hover:active separator {
-    background-image: image(var(--base0D));
     margin: 0px 0px 0px 10px;
     opacity: 0.8;
+    background-image: image(var(--base0D));
   }
   button:hover separator {
     background-image: image(var(--base01));
   }
 
   separator {
-    background-image: image(var(--base02));
-    min-height: 1px;
     min-width: 1px;
+    min-height: 1px;
     margin: 6px -7px 6px 0px;
     padding-right: 8px;
-    background-size: 1px 1px;
+
+    background-image: image(var(--base02));
     background-repeat: repeat-y;
     background-position: left;
+    background-size: 1px 1px;
   }
   separator.horizontal {
-    background-color: var(--base02);
     margin: 6px 16px 6px 16px;
+    background-color: var(--base02);
   }
 
   button.text-button.toggle {
@@ -1040,17 +1057,19 @@
   }
 
   tabs {
-    padding: 0px 4px 0px 4px;
     margin: -1px -1px -2px -1px;
+    padding: 0px 4px 0px 4px;
   }
   tab {
-    border-radius: 50px;
-    background-color: inherit;
+    min-width: 100px;
+    min-height: 24px;
     margin: 5px 0px 5px 0px;
-    padding: 3px 12px 4px 12px;
-    min-height: 30px;
-    min-width: 30px;
+    padding: 5px 17px 5px 17px;
+    border-radius: 50px;
+
     color: var(--base0D);
+
+    background-color: inherit;
   }
   tab:hover label {
     color: var(--base01);
@@ -1059,7 +1078,11 @@
     box-shadow: var(--shadow-inset-base01);
   }
   tab:hover:not(:checked) {
+    margin: 6px 0px 5px 1px;
+    padding: 4px 17px 5px 16px;
+
     color: var(--base01);
+
     background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
   }
@@ -1068,12 +1091,14 @@
   }
 
   tooltip {
-    border-radius: 50px;
-    border-width: 0px;
-    color: @base0D;
-    background-color: @base02;
     margin: 1px 30px 45px 15px;
     padding: 6px 10px;
+    border-width: 0px;
+    border-radius: 50px;
+
+    color: var(--base0D);
+
+    background-color: var(--base02);
     box-shadow: var(--shadow-wide-base02);
   }
   tooltip label {
@@ -1090,25 +1115,27 @@
     margin: 4px;
   }
   frame > scrolledwindow {
-    background-color: transparent;
     margin: 4px;
+    background-color: transparent;
   }
 
   spinner {
     color: var(--base0D);
-    -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+
     animation-name: spin;
+    animation-duration: 1s;
     animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
   }
 
   treeview.view {
+    margin-bottom: 2px;
     padding-top: 5px;
+    padding-right: 8px;
     padding-bottom: 5px;
     padding-left: 8px;
-    padding-right: 8px;
-    margin-bottom: 2px;
   }
   treeview.view * {
     color: @base0D;
@@ -1156,23 +1183,13 @@
     margin: 6px;
   }
 
-  popover > contents {
-    border-radius: 10px;
-    background-color: var(--base01);
-    /*padding: 8px;*/
-  }
-  popover > arrow {
-    min-height: 16px;
-    min-width: 16px;
-  }
-
   frame > scrolledwindow {
     background-color: var(--base00);
   }
 
   row.activatable {
-    padding: 2px;
     margin: 2px 2px 2px 2px;
+    padding: 2px;
   }
 
   scrolledwindow.frame row.activatable:active {
@@ -1211,27 +1228,28 @@
   }
 
   scrollbar {
-    color: var(--base0D);
-    padding: 0px;
     margin: 0px;
+    padding: 0px;
+    color: var(--base0D);
   }
   scrollbar > range {
-    padding: 0px;
     margin: 0px;
+    padding: 0px;
   }
   scrollbar > range > trough {
     border-radius: 50px;
   }
   scrollbar > range > trough > slider {
-    background-clip: padding-box;
-    background-color: var(--base0D);
-    border-radius: 50px;
-    border: 8px solid transparent;
-    margin: -8px;
     min-width: 8px;
     min-height: 8px;
-    transition: all 200ms linear;
+    margin: -8px;
+    border: 8px solid transparent;
+    border-radius: 50px;
+
     background-color: color-mix(in srgb, currentColor 50%, transparent);
+    background-clip: padding-box;
+
+    transition: all 200ms linear;
   }
   scrollbar.bottom.horizontal > range > trough {
     margin: 4px 9px 4px 9px;
@@ -1309,25 +1327,34 @@
   popover stack > box {
     padding: 6px;
   }
-  popover > contents {
+  popover contents {
     min-width: 120px;
+    border-width: 0px;
+    border-radius: 10px;
+
+    background-color: var(--base01);
+    box-shadow: var(--shadow-wide-base01);
+  }
+  popover > arrow {
+    min-width: 16px;
+    min-height: 16px;
   }
   popover stack > box modelbutton accelerator {
     margin-left: 12px;
   }
 
   video {
-    background-color: var(--base00);
+    margin: 8px;
     border-radius: 50px;
-    margin: 5px;
+    background-color: transparent;
   }
   video revealer {
     background-color: var(--base00);
   }
   video controls {
-    border-radius: 50px;
-    background-color: var(--base00);
     padding: 2px;
+    border-radius: 0px;
+    background-color: transparent;
   }
   video controls button.image-button:hover:active {
     box-shadow: var(--shadow-inset-base00);
@@ -1358,13 +1385,13 @@
   }
 
   calendar > grid {
-    padding-left: 2px;
     padding-bottom: 2px;
+    padding-left: 2px;
   }
   calendar > grid > label {
-    border-radius: 50px;
     margin-top: 3px;
     margin-right: 3px;
+    border-radius: 50px;
   }
   calendar > grid > label:hover {
     color: var(--base01);
@@ -1398,9 +1425,10 @@
   }
 
   expander {
-    color: var(--base0D);
     min-width: 16px;
     min-height: 16px;
+    color: var(--base0D);
+
     -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
   }
 
@@ -1417,15 +1445,17 @@
   }
 
   iconview {
+    padding: 5px;
+    border-radius: 10px;
     color: var(--base0D);
     background-color: transparent;
-    border-radius: 10px;
-    padding: 5px;
   }
   iconview *:hover {
-    color: var(--base01);
-    border-radius: 10px;
     padding: 5px;
+    border-radius: 10px;
+
+    color: var(--base01);
+
     background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
   }
@@ -1445,11 +1475,13 @@
   }
 
   textview {
-    color: var(--base0D);
     margin: 5px;
+    border-radius: 10px;
+
+    color: var(--base0D);
+
     background-color: var(--base00);
     box-shadow: var(--shadow-inset-base00);
-    border-radius: 10px;
   }
 
   columnview > listview > row.activatable:active {
@@ -1457,8 +1489,8 @@
   }
 
   columnview.data-table.list.view {
-    border-radius: 10px;
     padding: 2px;
+    border-radius: 10px;
     box-shadow: var(--shadow-inset-base00);
   }
 
@@ -1475,22 +1507,22 @@
     padding: 0px 6px 0px 6px;
   }
   stack > widget > scrolledwindow > viewport {
+    margin-top: 10px;
     border-radius: 10px;
     background-color: var(--base00);
     box-shadow: var(--shadow-inset-base00);
-    margin-top: 10px;
   }
 
   box.view {
     background-color: var(--base00);
   }
   box.view > scrolledwindow:first-child {
-    background-color: var(--base01);
     border-radius: 0px;
+    background-color: var(--base01);
   }
   box.view > scrolledwindow:first-child > listview.view {
-    background-color: var(--base01);
     border-radius: 0px;
+    background-color: var(--base01);
   }
   box.view > scrolledwindow:first-child > listview.view > row:selected {
     box-shadow: var(--shadow-inset-base01);
@@ -1503,8 +1535,8 @@
     box-shadow: var(--shadow-inset-base00);
   }
   box.view > scrolledwindow:first-child + separator + stack {
-    background-color: @base01;
     border-radius: 0px;
+    background-color: @base01;
   }
   box.view
     > scrolledwindow:first-child
@@ -1534,27 +1566,30 @@
   }
 
   box.toolbar + separator.horizontal {
-    margin: 0px;
     min-height: 0px;
+    margin: 0px;
   }
 
   box.vertical > separator.horizontal {
-    margin: 0px;
     min-height: 0px;
+    margin: 0px;
   }
 
   stacksidebar.sidebar {
     border-right-width: 0px;
   }
 
-  header > button {
-    margin: 1px 1px 2px 1px;
-  }
+  /* header > button { */
+  /*   margin: 1px 1px 2px 1px; */
+  /* } */
+  /* header > button:active { */
+  /*   margin: 0px 1px 2px 0px; */
+  /* } */
 
   list.rich-list > row {
-    padding: 8px 12px;
-    margin: 2px;
     min-height: 32px;
+    margin: 2px;
+    padding: 8px 12px;
   }
   list.rich-list.separators > row {
     border-bottom: none;
@@ -1563,8 +1598,8 @@
     border-spacing: 12px;
   }
   list.rich-list > header {
-    padding-left: 12px;
     padding-right: 12px;
+    padding-left: 12px;
   }
 
   row > box > entry:hover {
@@ -1610,10 +1645,10 @@
     margin-bottom: -3px;
   }
   popover listview.view row {
-    min-height: 32px;
     min-width: 40px;
-    padding: 0px 12px;
+    min-height: 32px;
     margin: 0px;
+    padding: 0px 12px;
   }
   popover listview.view row.activatable:hover,
   popover listview.view row.activatable:hover:selected {
@@ -1644,16 +1679,17 @@
   }
 
   box.pathbar {
-    border-radius: 50px;
-    background-color: var(--base02);
-    box-shadow: var(--shadow-thin-base02);
     min-height: 35px;
     padding: 0px;
+    border-radius: 50px;
+
+    background-color: var(--base02);
+    box-shadow: var(--shadow-thin-base02);
   }
   /*bar is 35px high, button is 24px min-height + 10px pad + 1px marg = 35px high*/
   box.pathbar button {
-    margin: 1px 1px 0px 1px;
     min-height: 24px;
+    margin: 1px 1px 0px 1px;
     padding: 5px;
   }
   box.pathbar button:not(.current-dir):hover {
@@ -1704,13 +1740,13 @@
     color: var(--base0D);
   }
   #NautilusPathBar > scrolledwindow:active {
-    background-color: var(--base02);
     color: var(--base0D);
+    background-color: var(--base02);
     box-shadow: var(--shadow-inset-base02);
   }
   #NautilusPathBar > menubutton > button {
-    margin: 1px 1px 0px 1px;
     min-height: 24px;
+    margin: 1px 1px 0px 1px;
     padding: 5px;
   }
   #NautilusPathBar > menubutton > button:active,
@@ -1719,8 +1755,8 @@
   }
 
   #NautilusPathButton {
-    margin: 1px 1px 0px 1px;
     min-height: 24px;
+    margin: 1px 1px 0px 1px;
     padding: 5px;
   }
   #NautilusPathButton:active {
@@ -1754,48 +1790,49 @@
     min-height: 34px;
   }
   stackswitcher.linked {
-    margin: 5px 0px 5px 0px;
+    margin: 7px 0px 6px 0px;
   }
   /*Haven't tested when there are borders*/
-  .linked button.text-button:hover:active,
-  .linked button.text-button:hover:checked,
+  .linked button.text-button:checked,
   .linked button.text-button:hover:active,
   .linked button.text-button:hover:checked,
   .linked button.text-button:last-child:checked  /*Needed, otherwise margin-left is -1px*/ {
-    margin: 0px;
     min-height: 24px;
+    margin: 0px;
     padding: 5px 17px 5px 17px;
   }
   .linked button.text-button:hover {
     margin: 1px 0px 0px 1px;
     padding: 4px 17px 5px 16px;
   }
-
-  .linked button.combo:hover:active,
-  .linked button.combo:hover:checked,
+  .linked button.combo:checked,
   .linked button.combo:hover:active,
   .linked button.combo:hover:checked,
   .linked button.combo:last-child:checked {
-    margin: 0px;
     min-height: 30px;
+    margin: 0px;
     padding: 2px 10px 2px 10px;
   }
   .linked button.combo:hover {
     margin: 1px 0px 0px 1px;
     padding: 1px 10px 2px 9px;
   }
-  .linked button.image-button:hover:active,
-  .linked button.image-button:hover:checked,
-  .linked button.image-button:hover:active,
-  .linked button.image-button:hover:checked,
-  .linked button.image-button:last-child:checked {
-    margin: 0px;
-    min-height: 24px;
-    padding: 5px 5px 5px 5px;
-  }
+  .linked button.image-button,
   .linked button.image-button:hover {
+    min-height: 24px;
     margin: 1px 0px 0px 1px;
     padding: 4px 5px 5px 4px;
+  }
+  .linked button.image-button:active,
+  .linked button.image-button:checked,
+  .linked button.image-button:hover:active,
+  .linked button.image-button:hover:checked {
+    margin: 0px 0px 0px 0px;
+    padding: 5px 5px 5px 5px;
+    box-shadow: var(--shadow-inset-base02);
+  }
+  .linked button.image-button:active:checked {
+    box-shadow: var(--shadow-inset-base02);
   }
 
   stackswitcher.linked > button.image-button:hover {
@@ -1825,17 +1862,17 @@
   }
 
   combobox > box.linked > button {
-    padding: 1px 10px 2px 9px;
-    margin: 1px 0px 0px 1px;
-    min-height: 30px;
     min-width: 16px;
+    min-height: 30px;
+    margin: 1px 0px 0px 1px;
+    padding: 1px 10px 2px 9px;
   }
   combobox > box.linked > *.combo:active,
   combobox > box.linked > *.combo:checked,
   combobox > box.linked > *.combo:focus-within {
-    border-radius: 0px;
-    padding: 2px 10px 2px 10px;
     margin: 0px 0px 0px 0px;
+    padding: 2px 10px 2px 10px;
+    border-radius: 0px;
   }
   combobox > box.linked > *.combo:active:last-child,
   combobox > box.linked > *.combo:checked:last-child,
@@ -1850,8 +1887,8 @@
     border-bottom-left-radius: 50px;
   }
   box.linked > button.image-button.model:hover {
-    border-radius: 50px;
     border-color: var(--base0D);
+    border-radius: 50px;
   }
 
   viewswitcher,
@@ -1867,8 +1904,8 @@
   }
   .linked > button.text-button:hover,
   viewswitcher > button.flat:hover {
-    border-radius: 50px 50px 50px 50px;
     border-color: transparent;
+    border-radius: 50px;
     background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
   }
@@ -1911,10 +1948,6 @@
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
   }
-  /*.linked > * + *:not(:last-child),
-  viewswitcher > * + *:not(:last-child) {
-    border-radius: 0px 0px 0px 0px;
-  }*/
 
   .linked > button:hover,
   viewswitcher > button:hover {
@@ -1927,31 +1960,29 @@
   viewswitcher > button:active,
   viewswitcher > button:checked,
   viewswitcher > button:hover:active,
-  viewswitcher > button:hover:checked {
-    color: var(--base0D);
-    background-color: var(--base02);
-    border-radius: 50px 50px 50px 50px;
-    border-color: transparent;
-    box-shadow: var(--shadow-inset-base02);
-  }
+  viewswitcher > button:hover:checked,
   stackswitcher.linked > button:active,
   stackswitcher.linked > button:checked,
   stackswitcher.linked > button:hover:active,
   stackswitcher.linked > button:hover:checked {
-    color: var(--base0D);
-    background-color: var(--base02);
-    border-radius: 50px 50px 50px 50px;
     border-color: transparent;
+    border-radius: 50px;
+
+    color: var(--base0D);
+
+    background-color: var(--base02);
     box-shadow: var(--shadow-inset-base02);
   }
   .linked > button:active *,
   .linked > button:checked *,
   .linked > button:hover:active *,
   .linked > button:hover:checked *,
+  .linked > button:hover:active:checked *,
   viewswitcher > button:active *,
   viewswitcher > button:checked *,
   viewswitcher > button:hover:active *,
-  viewswitcher > button:hover:checked * {
+  viewswitcher > button:hover:checked *,
+  viewswitcher > button:hover:active:checked * {
     color: var(--base0D);
   }
   .linked > entry:not(:focus-within) {
