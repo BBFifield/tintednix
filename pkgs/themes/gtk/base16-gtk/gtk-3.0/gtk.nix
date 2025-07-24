@@ -16,10 +16,7 @@
   }
 
   arrow {
-    border-color: transparent;
     color: @base0D;
-    /*For triangles above popups*/
-    background-color: transparent;
 
     -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
   }
@@ -37,7 +34,7 @@
   }
 
   :disabled {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
   selection {
@@ -170,11 +167,6 @@
     min-width: 4px;
   }
 
-  scrolledwindow,
-  textview {
-    border-radius: 10px;
-  }
-
   progressbar,
   levelbar {
     border-radius: 50px;
@@ -235,7 +227,6 @@
 
   switch {
     padding: 3px;
-    border-width: 1px;
     border-radius: 50px;
 
     color: transparent;
@@ -249,21 +240,20 @@
   switch:checked {
     background: @base0D;
     box-shadow:
-      1px 2px 2px mix(@base0D, black, 0.3) inset,
-      2px 4px 4px mix(@base0D, black, 0.3) inset,
-      -1px -1px 0px mix(@base0D, white, 0.1) inset;
+      1px 2px 2px mix(@base0D, black, 0.2) inset,
+      2px 4px 4px mix(@base0D, black, 0.2) inset,
+      -1px -1px 0px mix(@base0D, white, 0.4) inset;
   }
   switch slider {
     min-width: 20px;
     min-height: 20px;
-    border-width: 1px;
     border-radius: 100%;
 
     background: @base00;
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px rgba(255, 255, 255, 0.2);
+      -1px -1px 0px mix(@base00, white, 0.1);
   }
 
   radiobutton {
@@ -386,33 +376,51 @@
   }
 
   spinbutton {
+    min-height: 35px;
     border-radius: 50px;
+
     color: @base0D;
+
     background-color: @base02;
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px rgba(255, 255, 255, 0.2);
-  }
-  spinbutton:focus {
-    box-shadow: none;
+      -1px -1px 0px mix(@base02, white, 0.1);
   }
   spinbutton > entry {
     min-width: 30px;
+    padding: 0px 6px 0px 6px;
+    border-radius: 50px;
+
     background-color: transparent;
     box-shadow: none;
+  }
+  spinbutton > entry:focus {
+    padding: 0px 6px 0px 6px;
   }
   spinbutton button.up,
   spinbutton button.down {
     min-width: 24px;
-    min-height: 16px;
+    min-height: 24px;
+    margin: 1px 0px 0px 1px;
     padding: 0px 5px 0px 5px;
     border-color: transparent;
   }
   spinbutton button:hover {
+    margin: 1px 0px 0px 1px;
+    padding: 0px 5px 0px 5px;
     color: @base01;
+    box-shadow:
+      1px 2px 2px rgba(0, 0, 0, 0.17),
+      2px 4px 4px rgba(0, 0, 0, 0.2),
+      -1px -1px 0px mix(@base0D, white, 0.4);
   }
-  spinbutton button:active {
+  spinbutton button.up:active,
+  spinbutton button.up:hover:active,
+  spinbutton button.down:active,
+  spinbutton button.down:hover:active {
+    margin: 0px;
+    padding: 1px 5px 0px 6px;
     box-shadow:
       1px 2px 2px mix(@base02, black, 0.35) inset,
       2px 4px 4px mix(@base02, black, 0.35) inset,
@@ -420,7 +428,9 @@
   }
   spinbutton.vertical button {
     min-height: 40px;
-    padding: 0px;
+  }
+  spinbutton.vertical > text {
+    padding: 6px 0px 6px 0px;
   }
   spinbutton.vertical > entry {
     padding: 0px;
@@ -433,8 +443,9 @@
   }
 
   entry {
-    min-height: 34px;
-    padding: 0px 9px 0px 9px;
+    min-height: 24px;
+    margin: 1px 0px 0px 1px;
+    padding: 4px 9px 5px 8px;
     border-radius: 50px;
 
     color: @base0D;
@@ -445,12 +456,14 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px rgba(255, 255, 255, 0.2);
+      -1px -1px 0px mix(@base02, white, 0.1);
     caret-color: @base0D;
   }
   entry:focus,
   entry button:active,
   entry button:checked {
+    margin: 0px 0px 0px 0px;
+    padding: 5px 9px 5px 9px;
     box-shadow:
       1px 2px 2px mix(@base02, black, 0.35) inset,
       2px 4px 4px mix(@base02, black, 0.35) inset,
@@ -467,6 +480,9 @@
   }
   entry.search {
     border: none;
+  }
+  placeholder {
+    opacity: 0.55;
   }
 
   button {
@@ -587,6 +603,16 @@
     background-image: image(@base01);
   }
 
+  button.text-button.toggle,
+  button.text-button.radio {
+    min-width: 100px;
+  }
+
+  /*color button*/
+  colorswatch {
+    border-radius: 50px;
+  }
+
   separator {
     min-width: 1px;
     min-height: 1px;
@@ -603,11 +629,6 @@
     background-color: @base02;
   }
 
-  button.text-button.toggle,
-  button.text-button.radio {
-    min-width: 100px;
-  }
-
   menubar {
     padding-bottom: 1px;
     box-shadow: inset 0 -1px mix(@base02, white, 0.1);
@@ -617,18 +638,20 @@
     padding: 4px 8px 4px 8px;
     border-radius: 10px;
   }
+  /*popover > stack merge in gtk-4.0*/
   menu {
     min-width: 120px;
-    padding: 6px 0px 6px 0px;
+    padding: 6px;
     border-width: 0px;
     border-radius: 10px;
   }
   menu > menuitem {
     min-width: 40px;
-    min-height: 32px;
-    margin: 1px 6px 0px 6px;
+    min-height: 24px;
+    /* box-shadow is cut off if left at 1px */
+    margin: 1px 0px 0px 1px;
     /* For the popup menuitem label/accelerator spacing */
-    padding: 0px 6px 0px 0px;
+    padding: 4px 12px 5px 11px;
     border-radius: 50px;
 
     color: @base0D;
@@ -644,7 +667,7 @@
     color: @base01;
   }
   menu > menuitem label:first-child {
-    margin-left: -18px;
+    margin-left: -30px;
   }
 
   menubar,
@@ -670,10 +693,11 @@
       2px 4px 4px mix(@base01, black, 0.3) inset,
       -1px -1px 0px mix(@base01, white, 0.1) inset;
   }
+  /* Merge of headerbar and headerbar windowhandle > box from gtk-4.0 */
   headerbar {
     min-height: 46px;
     margin: 0px -1px 0px -1px;
-    padding: 0px 7px 0px 7px;
+    padding: 6px 7px 6px 7px;
 
     color: @base0D;
 
@@ -737,10 +761,35 @@
       2px 4px 4px mix(@base00, black, 0.3) inset,
       -1px -1px 0px mix(@base00, white, 0.1) inset;
   }
+  scrolledwindow:not(.sidebar),
+  textview {
+    border-radius: 10px;
+  }
+  scrolledwindow,
+  textview {
+    border-radius: 10px;
+  }
   scrolledwindow > textview.view {
     border-radius: 0px;
     color: @base0D;
     background-color: transparent;
+  }
+  scrolledwindow.frame textview,
+  frame textview {
+    box-shadow: none;
+  }
+
+  textview {
+    margin: 5px;
+    border-radius: 10px;
+
+    color: @base0D;
+
+    background-color: @base00;
+    box-shadow:
+      1px 2px 2px mix(@base00, black, 0.3) inset,
+      2px 4px 4px mix(@base00, black, 0.3) inset,
+      -1px -1px 0px mix(@base00, white, 0.1) inset;
   }
 
   frame > scrolledwindow {
@@ -1449,8 +1498,9 @@
   }
 
   modelbutton {
-    min-height: 32px;
-    padding: 0px 16px 0px 16px;
+    min-height: 24px;
+    margin: 1px 0px 0px 1px;
+    padding: 4px 16px 5px 15px;
     border-radius: 50px;
   }
   modelbutton:hover {
@@ -1463,6 +1513,8 @@
   modelbutton:active,
   modelbutton:hover:active,
   modelbutton:focus {
+    margin: 0px;
+    padding: 5px 16px 5px 16px;
     background-color: inherit;
     box-shadow:
       1px 2px 2px mix(@base01, black, 0.3) inset,
@@ -1471,8 +1523,8 @@
   }
 
   modelbutton:active *,
-  modelbutton:focus:active *,
-  modelbutton:focus * {
+  modelbutton:focus *,
+  modelbutton:active:focus * {
     color: @base0D;
   }
   modelbutton:hover * {
@@ -1490,7 +1542,9 @@
   }
 
   popover {
-    margin: 0px 55px 65px 25px;
+    min-width: 120px;
+    /*13px margin-top so arrow above popover doesn't overlay the bow-shadow*/
+    margin: 13px 55px 65px 25px;
     padding: 2px;
     border-width: 0px;
     border-radius: 10px;
@@ -1503,21 +1557,64 @@
       14px 30px 24px rgba(0, 0, 0, 0.3),
       -1px -1px 0px mix(@base01, white, 0.1);
   }
-
+  popover > stack {
+    min-width: 120px;
+  }
+  popover > stack > box {
+    margin: -12px;
+    padding: 6px;
+  }
+  popover stack > box modelbutton accelerator {
+    margin-left: 12px;
+  }
+  popover modelbutton {
+    min-width: 40px;
+    min-height: 24px;
+    margin: 1px 0px 0px 1px;
+    padding: 4px 12px 5px 11px;
+  }
+  popover modelbutton:hover,
+  popover modelbutton:hover:focus,
+  button:hover popover modelbutton {
+    margin: 1px 0px 0px 1px;
+    padding: 4px 12px 5px 11px;
+    background-color: @base0D;
+    box-shadow:
+      1px 2px 2px rgba(0, 0, 0, 0.17),
+      2px 4px 4px rgba(0, 0, 0, 0.2),
+      -1px -1px 0px mix(@base0D, white, 0.4);
+  }
+  popover modelbutton:active,
+  popover modelbutton:focus,
+  popover modelbutton:hover:active,
+  button:hover:active popover modelbutton:active,
+  button:hover popover modelbutton,
+  button:hover:active popover modelbutton:focus {
+    margin: 0px;
+    padding: 5px 12px 5px 12px;
+    background-color: @base01;
+    box-shadow:
+      1px 2px 2px mix(@base01, black, 0.3) inset,
+      2px 4px 4px mix(@base01, black, 0.3) inset,
+      -1px -1px 0px mix(@base01, white, 0.1) inset;
+  }
   popover modelbutton:hover *,
-  popover modelbutton:hover:not(:focus) *,
+  popover modelbutton:hover:focus *,
   button:hover popover modelbutton * {
     color: @base01;
   }
   popover modelbutton arrow,
-  popover modelbutton:focus:hover *,
+  popover modelbutton:active *,
+  popover modelbutton:hover:active *,
   button:hover:active popover modelbutton:active *,
   button:hover popover modelbutton *,
   button:hover:active popover modelbutton:focus * {
     color: @base0D;
   }
-  popover stack {
-    margin: -6px;
+  popover > arrow {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
   }
 
   fontchooser entry {
@@ -1531,10 +1628,14 @@
   calendar {
     color: @base0D;
   }
-  calendar:selected {
+  calendar *:selected {
     border-radius: 50px;
     color: @base01;
     background-color: @base0D;
+    box-shadow:
+      1px 2px 2px rgba(0, 0, 0, 0.17),
+      2px 4px 4px rgba(0, 0, 0, 0.2),
+      -1px -1px 0px mix(@base0D, white, 0.4);
   }
 
   expander title > arrow {

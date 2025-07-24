@@ -101,20 +101,22 @@ placeholder {
 /*Ex: The back and forward button popover in nautilus*/
 popover modelbutton {
   min-width: 40px;
-  min-height: 32px;
-  padding: 0px 12px 0px 12px;
+  min-height: 24px;
+  margin: 1px 0px 0px 1px;
+  padding: 4px 12px 5px 11px;
 }
 popover modelbutton * {
   color: var(--base0D);
 }
-popover modelbutton:focus {
-  background-color: var(--base01);
-  box-shadow: var(--shadow-inset-base01);
+popover modelbutton:hover,
+popover modelbutton:hover:focus {
+  margin: 1px 0px 0px 1px;
+  padding: 4px 12px 5px 11px;
 }
-popover modelbutton:disabled {
-  opacity: 0.5;
-}
+popover modelbutton:focus,
 popover modelbutton:selected:focus:not(:hover) {
+  margin: 0px;
+  padding: 5px 12px 5px 12px;
   background-color: var(--base01);
   box-shadow: var(--shadow-inset-base01);
 }
@@ -477,16 +479,6 @@ splitbutton:hover:active > separator {
   background-color: var(--base0D);
 }
 
-radio {
-  border: 1px solid var(--base02);
-  background-color: var(--base01);
-  box-shadow: var(--shadow-thin-base01);
-}
-radio:checked {
-  border-color: transparent;
-  color: var(--base01);
-  background-color: var(--base0D);
-}
 modelbutton:hover > box > radio:checked {
   color: var(--base01);
   background-color: var(--base0D);
@@ -510,21 +502,6 @@ modelbutton:hover > box > radio:checked {
   background-color: var(--base0D);
 }
 
-switch {
-  border-width: 1px;
-  background: var(--base02);
-  box-shadow: var(--shadow-inset-base02);
-}
-switch:checked {
-  background: var(--base0D);
-  box-shadow: var(--shadow-inset-base0D);
-}
-switch slider {
-  border-radius: 100%;
-  background: var(--base00);
-  box-shadow: var(--shadow-thin-base00);
-}
-
 block.empty {
   border: none;
   background-color: transparent;
@@ -537,52 +514,9 @@ block.filled {
   background-color: var(--base0B);
 }
 
-scale trough {
-  background-color: transparent;
-  box-shadow: var(--shadow-thin-base02);
-}
-row:hover scale trough {
-  box-shadow: var(--shadow-thin-base0B);
-}
-scale highlight {
-  background-color: var(--base0B);
-}
-scale slider {
-  border-radius: 100%;
-  background-color: var(--base02);
-  box-shadow: var(--shadow-thin-base02);
-}
-scale slider:hover {
-  background-color: var(--base0D);
-}
-
 scrolledwindow:not(.sidebar),
 textview {
   border-radius: 10px;
-}
-
-check:checked {
-  color: var(--base01);
-}
-
-progresscell {
-  border-radius: 50px;
-  background-color: transparent;
-  box-shadow: var(--shadow-inset-base00);
-}
-progresscell progress {
-  border-radius: 50px;
-  background-color: var(--base0B);
-  box-shadow: var(--shadow-thin-base0B);
-}
-progresscell trough {
-  background-color: transparent;
-}
-row:hover progresscell {
-  box-shadow: var(--shadow-inset-base00);
-}
-label.in-progress {
-  color: var(--base01);
 }
 
 row.activatable:hover entry {
@@ -640,6 +574,9 @@ scale {
 }
 scale.marks-after {
   padding: 12px 12px 0px 12px;
+}
+row:hover scale trough {
+  box-shadow: var(--shadow-thin-base0B);
 }
 scale trough {
   border-radius: 99px;
@@ -744,14 +681,28 @@ levelbar.discrete > trough > block:last-child {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
 }
-
+progresscell {
+  border-radius: 50px;
+  background-color: transparent;
+  box-shadow: var(--shadow-inset-base00);
+}
+progresscell progress {
+  border-radius: 50px;
+  background-color: var(--base0B);
+  box-shadow: var(--shadow-thin-base0B);
+}
+progresscell trough {
+  background-color: transparent;
+}
+row:hover progresscell {
+  box-shadow: var(--shadow-inset-base00);
+}
 label.in-progress {
   color: var(--base01);
 }
 
 switch {
   padding: 3px;
-  border-width: 1px;
   border-radius: 50px;
 
   color: transparent;
@@ -766,7 +717,6 @@ switch:checked {
 switch slider {
   min-width: 20px;
   min-height: 20px;
-  border-width: 1px;
   border-radius: 100%;
 
   background: var(--base00);
@@ -866,9 +816,6 @@ spinbutton {
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
 }
-spinbutton:focus {
-  box-shadow: none;
-}
 spinbutton > text {
   min-width: 30px;
   padding: 0px 6px 0px 6px;
@@ -884,15 +831,18 @@ spinbutton button.up,
 spinbutton button.down {
   min-width: 24px;
   min-height: 24px;
-  margin: 0px;
-  padding: 1px 5px 0px 6px;
+  margin: 1px 0px 0px 1px;
+  padding: 0px 5px 0px 5px;
   border-color: transparent;
 }
 spinbutton button:hover {
   margin: 1px 0px 0px 1px;
   padding: 0px 5px 0px 5px;
-  color: var(--base01);
-  box-shadow: var(--shadow-thin-base0D);
+  color: @base01;
+  box-shadow:
+    1px 2px 2px rgba(0, 0, 0, 0.17),
+    2px 4px 4px rgba(0, 0, 0, 0.2),
+    -1px -1px 0px mix(@base0D, white, 0.4);
 }
 spinbutton button.up:active,
 spinbutton button.up:hover:active,
@@ -1113,10 +1063,6 @@ frame {
 frame > label {
   margin: 4px;
 }
-frame > scrolledwindow {
-  margin: 4px;
-  background-color: transparent;
-}
 
 spinner {
   color: var(--base0D);
@@ -1183,6 +1129,7 @@ box.dialog-action-area {
 }
 
 frame > scrolledwindow {
+  margin: 4px;
   background-color: var(--base00);
 }
 
@@ -1743,11 +1690,6 @@ popover box.vertical > separator.horizontal {
   background-color: var(--base02);
   box-shadow: var(--shadow-inset-base02);
 }
-#NautilusPathBar > menubutton > button {
-  min-height: 24px;
-  margin: 1px 1px 0px 1px;
-  padding: 5px;
-}
 #NautilusPathBar > menubutton > button:active,
 #NautilusPathBar > menubutton > button:checked:not(:hover) {
   box-shadow: var(--shadow-inset-base02);
@@ -1766,6 +1708,9 @@ popover box.vertical > separator.horizontal {
   border-radius: 50px 0px 0px 50px;
 }
 #NautilusPathBar > menubutton > button {
+  min-height: 24px;
+  margin: 1px 1px 0px 1px;
+  padding: 5px;
   border-radius: 0px 50px 50px 0px;
 }
 #NautilusPathBar > menubutton:hover {
