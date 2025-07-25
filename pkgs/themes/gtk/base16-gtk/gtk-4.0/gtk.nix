@@ -866,6 +866,7 @@
   button {
     min-width: 24px; /*.linked modification, .image-button*/
     min-height: 24px;
+    margin: 1px 0px 0px 1px;
     padding: 4px 5px 5px 4px; /*.linked modification, .image-button*/
     border-radius: 50px;
 
@@ -972,7 +973,7 @@
 
     outline-offset: 4px;
   }
-  toolbar > button:active {
+  toolbar > button.image-button:active {
     box-shadow: var(--shadow-inset-base01);
   }
 
@@ -1058,7 +1059,7 @@
   frame {
     margin: 5px;
     border-radius: 10px;
-    background-color: @base00;
+    background-color: var(--base00);
     box-shadow: var(--shadow-inset-base00);
   }
   frame > label {
@@ -1322,6 +1323,12 @@
   box.toolbar.horizontal > button {
     outline-offset: 4px;
   }
+  frame button.image-button:active,
+  frame button.image-button:checked,
+  frame button.image-button:hover:active,
+  frame button.image-button:hover:active:checked {
+    box-shadow: var(--shadow-inset-base00);
+  }
 
   searchbar revealer > box {
     padding: 6px;
@@ -1424,11 +1431,10 @@
   textview {
     margin: 5px;
     border-radius: 10px;
-
     color: var(--base0D);
 
-    background-color: var(--base00);
-    box-shadow: var(--shadow-inset-base00);
+    /* background-color: var(--base00); */
+    /* box-shadow: var(--shadow-inset-base00); */
   }
 
   columnview > listview > row.activatable:active {
@@ -1764,6 +1770,7 @@
   }
   .linked button.image-button,
   .linked button.image-button:hover {
+    min-width: 24px;
     min-height: 24px;
     margin: 1px 0px 0px 1px;
     padding: 4px 5px 5px 4px;
@@ -1805,6 +1812,38 @@
   box.linked > button:first-child:last-child {
     border-radius: 50px;
   }
+
+  /* --------------------Might have some redundancy----------------------*/
+  box.linked > button {
+    min-width: 16px;
+    min-height: 30px;
+    margin: 1px 0px 0px 1px;
+    padding: 1px 10px 2px 9px;
+  }
+  box.linked > *:active,
+  box.linked > *:checked,
+  box.linked > entry:focus-within,
+  box.linked > button:hover:active {
+    margin: 0px 0px 0px 0px;
+    padding: 2px 10px 2px 10px;
+    border-radius: 0px;
+  }
+  box.linked > *:active:first-child,
+  box.linked > *:checked:first-child,
+  box.linked > *:focus-within:first-child,
+  box.linked > button:hover:active:first-child {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+  box.linked > *:active:last-child,
+  box.linked > *:checked:last-child,
+  box.linked > *:focus-within:last-child,
+  box.linked > button:hover:active:last-child {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+
+  /*-------------------------Might have some redundancy----------------------*/
 
   combobox > box.linked > button {
     min-width: 16px;

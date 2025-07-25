@@ -6,7 +6,10 @@
       normal 16px "JetBrainsMono Nerd Font",
       sans-serif;
     text-decoration: none;
+
     outline: none;
+    caret-color: @base0D;
+
     transition:
       0.1s linear background-color,
       border-color,
@@ -128,6 +131,7 @@
     min-height: 4px;
     border-radius: 9px;
     background-color: @base02;
+    /*TODO: Change box-shadow to be thin if not already done so*/
     box-shadow:
       1px 1px 1px mix(@base02, black, 0.35) inset,
       2px 2px 2px mix(@base02, black, 0.35) inset,
@@ -138,6 +142,7 @@
     background-color: @base0B;
   }
   scale slider {
+    /*Tiny bit different than in gtk-4.0 because of slight differences*/
     min-width: 18px;
     min-height: 18px;
     margin: -9px;
@@ -147,7 +152,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px rgba(255, 255, 255, 0.2);
+      -1px -1px 0px mix(@base02, white, 0.1);
   }
   scale slider:hover {
     background-color: @base0D;
@@ -389,6 +394,7 @@
   }
   spinbutton > entry {
     min-width: 30px;
+    margin: 0px;
     padding: 0px 6px 0px 6px;
     border-radius: 50px;
 
@@ -429,11 +435,8 @@
   spinbutton.vertical button {
     min-height: 40px;
   }
-  spinbutton.vertical > text {
-    padding: 6px 0px 6px 0px;
-  }
   spinbutton.vertical > entry {
-    padding: 0px;
+    padding: 6px 0px 6px 0px;
   }
 
   /*GTK3 Verified*/
@@ -488,6 +491,7 @@
   button {
     min-width: 24px;
     min-height: 24px;
+    margin: 1px 0px 0px 1px;
     padding: 4px 5px 5px 4px;
     border-radius: 50px;
 
@@ -495,13 +499,32 @@
 
     background-color: transparent;
   }
+  button.image-button,
+  button.image-button.text-button {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  button:hover,
+  button.image-button,
+  button.image-button:hover,
+  button.image-button:hover:checked,
+  button.image-button.text-button,
+  button.image-button.text-button:hover,
+  button.image-button.text-button:hover:checked {
+    margin: 1px 0px 0px 1px;
+    padding: 4px 5px 5px 4px;
+  }
   button:checked,
   button:active,
   button:hover:active,
   button.image-button:checked,
   button.image-button:active,
   button.image-button:hover:active,
-  button.image-button:hover:active:checked {
+  button.image-button:hover:active:checked,
+  button.image-button.text-button:checked,
+  button.image-button.text-button:active,
+  button.image-button.text-button:hover:active,
+  button.image-button.text-button:hover:active:checked {
     margin: 0px 0px 0px 0px;
     padding: 5px 5px 5px 5px;
     background-color: transparent;
@@ -510,15 +533,17 @@
       2px 4px 4px mix(@base01, black, 0.3) inset,
       -1px -1px 0px mix(@base01, white, 0.1) inset;
   }
-  button.image-button:hover:checked {
-    background-color: @base0D;
-    box-shadow:
-      1px 2px 2px rgba(0, 0, 0, 0.17),
-      2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px mix(@base0D, white, 0.4);
-  }
   button:hover,
-  button.image-button:hover {
+  button.image-button:hover,
+  button.image-button:hover:checked,
+  button.image-button.text-button:hover,
+  button.image-button.text-button:hover:checked,
+  button.text-button:hover,
+  button.text-button:hover:checked,
+  button.font:hover,
+  button.font:hover:checked,
+  button.file:hover,
+  button.file:hover:checked {
     background-color: @base0D;
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
@@ -540,42 +565,28 @@
       -1px -1px 0px mix(@base02, white, 0.1);
   }
   button.text-button:active,
-  button.font:active,
-  button.file:active,
   button.text-button:checked,
   button.text-button:hover:active,
   button.text-button:active:checked,
   button.text-button:hover:active:checked,
+  button.font:active,
   button.font:hover:active:checked,
-  button.font:hover:active {
+  button.font:hover:active,
+  button.file:active {
+    margin: 0px;
+    padding: 5px 17px 5px 17px;
     background-color: @base02;
     box-shadow:
       1px 2px 2px mix(@base02, black, 0.35) inset,
       2px 4px 4px mix(@base02, black, 0.35) inset,
       -1px -1px 0 mix(@base02, white, 0.1) inset;
   }
-  button.text-button:hover,
-  button.font:hover,
-  button.file:hover,
-  button.text-button:hover:checked,
-  button.font:hover:checked,
-  button.file:hover:checked {
-    background-color: @base0D;
-    box-shadow:
-      1px 2px 2px rgba(0, 0, 0, 0.17),
-      2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px mix(@base0D, white, 0.4);
-  }
+
   button:active label {
     color: @base0D;
   }
-  button.image-button {
-    margin: 1px 0px 0px 1px;
-    padding: 4px 5px 5px 4px;
-    background-color: transparent;
-    box-shadow: none;
-  }
-  button.image-button:active {
+  button.image-button:active,
+  button.image-button.text-button:active {
     background-color: transparent;
   }
   button:active *,
@@ -631,7 +642,7 @@
 
   menubar {
     padding-bottom: 1px;
-    box-shadow: inset 0 -1px mix(@base02, white, 0.1);
+    /* box-shadow: inset 0 -1px mix(@base02, white, 0.1); */
   }
   menubar > menuitem {
     margin: 3px;
@@ -663,7 +674,7 @@
       2px 4px 4px rgba(0, 0, 0, 0.2),
       -1px -1px 0px mix(@base0D, white, 0.4);
   }
-  menuitem:hover > label {
+  menuitem:hover > * {
     color: @base01;
   }
   menu > menuitem label:first-child {
@@ -676,7 +687,7 @@
   }
   toolbar {
     padding: 6px;
-    border-top: 1px solid rgb(41, 47, 69);
+    border-top: 0px solid rgb(41, 47, 69);
     background-color: @base01;
   }
   toolbutton > button {
@@ -687,12 +698,12 @@
 
     outline-offset: 4px;
   }
-  toolbar > button:active {
-    box-shadow:
-      1px 2px 2px mix(@base01, black, 0.3) inset,
-      2px 4px 4px mix(@base01, black, 0.3) inset,
-      -1px -1px 0px mix(@base01, white, 0.1) inset;
+  statusbar frame {
+    margin: -5px;
+    background-color: transparent;
+    box-shadow: none;
   }
+
   /* Merge of headerbar and headerbar windowhandle > box from gtk-4.0 */
   headerbar {
     min-height: 46px;
@@ -761,6 +772,13 @@
       2px 4px 4px mix(@base00, black, 0.3) inset,
       -1px -1px 0px mix(@base00, white, 0.1) inset;
   }
+
+  actionbar > revealer > box > button.image-button.popup {
+    margin: 6px;
+  }
+  actionbar > revealer > box > button.image-button.popup:active {
+    margin: 5px 6px 6px 5px;
+  }
   scrolledwindow:not(.sidebar),
   textview {
     border-radius: 10px;
@@ -769,52 +787,65 @@
   textview {
     border-radius: 10px;
   }
-  scrolledwindow > textview.view {
-    border-radius: 0px;
-    color: @base0D;
-    background-color: transparent;
+  scrolledwindow.frame,
+  frame {
+    border-radius: 10px;
+    background-color: @base00;
   }
   scrolledwindow.frame textview,
+  frame scrolledwindow,
   frame textview {
     box-shadow: none;
   }
-
   textview {
     margin: 5px;
     border-radius: 10px;
-
     color: @base0D;
 
+    /* background-color: @base00; */
+    /* box-shadow: */
+    /*   1px 2px 2px mix(@base00, black, 0.3) inset, */
+    /*   2px 4px 4px mix(@base00, black, 0.3) inset, */
+    /*   -1px -1px 0px mix(@base00, white, 0.1) inset; */
+  }
+
+  frame {
+    margin: 5px;
+    border-radius: 10px;
     background-color: @base00;
     box-shadow:
       1px 2px 2px mix(@base00, black, 0.3) inset,
       2px 4px 4px mix(@base00, black, 0.3) inset,
       -1px -1px 0px mix(@base00, white, 0.1) inset;
   }
-
+  frame menubar,
+  frame toolbar {
+    background-color: transparent;
+  }
+  frame button.image-button:active,
+  frame button.image-button:hover:active,
+  frame button.image-button.text-button:active,
+  frame button.image-button.text-button:hover:active {
+    background-color: @base00;
+    box-shadow:
+      1px 2px 2px mix(@base00, black, 0.35) inset,
+      2px 4px 4px mix(@base00, black, 0.35) inset,
+      -1px -1px 0 mix(@base00, white, 0.1) inset;
+  }
   frame > scrolledwindow {
     padding-top: 8px;
     padding-right: 6px;
     padding-bottom: 8px;
     padding-left: 6px;
   }
-  frame {
-    border-radius: 10px;
-    color: @base0D;
-    background-color: transparent;
-  }
   frame > label {
     margin: 4px;
   }
+
   button > box > arrow {
     min-width: 16px;
     min-height: 16px;
     color: @base0D;
-  }
-  scrolledwindow {
-    border: 0px solid @base02;
-    border-radius: 0px;
-    background-color: @base01;
   }
 
   treeview.view {
@@ -856,51 +887,85 @@
     color: @base01;
   }
 
-  scrollbar trough slider {
-    margin-right: -20px;
-    margin-bottom: 5px;
-    margin-left: 20px;
-    padding: 1px;
+  scrollbar {
+    margin-right: -12px;
+    padding: 0px;
+    color: @base0D;
+    opacity: 0.5;
+  }
+  scrollbar > contents > trough {
+    border-radius: 50px;
+  }
+  scrollbar > contents > trough > slider {
+    min-width: 8px;
+    min-height: 8px;
+    margin: -8px;
+    border: 8px solid transparent;
     border-radius: 50px;
 
     background-color: @base0D;
-  }
-  scrollbar trough:hover slider {
-    margin-left: 15px;
-  }
-  scrollbar trough slider:hover {
-    margin-left: 15px;
-  }
-  scrollbar trough slider:focus {
-    margin-left: 15px;
-  }
-  scrollbar:hover slider {
-    margin-left: 15px;
-  }
+    background-clip: padding-box;
 
-  scrollbar {
-    opacity: 0.5;
+    transition: all 200ms linear;
+  }
+  scrollbar.bottom.horizontal > contents > trough {
+    margin: 16px 9px 16px 9px;
+  }
+  scrollbar.right.vertical > contents > trough {
+    margin: 9px 16px 9px 16px;
+  }
+  scrollbar > contents > trough > slider:disabled {
+    opacity: 0;
+  }
+  scrollbar.overlay-indicator.horizontal:not(.hovering)
+    > contents
+    > trough
+    > slider {
+    min-width: 40px;
+    min-height: 3px;
+  }
+  scrollbar.overlay-indicator.vertical:not(.hovering)
+    > contents
+    > trough
+    > slider {
+    min-width: 3px;
+    min-height: 40px;
+  }
+  scrollbar.overlay-indicator.hovering > contents > trough {
+    /* This is rgb value of base0D */
+    background-color: rgba(137, 180, 250, 0.3);
+  }
+  scrollbar.overlay-indicator.horizontal.hovering > contents > trough > slider {
+    min-height: 8px;
+  }
+  scrollbar.overlay-indicator.vertical.hovering > contents > trough > slider {
+    min-height: 40px;
+  }
+  scrollbar button {
+    color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
   }
   scrollbar .down {
     margin-bottom: -50px;
-    opacity: 0;
   }
   scrollbar .up {
     margin-top: -50px;
-    opacity: 0;
   }
 
   tooltip {
-    padding: 6px 10px;
-  }
-  tooltip decoration {
     margin: 1px 30px 45px 15px;
+    padding: 6px 10px;
     border-width: 0px;
     border-radius: 50px;
 
     color: @base0D;
 
     background-color: @base02;
+  }
+  tooltip decoration {
+    border-radius: 50px;
+    background-color: transparent;
+    box-shadow: none;
     box-shadow:
       4px 12px 10px rgba(0, 0, 0, 0.2),
       7px 18px 14px rgba(0, 0, 0, 0.21),
@@ -921,11 +986,6 @@
     animation-iteration-count: infinite;
 
     -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
-  }
-
-  statusbar frame box,
-  statusbar frame border {
-    background-color: @base01;
   }
 
   .popup arrow {
@@ -1033,7 +1093,7 @@
   }
 
   /* widget factory page 1 - top combobox (entry + button) */
-  box.linked > entry:focus-within + button,
+  box.linked > entry:focus + button,
   box.linked > entry + button:hover,
   box.linked > entry + button:active,
   box.linked > entry + button:checked {
@@ -1055,6 +1115,38 @@
     border-radius: 50px;
   }
 
+  /* --------------------Might have some redundancy----------------------*/
+  box.linked > button {
+    min-width: 16px;
+    min-height: 30px;
+    margin: 1px 0px 0px 1px;
+    padding: 1px 10px 2px 9px;
+  }
+  box.linked > *:active,
+  box.linked > *:checked,
+  box.linked > entry:focus,
+  box.linked > button:hover:active {
+    margin: 0px 0px 0px 0px;
+    padding: 2px 10px 2px 10px;
+    border-radius: 0px;
+  }
+  box.linked > *:active:first-child,
+  box.linked > *:checked:first-child,
+  box.linked > *:focus:first-child,
+  box.linked > button:hover:active:first-child {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+  box.linked > *:active:last-child,
+  box.linked > *:checked:last-child,
+  box.linked > *:focus:last-child,
+  box.linked > button:hover:active:last-child {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+
+  /*-------------------------Might have some redundancy----------------------*/
+
   combobox > box.linked > button {
     min-width: 16px;
     min-height: 30px;
@@ -1063,22 +1155,22 @@
   }
   combobox > box.linked > *.combo:active,
   combobox > box.linked > *.combo:checked,
-  combobox > box.linked > *.combo:focus-within {
+  combobox > box.linked > *.combo:focus {
     margin: 0px 0px 0px 0px;
     padding: 2px 10px 2px 10px;
     border-radius: 0px;
   }
-  combobox > box.linked > *.combo:active:last-child,
-  combobox > box.linked > *.combo:checked:last-child,
-  combobox > box.linked > *.combo:focus-within:last-child {
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-  }
   combobox > box.linked > *.combo:active:first-child,
   combobox > box.linked > *.combo:checked:first-child,
-  combobox > box.linked > *.combo:focus-within:first-child {
+  combobox > box.linked > *.combo:focus:first-child {
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
+  }
+  combobox > box.linked > *.combo:active:last-child,
+  combobox > box.linked > *.combo:checked:last-child,
+  combobox > box.linked > *.combo:focus:last-child {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
   }
   box.linked > button.image-button.model:hover {
     border-color: @base0D;
@@ -1308,7 +1400,14 @@
   placessidebar {
     background-color: @base01;
   }
-
+  row.activatable {
+    margin: 2px 2px 2px 2px;
+    padding: 2px;
+  }
+  scrolledwindow.frame row.activatable:active {
+    background-color: transparent;
+    box-shadow: var(--shadow-inset-base00);
+  }
   row {
     min-height: 36px;
     margin: 0px 4px 0px 4px;
@@ -1333,7 +1432,6 @@
     color: @base01;
   }
   row:hover {
-    border-bottom-color: @base0D;
     background-color: @base0D;
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
@@ -1341,9 +1439,10 @@
       -1px -1px 0 rgba(255, 255, 255, 0.2);
   }
   columnview row:selected,
-  row.sidebar-row:selected,
-  row:selected:backdrop,
-  row:selected {
+  row.activatable.sidebar-row:selected,
+  row.activatable:selected:backdrop,
+  row.activatable:selected,
+  row.activatable:hover:selected {
     color: @base0D;
     background-color: inherit;
     box-shadow:
@@ -1351,7 +1450,7 @@
       2px 4px 4px mix(@base01, black, 0.3) inset,
       -1px -1px 0px mix(@base01, white, 0.1) inset;
   }
-  row.activatable:hover:not(:selected) {
+  row.activatable:hover {
     color: @base01;
     background-color: @base0D;
     box-shadow:
@@ -1617,9 +1716,9 @@
     box-shadow: none;
   }
 
-  fontchooser entry {
-    margin: 1px;
-  }
+  /* fontchooser entry { */
+  /*   margin: 1px; */
+  /* } */
 
   button.radio:checked {
     border-radius: 50px;
@@ -1659,10 +1758,128 @@
     background-color: @base0D;
   }
 
-  #gtk-combobox-popup-menu menuitem {
-    padding: 0px 16px 0px 16px;
+  /*New stuff not ported yet from gtk 4*/
+  .sidebar list row {
+    min-height: 36px;
   }
-  #gtk-combobox-popup-menu menuitem:hover * {
+  .sidebar list > row > label {
+    padding: 0px 6px 0px 6px;
+  }
+  row.activatable:hover {
+    color: @base01;
+    background-color: @base0D;
+    box-shadow:
+      1px 2px 2px rgba(0, 0, 0, 0.17),
+      2px 4px 4px rgba(0, 0, 0, 0.2),
+      -1px -1px 0px mix(@base0D, white, 0.4);
+  }
+  row.activatable:active {
+    background-color: transparent;
+    box-shadow:
+      1px 2px 2px mix(@base01, black, 0.3) inset,
+      2px 4px 4px mix(@base01, black, 0.3) inset,
+      -1px -1px 0px mix(@base01, white, 0.1) inset;
+  }
+  row.activatable:hover label,
+  row.activatable:hover image,
+  row.activatable:hover sort-indicator,
+  row.activatable:hover arrow,
+  row.activatable:hover expander {
+    color: @base01;
+  }
+  row.activatable:active label,
+  row.activatable:active image,
+  row.activatable:active sort-indicator,
+  row.activatable:active arrow,
+  row.activatable:active expander,
+  row.activatable:selected label,
+  row.activatable:selected image,
+  row.activatable:selected sort-indicator,
+  row.activatable:selected arrow,
+  row.activatable:selected expander {
+    color: @base0D;
+  }
+  columnview row:selected,
+  row.activatable.sidebar-row:selected,
+  row.activatable:selected:backdrop,
+  row.activatable:selected {
+    color: @base0D;
+    background-color: inherit;
+    box-shadow:
+      1px 2px 2px mix(@base01, black, 0.3) inset,
+      2px 4px 4px mix(@base01, black, 0.3) inset,
+      -1px -1px 0px mix(@base01, white, 0.1) inset;
+  }
+  row.activatable:hover:not(:selected):not(:active) {
+    color: @base01;
+    background-color: @base0D;
+    box-shadow:
+      1px 2px 2px rgba(0, 0, 0, 0.17),
+      2px 4px 4px rgba(0, 0, 0, 0.2),
+      -1px -1px 0px mix(@base0D, white, 0.4);
+  }
+  row.activatable:hover entry {
+    background-color: @base0D;
+  }
+  row.activatable:hover entry:focus {
+    box-shadow:
+      1px 2px 2px mix(@base0D, black, 0.2) inset,
+      2px 4px 4px mix(@base0D, black, 0.2) inset,
+      -1px -1px 0px mix(@base0D, white, 0.4) inset;
+  }
+  row.activatable:hover selection:focus {
+    background-color: @base02;
+  }
+
+  /*Inspector global settings dropdowns*/
+  stack:hover > row.activatable:hover {
+    box-shadow: none;
+  }
+  row:hover dropdown > button.toggle:checked {
+    box-shadow:
+      1px 2px 2px mix(@base0D, black, 0.2) inset,
+      2px 4px 4px mix(@base0D, black, 0.2) inset,
+      -1px -1px 0px mix(@base0D, white, 0.4) inset;
+  }
+  row:hover dropdown > button.toggle:checked:hover {
+    box-shadow:
+      1px 2px 2px mix(@base0D, black, 0.2) inset,
+      2px 4px 4px mix(@base0D, black, 0.2) inset,
+      -1px -1px 0px mix(@base0D, white, 0.4) inset;
+  }
+  row:hover dropdown > button.toggle:checked * {
+    color: @base01;
+  }
+  row:not(:hover) dropdown > button.toggle:checked:not(:hover) {
+    box-shadow:
+      1px 2px 2px mix(@base02, black, 0.3) inset,
+      2px 4px 4px mix(@base02, black, 0.3) inset,
+      -1px -1px 0px mix(@base02, white, 0.1) inset;
+  }
+
+  row:hover button.text-button:checked,
+  row:hover button.text-button:checked:hover {
+    box-shadow:
+      1px 2px 2px mix(@base0D, black, 0.2) inset,
+      2px 4px 4px mix(@base0D, black, 0.2) inset,
+      -1px -1px 0px mix(@base0D, white, 0.4) inset;
+  }
+  row:hover button.text-button:checked * {
+    color: @base01;
+  }
+  row:not(:hover) button.text-button:checked:not(:hover) {
+    background-color: @base02;
+    box-shadow:
+      1px 2px 2px mix(@base02, black, 0.3) inset,
+      2px 4px 4px mix(@base02, black, 0.3) inset,
+      -1px -1px 0px mix(@base02, white, 0.1) inset;
+  }
+  /*I don't even remember what a banner is*/
+  banner widget {
+    opacity: 1;
+    background-color: @base0D;
+  }
+  banner label.heading {
     color: @base01;
   }
 ''
