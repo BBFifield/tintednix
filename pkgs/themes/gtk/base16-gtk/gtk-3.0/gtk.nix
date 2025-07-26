@@ -156,6 +156,10 @@
   }
   scale slider:hover {
     background-color: @base0D;
+    box-shadow:
+      1px 2px 2px rgba(0, 0, 0, 0.17),
+      2px 4px 4px rgba(0, 0, 0, 0.2),
+      -1px -1px 0px mix(@base0D, white, 0.4);
   }
   scale value {
     color: @base0D;
@@ -267,9 +271,9 @@
   radio {
     min-width: 14px;
     min-height: 14px;
-    margin: 0px 4px 0px 4px;
-    padding: 3px;
-    border: 1px solid @base02;
+    margin: 1px 4px 0px 5px;
+    padding: 2px 3px 3px 2px;
+    border-width: 0px;
     border-radius: 100%;
 
     background-color: @base02;
@@ -279,6 +283,8 @@
       -1px -1px 0px rgba(255, 255, 255, 0.2);
   }
   radio:checked {
+    margin: 0px 4px 0px 4px;
+    padding: 3px;
     border-color: @base0D;
 
     color: @base01;
@@ -299,6 +305,8 @@
     );
   }
   radio:indeterminate {
+    margin: 0px 4px 0px 4px;
+    padding: 3px;
     border-color: @base0D;
 
     color: @base01;
@@ -328,9 +336,9 @@
   check {
     min-width: 14px;
     min-height: 14px;
-    margin: 0px 4px 0px 4px;
-    padding: 3px;
-    border: 1px solid @base02;
+    margin: 1px 4px 0px 5px;
+    padding: 2px 3px 3px 2px;
+    border: 0px;
     border-radius: 6px;
 
     background-color: @base02;
@@ -340,6 +348,8 @@
       -1px -1px 0px rgba(255, 255, 255, 0.2);
   }
   check:checked {
+    margin: 0px 4px 0px 4px;
+    padding: 3px;
     border-color: @base0D;
 
     color: @base01;
@@ -360,6 +370,8 @@
     );
   }
   check:indeterminate {
+    margin: 0px 4px 0px 4px;
+    padding: 3px;
     border-color: @base0D;
 
     color: @base01;
@@ -635,7 +647,8 @@
     background-position: left;
     background-size: 1px 1px;
   }
-  separator.horizontal {
+  separator.horizontal,
+  menuitem separator {
     margin: 6px 16px 6px 16px;
     background-color: @base02;
   }
@@ -1154,30 +1167,26 @@
     padding: 1px 10px 2px 9px;
   }
   combobox > box.linked > *.combo:active,
-  combobox > box.linked > *.combo:checked,
-  combobox > box.linked > *.combo:focus {
+  combobox > box.linked > *.combo:checked {
     margin: 0px 0px 0px 0px;
     padding: 2px 10px 2px 10px;
+    /*Override 50px border-radius from button selector*/
     border-radius: 0px;
   }
-  combobox > box.linked > *.combo:active:first-child,
-  combobox > box.linked > *.combo:checked:first-child,
-  combobox > box.linked > *.combo:focus:first-child {
+  combobox > box.linked > *.combo:first-child {
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
   }
-  combobox > box.linked > *.combo:active:last-child,
-  combobox > box.linked > *.combo:checked:last-child,
-  combobox > box.linked > *.combo:focus:last-child {
+  combobox > box.linked > *.combo:last-child {
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
   }
+  /*Ex: linked buttons in popover on second page of gtk3-widget-factory*/
   box.linked > button.image-button.model:hover {
-    border-color: @base0D;
     border-radius: 50px;
   }
 
-  /* included viewswitcher selector in gtk-4.0 */
+  /* Removed viewswitcher selector from gtk-4.0 */
   .linked {
     border-radius: 50px;
     background-color: @base02;
@@ -1197,7 +1206,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px mix(@base0D, white, 0.4);
+      -1px -1px 0px mix(@base0d, white, 0.4);
   }
   .linked > button.text-button:hover + button.text-button,
   .linked > button.text-button:active + button.text-button,
@@ -1394,99 +1403,6 @@
     min-height: 16px;
 
     -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
-  }
-
-  /*This might be needed*/
-  placessidebar {
-    background-color: @base01;
-  }
-  row.activatable {
-    margin: 2px 2px 2px 2px;
-    padding: 2px;
-  }
-  scrolledwindow.frame row.activatable:active {
-    background-color: transparent;
-    box-shadow: var(--shadow-inset-base00);
-  }
-  row {
-    min-height: 36px;
-    margin: 0px 4px 0px 4px;
-    border-bottom-color: transparent;
-    border-radius: 50px;
-
-    background-color: transparent;
-  }
-  row > revealer {
-    padding: 0px 14px 0px 14px;
-  }
-  row box > image {
-    padding-right: 8px;
-  }
-  row box > label {
-    padding-right: 2px;
-  }
-  row box > button {
-    margin: 3px 0px 3px 0px;
-  }
-  row:hover:not(:selected) label {
-    color: @base01;
-  }
-  row:hover {
-    background-color: @base0D;
-    box-shadow:
-      1px 2px 2px rgba(0, 0, 0, 0.17),
-      2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0 rgba(255, 255, 255, 0.2);
-  }
-  columnview row:selected,
-  row.activatable.sidebar-row:selected,
-  row.activatable:selected:backdrop,
-  row.activatable:selected,
-  row.activatable:hover:selected {
-    color: @base0D;
-    background-color: inherit;
-    box-shadow:
-      1px 2px 2px mix(@base01, black, 0.3) inset,
-      2px 4px 4px mix(@base01, black, 0.3) inset,
-      -1px -1px 0px mix(@base01, white, 0.1) inset;
-  }
-  row.activatable:hover {
-    color: @base01;
-    background-color: @base0D;
-    box-shadow:
-      1px 2px 2px rgba(0, 0, 0, 0.17),
-      2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0 rgba(255, 255, 255, 0.2);
-  }
-
-  popover list.view > row.activatable:selected:not(:hover) {
-    box-shadow: unset;
-  }
-  popover list.view > row.activatable:hover {
-    color: @base01;
-    background-color: @base0D;
-    box-shadow:
-      1px 2px 2px rgba(0, 0, 0, 0.17),
-      2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0 rgba(255, 255, 255, 0.2);
-  }
-  popover list.view > row.activatable:focus,
-  popover list.view > row.activatable:focus:selected {
-    color: @base0D;
-    background-color: @base01;
-    box-shadow:
-      1px 2px 2px mix(@base01, black, 0.3) inset,
-      2px 4px 4px mix(@base01, black, 0.3) inset,
-      -1px -1px 0px mix(@base01, white, 0.1) inset;
-  }
-
-  .view > row.activatable:selected,
-  .view > child.activatable:selected,
-  list:not(.navigation-sidebar) > row.activatable:not(.sidebar-row):selected {
-    box-shadow:
-      1px 2px 2px mix(@base00, black, 0.3) inset,
-      2px 4px 4px mix(@base00, black, 0.3) inset,
-      -1px -1px 0px mix(@base00, white, 0.1) inset;
   }
 
   stack.view {
@@ -1716,10 +1632,6 @@
     box-shadow: none;
   }
 
-  /* fontchooser entry { */
-  /*   margin: 1px; */
-  /* } */
-
   button.radio:checked {
     border-radius: 50px;
   }
@@ -1765,6 +1677,20 @@
   .sidebar list > row > label {
     padding: 0px 6px 0px 6px;
   }
+
+  scrolledwindow.frame row.activatable:active {
+    background-color: transparent;
+    box-shadow:
+      1px 2px 2px mix(@base00, black, 0.35) inset,
+      2px 4px 4px mix(@base00, black, 0.35) inset,
+      -1px -1px 0 mix(@base00, white, 0.1) inset;
+  }
+
+  row {
+    border-width: 0px;
+    border-radius: 50px;
+    background-color: transparent;
+  }
   row.activatable:hover {
     color: @base01;
     background-color: @base0D;
@@ -1802,7 +1728,8 @@
   columnview row:selected,
   row.activatable.sidebar-row:selected,
   row.activatable:selected:backdrop,
-  row.activatable:selected {
+  row.activatable:selected,
+  row.activatable:hover:selected {
     color: @base0D;
     background-color: inherit;
     box-shadow:
@@ -1818,6 +1745,18 @@
       2px 4px 4px rgba(0, 0, 0, 0.2),
       -1px -1px 0px mix(@base0D, white, 0.4);
   }
+  row > revealer {
+    padding: 0px 14px 0px 14px;
+  }
+  row box > image {
+    padding-right: 8px;
+  }
+  row box > label {
+    padding-right: 2px;
+  }
+  row box > button {
+    margin: 3px 0px 3px 0px;
+  }
   row.activatable:hover entry {
     background-color: @base0D;
   }
@@ -1831,49 +1770,32 @@
     background-color: @base02;
   }
 
-  /*Inspector global settings dropdowns*/
+  /*Inspector global settings dropdowns, which I think were directly pasted from gtk 4 css*/
   stack:hover > row.activatable:hover {
     box-shadow: none;
   }
-  row:hover dropdown > button.toggle:checked {
-    box-shadow:
-      1px 2px 2px mix(@base0D, black, 0.2) inset,
-      2px 4px 4px mix(@base0D, black, 0.2) inset,
-      -1px -1px 0px mix(@base0D, white, 0.4) inset;
-  }
+  row:hover button.text-button:checked,
+  row:hover button.text-button:checked:hover,
+  row:hover dropdown > button.toggle:checked,
   row:hover dropdown > button.toggle:checked:hover {
     box-shadow:
       1px 2px 2px mix(@base0D, black, 0.2) inset,
       2px 4px 4px mix(@base0D, black, 0.2) inset,
       -1px -1px 0px mix(@base0D, white, 0.4) inset;
   }
+  row:hover button.text-button:checked *,
   row:hover dropdown > button.toggle:checked * {
     color: @base01;
   }
+  row:not(:hover) button.text-button:checked:not(:hover),
   row:not(:hover) dropdown > button.toggle:checked:not(:hover) {
-    box-shadow:
-      1px 2px 2px mix(@base02, black, 0.3) inset,
-      2px 4px 4px mix(@base02, black, 0.3) inset,
-      -1px -1px 0px mix(@base02, white, 0.1) inset;
-  }
-
-  row:hover button.text-button:checked,
-  row:hover button.text-button:checked:hover {
-    box-shadow:
-      1px 2px 2px mix(@base0D, black, 0.2) inset,
-      2px 4px 4px mix(@base0D, black, 0.2) inset,
-      -1px -1px 0px mix(@base0D, white, 0.4) inset;
-  }
-  row:hover button.text-button:checked * {
-    color: @base01;
-  }
-  row:not(:hover) button.text-button:checked:not(:hover) {
     background-color: @base02;
     box-shadow:
       1px 2px 2px mix(@base02, black, 0.3) inset,
       2px 4px 4px mix(@base02, black, 0.3) inset,
       -1px -1px 0px mix(@base02, white, 0.1) inset;
   }
+
   /*I don't even remember what a banner is*/
   banner widget {
     opacity: 1;
@@ -1881,5 +1803,54 @@
   }
   banner label.heading {
     color: @base01;
+  }
+
+  /*This might be needed*/
+  placessidebar {
+    background-color: @base01;
+  }
+
+  popover list.view > row.activatable:selected:not(:hover) {
+    box-shadow: unset;
+  }
+  popover list.view > row.activatable:hover {
+    color: @base01;
+    background-color: @base0D;
+    box-shadow:
+      1px 2px 2px rgba(0, 0, 0, 0.17),
+      2px 4px 4px rgba(0, 0, 0, 0.2),
+      -1px -1px 0px mix(@base0D, white, 0.4);
+  }
+  popover list.view > row.activatable:focus,
+  popover list.view > row.activatable:focus:selected {
+    color: @base0D;
+    background-color: @base01;
+    box-shadow:
+      1px 2px 2px mix(@base01, black, 0.3) inset,
+      2px 4px 4px mix(@base01, black, 0.3) inset,
+      -1px -1px 0px mix(@base01, white, 0.1) inset;
+  }
+
+  .view > row.activatable:selected,
+  .view > child.activatable:selected,
+  list:not(.navigation-sidebar) > row.activatable:not(.sidebar-row):selected {
+    box-shadow:
+      1px 2px 2px mix(@base00, black, 0.3) inset,
+      2px 4px 4px mix(@base00, black, 0.3) inset,
+      -1px -1px 0px mix(@base00, white, 0.1) inset;
+  }
+  /*New stuff not included in gtk 4 css*/
+  /*Equivalent to list.rich-list in gtk 4*/
+  scrolledwindow > viewport > list > row {
+    min-height: 32px;
+    margin: 1px 2px 0px 3px;
+    padding: 7px 12px 8px 11px;
+  }
+  scrolledwindow > viewport > list > row.activatable {
+    margin: 1px 2px 0px 3px;
+    padding: 7px 12px 8px 11px;
+  }
+  scrolledwindow > viewport > list > separator.horizontal {
+    all: unset;
   }
 ''

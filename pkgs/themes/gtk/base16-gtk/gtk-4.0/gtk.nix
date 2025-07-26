@@ -104,7 +104,7 @@
     min-width: 40px;
     min-height: 24px;
     margin: 1px 0px 0px 1px;
-    padding: 4px 12px 5px 11px;
+    padding: 4px 5px 5px 4px;
   }
   popover modelbutton * {
     color: var(--base0D);
@@ -112,12 +112,12 @@
   popover modelbutton:hover,
   popover modelbutton:hover:focus {
     margin: 1px 0px 0px 1px;
-    padding: 4px 12px 5px 11px;
+    padding: 4px 5px 5px 4px;
   }
   popover modelbutton:focus,
   popover modelbutton:selected:focus:not(:hover) {
     margin: 0px;
-    padding: 5px 12px 5px 12px;
+    padding: 5px;
     background-color: var(--base01);
     box-shadow: var(--shadow-inset-base01);
   }
@@ -205,70 +205,6 @@
   child.activatable:selected image {
     color: var(--base0D);
   }
-  row {
-    border: none;
-    border-radius: 50px;
-    background-color: transparent;
-  }
-  row.activatable:hover {
-    color: var(--base01);
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base0D);
-  }
-  row.activatable:active {
-    background-color: transparent;
-    box-shadow: var(--shadow-inset-base01);
-  }
-  row.activatable:hover label,
-  row.activatable:hover image,
-  row.activatable:hover sort-indicator,
-  row.activatable:hover arrow,
-  row.activatable:hover expander {
-    color: var(--base01);
-  }
-  row.activatable:active label,
-  row.activatable:active image,
-  row.activatable:active sort-indicator,
-  row.activatable:active arrow,
-  row.activatable:active expander,
-  row.activatable:selected label,
-  row.activatable:selected image,
-  row.activatable:selected sort-indicator,
-  row.activatable:selected arrow,
-  row.activatable:selected expander {
-    color: var(--base0D);
-  }
-  columnview row:selected,
-  row.activatable.sidebar-row:selected,
-  row.activatable:selected:backdrop,
-  row.activatable:selected {
-    color: var(--base0D);
-    background-color: inherit;
-    box-shadow: var(--shadow-inset-base01);
-  }
-  row.activatable:hover:not(:selected):not(:active) {
-    color: var(--base01);
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base0D);
-  }
-  .list {
-    background-color: var(--base00);
-  }
-
-  popover listview.view > row.activatable:selected:not(:hover) {
-    box-shadow: unset;
-  }
-  popover listview.view > row.activatable:hover {
-    color: var(--base01);
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base0D);
-  }
-  popover listview.view > row.activatable:focus,
-  popover listview.view > row.activatable:focus:selected {
-    color: var(--base0D);
-    background-color: var(--base01);
-    box-shadow: var(--shadow-inset-base01);
-  }
 
   menubar {
     padding-bottom: 1px;
@@ -276,14 +212,18 @@
       color-mix(in srgb, currentColor var(--border-opacity), transparent);
   }
   menubar > item {
-    margin: 3px;
-    padding: 4px 8px 4px 8px;
+    margin: 4px 3px 3px 4px;
+    padding: 3px 8px 4px 7px;
     border-radius: 10px;
     color: var(--base0D);
   }
   menubar > item:hover {
     background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
+  }
+  menubar > item:selected {
+    margin: 3px 3px 3px 3px;
+    padding: 4px 8px 4px 8px;
   }
   menubar > item:hover > label {
     color: var(--base01);
@@ -305,23 +245,6 @@
     color: var(--base0D);
     background-color: inherit;
     box-shadow: var(--shadow-inset-base01);
-  }
-
-  .view > row.activatable:not(.sidebar-row):selected,
-  .view > child.activatable:selected,
-  list:not(.navigation-sidebar) > row.activatable:not(.sidebar-row):selected {
-    box-shadow: var(--shadow-inset-base00);
-  }
-
-  .star,
-  listview .star image,
-  listview row.activatable:selected .star:hover:active image,
-  listview row.activatable:hover:selected .star image {
-    color: var(--base0A);
-  }
-  listview row.activatable:hover .star image,
-  listview row.activatable:selected .star:hover image {
-    color: var(--base01);
   }
 
   stack > button:not(:hover):not(.toggle):not(.image-button) {
@@ -485,24 +408,6 @@
     background-color: var(--base0D);
   }
 
-  .boxed-list {
-    border-radius: 30px;
-    background-color: var(--base02);
-    box-shadow: var(--shadow-thin-base02);
-  }
-  .boxed-list > row.activatable:active {
-    box-shadow: var(--shadow-inset-base02);
-  }
-  .boxed-list > row:hover button:active {
-    box-shadow: var(--shadow-inset-base02);
-  }
-  .boxed-list > row:hover button:active * {
-    color: var(--base0D);
-  }
-  .boxed-list > row.activatable:hover levelbar .empty {
-    background-color: var(--base0D);
-  }
-
   block.empty {
     border: none;
     background-color: transparent;
@@ -599,6 +504,7 @@
   }
   scale slider:hover {
     background-color: var(--base0D);
+    box-shadow: var(--shadow-thin-base0D);
   }
   scale value {
     color: var(--base0D);
@@ -727,15 +633,18 @@
   radio {
     min-width: 14px;
     min-height: 14px;
-    margin: 0px 4px 0px 4px;
-    padding: 3px;
-    border: 1px solid var(--base02);
+    margin: 1px 4px 0px 5px;
+    padding: 2px 3px 3px 2px;
+    /* border: 1px solid var(--base02); */
+    border-width: 0px;
     border-radius: 100%;
 
     background-color: var(--base02);
     box-shadow: var(--shadow-thin-base02);
   }
   radio:checked {
+    margin: 0px 4px 0px 4px;
+    padding: 3px;
     border-color: var(--base0D);
 
     color: var(--base01);
@@ -749,6 +658,8 @@
     );
   }
   radio:indeterminate {
+    margin: 0px 4px 0px 4px;
+    padding: 3px;
     border-color: var(--base0D);
 
     color: var(--base01);
@@ -772,9 +683,9 @@
   check {
     min-width: 14px;
     min-height: 14px;
-    margin: 0px 4px 0px 4px;
-    padding: 3px;
-    border: 1px solid var(--base02);
+    margin: 1px 4px 0px 5px;
+    padding: 2px 3px 3px 2px;
+    border-width: 0px;
     border-radius: 6px;
 
     background-color: var(--base02);
@@ -782,6 +693,8 @@
   }
 
   check:checked {
+    margin: 0px 4px 0px 4px;
+    padding: 3px;
     border-color: var(--base0D);
 
     color: var(--base01);
@@ -795,6 +708,8 @@
     );
   }
   check:indeterminate {
+    margin: 0px 4px 0px 4px;
+    padding: 3px;
     border-color: var(--base0D);
 
     color: var(--base01);
@@ -1135,11 +1050,6 @@
     background-color: var(--base00);
   }
 
-  row.activatable {
-    margin: 2px 2px 2px 2px;
-    padding: 2px;
-  }
-
   scrolledwindow.frame row.activatable:active {
     background-color: transparent;
     box-shadow: var(--shadow-inset-base00);
@@ -1431,41 +1341,21 @@
   textview {
     margin: 5px;
     border-radius: 10px;
+
     color: var(--base0D);
 
-    /* background-color: var(--base00); */
-    /* box-shadow: var(--shadow-inset-base00); */
-  }
-
-  columnview > listview > row.activatable:active {
+    /*background-color and box-shadow only applies when textview isn't inside a frame, otherwise it's overridden via more speicificity above*/
+    background-color: var(--base00);
     box-shadow: var(--shadow-inset-base00);
   }
 
-  columnview.data-table.list.view {
-    padding: 2px;
-    border-radius: 10px;
-    box-shadow: var(--shadow-inset-base00);
-  }
-
-  list.navigation-sidebar {
-    background-color: var(--base01);
-  }
-  list.navigation-sidebar > row:first-child {
-    margin-top: 2px;
-  }
-  .sidebar list row {
-    min-height: 36px;
-  }
-  .sidebar list > row > label {
-    padding: 0px 6px 0px 6px;
-  }
+  /*Unsure about these, prob in the inspector as well*/
   stack > widget > scrolledwindow > viewport {
     margin-top: 10px;
     border-radius: 10px;
     background-color: var(--base00);
     box-shadow: var(--shadow-inset-base00);
   }
-
   box.view {
     background-color: var(--base00);
   }
@@ -1539,22 +1429,69 @@
   /*   margin: 0px 1px 2px 0px; */
   /* } */
 
-  list.rich-list > row {
-    min-height: 32px;
-    margin: 2px;
-    padding: 8px 12px;
+  /*------------------Row and list stuff----------------------*/
+  row {
+    border-width: 0px;
+    border-radius: 50px;
+    background-color: transparent;
   }
-  list.rich-list.separators > row {
-    border-bottom: none;
+  row.activatable:hover {
+    color: var(--base01);
+    background-color: var(--base0D);
+    box-shadow: var(--shadow-thin-base0D);
   }
-  list.rich-list > row > box {
-    border-spacing: 12px;
+  row.activatable:active {
+    background-color: transparent;
+    box-shadow: var(--shadow-inset-base01);
   }
-  list.rich-list > header {
-    padding-right: 12px;
-    padding-left: 12px;
+  row.activatable:hover > label,
+  row.activatable:hover > image,
+  row.activatable:hover > sort-indicator,
+  row.activatable:hover > arrow,
+  row.activatable:hover > expander,
+  row.activatable:hover > box > label,
+  row.activatable:hover > box > image,
+  row.activatable:hover > box > sort-indicator,
+  row.activatable:hover > box > arrow,
+  row.activatable:hover > box > expander {
+    color: var(--base01);
   }
-
+  row.activatable:active > label,
+  row.activatable:active > image,
+  row.activatable:active > sort-indicator,
+  row.activatable:active > arrow,
+  row.activatable:active > expander,
+  row.activatable:selected > label,
+  row.activatable:selected > image,
+  row.activatable:selected > sort-indicator,
+  row.activatable:selected > arrow,
+  row.activatable:selected > expander,
+  row.activatable:active > box > label,
+  row.activatable:active > box > image,
+  row.activatable:active > box > sort-indicator,
+  row.activatable:active > box > arrow,
+  row.activatable:active > box > expander,
+  row.activatable:selected > box > label,
+  row.activatable:selected > box > image,
+  row.activatable:selected > box > sort-indicator,
+  row.activatable:selected > box > arrow,
+  row.activatable:selected > box > expander {
+    color: var(--base0D);
+  }
+  columnview row:selected,
+  row.activatable.sidebar-row:selected,
+  row.activatable:selected:backdrop,
+  row.activatable:selected {
+    color: var(--base0D);
+    background-color: inherit;
+    box-shadow: var(--shadow-inset-base01);
+  }
+  row.activatable:hover:not(:selected):not(:active) {
+    color: var(--base01);
+    background-color: var(--base0D);
+    box-shadow: var(--shadow-thin-base0D);
+  }
+  /*Mostly stuff from the Global Settings section of the inspector window iirc*/
   row > box > entry:hover {
     background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
@@ -1582,6 +1519,7 @@
     background-color: transparent;
     box-shadow: none;
   }
+  /*Next few blocks might be nautilus related*/
   row:hover > box > dropdown > button.toggle:hover:checked * {
     color: var(--base01);
   }
@@ -1597,18 +1535,38 @@
     margin-top: -3px;
     margin-bottom: -3px;
   }
+  /*End*/
+
+  popover listview.view > row.activatable:selected:not(:hover) {
+    box-shadow: unset;
+  }
+  popover listview.view > row.activatable:hover {
+    color: var(--base01);
+    background-color: var(--base0D);
+    box-shadow: var(--shadow-thin-base0D);
+  }
+  popover listview.view > row.activatable:focus,
+  popover listview.view > row.activatable:focus:selected {
+    color: var(--base0D);
+    background-color: var(--base01);
+    box-shadow: var(--shadow-inset-base01);
+  }
   popover listview.view row {
     min-width: 40px;
     min-height: 32px;
-    margin: 0px;
-    padding: 0px 12px;
+    margin: 1px 0px 0px 1px;
+    padding: 0px 12px 1px 11px;
   }
   popover listview.view row.activatable:hover,
   popover listview.view row.activatable:hover:selected {
+    margin: 1px 0px 0px 1px;
+    padding: 0px 12px 1px 11px;
     background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
   }
   popover listview.view row.activatable:active:selected {
+    margin: 0px;
+    padding: 1px 12px;
     background-color: var(--base01);
     box-shadow: var(--shadow-inset-base01);
   }
@@ -1622,6 +1580,111 @@
   popover scrolledwindow > listview.view {
     padding: 6px;
   }
+  list > row {
+    min-height: 32px;
+    margin: 3px 2px 2px 3px;
+    padding: 1px 2px 2px 1px;
+  }
+  list > row.activatable:active,
+  list > row.activatable:selected {
+    margin: 2px;
+    padding: 2px;
+  }
+  /*The row is acting as a button here, so no need to have styling for the button itself*/
+  list > row.activatable > button.text-button,
+  list > row.activatable:hover > button.text-button {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  /*TODO: Find an example that is a .boxed-list*/
+  .boxed-list {
+    border-radius: 30px;
+    background-color: var(--base02);
+    box-shadow: var(--shadow-thin-base02);
+  }
+  .boxed-list > row.activatable:active {
+    box-shadow: var(--shadow-inset-base02);
+  }
+  .boxed-list > row:hover button:active {
+    box-shadow: var(--shadow-inset-base02);
+  }
+  .boxed-list > row:hover button:active * {
+    color: var(--base0D);
+  }
+  .boxed-list > row.activatable:hover levelbar .empty {
+    background-color: var(--base0D);
+  }
+  list.rich-list > row {
+    min-height: 32px;
+    margin: 3px 2px 2px 3px;
+    padding: 7px 12px 8px 11px;
+  }
+  list.rich-list.separators > row {
+    border-bottom: none;
+  }
+  list.rich-list > row.activatable:active,
+  list.rich-list > row.activatable:selected {
+    margin: 2px;
+    padding: 8px 12px;
+  }
+  list.rich-list > row > box {
+    border-spacing: 12px;
+  }
+  list.rich-list > header {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .list {
+    background-color: var(--base00);
+  }
+  /*Ex: The css nodes table in the objects section in gtk inspector*/
+  columnview.data-table.list.view {
+    padding: 2px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-inset-base00);
+  }
+  columnview > listview > row {
+    margin: 3px 2px 2px 3px;
+    padding: 1px 2px 2px 1px;
+  }
+  columnview > listview > row.activatable:active,
+  columnview > listview > row.activatable:selected {
+    margin: 2px;
+    padding: 2px;
+    box-shadow: var(--shadow-inset-base00);
+  }
+  /*End*/
+
+  /*Ex: The sidebar in the objects section of gtk inpsector*/
+  list.navigation-sidebar {
+    background-color: var(--base01);
+  }
+  list.navigation-sidebar > row:first-child {
+    margin-top: 2px;
+  }
+  /*End*/
+  .sidebar list row {
+    min-height: 36px;
+  }
+  .sidebar list > row > label {
+    padding: 0px 6px 0px 6px;
+  }
+  .view > row.activatable:not(.sidebar-row):selected,
+  .view > child.activatable:selected,
+  list:not(.navigation-sidebar) > row.activatable:not(.sidebar-row):selected {
+    box-shadow: var(--shadow-inset-base00);
+  }
+  .star,
+  listview .star image,
+  listview row.activatable:selected .star:hover:active image,
+  listview row.activatable:hover:selected .star image {
+    color: var(--base0A);
+  }
+  listview row.activatable:hover .star image,
+  listview row.activatable:selected .star:hover image {
+    color: var(--base01);
+  }
+  /*------------------End of row and list stuff----------------------*/
 
   entry > menubutton > button.image-button:active,
   entry > menubutton > button.image-button:checked,
@@ -1852,21 +1915,17 @@
     padding: 1px 10px 2px 9px;
   }
   combobox > box.linked > *.combo:active,
-  combobox > box.linked > *.combo:checked,
-  combobox > box.linked > *.combo:focus-within {
+  combobox > box.linked > *.combo:checked {
     margin: 0px 0px 0px 0px;
     padding: 2px 10px 2px 10px;
+    /*Override 50px border-radius from button selector*/
     border-radius: 0px;
   }
-  combobox > box.linked > *.combo:active:last-child,
-  combobox > box.linked > *.combo:checked:last-child,
-  combobox > box.linked > *.combo:focus-within:last-child {
+  combobox > box.linked > *.combo:last-child {
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
   }
-  combobox > box.linked > *.combo:active:first-child,
-  combobox > box.linked > *.combo:checked:first-child,
-  combobox > box.linked > *.combo:focus-within:first-child {
+  combobox > box.linked > *.combo:first-child {
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
   }
