@@ -19,6 +19,24 @@
     }
   }
 
+  @keyframes slide-right {
+    from {
+      background-image: radial-gradient(circle farthest-corner at 0% 50%, alpha(currentColor, 1) 0%, transparent 0%);
+    }
+    to {
+      background-image: radial-gradient(circle farthest-corner at 50% 50%, alpha(currentColor, 1) 100%, transparent 0%);
+    }
+  }
+
+  @keyframes slide-left {
+    from {
+      background-image: radial-gradient(circle farthest-corner at 50% 50%, alpha(currentColor, 1) 100%, transparent 0%);
+    }
+    to {
+      background-image: radial-gradient(circle farthest-corner at 0% 50%, alpha(currentColor, 1) 0%, transparent 0%);
+    }
+  }
+
   * {
     font:
       normal 16px "jetbrainsmono nerd font",
@@ -81,7 +99,6 @@
   image {
     color: var(--base0D);
   }
-
   label.title,
   label.subtitle {
     padding: 0px 12px 0px 12px;
@@ -105,19 +122,23 @@
     caret-color: var(--base0D);
   }
   entry:focus-within,
-  entry button:active,
-  entry button:checked {
+  entry > button:active,
+  entry > button:checked {
     margin: 0px 0px 0px 0px;
     padding: 2px 9px 2px 9px;
     box-shadow: var(--shadow-inset-base02);
   }
-  entry.search image {
-    color: @base0D;
+  entry > image {
+    color: var(--base0D);
+    opacity: 50%;
   }
-  entry.search > image:first-child {
+  entry > image:hover {
+    opacity: 100%;
+  }
+  entry > image.left {
     margin-right: 7px;
   }
-  entry text + image {
+  entry > image.right {
     margin-left: 7px;
   }
   entry.search {
@@ -125,53 +146,6 @@
   }
   placeholder {
     opacity: 55%;
-  }
-
-  /*ex: the back and forward button popover in nautilus*/
-  popover modelbutton,
-  popover modelbutton:hover,
-  popover modelbutton:hover:focus {
-    min-width: 40px;
-    min-height: 30px;
-    margin: 1px 0px 0px 1px;
-    padding: 1px 9px 2px 8px;
-  }
-  popover modelbutton:focus,
-  popover modelbutton:selected:focus:not(:hover) {
-    margin: 0px;
-    padding: 2px 9px 2px 9px;
-    background-color: var(--base01);
-    box-shadow: var(--shadow-inset-base01);
-  }
-  popover modelbutton *,
-  popover modelbutton:focus *,
-  popover modelbutton:selected:focus:not(:hover) *,
-  popover modelbutton:not(:selected):not(:hover) *,
-  button:hover:active popover modelbutton:active *,
-  button:hover popover modelbutton *,
-  button:hover:active popover modelbutton:focus * {
-    color: var(--base0D);
-  }
-  popover modelbutton:hover *,
-  popover modelbutton:hover:not(:focus) *,
-  button:hover popover modelbutton *,
-  popover modelbutton:selected:focus:not(:hover) radio,
-  button:hover:active popover modelbutton:active radio,
-  button:hover popover modelbutton radio,
-  button:hover:active popover modelbutton:focus radio,
-  popover modelbutton:focus check,
-  popover modelbutton:selected:focus:not(:hover) check,
-  button:hover:active popover modelbutton:active check,
-  button:hover popover modelbutton check,
-  button:hover:active popover modelbutton:focus check,
-  popover modelbutton:not(:selected):not(:hover) radio,
-  popover modelbutton:not(:selected):not(:hover) check,
-  popover modelbutton:hover:selected:focus:not(:active) * {
-    color: var(--base01);
-  }
-  popover modelbutton:hover:not(:active) {
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base0D);
   }
 
   selection {
@@ -185,26 +159,6 @@
   }
   button:hover:not(:active) sort-indicator {
     color: var(--base01);
-  }
-
-  child.activatable {
-    border-radius: 10px;
-  }
-  child.activatable:hover {
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base0D);
-  }
-  child.activatable:hover label,
-  child.activatable:hover image {
-    color: var(--base01);
-  }
-  child.activatable:selected {
-    background-color: inherit;
-    box-shadow: var(--shadow-inset-base01);
-  }
-  child.activatable:selected label,
-  child.activatable:selected image {
-    color: var(--base0D);
   }
 
   menubar {
@@ -231,186 +185,14 @@
   menubar > item:hover:selected:not(:focus) > label {
     color: var(--base0D);
   }
-  menubar > item > popover modelbutton:hover {
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base0D);
-  }
-  menubar > item > popover modelbutton:hover > * {
-    color: var(--base01);
-  }
-  menubar > item > popover modelbutton:not(:hover) > * {
-    color: var(--base0D);
-  }
   item:selected:not(:focus) {
     color: var(--base0D);
     background-color: inherit;
     box-shadow: var(--shadow-inset-base01);
   }
 
-  stack > scrolledwindow > viewport {
-    border-radius: 10px;
-    background-color: var(--base00);
-    box-shadow: var(--shadow-inset-base00);
-  }
-  /*because list covers the viewport and its box-shadow*/
-  stack > scrolledwindow > viewport > list {
-    background-color: transparent;
-  }
-  stack modelbutton:focus label {
-    color: var(--base01);
-  }
-
   widget.cutout button {
     background-color: var(--base02);
-  }
-
-  header.activatable > button:active label {
-    color: var(--base01);
-  }
-  header.activatable > button:active {
-    box-shadow: var(--shadow-inset-base00);
-  }
-
-  modelbutton {
-    border-radius: 50px;
-  }
-  modelbutton:hover,
-  modelbutton:selected {
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base0D);
-  }
-  modelbutton:active,
-  modelbutton:hover:active {
-    background-color: inherit;
-    box-shadow: var(--shadow-inset-base01);
-  }
-
-  modelbutton:active *,
-  modelbutton:selected:active * {
-    color: var(--base0D);
-  }
-  modelbutton:hover *,
-  modelbutton:selected * {
-    color: var(--base01);
-  }
-
-  splitbutton {
-    margin: 1px 0px 0px 1px;
-    padding: 0px;
-    border-radius: 50px;
-
-    background-color: transparent;
-
-    animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  }
-  splitbutton:active,
-  splitbutton:checked,
-  splitbutton:hover:active,
-  splitbutton:active:checked,
-  splitbutton:hover:active:checked {
-    margin: 0px;
-    padding: 1px 0px 0px 1px;
-    box-shadow: var(--shadow-inset-base01);
-    animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  }
-  splitbutton > separator {
-    margin: 6px 1px 6px 0px;
-    padding-right: 0px;
-    background-color: var(--base0D);
-    background-size: 0px 0px;
-  }
-  splitbutton:hover {
-    box-shadow: var(--shadow-thin-base0D);
-    animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  }
-  splitbutton:hover:checked {
-    margin: 0px;
-    padding: 1px 0px 0px 1px;
-    box-shadow: var(--shadow-inset-base0D);
-    animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  }
-  splitbutton > button:not(#_),
-  splitbutton > button:not(#_):hover,
-  splitbutton > menubutton > button:not(#_),
-  splitbutton > menubutton > button:not(#_):hover,
-  splitbutton > menubutton > button:not(#_):checked {
-    background: none;
-    box-shadow: none;
-    animation: none;
-  }
-
-  splitbutton:active > button > image,
-  splitbutton:active arrow,
-  splitbutton:checked > button > image,
-  splitbutton:checked arrow,
-  splitbutton:hover:active > button > image,
-  splitbutton:hover:active arrow,
-  splitbutton:hover:active:checked > button > image,
-  splitbutton:hover:active:checked arrow {
-    color: var(--base0D);
-  }
-  splitbutton:hover > button > image,
-  splitbutton:hover arrow,
-  splitbutton:hover:checked > button > image,
-  splitbutton:hover:checked arrow {
-    color: var(--base01);
-  }
-  splitbutton:hover > separator,
-  splitbutton:hover:checked > separator {
-    background-color: var(--base01);
-  }
-  splitbutton:checked > separator,
-  splitbutton:hover:active > separator {
-    background-color: var(--base0D);
-  }
-
-  modelbutton:hover > box > radio:checked {
-    color: var(--base01);
-    background-color: var(--base0D);
-  }
-
-  scrolledwindow:not(.sidebar),
-  textview {
-    border-radius: 10px;
-  }
-
-  row.activatable:hover entry {
-    background-color: var(--base0D);
-  }
-  row.activatable:hover entry:focus-within {
-    box-shadow: var(--shadow-inset-base0D);
-  }
-  row.activatable:hover selection:focus {
-    background-color: var(--base02);
-  }
-
-  /*inspector global settings dropdowns*/
-  stack:hover > row.activatable:hover {
-    box-shadow: none;
-  }
-  row:hover dropdown > button.toggle:checked {
-    box-shadow: var(--shadow-inset-base0D);
-  }
-  row:hover dropdown > button.toggle:checked:hover {
-    box-shadow: var(--shadow-thin-base0D);
-  }
-  row:hover dropdown > button.toggle:checked * {
-    color: var(--base01);
-  }
-  row:not(:hover) dropdown > button.toggle:checked:not(:hover) {
-    box-shadow: var(--shadow-inset-base02);
-  }
-
-  row:hover button.text-button:checked,
-  row:hover button.text-button:checked:hover {
-    box-shadow: var(--shadow-inset-base0D);
-  }
-  row:hover button.text-button:checked * {
-    color: var(--base01);
-  }
-  row:not(:hover) button.text-button:checked:not(:hover) {
-    background-color: var(--base02);
-    box-shadow: var(--shadow-inset-base02);
   }
 
   banner widget {
@@ -419,11 +201,6 @@
   }
   banner label.heading {
     color: var(--base01);
-  }
-
-  scrolledwindow,
-  textview {
-    border-radius: 10px;
   }
 
   progressbar,
@@ -501,7 +278,8 @@
     color: var(--base01);
   }
 
-  slider {
+  scale slider,
+  switch slider {
     min-width: 20px;
     min-height: 20px;
     border-radius: 100%;
@@ -562,52 +340,22 @@
     padding: 3px;
     border-radius: 50px;
 
-    color: transparent;
+    color: var(--base0D);
 
-    background: var(--base01);
+    background: transparent;
     box-shadow: var(--shadow-inset-base01);
+
+    animation: slide-left 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   switch:checked {
-    background: var(--base0D);
+    color: var(--base0D);
     box-shadow: var(--shadow-inset-base0D);
+    animation: slide-right 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  switch image {
+    color: transparent;
   }
 
-  radio {
-    min-width: 14px;
-    min-height: 14px;
-    margin: 1px 4px 0px 5px;
-    padding: 2px 3px 3px 2px;
-    /* border: 1px solid var(--base02); */
-    border-width: 0px;
-    border-radius: 100%;
-
-    background-color: var(--base02);
-    box-shadow: var(--shadow-thin-base02);
-  }
-  radio:checked {
-    margin: 0px 4px 0px 4px;
-    padding: 3px;
-    border-color: var(--base0D);
-
-    color: var(--base01);
-
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-inset-base0D);
-
-    -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-symbolic.symbolic.png")), -gtk-recolor(url("assets/bullet@2-symbolic.symbolic.png")));
-  }
-  radio:indeterminate {
-    margin: 0px 4px 0px 4px;
-    padding: 3px;
-    border-color: var(--base0D);
-
-    color: var(--base01);
-
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-inset-base0D);
-
-    -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
-  }
   checkbutton {
     padding: 4px;
   }
@@ -615,41 +363,43 @@
     margin-right: 4px;
     color: var(--base0D);
   }
-
-  check {
+  check,
+  radio {
     min-width: 14px;
     min-height: 14px;
-    margin: 1px 4px 0px 5px;
-    padding: 2px 3px 3px 2px;
-    border-width: 0px;
-    border-radius: 6px;
-
-    background-color: var(--base02);
-    box-shadow: var(--shadow-thin-base02);
-  }
-
-  check:checked {
     margin: 0px 4px 0px 4px;
     padding: 3px;
-    border-color: var(--base0D);
+    border-width: 0px;
 
+    background-color: transparent;
+    box-shadow: var(--shadow-inset-base01-thin);
+
+    animation: ripple-in-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  check:checked,
+  check:indeterminate,
+  radio:checked,
+  radio:indeterminate {
     color: var(--base01);
-
-    background-color: var(--base0D);
     box-shadow: var(--shadow-inset-base0D);
-
+    animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  radio {
+    border-radius: 100%;
+  }
+  radio:checked {
+    -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-symbolic.symbolic.png")), -gtk-recolor(url("assets/bullet@2-symbolic.symbolic.png")));
+  }
+  radio:indeterminate {
+    -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
+  }
+  check {
+    border-radius: 6px;
+  }
+  check:checked {
     -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-symbolic.svg")), -gtk-recolor(url("assets/check-symbolic.symbolic.png")));
   }
   check:indeterminate {
-    margin: 0px 4px 0px 4px;
-    padding: 3px;
-    border-color: var(--base0D);
-
-    color: var(--base01);
-
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-inset-base0D);
-
     -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
   }
 
@@ -698,6 +448,76 @@
     padding: 0px;
   }
 
+  splitbutton {
+    margin: 1px 0px 0px 1px;
+    padding: 0px;
+    border-radius: 50px;
+
+    background-color: transparent;
+
+    animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  splitbutton:active,
+  splitbutton:checked,
+  splitbutton:hover:active,
+  splitbutton:active:checked,
+  splitbutton:hover:active:checked {
+    margin: 0px;
+    padding: 1px 0px 0px 1px;
+    box-shadow: var(--shadow-inset-base01);
+    animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  splitbutton > separator {
+    margin: 6px 1px 6px 0px;
+    padding-right: 0px;
+    background-color: var(--base0D);
+    background-size: 0px 0px;
+  }
+  splitbutton:hover {
+    box-shadow: var(--shadow-thin-base0D);
+    animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  splitbutton:hover:checked {
+    margin: 0px;
+    padding: 1px 0px 0px 1px;
+    box-shadow: var(--shadow-inset-base0D);
+    animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  splitbutton > button:not(#_),
+  splitbutton > button:not(#_):hover,
+  splitbutton > menubutton > button:not(#_),
+  splitbutton > menubutton > button:not(#_):hover,
+  splitbutton > menubutton > button:not(#_):checked {
+    background: none;
+    box-shadow: none;
+    animation: none;
+  }
+
+  splitbutton:active > button > image,
+  splitbutton:active arrow,
+  splitbutton:checked > button > image,
+  splitbutton:checked arrow,
+  splitbutton:hover:active > button > image,
+  splitbutton:hover:active arrow,
+  splitbutton:hover:active:checked > button > image,
+  splitbutton:hover:active:checked arrow {
+    color: var(--base0D);
+  }
+  splitbutton:hover > button > image,
+  splitbutton:hover arrow,
+  splitbutton:hover:checked > button > image,
+  splitbutton:hover:checked arrow {
+    color: var(--base01);
+  }
+  splitbutton:hover > separator,
+  splitbutton:hover:checked > separator {
+    background-color: var(--base01);
+  }
+  splitbutton:checked > separator,
+  splitbutton:hover:active > separator {
+    background-color: var(--base0D);
+  }
+
   button {
     min-width: 16px;
     min-height: 30px;
@@ -710,6 +530,21 @@
     background-color: transparent;
 
     animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  button.destructive-action {
+    color: var(--base08);
+  }
+  button.small-button {
+    /*24x24 allocation*/
+    min-width: 16px;
+    min-height: 22px;
+    margin: 1px 0px 0px 1px;
+    padding: 0px 4px 1px 3px;
+  }
+  button.small-button:active,
+  button.small-button:hover:active {
+    margin: 0px;
+    padding: 1px 4px 1px 4px;
   }
   button:checked,
   button:active,
@@ -758,21 +593,43 @@
   button.file:hover {
     box-shadow: var(--shadow-thin-base0D);
   }
-  button.text-button:hover:checked,
-  button.font:hover:checked,
-  button.file:hover:checked {
-    box-shadow: var(--shadow-inset-base0D);
+  button.destructive-action:hover {
+    color: var(--base08);
+    box-shadow: var(--shadow-thin-base08);
   }
-  button *,
-  button:active *,
-  button:checked *,
-  button:hover:active *,
-  button:checked:active * {
+  /*Only declare color nested three nodes down the tree rather than just "button *". This should cover most cases while avoiding unintended colorations in popovers*/
+  button > *,
+  button:active > *,
+  button:checked > *,
+  button:hover:active > *,
+  button:checked:active > *,
+  button:hover:checked:active > *,
+  button > box > *,
+  button:active > box > *,
+  button:checked > box > *,
+  button:hover:active > box > *,
+  button:checked:active > box > *,
+  button:hover:checked:active > box > *,
+  button:hover:active > box > * > * {
     color: var(--base0D);
   }
-  button:hover *,
-  button:hover:not(:active) *,
-  button:hover:checked:not(:active) * {
+  button:hover > *,
+  button:hover > box > *,
+  button:hover > box > * > * {
+    color: var(--base01);
+  }
+  button.destructive-action > *,
+  button.destructive-action:active > *,
+  button.destructive-action:hover:active > *,
+  button.destructive-action > box > *,
+  button.destructive-action:active > box > *,
+  button.destructive-action:hover:active > box > *,
+  button.destructive-action:hover:active > box > * > * {
+    color: var(--base08);
+  }
+  button.destructive-action:hover > *,
+  button.destructive-action:hover > box > *,
+  button.destructive-action:hover > box > * > * {
     color: var(--base01);
   }
   button.text-button.toggle {
@@ -825,14 +682,13 @@
   }
 
   tabs {
-    margin: -1px -1px -2px -1px;
     padding: 0px 4px 0px 4px;
   }
   tab {
     min-width: 100px;
-    min-height: 30px;
+    min-height: 24px;
     margin: 6px 0px 5px 1px;
-    padding: 1px 17px 2px 16px;
+    padding: 4px 17px 5px 16px;
     border-radius: 50px;
 
     color: var(--base0D);
@@ -841,12 +697,9 @@
 
     animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
-  tab:hover label {
-    color: var(--base01);
-  }
   tab:checked {
     margin: 5px 0px 5px 0px;
-    padding: 2px 17px 2px 17px;
+    padding: 5px 17px 5px 17px;
     box-shadow: var(--shadow-inset-base01);
   }
   tab:hover:not(:checked) {
@@ -854,8 +707,9 @@
     box-shadow: var(--shadow-thin-base0D);
     animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
-  tab:hover:checked > label {
-    color: var(--base0D);
+  tab:hover:not(:checked) label,
+  tab:hover:not(:checked) image {
+    color: var(--base01);
   }
 
   tooltip {
@@ -871,16 +725,6 @@
   }
   tooltip label {
     padding: 0px 6px 0px 6px;
-  }
-
-  frame {
-    margin: 5px;
-    border-radius: 10px;
-    background-color: var(--base00);
-    box-shadow: var(--shadow-inset-base00);
-  }
-  frame > label {
-    margin: 4px;
   }
 
   spinner {
@@ -902,14 +746,15 @@
   treeview.view .cell {
     color: var(--base0D);
   }
+  treeview.view radio:checked,
+  treeview.view check:checked,
   treeview .cell:hover:not(:focus) {
     color: var(--base01);
     background-color: var(--base0D);
   }
-  treeview.view radio:checked,
-  treeview.view check:checked {
-    color: var(--base01);
-    background-color: var(--base0D);
+  treeview.view check.cell:hover:not(:focus),
+  treeview.view radio.cell:hover:not(:focus) {
+    box-shadow: var(--shadow-inset-base0D);
   }
   treeview.view .cell:focus:not(check):not(radio) {
     /*Need :not(check):not(radio) so check and radio byttons don't receive this box-shadow too*/
@@ -931,19 +776,12 @@
     margin-left: 6px;
   }
   box.dialog-action-area {
+    border-spacing: 5px;
     margin: 6px;
-  }
-
-  frame > scrolledwindow {
-    margin: 0px;
-    background-color: transparent;
   }
 
   grid.dim-label {
     opacity: 55%;
-  }
-  scrolledwindow > columnview.view {
-    background-color: var(--base00);
   }
 
   scrollbar {
@@ -1001,49 +839,16 @@
     box-shadow: var(--shadow-thin-base01);
   }
 
-  button.image-button.up:checked,
-  button.image-button.down:checked,
+  spinbutton button.image-button:checked,
   button.image-button.radio:checked,
-  button.image-button.up:active,
-  button.image-button.down:active,
+  spinbutton button.image-button:active,
   button.image-button.radio:active,
-  button.image-button.up:hover:active,
-  button.image-button.down:hover:active,
+  spinbutton button.image-button:hover:active,
   button.image-button.radio:hover:active,
-  button.image-button.up:hover:active:checked,
-  button.image-button.down:hover:active:checked,
+  spinbutton button.image-button:hover:active:checked,
   button.image-button.radio:hover:active:checked {
     background-color: transparent;
     box-shadow: var(--shadow-inset-base02);
-  }
-  button.image-button.up:hover:checked,
-  button.image-button.down:hover:checked,
-  button.image-button.radio:hover:checked {
-    background-color: var(--base0D);
-    box-shadow: var(--shadow-thin-base01);
-  }
-
-  popover stack > box {
-    /*inside the nautlius pathbar search with the two buttons*/
-    padding: 0px;
-  }
-  popover stack {
-    padding: 6px;
-  }
-  popover contents {
-    min-width: 120px;
-    border-width: 0px;
-    border-radius: 10px;
-
-    background-color: var(--base01);
-    box-shadow: var(--shadow-wide-base01);
-  }
-  popover > arrow {
-    min-width: 16px;
-    min-height: 16px;
-  }
-  popover stack > box modelbutton accelerator {
-    margin-left: 12px;
   }
 
   video {
@@ -1060,16 +865,6 @@
     background-color: transparent;
   }
   video controls button.image-button:hover:active {
-    box-shadow: var(--shadow-inset-base00);
-  }
-
-  frame button.image-button:hover:checked {
-    box-shadow: var(--shadow-inset-base0D);
-  }
-  frame button.image-button:active,
-  frame button.image-button:checked,
-  frame button.image-button:hover:active,
-  frame button.image-button:hover:active:checked {
     box-shadow: var(--shadow-inset-base00);
   }
 
@@ -1129,15 +924,12 @@
 
     -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
   }
-
   expander:dir(rtl) {
     -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
   }
-
   expander:disabled {
     filter: opacity(var(--disabled-opacity));
   }
-
   expander:checked {
     -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
   }
@@ -1161,20 +953,53 @@
   actionbar > revealer > box > box {
     padding: 6px;
   }
+
+  frame {
+    margin: 5px;
+    border-radius: 10px;
+    background-color: var(--base00);
+    box-shadow: var(--shadow-inset-base00);
+  }
+  frame button.image-button:hover:checked {
+    box-shadow: var(--shadow-inset-base0D);
+  }
+  frame frame > label {
+    margin: 4px;
+  }
+  scrolledwindow:not(.sidebar),
+  textview {
+    border-radius: 10px;
+  }
   scrolledwindow.frame,
   frame {
     border-radius: 10px;
     background-color: var(--base00);
     box-shadow: var(--shadow-inset-base00);
   }
+  frame > scrolledwindow {
+    margin: 0px;
+    background-color: transparent;
+  }
+  frame button.small-button:active,
+  frame button.small-button:hover:active,
+  scrolledwindow.frame button.small-button:active,
+  scrolledwindow.frame button.small-button:hover:active,
   scrolledwindow.frame textview,
   scrolledwindow.frame block.empty,
   scrolledwindow.frame progressbar trough,
   scrolledwindow.frame levelbar trough,
   scrolledwindow.frame scale trough,
-  scrolledwindow.frame switch:not(:checked) {
+  scrolledwindow.frame radio:not(:checked),
+  scrolledwindow.frame check:not(:checked) {
     box-shadow: var(--shadow-inset-base00-thin);
   }
+  frame button.image-button:active,
+  frame button.image-button:checked,
+  frame button.image-button:hover:active,
+  frame button.image-button:hover:active:checked,
+  frame tab:checked,
+  frame tab:active,
+  scrolledwindow.frame switch:not(:checked),
   scrolledwindow.frame row.activatable:active {
     background-color: transparent;
     box-shadow: var(--shadow-inset-base00);
@@ -1182,6 +1007,9 @@
   scrolledwindow.frame textview,
   frame textview {
     box-shadow: none;
+  }
+  scrolledwindow > columnview.view {
+    background-color: var(--base00);
   }
 
   textview {
@@ -1196,8 +1024,9 @@
   }
 
   /*unsure about these, prob in the inspector as well*/
-  stack > widget > scrolledwindow > viewport {
-    margin-top: 10px;
+  stack > widget > scrolledwindow > viewport,
+  stack > box > scrolledwindow > viewport {
+    margin-top: 6px;
     border-radius: 10px;
     background-color: var(--base00);
     box-shadow: var(--shadow-inset-base00);
@@ -1225,7 +1054,7 @@
   }
   box.view > scrolledwindow:first-child + separator + stack {
     border-radius: 0px;
-    background-color: @base01;
+    background-color: var(--base01);
   }
   box.view > scrolledwindow:first-child + separator + stack > paned > separator.wide,
   box.horizontal > stack > box.vertical > paned.horizontal > separator.wide {
@@ -1257,9 +1086,96 @@
     border-right-width: 0px;
   }
 
-  /* header > button > :first-child { */
-  /*   margin-left: 6px; */
-  /* } */
+  modelbutton {
+    border-radius: 50px;
+  }
+  modelbutton:hover:not(:active) > box > check:not(:checked),
+  modelbutton:hover:not(:active) > box > radio:not(:checked) {
+    box-shadow: var(--shadow-inset-base0D);
+  }
+  modelbutton:active,
+  modelbutton:hover:active {
+    background-color: inherit;
+    box-shadow: var(--shadow-inset-base01);
+  }
+  /*ex: the back and forward button popover in nautilus*/
+  popover modelbutton,
+  popover modelbutton:hover,
+  popover modelbutton:hover:focus {
+    min-width: 40px;
+    min-height: 30px;
+    margin: 1px 0px 0px 1px;
+    padding: 1px 9px 2px 8px;
+  }
+  popover modelbutton:focus,
+  popover modelbutton:selected:focus:not(:hover) {
+    margin: 0px;
+    padding: 2px 9px 2px 9px;
+    background-color: var(--base01);
+    box-shadow: var(--shadow-inset-base01);
+  }
+  modelbutton:active > *,
+  modelbutton:hover:active > *,
+  modelbutton:selected:active > *,
+  popover modelbutton > *,
+  popover modelbutton:focus > *,
+  popover modelbutton:hover:focus > *,
+  popover modelbutton:hover:active:selected:focus > *,
+  button:hover popover modelbutton > *,
+  button:hover:active popover modelbutton:active > *,
+  button:hover:active popover modelbutton:focus > * {
+    color: var(--base0D);
+  }
+  modelbutton:hover > *,
+  modelbutton:selected > *,
+  popover modelbutton:hover > *,
+  popover modelbutton:hover:selected > *,
+  popover modelbutton:hover:selected:focus > * {
+    color: var(--base01);
+  }
+  modelbutton:hover,
+  modelbutton:selected,
+  popover modelbutton:hover:not(:active) {
+    background-color: var(--base0D);
+    box-shadow: var(--shadow-thin-base0D);
+  }
+  popover stack > box {
+    /*inside the nautlius pathbar search with the two buttons*/
+    padding: 0px;
+  }
+  popover stack {
+    padding: 6px;
+  }
+  popover contents {
+    min-width: 120px;
+    border-width: 0px;
+    border-radius: 10px;
+
+    background-color: var(--base01);
+    box-shadow: var(--shadow-wide-base01);
+  }
+  popover > arrow {
+    min-width: 16px;
+    min-height: 16px;
+  }
+  popover stack > box modelbutton accelerator {
+    margin-left: 12px;
+  }
+  popover.emoji-picker entry {
+    margin: 6px 6px 0px 6px;
+  }
+  popover.emoji-picker flowboxchild {
+    margin: 6px 3px 0px 3px;
+  }
+  stack > scrolledwindow > viewport {
+    border-radius: 10px;
+    background-color: var(--base00);
+    box-shadow: var(--shadow-inset-base00);
+  }
+  /*because list covers the viewport and its box-shadow*/
+  stack > scrolledwindow > viewport > list {
+    background-color: transparent;
+  }
 
   /*------------------row and list stuff----------------------*/
   row {
@@ -1267,12 +1183,22 @@
     border-radius: 50px;
     background-color: transparent;
   }
-  row.activatable:hover {
+  child.activatable {
+    border-radius: 10px;
+  }
+  row.activatable:hover,
+  child.activatable:hover {
     color: var(--base01);
     background-color: var(--base0D);
     box-shadow: var(--shadow-thin-base0D);
   }
-  row.activatable:active {
+  row.activatable:active,
+  row.activatable.sidebar-row:selected,
+  row.activatable:selected:backdrop,
+  row.activatable:selected,
+  child.activatable:selected,
+  columnview row:selected {
+    color: var(--base0D);
     background-color: transparent;
     box-shadow: var(--shadow-inset-base01);
   }
@@ -1281,7 +1207,10 @@
   row.activatable:hover button:hover > *,
   row.activatable:hover button.image-button.sidebar-button > *,
   row.activatable:hover box > button > *,
-  row.activatable:hover:selected button:hover > * {
+  row.activatable:hover:selected button:hover > *,
+  child.activatable:hover label,
+  child.activatable:hover image,
+  header.activatable > button:active label {
     color: var(--base01);
   }
   row.activatable:hover slider,
@@ -1297,23 +1226,20 @@
   row.activatable:hover:selected *,
   row.activatable:hover:selected button > *,
   row.activatable:hover:selected button:active > *,
-  row.activatable:hover:selected button:hover:active > * {
+  row.activatable:hover:selected button:hover:active > *,
+  child.activatable:selected label,
+  child.activatable:selected image {
     color: var(--base0D);
   }
-  columnview row:selected,
-  row.activatable.sidebar-row:selected,
-  row.activatable:selected:backdrop,
-  row.activatable:selected {
-    color: var(--base0D);
-    background-color: inherit;
-    box-shadow: var(--shadow-inset-base01);
-  }
-  row.activatable:hover:not(:selected) block.empty,
-  row.activatable:hover:not(:selected) progressbar trough,
-  row.activatable:hover:not(:selected) levelbar trough,
-  row.activatable:hover:not(:selected) scale trough {
+  row.activatable:hover:not(:active):not(:selected) block.empty,
+  row.activatable:hover:not(:active):not(:selected) progressbar trough,
+  row.activatable:hover:not(:active):not(:selected) levelbar trough,
+  row.activatable:hover:not(:active):not(:selected) scale trough,
+  row.activatable:hover:not(:active):not(:selected) radio,
+  row.activatable:hover:not(:active):not(:selected) check {
     box-shadow: var(--shadow-inset-base0D-thin);
   }
+  row.activatable:hover:not(:active):not(:selected) switch,
   row.activatable:hover:not(:selected):not(:active) {
     color: var(--base01);
     background-color: var(--base0D);
@@ -1329,6 +1255,47 @@
     background-color: transparent;
     box-shadow: var(--shadow-inset-base01);
   }
+
+  /*TODO; Check if there's redundancy*/
+  /* row.activatable:hover entry { */
+  /*   background-color: var(--base0D); */
+  /* } */
+  /* row.activatable:hover entry:focus-within { */
+  /*   box-shadow: var(--shadow-inset-base0D); */
+  /* } */
+  /* row.activatable:hover selection:focus { */
+  /*   background-color: var(--base02); */
+  /* } */
+
+  /*inspector global settings dropdowns.*/
+  stack:hover > row.activatable:hover {
+    box-shadow: none;
+  }
+  row:hover dropdown > button.toggle:checked {
+    box-shadow: var(--shadow-inset-base0D);
+  }
+  row:hover dropdown > button.toggle:checked:hover {
+    box-shadow: var(--shadow-thin-base0D);
+  }
+  row:hover dropdown > button.toggle:checked * {
+    color: var(--base01);
+  }
+  row:not(:hover) dropdown > button.toggle:checked:not(:hover) {
+    box-shadow: var(--shadow-inset-base02);
+  }
+  row:hover button.text-button:checked,
+  row:hover button.text-button:checked:hover {
+    box-shadow: var(--shadow-inset-base0D);
+  }
+  row:hover button.text-button:checked * {
+    color: var(--base01);
+  }
+  row:not(:hover) button.text-button:checked:not(:hover) {
+    background-color: var(--base02);
+    box-shadow: var(--shadow-inset-base02);
+  }
+  /*End check for redundancy*/
+
   /*next few blocks might be nautilus related*/
   row:hover > box > dropdown > button.toggle:hover:checked * {
     color: var(--base01);
@@ -1430,7 +1397,8 @@
     box-shadow: var(--shadow-inset-base00);
   }
   /*end*/
-  header.activatable button:active {
+  header.activatable button:active,
+  header.activatable > button:active {
     box-shadow: var(--shadow-inset-base00);
   }
   header.activatable button:active > box > label {
@@ -1468,6 +1436,28 @@
   listview row.activatable:hover .star image,
   listview row.activatable:selected .star:hover image {
     color: var(--base01);
+  }
+
+  scrolledwindow > viewport > list > row {
+    min-height: 32px;
+    margin: 2px 6px 1px 7px;
+    padding: 0px 12px 1px 11px;
+    border-bottom: none;
+  }
+  scrolledwindow > viewport > list > row.activatable:active,
+  scrolledwindow > viewport > list > row.activatable:selected {
+    margin: 1px 6px 1px 6px;
+    padding: 1px 12px 1px 12px;
+  }
+  scrolledwindow > viewport > list > row > box {
+    border-spacing: 12px;
+  }
+  scrolledwindow > viewport > list > header {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  scrolledwindow > viewport > list > separator.horizontal {
+    all: unset;
   }
   /*------------------end of row and list stuff----------------------*/
 
@@ -1521,7 +1511,7 @@
     min-height: 24px;
   }
   stackswitcher.linked {
-    margin: 7px 0px 6px 0px;
+    margin: 7px 0px 6px 1px;
   }
   viewswitcher,
   .linked {
@@ -1533,67 +1523,113 @@
   .linked > entry:not(:focus-within) {
     box-shadow: none;
   }
-  .linked > *:hover {
+  .linked.horizontal > *:hover {
     border-left: 0px dotted var(--base00);
     border-radius: 50px;
   }
-  .linked > *:active,
-  .linked > *:checked,
-  .linked > *:hover:active,
-  .linked > *:hover:checked,
-  .linked > entry:focus-within {
+  .linked.vertical > *:hover {
+    border-top: 0px dotted var(--base00);
+    border-radius: 50px;
+  }
+  .linked.horizontal > *:active,
+  .linked.horizontal > *:checked,
+  .linked.horizontal > *:hover:active,
+  .linked.horizontal > *:hover:checked,
+  .linked.horizontal > entry:focus-within {
     border-left-width: 0px;
     border-radius: 50px;
   }
-  .linked button:active,
-  .linked button:checked,
-  .linked button:hover:active,
-  .linked button:hover:checked,
-  .linked button:hover:active:checked,
-  .linked button.image-button:active,
-  .linked button.image-button:checked,
-  .linked button.image-button:hover:active,
-  .linked button.image-button:active:checked,
-  .linked button.image-button:hover:active:checked {
+  .linked.vertical > *:active,
+  .linked.vertical > *:checked,
+  .linked.vertical > *:hover:active,
+  .linked.vertical > *:hover:checked,
+  .linked.vertical > entry:focus-within {
+    border-top-width: 0px;
+    border-radius: 50px;
+  }
+  .linked > button:active,
+  .linked > button:checked,
+  .linked > button:hover:active,
+  .linked > button:hover:checked,
+  .linked > button:hover:active:checked,
+  .linked > button.image-button:active,
+  .linked > button.image-button:checked,
+  .linked > button.image-button:hover:active,
+  .linked > button.image-button:active:checked,
+  .linked > button.image-button:hover:active:checked {
     box-shadow: var(--shadow-inset-base02);
   }
-  .linked button:hover:checked,
-  .linked button.image-button:hover:checked {
+  .linked > button:hover:checked,
+  .linked > button.image-button:hover:checked {
     padding: 2px 9px 2px 9px;
     box-shadow: var(--shadow-inset-base0D);
   }
-  .linked > * + button:hover {
+  .linked.horizontal > * + button:hover {
     margin: 1px 0px 0px 2px;
   }
-  .linked > * + button:active,
-  .linked > * + button:checked,
-  .linked > * + button:hover:active,
-  .linked > * + button:hover:checked,
-  .linked > * + button:hover:active:checked {
+  .linked.vertical > * + button:hover {
+    margin: 2px 0px 0px 1px;
+  }
+  .linked.horizontal > * + button:active,
+  .linked.horizontal > * + button:checked,
+  .linked.horizontal > * + button:hover:active,
+  .linked.horizontal > * + button:hover:checked,
+  .linked.horizontal > * + button:hover:active:checked {
     margin: 0px 0px 0px 1px;
   }
-  .linked > * + * {
+  .linked.vertical > * + button:active,
+  .linked.vertical > * + button:checked,
+  .linked.vertical > * + button:hover:active,
+  .linked.vertical > * + button:hover:checked,
+  .linked.vertical > * + button:hover:active:checked {
+    margin: 1px 0px 0px 0px;
+  }
+  .linked.horizontal > * + * {
     border-left: 1px dotted var(--base00);
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
   }
-  .linked > *:first-child {
+  .linked.horizontal > *:first-child {
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
   }
-  .linked > *:last-child {
+  .linked.horizontal > *:last-child {
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
   }
-  .linked > scrolledwindow:hover + *,
-  .linked > entry:focus-within + *,
-  .linked > button:hover + *,
-  .linked > button:active + *,
-  .linked > button:checked + *,
-  .linked > button:hover:active + *,
-  .linked > button:hover:checked + *,
-  .linked > *:not(entry):hover + * {
+  .linked.vertical > * + * {
+    border-top: 1px dotted var(--base00);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+  .linked.vertical > *:first-child {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+  }
+  .linked.vertical > *:last-child {
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+  .linked.horizontal > scrolledwindow:hover + *,
+  .linked.horizontal > entry:focus-within + *,
+  .linked.horizontal > button:hover + *,
+  .linked.horizontal > button:active + *,
+  .linked.horizontal > button:checked + *,
+  .linked.horizontal > button:hover:active + *,
+  .linked.horizontal > button:hover:checked + *,
+  .linked.horizontal > *:not(entry):hover + * {
     border-left-color: transparent;
+    border-radius: 50px;
+  }
+  .linked.vertical > scrolledwindow:hover + *,
+  .linked.vertical > entry:focus-within + *,
+  .linked.vertical > button:hover + *,
+  .linked.vertical > button:active + *,
+  .linked.vertical > button:checked + *,
+  .linked.vertical > button:hover:active + *,
+  .linked.vertical > button:hover:checked + *,
+  .linked.vertical > *:not(entry):hover + * {
+    border-top-color: transparent;
     border-radius: 50px;
   }
   .linked > combobox,
@@ -1612,20 +1648,19 @@
     border-color: transparent;
     box-shadow: none;
   }
-
-  .linked > button.text-button:checked,
-  .linked > button.text-button:hover:checked,
-  viewswitcher > button.flat:checked,
-  viewswitcher > button.flat:hover:checked {
-    animation: none;
-  }
-  .linked > button.text-button:hover:checked,
-  viewswitcher > button.flat:hover:checked {
+  .linked > button:not(.combo):checked,
+  .linked > button:not(.combo):hover:checked {
     background-color: var(--base02);
     box-shadow: var(--shadow-inset-base02);
+    animation: none;
   }
+  .linked > button:not(.combo):hover:checked * {
+    color: var(--base0D);
+  }
+
   .linked > button.text-button:nth-child(1):hover:not(:active):not(:checked),
-  viewswitcher > button.flat:nth-child(1):hover:not(:active):not(:checked) {
+  viewswitcher > button.flat:nth-child(1):hover:not(:active):not(:checked),
+  box.dialog-action-area > button.text-button.default:hover:not(:active) {
     box-shadow: var(--shadow-thin-base0B);
   }
   .linked > button.text-button:nth-child(1),
@@ -1635,11 +1670,17 @@
   viewswitcher > button.flat:nth-child(1),
   viewswitcher > button.flat:nth-child(1):not(:hover) *,
   viewswitcher > button.flat:nth-child(1):active *,
-  viewswitcher > button.flat:nth-child(1):checked * {
+  viewswitcher > button.flat:nth-child(1):checked *,
+  box.dialog-action-area > button.text-button.default,
+  box.dialog-action-area > button.text-button.default:hover,
+  box.dialog-action-area > button.text-button.default:active,
+  box.dialog-action-area > button.text-button.default:hover:active *,
+  box.dialog-action-area > button.text-button.default:not(:hover) * {
     color: var(--base0B);
   }
   .linked > button.text-button:nth-child(2):hover:not(:active):not(:checked),
-  viewswitcher > button.flat:nth-child(2):hover:not(:active):not(:checked) {
+  viewswitcher > button.flat:nth-child(2):hover:not(:active):not(:checked),
+  box.dialog-action-area > button.text-button:first-child:hover:not(:active) {
     box-shadow: var(--shadow-thin-base08);
   }
   .linked > button.text-button:nth-child(2),
@@ -1649,7 +1690,12 @@
   viewswitcher > button.flat:nth-child(2),
   viewswitcher > button.flat:nth-child(2):not(:hover) *,
   viewswitcher > button.flat:nth-child(2):active *,
-  viewswitcher > button.flat:nth-child(2):checked * {
+  viewswitcher > button.flat:nth-child(2):checked *,
+  box.dialog-action-area > button.text-button:first-child,
+  box.dialog-action-area > button.text-button:first-child:hover,
+  box.dialog-action-area > button.text-button:first-child:active,
+  box.dialog-action-area > button.text-button:first-child:hover:active *,
+  box.dialog-action-area > button.text-button:first-child:not(:hover) * {
     color: var(--base08);
   }
   .linked > button.text-button:nth-child(3):hover:not(:active):not(:checked),

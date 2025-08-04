@@ -21,12 +21,62 @@ $variant: {{scheme-variant}}; // “dark” or “light”
 @function shade-wide-shadow($var-name) { @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%)"; }
 @function color-wide-shadow($var-name) { @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 40%)"; }
 
-@function top-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
-@function top-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
+@function shade-top-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
+@function shade-top-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
+
+@function color-top-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 70%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 70%) inset"; }
+@function color-top-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 70%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 70%) inset"; }
 
 @function shade-heavy-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "0%, white 100%")}) inset"; }
 @function shade-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "50%, white 50%")}) inset"; }
-@function color-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 40%", "80%, white 20%")}) inset"; }
+@function color-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 60%", "80%, white 20%")}) inset"; }
+
+@function shade-heavy-separator-mimc-shadow($var-name) { @return "-2px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 90%), -1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 20%), 1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%) inset"; }
+@function shade-separator-mimc-shadow($var-name) { @return "-2px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 15%), -1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 5%), 1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%) inset"; }
+
+/// Mixin: ripple-out-keyframes
+/// @param $color-var  CSS custom‐property name (e.g. --ripple-color)
+/// @param $name       Animation name (defaults to ripple-out)
+@mixin ripple-out-keyframes($color-var, $name: ripple-out) {
+  @at-root {
+    @keyframes #{$name} {
+      from {
+        background-image: #{unquote(
+          "radial-gradient(circle farthest-corner at center, \
+           alpha(var(#{$color-var}), 1) 0%, transparent 0%)"
+        )};
+      }
+      to {
+        background-image: #{unquote(
+          "radial-gradient(circle farthest-corner at center, \
+           alpha(var(#{$color-var}), 1) 100%, transparent 0%)"
+        )};
+      }
+    }
+  }
+}
+
+/// Mixin: ripple-in-keyframes
+/// @param $color-var  CSS custom‐property name (e.g. --ripple-color)
+/// @param $name       Animation name (defaults to ripple-in)
+@mixin ripple-in-keyframes($color-var, $name: ripple-in) {
+  @at-root {
+    @keyframes #{$name} {
+      from {
+        background-image: #{unquote(
+          "radial-gradient(circle farthest-corner at center, \
+           alpha(var(#{$color-var}), 1) 100%, transparent 0%)"
+        )};
+      }
+      to {
+        background-image: #{unquote(
+          "radial-gradient(circle farthest-corner at center, \
+           alpha(var(#{$color-var}), 1) 0%, transparent 0%)"
+        )};
+      }
+    }
+  }
+}
 
 @define-color base00 #{{base00-hex}};
 @define-color base01 #{{base01-hex}};
@@ -117,15 +167,17 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --purple:            @purple;
 
 
-  --shadow-inset-base00: #{top-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)}; /* Bottom inset shadow for more extreme shades (usually base00 and base02) */
-  --shadow-inset-base01: #{top-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
-  --shadow-inset-base02: #{top-inset-shadow(--base02)}, #{shade-bottom-inset-shadow(--base02)}; /* Bottom inset shadow for duller shades (usually base02-base07) */
-  --shadow-inset-base08: #{top-inset-shadow(--base08)}, #{color-bottom-inset-shadow(--base08)};
-  --shadow-inset-base0D: #{top-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
-  --shadow-inset-base00-thin: #{top-thin-inset-shadow(--base00)}, #{shade-bottom-inset-shadow(--base00)};
-  --shadow-inset-base01-thin: #{top-thin-inset-shadow(--base01)}, #{shade-bottom-inset-shadow(--base01)};
-  --shadow-inset-base02-thin: #{top-thin-inset-shadow(--base02)}, #{shade-bottom-inset-shadow(--base02)};
-  --shadow-inset-base0D-thin: #{top-thin-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
+  --shadow-inset-base00: #{shade-top-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)}; /* Bottom inset shadow for more extreme shades (usually base00 and base02) */
+  --shadow-inset-base01: #{shade-top-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
+  --shadow-inset-base02: #{shade-top-inset-shadow(--base02)}, #{shade-bottom-inset-shadow(--base02)}; /* Bottom inset shadow for duller shades (usually base02-base07) */
+  --shadow-inset-base08: #{color-top-inset-shadow(--base08)}, #{color-bottom-inset-shadow(--base08)};
+  --shadow-inset-base0D: #{color-top-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
+  --shadow-inset-base0B: #{color-top-inset-shadow(--base0B)}, #{color-bottom-inset-shadow(--base0B)};
+  --shadow-inset-base00-thin: #{shade-top-thin-inset-shadow(--base00)}, #{shade-bottom-inset-shadow(--base00)};
+  --shadow-inset-base01-thin: #{shade-top-thin-inset-shadow(--base01)}, #{shade-bottom-inset-shadow(--base01)};
+  --shadow-inset-base02-thin: #{shade-top-thin-inset-shadow(--base02)}, #{shade-bottom-inset-shadow(--base02)};
+  --shadow-inset-base0D-thin: #{color-top-thin-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
+  --shadow-inset-base0B-thin: #{color-top-thin-inset-shadow(--base0B)}, #{color-bottom-inset-shadow(--base0B)};
 
   --shadow-thin-base00: #{shade-thin-shadow(--base00)};
   --shadow-thin-base01: #{shade-thin-shadow(--base01)};
@@ -139,4 +191,19 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --shadow-wide-base01: #{shade-wide-shadow(--base01)};
   --shadow-wide-base02: #{shade-wide-shadow(--base02)};
   --shadow-wide-base08: #{color-wide-shadow(--base08)};
+
+  --shadow-separator-mimc-base00: #{shade-heavy-separator-mimc-shadow(--base00)};
+  --shadow-separator-mimc-base01: #{shade-heavy-separator-mimc-shadow(--base01)};
+  --shadow-separator-mimc-base02: #{shade-separator-mimc-shadow(--base02)};
+
+  @include ripple-out-keyframes(--base0D, ripple-out-base0D);
+  @include ripple-out-keyframes(--base08, ripple-out-base08);
+  @include ripple-out-keyframes(--base09, ripple-out-base09);
+  @include ripple-out-keyframes(--base0A, ripple-out-base0A);
+  @include ripple-out-keyframes(--base0B, ripple-out-base0B);
+  @include ripple-in-keyframes(--base0D, ripple-in-base0D);
+  @include ripple-in-keyframes(--base08, ripple-in-base08);
+  @include ripple-in-keyframes(--base09, ripple-in-base09);
+  @include ripple-in-keyframes(--base0A, ripple-in-base0A);
+  @include ripple-in-keyframes(--base0B, ripple-in-base0B);
 }

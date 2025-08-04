@@ -11,7 +11,7 @@
     src = ./gtk/base16-gtk;
 
     installPhase = let
-      gtk4style = import ./gtk/base16-gtk/gtk-4.0/gtk.nix {};
+      gtk4style = builtins.readFile ./gtk/base16-gtk/gtk-4.0/gtk.css;
       gtk3style = import ./gtk/base16-gtk/gtk-3.0/gtk.nix {};
     in ''
       theme_dir=$out/share/themes/${pname}
