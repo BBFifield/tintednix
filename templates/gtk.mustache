@@ -3,10 +3,9 @@
   and adw-gtk3 - https://github.com/lassekongo83/adw-gtk3
 
   1. If ~/.config/gtk-4.0/gtk.css and/or ~/.config/gtk-3.0/gtk.css exists, make backups
-  2. Enable the adw-gtk3-dark theme
-  3. Save this file to ~/.config/gtk-4.0/gtk.css
-  4. Make the file a symbolic link to ~/.config/gtk-3.0/gtk.css (or copy it to that location)
-  5. Close and re-open any open apps or log out and in again
+  2. Save this file to ~/.config/gtk-4.0/gtk.css
+  3. Make the file a symbolic link to ~/.config/gtk-3.0/gtk.css (or copy it to that location)
+  4. Close and re-open any open apps or log out and in again
 */
 
 /* Global color definitions */
@@ -15,24 +14,31 @@
 
 $variant: {{scheme-variant}}; // “dark” or “light”
 
+@function top-extra-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 40%) inset"; }
+
+@function shade-top-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
+@function color-heavy-top-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 50%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 50%) inset"; }
+@function color-light-top-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 15%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 15%) inset"; }
+
+@function shade-top-deep-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
+@function color-top-deep-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 50%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 50%) inset"; }
+
+@function shade-heavy-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "0%, white 100%")}) inset"; }
+@function shade-light-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "50%, white 50%")}) inset"; }
+@function color-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 60%", "80%, white 20%")}) inset"; }
+
 @function shade-thin-shadow($var-name) { @return "1px 2px 2px rgba(0, 0, 0, 0.17), 2px 4px 4px rgba(0, 0, 0, 0.2), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%)"; }
 @function color-thin-shadow($var-name) { @return "1px 2px 2px rgba(0, 0, 0, 0.17), 2px 4px 4px rgba(0, 0, 0, 0.2), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 40%)"; }
 
 @function shade-wide-shadow($var-name) { @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%)"; }
 @function color-wide-shadow($var-name) { @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 40%)"; }
 
-@function shade-top-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
-@function shade-top-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
+@function shade-heavy-horizontal-separator-mimic-shadow($var-name) { @return "0px -2px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 40%), 0px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 10%), 0px 1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%) inset"; }
+@function shade-light-horizontal-separator-mimic-shadow($var-name) { @return "0px -2px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 25%), 0px -1px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 10%), 0px 1px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%) inset"; }
+@function shade-heavy-vertical-separator-mimic-shadow($var-name) { @return "-2px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 40%), -1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 20%), 1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%) inset"; }
+@function shade-light-vertical-separator-mimic-shadow($var-name) { @return "-2px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 25%), -1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 10%), 1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%) inset"; }
 
-@function color-top-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 70%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 70%) inset"; }
-@function color-top-thin-inset-shadow($var-name) { @return "1px 1px 1px color-mix(in oklab, var(#{$var-name}) 80%, black 70%) inset, 2px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 70%) inset"; }
 
-@function shade-heavy-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "0%, white 100%")}) inset"; }
-@function shade-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "50%, white 50%")}) inset"; }
-@function color-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 60%", "80%, white 20%")}) inset"; }
-
-@function shade-heavy-separator-mimc-shadow($var-name) { @return "-2px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 90%), -1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 20%), 1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%) inset"; }
-@function shade-separator-mimc-shadow($var-name) { @return "-2px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 15%), -1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, black 5%), 1px 0px 0px color-mix(in oklab, var(#{$var-name}) 80%, white 10%) inset"; }
 
 /// Mixin: ripple-out-keyframes
 /// @param $color-var  CSS custom‐property name (e.g. --ripple-color)
@@ -56,6 +62,7 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   }
 }
 
+
 /// Mixin: ripple-in-keyframes
 /// @param $color-var  CSS custom‐property name (e.g. --ripple-color)
 /// @param $name       Animation name (defaults to ripple-in)
@@ -77,6 +84,7 @@ $variant: {{scheme-variant}}; // “dark” or “light”
     }
   }
 }
+
 
 @define-color base00 #{{base00-hex}};
 @define-color base01 #{{base01-hex}};
@@ -167,17 +175,23 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --purple:            @purple;
 
 
-  --shadow-inset-base00: #{shade-top-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)}; /* Bottom inset shadow for more extreme shades (usually base00 and base02) */
-  --shadow-inset-base01: #{shade-top-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
-  --shadow-inset-base02: #{shade-top-inset-shadow(--base02)}, #{shade-bottom-inset-shadow(--base02)}; /* Bottom inset shadow for duller shades (usually base02-base07) */
-  --shadow-inset-base08: #{color-top-inset-shadow(--base08)}, #{color-bottom-inset-shadow(--base08)};
-  --shadow-inset-base0D: #{color-top-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
-  --shadow-inset-base0B: #{color-top-inset-shadow(--base0B)}, #{color-bottom-inset-shadow(--base0B)};
-  --shadow-inset-base00-thin: #{shade-top-thin-inset-shadow(--base00)}, #{shade-bottom-inset-shadow(--base00)};
-  --shadow-inset-base01-thin: #{shade-top-thin-inset-shadow(--base01)}, #{shade-bottom-inset-shadow(--base01)};
-  --shadow-inset-base02-thin: #{shade-top-thin-inset-shadow(--base02)}, #{shade-bottom-inset-shadow(--base02)};
-  --shadow-inset-base0D-thin: #{color-top-thin-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
-  --shadow-inset-base0B-thin: #{color-top-thin-inset-shadow(--base0B)}, #{color-bottom-inset-shadow(--base0B)};
+  --shadow-inset-extra-thin-base00: #{top-extra-thin-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)};
+  --shadow-inset-extra-thin-base01: #{top-extra-thin-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
+  --shadow-inset-extra-thin-base02: #{top-extra-thin-inset-shadow(--base02)}, #{shade-light-bottom-inset-shadow(--base02)};
+  --shadow-inset-extra-thin-base0D: #{top-extra-thin-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
+
+  --shadow-inset-thin-base00: #{shade-top-thin-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)};
+  --shadow-inset-thin-base01: #{shade-top-thin-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
+  --shadow-inset-thin-base02: #{shade-top-thin-inset-shadow(--base02)}, #{shade-light-bottom-inset-shadow(--base02)};
+  --shadow-inset-thin-base0D: #{color-heavy-top-thin-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
+  --shadow-inset-thin-base0B: #{color-heavy-top-thin-inset-shadow(--base0B)}, #{color-bottom-inset-shadow(--base0B)};
+
+  --shadow-inset-base00: #{shade-top-deep-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)}; /* Bottom inset shadow for more extreme shades (usually base00 and base01) */
+  --shadow-inset-base01: #{shade-top-deep-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
+  --shadow-inset-base02: #{shade-top-deep-inset-shadow(--base02)}, #{shade-light-bottom-inset-shadow(--base02)}; /* Bottom inset shadow for duller shades (usually base02-base07) */
+  --shadow-inset-base08: #{shade-top-deep-inset-shadow(--base08)}, #{color-bottom-inset-shadow(--base08)};
+  --shadow-inset-base0D: #{color-top-deep-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
+  --shadow-inset-base0B: #{color-top-deep-inset-shadow(--base0B)}, #{color-bottom-inset-shadow(--base0B)};
 
   --shadow-thin-base00: #{shade-thin-shadow(--base00)};
   --shadow-thin-base01: #{shade-thin-shadow(--base01)};
@@ -192,9 +206,12 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --shadow-wide-base02: #{shade-wide-shadow(--base02)};
   --shadow-wide-base08: #{color-wide-shadow(--base08)};
 
-  --shadow-separator-mimc-base00: #{shade-heavy-separator-mimc-shadow(--base00)};
-  --shadow-separator-mimc-base01: #{shade-heavy-separator-mimc-shadow(--base01)};
-  --shadow-separator-mimc-base02: #{shade-separator-mimc-shadow(--base02)};
+  --shadow-separator-mimic-horizontal-base00: #{shade-heavy-horizontal-separator-mimic-shadow(--base00)};
+  --shadow-separator-mimic-horizontal-base01: #{shade-heavy-horizontal-separator-mimic-shadow(--base01)};
+  --shadow-separator-mimic-horizontal-base02: #{shade-light-horizontal-separator-mimic-shadow(--base02)};
+  --shadow-separator-mimic-vertical-base00: #{shade-heavy-vertical-separator-mimic-shadow(--base00)};
+  --shadow-separator-mimic-vertical-base01: #{shade-heavy-vertical-separator-mimic-shadow(--base01)};
+  --shadow-separator-mimic-vertical-base02: #{shade-light-vertical-separator-mimic-shadow(--base02)};
 
   @include ripple-out-keyframes(--base0D, ripple-out-base0D);
   @include ripple-out-keyframes(--base08, ripple-out-base08);
