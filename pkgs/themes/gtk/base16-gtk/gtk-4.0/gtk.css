@@ -48,6 +48,11 @@
     -gtk-icon-transform;
 }
 
+undershoot.top {
+  background: none;
+  box-shadow: none;
+}
+
 .background {
   color: var(--window-fg-color);
 }
@@ -296,10 +301,10 @@ switch slider {
 scale {
   min-width: 10px;
   min-height: 10px;
-  padding: 12px;
+  padding: 6px;
 }
 scale.marks-after {
-  padding: 12px 12px 0px 12px;
+  padding: 6px 6px 0px 6px;
 }
 scale highlight {
   border-radius: 99px;
@@ -1146,10 +1151,15 @@ scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.a
   background-color: transparent;
   box-shadow: var(--shadow-inset-base00);
 }
+frame dropdown > button.toggle:active,
+frame dropdown > button.toggle:checked:not(:hover),
+frame dropdown > button.toggle:hover:active,
+frame dropdown > button.toggle:hover:active:checked,
 frame spinbutton > button.image-button:active,
 frame spinbutton > button.image-button:hover:active,
 scrolledwindow.frame spinbutton > button.image-button:active,
 scrolledwindow.frame spinbutton > button.image-button:hover:active {
+  background-color: var(--base02);
   box-shadow: var(--shadow-inset-base02);
 }
 frame list:not(.navigation-sidebar):not(.boxed-list) > row + row,
@@ -1170,12 +1180,14 @@ textview {
 }
 
 /*unsure about these, prob in the inspector as well*/
-stack > widget > scrolledwindow > viewport {
+stack > widget > scrolledwindow > viewport,
+stack > box:not(#NautilusPathBar) > scrolledwindow > viewport {
   margin-top: 6px;
   border-radius: 10px;
   background-color: var(--base00);
   box-shadow: var(--shadow-inset-base00);
 }
+/*Why set box-shadow to none here? Because it affects the nautilus pathbar*/
 stack > box > scrolledwindow > viewport {
   box-shadow: none;
 }
@@ -1326,9 +1338,6 @@ popover row arrow {
 popover stack > box modelbutton accelerator {
   margin-left: 12px;
 }
-/* popover.emoji-picker entry { */
-/*   margin: 6px 6px 0px 6px; */
-/* } */
 popover.emoji-picker flowboxchild {
   margin: 6px 3px 0px 3px;
 }
@@ -1369,9 +1378,10 @@ columnview row:selected {
 }
 row.activatable:hover *,
 row.activatable:hover > box > *,
-row.activatable:hover button:hover > *,
+row.activatable:hover button > *,
+row.activatable:hover button:not(#_):hover > *,
 row.activatable:hover box > button > *,
-row.activatable:hover:selected button:hover > *,
+row.activatable:hover:selected button:not(#_):hover > *,
 child.activatable:hover label,
 child.activatable:hover image,
 header.activatable > button:active label {
@@ -1379,18 +1389,19 @@ header.activatable > button:active label {
 }
 row.activatable:hover slider,
 row.activatable:hover button,
+row.activatable:hover button.text-button > *,
 row.activatable:hover button:hover,
 row.activatable:hover entry *,
 row.activatable:hover spinbutton > text,
-row.activatable:hover button > *,
+row.activatable:hover spinbutton button > *,
 row.activatable:active *,
 row.activatable:selected *,
 row.activatable:hover:active *,
-row.activatable:hover:active button > *,
+row.activatable:hover:active button:not(#_) > *,
 row.activatable:hover:selected *,
-row.activatable:hover:selected button > *,
-row.activatable:hover:selected button:active > *,
-row.activatable:hover:selected button:hover:active > *,
+row.activatable:hover:selected button:not(#_) > *,
+row.activatable:hover:selected button:not(#_):active > *,
+row.activatable:hover:selected button:not(#_):hover:active > *,
 child.activatable:selected label,
 child.activatable:selected image {
   color: var(--base0D);
@@ -1412,76 +1423,11 @@ row.activatable:hover:not(:selected):not(:active) {
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
 }
-/*mostly stuff from the global settings section of the inspector window iirc*/
-/* row button.toggle:hover row.activatable:hover { */
-/*   background-color: transparent; */
-/*   box-shadow: none; */
-/* } */
-/* row:hover button:hover:active, */
-/* row:hover button.text:hover:active { */
-/*   background-color: transparent; */
-/*   box-shadow: var(--shadow-inset-base01); */
-/* } */
-
-/*TODO; Check if there's redundancy*/
-/* row.activatable:hover entry { */
-/*   background-color: var(--base0D); */
-/* } */
-/* row.activatable:hover entry:focus-within { */
-/*   box-shadow: var(--shadow-inset-base0D); */
-/* } */
-/* row.activatable:hover selection:focus { */
-/*   background-color: var(--base02); */
-/* } */
 
 /*inspector global settings dropdowns.*/
 stack:hover > row.activatable:hover {
   box-shadow: none;
 }
-row.activatable:hover dropdown > button.toggle:checked {
-  box-shadow: var(--shadow-inset-base0D);
-}
-row.activatable:hover dropdown > button.toggle:checked:hover {
-  box-shadow: var(--shadow-thin-base0D);
-}
-row.activatable:hover dropdown > button.toggle:checked * {
-  color: var(--base01);
-}
-row:not(:hover) dropdown > button.toggle:checked:not(:hover) {
-  box-shadow: var(--shadow-inset-base02);
-}
-row.activatable:hover button.text-button:checked {
-  /* row:hover button.text-button:hover:checked { */
-  box-shadow: var(--shadow-inset-base0D);
-}
-row.activatable:hover button.text-button:checked * {
-  color: var(--base01);
-}
-row:not(:hover) button.text-button:checked:not(:hover) {
-  background-color: var(--base02);
-  box-shadow: var(--shadow-inset-base02);
-}
-/*End check for redundancy*/
-
-/*next few blocks might be nautilus related*/
-row:hover > box > dropdown > button.toggle:hover:checked * {
-  color: var(--base01);
-}
-row.activatable button.text-button:active,
-row:hover > box > dropdown > button.toggle:active,
-row:hover > box > dropdown > button.toggle:checked {
-  box-shadow: var(--shadow-inset-base02);
-}
-row.activatable button.text-button:active *,
-row:hover > box > dropdown > button.toggle:active *,
-row:hover > box > dropdown > button.toggle:checked * {
-  color: var(--base0D);
-}
-row > box > dropdown > button.toggle > box {
-  margin-top: -3px;
-  margin-bottom: -3px;
-}
-/*end*/
 
 list > row {
   min-height: 35px;
@@ -1603,6 +1549,8 @@ list.rich-list.separators > row {
 }
 list.rich-list > row.activatable:active,
 list.rich-list > row.activatable:selected,
+list.rich-list > row + row.activatable:active,
+list.rich-list > row + row.activatable:selected,
 list.rich-list > row + row.activatable:hover:active {
   padding: 8px 15px;
 }
@@ -1654,57 +1602,88 @@ scrolledwindow > listview.view {
   padding: 3px;
 }
 
-/*To stop header buttons from clipping undershoot.top*/
-header > button {
-  margin-bottom: 7px;
-  border-width: 0px;
-}
-header > button:active,
-header > button:checked,
-header > button:hover:active,
-header > button:active:checked,
-header > button:hover:active:checked {
-  margin-bottom: 7px;
-}
+/* header > button:active, */
+/* header > button:checked, */
+/* header > button:hover:active, */
+/* header > button:active:checked, */
+/* header > button:hover:active:checked { */
+/*   margin-bottom: 7px; */
+/* } */
 listview.view {
-  border-spacing: 4px 4px;
+  border-spacing: 0px 0px;
   padding-top: 0px;
   border-top-color: transparent;
 }
 /*End*/
+listview > separator {
+  all: unset;
+}
 listview > row {
-  margin: 2px 3px 1px 4px;
-  padding: 3px 4px 4px 3px;
+  margin: 1px 3px 0px 4px;
+  padding: 0px 4px 1px 3px;
+}
+listview > row.activatable:active,
+listview > row.activatable:selected {
+  margin: 0px 3px;
+  padding: 1px 4px;
+}
+listview > row.activatable:active,
+listview > row.activatable:selected,
+listview > row:not(.activatable):hover button:hover:active,
+header.activatable button:active,
+header.activatable > button:active {
+  box-shadow: var(--shadow-inset-base00);
+}
+/*the row is acting as a button here, so no need to have styling for the button itself*/
+listview > row.activatable > button.text-button,
+listview > row.activatable:hover > button.text-button {
+  background-color: transparent;
+  box-shadow: none;
+}
+/*mimic inset separators*/
+listview > row + row,
+header + listview > row:first-child {
+  margin: 2px 3px 0px 4px;
+  padding: 2px 4px 1px 3px;
+  border-radius: 1px;
+  box-shadow: var(--shadow-light-separator-mimic-horizontal-base00);
+}
+listview > row.activatable:hover + row:not(:selected),
+listview > row.activatable:selected + row:not(:hover) {
+  box-shadow: none;
+}
+listview > row + row.activatable:active,
+listview > row + row.activatable:selected,
+listview > row + row.activatable:hover:active,
+header + listview > row.activatable:active,
+header + listview > row.activatable:selected,
+header + listview > row.activatable:hover:active {
+  margin: 3px 3px 0px 3px;
+  padding: 1px 4px;
+  border-radius: 50px;
+}
+listview > row + row.activatable:hover:not(:active):not(:selected),
+header + listview > row.activatable:hover:not(:active):not(:selected) {
+  margin: 4px 3px 0px 4px;
+  padding: 0px 4px 1px 3px;
+  border-radius: 50px;
+}
+listview > row button,
+listview > row entry {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+listview > row button:active,
+listview > row button:hover:active,
+listview > row entry:focus-within {
+  margin-top: 3px;
+  margin-bottom: 4px;
 }
 listview > row > :first-child {
   margin-left: 3px;
 }
 listview > row > :last-child {
   margin-right: 3px;
-}
-listview > row.activatable:active,
-listview > row.activatable:selected {
-  margin: 1px 3px 1px 3px;
-  padding: 4px;
-  box-shadow: var(--shadow-inset-base00);
-}
-listview > row:hover button:hover:active {
-  box-shadow: var(--shadow-inset-base00);
-}
-listview .star image,
-listview row.activatable:hover button.star:hover:active > image,
-listview row.activatable:selected button.star > image,
-listview row.activatable:hover:active button.star > image,
-listview row.activatable:hover:selected button.star > image {
-  color: var(--base0A);
-}
-listview row.activatable:hover button.star > image,
-listview row.activatable:selected button.star:hover:not(:active) > image {
-  color: var(--base01);
-}
-header.activatable button:active,
-header.activatable > button:active {
-  box-shadow: var(--shadow-inset-base00);
 }
 header.activatable button:active > box > label {
   color: var(--base0D);
@@ -1715,28 +1694,6 @@ columnview.data-table.list.view {
   border-radius: 10px;
   box-shadow: var(--shadow-inset-base00);
 }
-
-/* scrolledwindow > viewport > list > row { */
-/*   min-height: 32px; */
-/*   margin: 2px 6px 1px 7px; */
-/*   padding: 0px 12px 1px 11px; */
-/*   border-bottom: none; */
-/* } */
-/* scrolledwindow > viewport > list > row.activatable:active, */
-/* scrolledwindow > viewport > list > row.activatable:selected { */
-/*   margin: 1px 6px 1px 6px; */
-/*   padding: 1px 12px 1px 12px; */
-/* } */
-/* scrolledwindow > viewport > list > row > box { */
-/*   border-spacing: 12px; */
-/* } */
-/* scrolledwindow > viewport > list > header { */
-/*   padding-right: 12px; */
-/*   padding-left: 12px; */
-/* } */
-/* scrolledwindow > viewport > list > separator.horizontal { */
-/*   all: unset; */
-/* } */
 /*------------------end of row and list stuff----------------------*/
 
 entry > menubutton > button.image-button:active,
