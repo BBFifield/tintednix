@@ -82,14 +82,15 @@ window {
 
 headerbar {
   min-height: 46px;
-  margin: 0px -1px 0px -1px;
+  margin: 0px -1px 6px -1px;
 
   color: var(--base0D);
 
   background-color: var(--base01);
   box-shadow:
-    0px 1px 1px rgba(0, 0, 0, 0.17),
-    0px 2px 4px rgba(0, 0, 0, 0.2);
+    0px -2px 0px color-mix(in oklab, var(--base01) 80%, black 40%) inset,
+    0px -1px 0px color-mix(in oklab, var(--base01) 80%, black 10%) inset,
+    0px 1px 0px color-mix(in oklab, var(--base01) 80%, white 10%);
 }
 headerbar windowhandle > box {
   padding: 6px 7px 6px 7px;
@@ -110,6 +111,10 @@ label.subtitle {
 }
 label.subtitle {
   opacity: 0.5;
+}
+label.link > link {
+  font-weight: bold;
+  color: var(--base0B);
 }
 *.error {
   color: var(--base08);
@@ -418,6 +423,7 @@ check:indeterminate {
 
 spinbutton {
   min-height: 35px;
+  margin: 1px 0px 0px 1px;
   border-radius: 50px;
 
   color: var(--base0D);
@@ -548,8 +554,12 @@ button.suggested-action.text-button {
   background-color: var(--base0B);
   box-shadow: var(--shadow-thin-base0B);
 }
-button.destructive-action {
+button.destructive-action,
+button.close {
   color: var(--base08);
+}
+button.close > * {
+  background-color: transparent;
 }
 button.small-button {
   /*24x24 allocation*/
@@ -629,11 +639,13 @@ button.font:hover:not(:active):not(:checked),
 button.file:hover:not(:active):not(:checked) {
   box-shadow: var(--shadow-thin-base0D);
 }
-button.destructive-action:hover:active {
+button.destructive-action:hover:active,
+button.close:hover:active {
   color: var(--base08);
   animation: ripple-in-base08 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
-button.destructive-action:hover:not(:active):not(:checked) {
+button.destructive-action:hover:not(:active):not(:checked),
+button.close:hover:not(:active):not(:checked) {
   color: var(--base08);
   box-shadow: var(--shadow-thin-base08);
 }
@@ -668,7 +680,10 @@ button:hover > box > *,
 button:hover > box > * > *,
 button.destructive-action:hover > *,
 button.destructive-action:hover > box > *,
-button.destructive-action:hover > box > * > * {
+button.destructive-action:hover > box > * > *,
+button.close:hover > *,
+button.close:hover > box > *,
+button.close:hover > box > * > * {
   color: var(--base01);
 }
 button.destructive-action > *,
@@ -677,7 +692,10 @@ button.destructive-action:hover:active > *,
 button.destructive-action > box > *,
 button.destructive-action:active > box > *,
 button.destructive-action:hover:active > box > *,
-button.destructive-action:hover:active > box > * > * {
+button.destructive-action:hover:active > box > * > *,
+button.close > *,
+button.close:active > *,
+button.close:hover:active > * {
   color: var(--base08);
 }
 button.default:hover > *,
@@ -1147,7 +1165,10 @@ frame tab:active,
 scrolledwindow.frame button:hover:active,
 scrolledwindow.frame switch:not(:checked),
 scrolledwindow.frame row.activatable:active,
-scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.activatable:active {
+scrolledwindow.frame row.activatable:selected:backdrop,
+scrolledwindow listview row.activatable:selected:backdrop,
+scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.activatable:active,
+scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.activatable:selected:backdrop {
   background-color: transparent;
   box-shadow: var(--shadow-inset-base00);
 }
@@ -1181,7 +1202,7 @@ textview {
 
 /*unsure about these, prob in the inspector as well*/
 stack > widget > scrolledwindow > viewport,
-stack > box:not(#NautilusPathBar) > scrolledwindow > viewport {
+stack > box:not(#NautilusPathBar) > scrolledwindow:not(.frame) > viewport {
   margin-top: 6px;
   border-radius: 10px;
   background-color: var(--base00);
@@ -1252,23 +1273,28 @@ modelbutton:hover:active {
 popover modelbutton,
 popover modelbutton:hover,
 popover modelbutton:hover:focus,
-popover listview.view row,
-popover listview.view row.activatable:hover:selected {
+popover > contents > box > scrolledwindow > listview.view row,
+popover > contents > box > scrolledwindow > listview.view row.activatable:hover:selected {
   min-width: 40px;
   min-height: 30px;
   margin: 1px 0px 0px 1px;
   padding: 1px 9px 2px 8px;
 }
+popover > contents > box > scrolledwindow > listview.view > row:not(:hover):not(:active):not(:selected) {
+  box-shadow: none;
+}
 popover modelbutton:focus,
 popover modelbutton:selected:focus:not(:hover),
-popover listview.view row.activatable:active,
-popover listview.view row.activatable:hover:active,
-popover listview.view row.activatable:selected:not(:hover) {
+popover > contents > box > scrolledwindow > listview.view > row:active,
+popover > contents > box > scrolledwindow > listview.view > row:selected,
+popover > contents > box > scrolledwindow > listview.view > row:hover:active,
+popover > contents > box > scrolledwindow > listview.view > row:hover:active:selected {
   margin: 0px;
   padding: 2px 9px 2px 9px;
   background-color: var(--base01);
   box-shadow: var(--shadow-inset-base01);
 }
+
 modelbutton:active > *,
 modelbutton:hover:active > *,
 modelbutton:selected:active > *,
@@ -1307,6 +1333,7 @@ popover stack > box {
 popover scrolledwindow > listview.view {
   padding: 0px;
 }
+/*Keeps arrow spaced properly*/
 popover listview.view row image {
   margin: 0px 0px 0px 10px;
 }
@@ -1380,6 +1407,8 @@ row.activatable:hover *,
 row.activatable:hover > box > *,
 row.activatable:hover button > *,
 row.activatable:hover button:not(#_):hover > *,
+/*First row in properties section of gtk inspector*/
+row.activatable:hover dropdown > button:hover > box > *,
 row.activatable:hover box > button > *,
 row.activatable:hover:selected button:not(#_):hover > *,
 child.activatable:hover label,
@@ -1394,6 +1423,7 @@ row.activatable:hover button:hover,
 row.activatable:hover entry *,
 row.activatable:hover spinbutton > text,
 row.activatable:hover spinbutton button > *,
+row.activatable:hover box.linked > button > *,
 row.activatable:active *,
 row.activatable:selected *,
 row.activatable:hover:active *,
@@ -1402,6 +1432,12 @@ row.activatable:hover:selected *,
 row.activatable:hover:selected button:not(#_) > *,
 row.activatable:hover:selected button:not(#_):active > *,
 row.activatable:hover:selected button:not(#_):hover:active > *,
+/*First row in properties section of gtk inspector*/
+row.activatable:hover dropdown box row *,
+row.activatable:hover dropdown box arrow,
+row.activatable:hover dropdown > button:active > box arrow,
+row.activatable:hover popover > contents > box > scrolledwindow > listview > row *,
+row.activatable:hover:selected popover > contents > box > scrolledwindow > listview > row *,
 child.activatable:selected label,
 child.activatable:selected image {
   color: var(--base0D);
@@ -1588,8 +1624,8 @@ list.navigation-sidebar row > revealer {
 .sidebar list > row > label {
   padding: 0px 6px 0px 6px;
 }
-.view > row.activatable:not(.sidebar-row):selected,
-.view > child.activatable:selected,
+/* .view > row.activatable:not(.sidebar-row):selected, */
+/* .view > child.activatable:selected, */
 list:not(.navigation-sidebar) > row.activatable:not(.sidebar-row):selected {
   box-shadow: var(--shadow-inset-base00);
 }
@@ -1602,19 +1638,35 @@ scrolledwindow > listview.view {
   padding: 3px;
 }
 
-/* header > button:active, */
-/* header > button:checked, */
-/* header > button:hover:active, */
-/* header > button:active:checked, */
-/* header > button:hover:active:checked { */
-/*   margin-bottom: 7px; */
-/* } */
-listview.view {
-  border-spacing: 0px 0px;
-  padding-top: 0px;
-  border-top-color: transparent;
+header {
+  margin: 0px 4px;
+  box-shadow:
+    0px -2px 0px color-mix(in oklab, var(--base01) 80%, black 40%) inset,
+    0px -1px 0px color-mix(in oklab, var(--base01) 80%, black 10%) inset,
+    0px 1px 0px color-mix(in oklab, var(--base01) 80%, white 10%);
 }
+scrolledwindow header {
+  box-shadow:
+    0px -2px 0px color-mix(in oklab, var(--base00) 80%, black 20%) inset,
+    0px -1px 0px color-mix(in oklab, var(--base00) 80%, black 10%) inset,
+    0px 1px 0px color-mix(in oklab, var(--base00) 80%, white 5%);
+}
+header > button {
+  min-height: 24px;
+  margin: 4px 0px 3px 1px;
+  border: none;
+}
+header > button:active,
+header > button:hover:active {
+  margin: 3px 0px;
+}
+
 /*End*/
+listview {
+  border-spacing: 0px 0px;
+  margin: 3px 0px;
+  padding: 0px;
+}
 listview > separator {
   all: unset;
 }
@@ -1641,8 +1693,7 @@ listview > row.activatable:hover > button.text-button {
   box-shadow: none;
 }
 /*mimic inset separators*/
-listview > row + row,
-header + listview > row:first-child {
+listview > row + row {
   margin: 2px 3px 0px 4px;
   padding: 2px 4px 1px 3px;
   border-radius: 1px;
@@ -1654,39 +1705,61 @@ listview > row.activatable:selected + row:not(:hover) {
 }
 listview > row + row.activatable:active,
 listview > row + row.activatable:selected,
-listview > row + row.activatable:hover:active,
-header + listview > row.activatable:active,
-header + listview > row.activatable:selected,
-header + listview > row.activatable:hover:active {
+listview > row + row.activatable:hover:active {
   margin: 3px 3px 0px 3px;
   padding: 1px 4px;
   border-radius: 50px;
 }
-listview > row + row.activatable:hover:not(:active):not(:selected),
-header + listview > row.activatable:hover:not(:active):not(:selected) {
+listview > row + row.activatable:hover:not(:active):not(:selected) {
   margin: 4px 3px 0px 4px;
   padding: 0px 4px 1px 3px;
   border-radius: 50px;
 }
+/*Actions section of gtk inspector*/
 listview > row button,
-listview > row entry {
-  margin-top: 4px;
-  margin-bottom: 4px;
+listview > row entry,
+listview > row spinbutton,
+listview > row box.linked {
+  margin-top: 3px;
+  margin-bottom: 2px;
 }
 listview > row button:active,
+listview > row button:checked,
 listview > row button:hover:active,
+listview > row button:hover:checked,
 listview > row entry:focus-within {
-  margin-top: 3px;
-  margin-bottom: 4px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+listview > row button.image-button:active {
+  box-shadow: var(--shadow-inset-base00);
+}
+listview > row box + button.image-button {
+  margin-top: 1px;
+}
+listview > row box + button.image-button:active {
+  margin-top: 0px;
+}
+listview > row spinbutton > button {
+  margin: 1px 0px;
+}
+listview > row box.linked > entry {
+  margin: 1px 0px 0px 1px;
+}
+listview > row box.linked > entry:focus-within {
+  margin: 0px;
 }
 listview > row > :first-child {
-  margin-left: 3px;
+  margin-left: 6px;
 }
 listview > row > :last-child {
-  margin-right: 3px;
+  margin-right: 6px;
 }
 header.activatable button:active > box > label {
   color: var(--base0D);
+}
+columnview {
+  padding: 3px;
 }
 /*ex: the css nodes table in the objects section in gtk inspector*/
 columnview.data-table.list.view {
@@ -1745,6 +1818,7 @@ stackswitcher.linked {
 }
 viewswitcher,
 .linked {
+  margin: 1px 0px 0px 1px;
   border-radius: 17px;
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
