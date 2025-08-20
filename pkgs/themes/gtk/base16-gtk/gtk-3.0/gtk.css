@@ -73,6 +73,22 @@
   color: @window-fg-color;
 }
 
+arrow {
+  color: @base0D;
+
+  -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
+}
+arrow.left {
+  -gtk-icon-source: -gtk-icontheme("go-previous-symbolic");
+}
+arrow.right {
+  -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
+}
+
+:disabled {
+  opacity: 0.6;
+}
+
 window {
   background-color: @base01;
 }
@@ -84,6 +100,20 @@ window > *:not(headerbar) {
 }
 window > box > label {
   color: @base0D;
+}
+/* Merge of headerbar and headerbar windowhandle > box from gtk-4.0 */
+headerbar {
+  min-height: 46px;
+  margin: 0px -1px 0px -1px;
+  padding: 6px 7px 6px 7px;
+
+  color: @base0D;
+
+  background-color: @base01;
+  box-shadow:
+    0px -2px 0px mix(@base01, black, 0.4) inset,
+    0px -1px 0px mix(@base01, black, 0.1) inset,
+    0px 1px 0px mix(@base01, white, 0.1);
 }
 
 decoration {
@@ -97,18 +127,6 @@ decoration {
     -1px -1px 0px mix(@base01, white, 0.1);
 }
 
-arrow {
-  color: @base0D;
-
-  -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
-}
-arrow.left {
-  -gtk-icon-source: -gtk-icontheme("go-previous-symbolic");
-}
-arrow.right {
-  -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
-}
-
 dialog,
 .dialog-vbox,
 .titlebar {
@@ -116,24 +134,6 @@ dialog,
 }
 buttonbox.dialog-action-area {
   margin: 3px;
-}
-
-:disabled {
-  opacity: 0.6;
-}
-
-/* Merge of headerbar and headerbar windowhandle > box from gtk-4.0 */
-headerbar {
-  min-height: 46px;
-  margin: 0px -1px 0px -1px;
-  padding: 0px 6px 0px 6px;
-
-  color: @base0D;
-
-  background-color: @base01;
-  box-shadow:
-    1px 1px 1px rgba(0, 0, 0, 0.17),
-    2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 label,
@@ -147,6 +147,13 @@ label.subtitle {
 }
 label.subtitle {
   opacity: 0.5;
+}
+label.link > link {
+  font-weight: bold;
+  color: @base0B;
+}
+*.error {
+  color: @base08;
 }
 
 entry {
@@ -281,7 +288,10 @@ label.in-progress {
 
 scale slider,
 switch slider {
+  min-width: 20px;
+  min-height: 20px;
   border-radius: 100%;
+
   background-color: @base02;
   box-shadow:
     1px 2px 2px rgba(0, 0, 0, 0.17),
@@ -292,31 +302,18 @@ switch slider {
 scale {
   min-width: 10px;
   min-height: 10px;
-  padding: 12px;
+  padding: 6px;
 }
 scale.marks-after {
-  padding: 12px 12px 0px 12px;
-}
-scale trough {
-  border-radius: 9px;
-  background-color: transparent;
-  box-shadow:
-    1px 1px 1px mix(@base01, black, 0.3) inset,
-    2px 2px 2px mix(@base01, black, 0.3) inset,
-    -1px -1px 0px mix(@base01, white, 0.1) inset;
+  padding: 6px 6px 0px 6px;
 }
 scale highlight {
-  border-radius: 9px;
+  border-radius: 99px;
   background-color: @base0B;
 }
 scale slider {
-  /*Tiny bit different than in gtk-4.0 because of slight differences*/
-  min-width: 18px;
-  min-height: 18px;
-  margin: -9px;
-
+  margin: -8px;
   color: @base0D;
-
   animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 scale slider:hover {
@@ -339,16 +336,13 @@ scale marks indicator {
   color: @base0B;
   background-color: @base0B;
 }
-scale.horizontal trough {
-  min-height: 4px;
-}
 scale.vertical trough {
-  min-width: 4px;
+  min-width: 3px;
 }
 progressbar trough,
 levelbar trough,
 progresscell trough,
-scale trough {
+progresscell {
   border-radius: 50px;
   background-color: transparent;
   box-shadow:
@@ -356,32 +350,36 @@ scale trough {
     2px 2px 2px mix(@base01, black, 0.2) inset,
     -1px -1px 0px mix(@base01, white, 0.1) inset;
 }
+scale trough {
+  border-radius: 50px;
+  background-color: transparent;
+  /*shadow-inset-extra-thin-base01*/
+  box-shadow:
+    1px 1px 1px mix(@base01, black, 0.6) inset,
+    -1px -1px 0px mix(@base01, white, 0.1) inset;
+}
 
 switch {
   padding: 3px;
   border-radius: 50px;
 
-  color: @base0D;
+  color: @base0B;
 
   background: transparent;
   box-shadow:
-    1px 2px 2px mix(@base01, black, 0.3) inset,
-    2px 4px 4px mix(@base01, black, 0.3) inset,
+    1px 2px 2px mix(@base01, black, 0.5) inset,
+    2px 4px 4px mix(@base01, black, 0.5) inset,
     -1px -1px 0px mix(@base01, white, 0.1) inset;
 
   animation: slide-left 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 switch:checked {
-  color: @base0D;
+  color: @base0B;
   box-shadow:
-    1px 2px 2px mix(@base0D, black, 0.2) inset,
-    2px 4px 4px mix(@base0D, black, 0.2) inset,
-    -1px -1px 0px mix(@base0D, white, 0.4) inset;
+    1px 2px 2px mix(@base0B, black, 0.7) inset,
+    2px 4px 4px mix(@base0B, black, 0.7) inset,
+    -1px -1px 0px mix(@base0B, white, 0.6) inset;
   animation: slide-right 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-switch slider {
-  min-width: 20px;
-  min-height: 20px;
 }
 switch image {
   color: transparent;
@@ -391,7 +389,8 @@ checkbutton,
 radiobutton {
   padding: 4px;
 }
-checkbutton > label {
+checkbutton > label,
+radiobutton > label {
   margin-right: 4px;
   color: @base0D;
 }
@@ -400,13 +399,14 @@ radio {
   min-width: 14px;
   min-height: 14px;
   margin: 0px 4px 0px 4px;
-  padding: 3px;
+  padding: 4px;
   border-width: 0px;
 
   background-color: transparent;
+  /*shadow-inset-thin-base01*/
   box-shadow:
-    1px 1px 1px mix(@base01, black, 0.2) inset,
-    2px 2px 2px mix(@base01, black, 0.2) inset,
+    1px 1px 1px mix(@base01, black, 0.5) inset,
+    2px 2px 2px mix(@base01, black, 0.5) inset,
     -1px -1px 0px mix(@base01, white, 0.1) inset;
 
   animation: ripple-in-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
@@ -416,9 +416,10 @@ check:indeterminate,
 radio:checked,
 radio:indeterminate {
   color: @base01;
+  /*shadow-inset-thin-base0D*/
   box-shadow:
-    1px 2px 2px mix(@base0D, black, 0.3) inset,
-    2px 4px 4px mix(@base0D, black, 0.3) inset,
+    1px 1px 1px mix(@base0D, black, 0.5) inset,
+    2px 2px 2px mix(@base0D, black, 0.5) inset,
     -1px -1px 0px mix(@base0D, white, 0.1) inset;
   animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
@@ -1089,7 +1090,7 @@ box.linked {
   min-height: 24px;
 }
 stackswitcher.linked {
-  margin: 7px 0px 6px 0px;
+  margin: 7px 0px 6px 1px;
 }
 .linked {
   border-radius: 17px;
@@ -1567,6 +1568,7 @@ expander title > arrow:checked {
   -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
 }
 
+/*------------------row and list stuff----------------------*/
 row {
   border-width: 0px;
   border-radius: 50px;
@@ -1587,6 +1589,18 @@ row.activatable:active {
     2px 4px 4px mix(@base01, black, 0.3) inset,
     -1px -1px 0px mix(@base01, white, 0.1) inset;
 }
+row.activatable.sidebar-row:selected,
+row.activatable:selected:backdrop,
+row.activatable:selected,
+row.activatable:hover:selected,
+columnview row:selected {
+  color: @base0D;
+  background-color: transparent;
+  box-shadow:
+    1px 2px 2px mix(@base01, black, 0.3) inset,
+    2px 4px 4px mix(@base01, black, 0.3) inset,
+    -1px -1px 0px mix(@base01, white, 0.1) inset;
+}
 row.activatable:hover *,
 row.activatable:hover > box > *,
 row.activatable:hover button:hover > *,
@@ -1596,25 +1610,27 @@ row.activatable:hover:selected button:hover > * {
 }
 row.activatable:hover slider,
 row.activatable:hover button,
+row.activatable:hover button.text-button > *,
 row.activatable:hover button:hover,
 row.activatable:hover entry *,
 row.activatable:hover spinbutton > text,
+row.activatable:hover spinbutton button > *,
 row.activatable:hover button > *,
+row.activatable:hover popover *,
 row.activatable:active *,
 row.activatable:selected *,
 row.activatable:hover:active *,
-row.activatable:hover:active button > *,
+row.activatable:hover:active button:not(#_) > *,
 row.activatable:hover:selected *,
-row.activatable:hover:selected button > *,
-row.activatable:hover:selected button:active > *,
-row.activatable:hover:selected button:hover:active > * {
+row.activatable:hover:selected button:not(#_) > *,
+row.activatable:hover:selected button:not(#_):active > *,
+row.activatable:hover:selected button:not(#_):hover:active > * {
   color: @base0D;
 }
 row.activatable:hover:not(:active):not(:selected) block.empty,
 row.activatable:hover:not(:active):not(:selected) progressbar trough,
 row.activatable:hover:not(:active):not(:selected) levelbar trough,
 row.activatable:hover:not(:active):not(:selected) scale trough,
-row.activatable:hover:not(:active):not(:selected) switch,
 row.activatable:hover:not(:active):not(:selected) radio,
 row.activatable:hover:not(:active):not(:selected) check {
   box-shadow:
@@ -1622,23 +1638,23 @@ row.activatable:hover:not(:active):not(:selected) check {
     2px 2px 2px mix(@base0D, black, 0.2) inset,
     -1px -1px 0px mix(@base0D, white, 0.4) inset;
 }
+row.activatable:hover:not(:active):not(:selected) popover block.empty,
+row.activatable:hover:not(:active):not(:selected) popover progressbar trough,
+row.activatable:hover:not(:active):not(:selected) popover levelbar trough,
+row.activatable:hover:not(:active):not(:selected) popover scale trough,
+row.activatable:hover:not(:active):not(:selected) popover radio:not(:checked):not(:indeterminate),
+row.activatable:hover:not(:active):not(:selected) popover check:not(:checked):not(:indeterminate) {
+  box-shadow:
+    1px 1px 1px mix(@base01, black, 0.2) inset,
+    2px 2px 2px mix(@base01, black, 0.2) inset,
+    -1px -1px 0px mix(@base01, white, 0.1) inset;
+}
 row.activatable:hover:not(:active):not(:selected) switch {
+  color: @base0B;
   box-shadow:
     1px 2px 2px mix(@base0D, black, 0.2) inset,
     2px 4px 4px mix(@base0D, black, 0.2) inset,
     -1px -1px 0px mix(@base0D, white, 0.4) inset;
-}
-columnview row:selected,
-row.activatable.sidebar-row:selected,
-row.activatable:selected:backdrop,
-row.activatable:selected,
-row.activatable:hover:selected {
-  color: @base0D;
-  background-color: inherit;
-  box-shadow:
-    1px 2px 2px mix(@base01, black, 0.3) inset,
-    2px 4px 4px mix(@base01, black, 0.3) inset,
-    -1px -1px 0px mix(@base01, white, 0.1) inset;
 }
 row.activatable:hover:not(:selected):not(:active) {
   color: @base01;
@@ -1682,18 +1698,185 @@ row.activatable:hover selection:focus {
 list > row {
   min-height: 35px;
   margin: 2px 6px 1px 7px;
-  padding: 0px 1px 1px 0px;
+  padding: 0px 15px 1px 14px;
 }
 list > row.activatable:active,
 list > row.activatable:selected {
   margin: 1px 6px 1px 6px;
-  padding: 1px;
+  padding: 1px 15px;
 }
 /*the row is acting as a button here, so no need to have styling for the button itself*/
 list > row.activatable > button.text-button,
 list > row.activatable:hover > button.text-button {
   background-color: transparent;
   box-shadow: none;
+}
+/*mimic inset separators*/
+list > row + row {
+  margin: 3px 6px 1px 7px;
+  padding: 2px 15px 1px 14px;
+  border-radius: 1px;
+  box-shadow:
+    0px -2px 0px mix(@base01, black, 0.4),
+    0px -1px 0px mix(@base01, black, 0.1),
+    0px 1px 0px mix(@base01, white, 0.1) inset;
+}
+list > row.activatable:hover + row:not(:selected),
+list > row.activatable:selected + row:not(:hover) {
+  box-shadow: none;
+}
+list > row + row.activatable:active,
+list > row + row.activatable:selected,
+list > row + row.activatable:hover:active {
+  margin: 4px 6px 1px 6px;
+  padding: 1px 15px 1px 15px;
+  border-radius: 50px;
+}
+list > row + row.activatable:hover:not(:active):not(:selected) {
+  margin: 5px 6px 1px 7px;
+  padding: 0px 15px 1px 14px;
+  border-radius: 50px;
+}
+list > separator {
+  all: unset;
+}
+
+stacksidebar {
+  background-color: @base01;
+}
+stacksidebar > scrolledwindow {
+  border-radius: 0px;
+  background-color: transparent;
+}
+stacksidebar > scrolledwindow > viewport > list {
+  background-color: @base01;
+}
+stacksidebar > scrolledwindow > viewport > list > row {
+  min-height: 32px;
+  margin: 2px 6px 1px 7px;
+  padding: 0px 12px 1px 11px;
+  border-bottom: none;
+}
+stacksidebar > scrolledwindow > viewport > list > row.activatable:active,
+stacksidebar > scrolledwindow > viewport > list > row.activatable:selected {
+  margin: 1px 6px 1px 6px;
+  padding: 1px 12px 1px 12px;
+  box-shadow:
+    1px 1px 1px mix(@base01, black, 0.2) inset,
+    2px 2px 2px mix(@base01, black, 0.2) inset,
+    -1px -1px 0px mix(@base01, white, 0.1) inset;
+}
+stacksidebar > scrolledwindow > viewport > list > header {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+stacksidebar > scrolledwindow > viewport > list > separator.horizontal {
+  all: unset;
+}
+/*Override separators for sidebar rows*/
+stacksidebar > scrolledwindow > viewport > list > row + row {
+  margin: 3px 6px 1px 7px;
+  padding: 2px 15px 1px 14px;
+  border-radius: 1px;
+  box-shadow: none;
+}
+stacksidebar > scrolledwindow > viewport > list > row.activatable:hover + row:not(:selected),
+stacksidebar > scrolledwindow > viewport > list > row.activatable:selected + row:not(:hover) {
+  box-shadow: none;
+}
+stacksidebar > scrolledwindow > viewport > list > row + row.activatable:active,
+stacksidebar > scrolledwindow > viewport > list > row + row.activatable:selected,
+stacksidebar > scrolledwindow > viewport > list > row + row.activatable:hover:active {
+  margin: 4px 6px 1px 6px;
+  padding: 1px 15px 1px 15px;
+  border-radius: 50px;
+}
+stacksidebar > scrolledwindow > viewport > list > row + row.activatable:hover:not(:active):not(:selected) {
+  margin: 5px 6px 1px 7px;
+  padding: 0px 15px 1px 14px;
+  border-radius: 50px;
+}
+
+/*Ex: Global settings in inspector window*/
+list.boxed-list {
+  border-radius: 10px;
+  background-color: @base02;
+  box-shadow:
+    1px 2px 2px rgba(0, 0, 0, 0.17),
+    2px 4px 4px rgba(0, 0, 0, 0.2),
+    -1px -1px 0px mix(@base02, white, 0.1);
+}
+list.boxed-list > row + row {
+  box-shadow:
+    0px -2px 0px mix(@base02, black, 0.25),
+    0px -1px 0px mix(@base02, black, 0.1),
+    0px 1px 0px mix(@base02, white, 0.1) inset;
+}
+list.boxed-list > row.activatable:active {
+  box-shadow:
+    1px 2px 2px mix(@base02, black, 0.3) inset,
+    2px 4px 4px mix(@base02, black, 0.3) inset,
+    -1px -1px 0px mix(@base02, white, 0.1) inset;
+}
+list.boxed-list > row:hover button:active {
+  box-shadow:
+    1px 2px 2px mix(@base02, black, 0.3) inset,
+    2px 4px 4px mix(@base02, black, 0.3) inset,
+    -1px -1px 0px mix(@base02, white, 0.1) inset;
+}
+list.boxed-list > row:hover button:active * {
+  color: @base0D;
+}
+list.boxed-list > row block.empty,
+list.boxed-list > row progressbar trough,
+list.boxed-list > row levelbar trough,
+list.boxed-list > row progresscell trough,
+list.boxed-list > row progresscell,
+list.boxed-list > row scale > trough,
+list.boxed-list > row radio:not(:checked):not(:indeterminate),
+list.boxed-list > row check:not(:checked):not(:indeterminate) {
+  box-shadow:
+    1px 1px 1px mix(@base02, black, 0.2) inset,
+    2px 2px 2px mix(@base02, black, 0.2) inset,
+    -1px -1px 0px mix(@base02, white, 0.2) inset;
+}
+list.boxed-list > row switch:not(:checked),
+list.boxed-list > row.activatable:active switch:not(:checked),
+list.boxed-list > row.activatable:hover:active switch:not(:checked) {
+  box-shadow:
+    1px 2px 2px mix(@base02, black, 0.3) inset,
+    2px 4px 4px mix(@base02, black, 0.3) inset,
+    -1px -1px 0px mix(@base02, white, 0.1) inset;
+}
+list.boxed-list > row.activatable:hover:not(:active) switch:not(:checked),
+list.boxed-list > row.activatable:hover:not(:active) dropdown > button:checked {
+  box-shadow:
+    1px 2px 2px mix(@base0D, black, 0.2) inset,
+    2px 4px 4px mix(@base0D, black, 0.2) inset,
+    -1px -1px 0px mix(@base0D, white, 0.4) inset;
+}
+list.boxed-list > row.activatable:hover:not(:active) dropdown > button {
+  background-color: transparent;
+  box-shadow:
+    1px 2px 2px rgba(0, 0, 0, 0.17),
+    2px 4px 4px rgba(0, 0, 0, 0.2),
+    -1px -1px 0px mix(@base0D, white, 0.4);
+}
+list.boxed-list > row.activatable:hover:not(:active) button * {
+  color: @base01;
+}
+list.boxed-list > row.activatable:hover:not(:active) > box > dropdown > popover row.activatable * {
+  color: @base0D;
+}
+list.boxed-list > row.activatable:hover:not(:active) > box > dropdown > popover row.activatable:hover * {
+  color: @base01;
+}
+list.boxed-list > row > box > frame {
+  background-color: @base02;
+  box-shadow:
+    1px 2px 2px mix(@base02, black, 0.3) inset,
+    2px 4px 4px mix(@base02, black, 0.3) inset,
+    -1px -1px 0px mix(@base02, white, 0.1) inset;
 }
 
 header {
@@ -1737,15 +1920,6 @@ row:not(:hover) dropdown > button.toggle:checked:not(:hover) {
     -1px -1px 0px mix(@base02, white, 0.1) inset;
 }
 
-/*I don't even remember what a banner is*/
-banner widget {
-  opacity: 1;
-  background-color: @base0D;
-}
-banner label.heading {
-  color: @base01;
-}
-
 filechooser paned {
   background-color: @base00;
 }
@@ -1784,33 +1958,9 @@ popover list.view > row.activatable:focus:selected {
 
 .view > row.activatable:selected,
 .view > child.activatable:selected,
-frame list:not(.navigation-sidebar) > row.activatable:not(.sidebar-row):selected {
+frame list > row.activatable:selected {
   box-shadow:
     1px 2px 2px mix(@base00, black, 0.3) inset,
     2px 4px 4px mix(@base00, black, 0.3) inset,
     -1px -1px 0px mix(@base00, white, 0.1) inset;
-}
-/*New stuff not included in gtk 4 css*/
-/*Equivalent to list.rich-list in gtk 4*/
-stacksidebar > scrolledwindow {
-  border-radius: 0px;
-  background-color: transparent;
-}
-scrolledwindow > viewport > list > row {
-  min-height: 32px;
-  margin: 2px 6px 1px 7px;
-  padding: 0px 12px 1px 11px;
-  border-bottom: none;
-}
-scrolledwindow > viewport > list > row.activatable:active,
-scrolledwindow > viewport > list > row.activatable:selected {
-  margin: 1px 6px 1px 6px;
-  padding: 1px 12px 1px 12px;
-}
-scrolledwindow > viewport > list > header {
-  padding-right: 12px;
-  padding-left: 12px;
-}
-scrolledwindow > viewport > list > separator.horizontal {
-  all: unset;
 }

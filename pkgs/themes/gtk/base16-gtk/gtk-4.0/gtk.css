@@ -41,11 +41,15 @@
     normal 16px "jetbrainsmono nerd font",
     sans-serif;
   text-decoration: none;
+
   outline: none;
+
   transition:
+    box-shadow,
     opacity,
     transform,
     -gtk-icon-transform;
+  transition-duration: 0.2s;
 }
 
 undershoot.top {
@@ -66,9 +70,6 @@ arrow {
 }
 arrow.left {
   -gtk-icon-source: -gtk-icontheme("go-previous-symbolic");
-}
-
-arrow.right {
 }
 
 *:disabled {
@@ -557,7 +558,7 @@ button.suggested-action.text-button {
   background-color: color-mix(in oklab, var(--base0B) 50%, black 50%);
   box-shadow: var(--shadow-thin-base0B-dull);
 }
-button.destructive-action {
+button.destructive-action.text-button {
   background-color: color-mix(in oklab, var(--base08) 50%, black 50%);
   box-shadow: var(--shadow-thin-base08-dull);
 }
@@ -632,7 +633,12 @@ button.destructive-action:active,
 button.destructive-action:checked:not(:hover),
 button.destructive-action:hover:active,
 button.destructive-action:active:checked,
-button.destructive-action:hover:active:checked {
+button.destructive-action:hover:active:checked,
+frame button.destructive-action:active,
+frame button.destructive-action:checked,
+frame button.destructive-action:hover:active,
+frame button.destructive-action:hover:active:checked {
+  background-color: color-mix(in oklab, var(--base08) 50%, black 50%);
   box-shadow: var(--shadow-inset-base08-dull);
 }
 button.default:active,
@@ -640,11 +646,20 @@ button.default:checked:not(:hover),
 button.default:hover:active,
 button.default:active:checked,
 button.default:hover:active:checked,
+frame button.default:active,
+frame button.default:checked,
+frame button.default:hover:active,
+frame button.default:hover:active:checked,
 button.suggested-action:active,
 button.suggested-action:checked:not(:hover),
 button.suggested-action:hover:active,
 button.suggested-action:active:checked,
-button.suggested-action:hover:active:checked {
+button.suggested-action:hover:active:checked,
+frame button.suggested-action:active,
+frame button.suggested-action:checked,
+frame button.suggested-action:hover:active,
+frame button.suggested-action:hover:active:checked {
+  background-color: color-mix(in oklab, var(--base0B) 50%, black 50%);
   box-shadow: var(--shadow-inset-base0B-dull);
 }
 stack > button:hover,
@@ -1185,7 +1200,7 @@ frame box.toolbar > separator {
 frame button:active,
 frame button:checked,
 frame button:hover:active,
-frame button:hover:active:checked,
+frame button:active:checked,
 frame tab:checked,
 frame tab:active,
 scrolledwindow.frame button:hover:active,
