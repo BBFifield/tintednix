@@ -22,7 +22,7 @@ $variant: {{scheme-variant}}; // “dark” or “light”
 
 @function shade-top-deep-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 20%) inset"; }
 @function color-top-deep-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 80%, black 50%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 80%, black 50%) inset"; }
-@function color-dull-top-deep-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 50%, black 50%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 50%, black 50%) inset"; }
+@function color-dull-top-deep-inset-shadow($var-name) { @return "1px 2px 2px color-mix(in oklab, var(#{$var-name}) 20%, black 60%) inset, 2px 4px 4px color-mix(in oklab, var(#{$var-name}) 20%, black 60%) inset"; }
 
 @function shade-heavy-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "0%, white 100%")}) inset"; }
 @function shade-light-bottom-inset-shadow($var-name) { @return "-1px -1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, "80%, white 10%", "50%, white 50%")}) inset"; }
