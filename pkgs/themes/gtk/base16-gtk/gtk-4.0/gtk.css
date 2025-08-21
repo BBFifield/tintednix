@@ -567,7 +567,8 @@ button.close > * {
   padding: 0px;
   background-color: transparent;
 }
-button.small-button {
+button.small-button,
+button.sidebar-button {
   /*24x24 allocation*/
   min-width: 16px;
   min-height: 22px;
@@ -575,12 +576,15 @@ button.small-button {
   padding: 0px 4px 1px 3px;
 }
 button.small-button:active,
-button.small-button:hover:active {
+button.small-button:hover:active,
+button.sidebar-button:active,
+button.sidebar-button:hover:active {
   margin: 0px;
   padding: 1px 4px 1px 4px;
+  box-shadow: var(--shadow-inset-thin-base01);
 }
-button:checked,
 button:active,
+button:checked,
 button:hover:active,
 button:active:checked,
 button:hover:active:checked {
@@ -626,6 +630,13 @@ button.font:hover:active,
 button.font:hover:active:checked {
   box-shadow: var(--shadow-inset-base02);
 }
+stack > button:hover,
+dropdown > button.toggle:hover:not(:active):not(:checked),
+button.text-button:hover:not(:active):not(:checked),
+button.font:hover:not(:active):not(:checked),
+button.file:hover:not(:active):not(:checked) {
+  box-shadow: var(--shadow-thin-base0D);
+}
 button.destructive-action:active,
 button.destructive-action:checked:not(:hover),
 button.destructive-action:hover:active,
@@ -658,13 +669,6 @@ frame button.suggested-action:hover:active,
 frame button.suggested-action:hover:active:checked {
   background-color: color-mix(in oklab, var(--base0B) 50%, black 50%);
   box-shadow: var(--shadow-inset-base0B-dull);
-}
-stack > button:hover,
-dropdown > button.toggle:hover:not(:active):not(:checked),
-button.text-button:hover:not(:active):not(:checked),
-button.font:hover:not(:active):not(:checked),
-button.file:hover:not(:active):not(:checked) {
-  box-shadow: var(--shadow-thin-base0D);
 }
 button.destructive-action:hover:active,
 button.close:hover:active {
@@ -850,15 +854,6 @@ tab {
 
   animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
-/*Create the illusion of inset separators*/
-tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover) {
-  border-radius: 1px;
-  box-shadow: var(--shadow-separator-mimic-vertical-base01);
-}
-header.vertical > tabs > tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover) {
-  border-radius: 1px;
-  box-shadow: var(--shadow-separator-mimic-horizontal-base01);
-}
 tab:hover:not(:checked) {
   color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
@@ -868,6 +863,15 @@ tab:checked {
   margin: 5px 0px 5px 0px;
   padding: 5px 17px 5px 17px;
   box-shadow: var(--shadow-inset-base01);
+}
+/*Create the illusion of inset separators*/
+tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover) {
+  border-radius: 1px;
+  box-shadow: var(--shadow-separator-mimic-vertical-base01);
+}
+header.vertical > tabs > tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover) {
+  border-radius: 1px;
+  box-shadow: var(--shadow-separator-mimic-horizontal-base01);
 }
 tab + tab:not(:hover):not(:checked) {
   margin: 6px 0px 5px 2px;
@@ -1699,16 +1703,11 @@ scrolledwindow > listview.view {
 
 header {
   margin: 0px 4px;
-  box-shadow:
-    0px -2px 0px color-mix(in oklab, var(--base01) 80%, black 40%) inset,
-    0px -1px 0px color-mix(in oklab, var(--base01) 80%, black 10%) inset,
-    0px 1px 0px color-mix(in oklab, var(--base01) 80%, white 10%);
+  box-shadow: var(--shadow-separator-mimic-bottom-horizontal-base01);
 }
+frame header,
 scrolledwindow header {
-  box-shadow:
-    0px -2px 0px color-mix(in oklab, var(--base00) 80%, black 20%) inset,
-    0px -1px 0px color-mix(in oklab, var(--base00) 80%, black 10%) inset,
-    0px 1px 0px color-mix(in oklab, var(--base00) 80%, white 5%);
+  box-shadow: var(--shadow-separator-mimic-bottom-horizontal-base00);
 }
 header > button {
   min-height: 24px;
@@ -2139,6 +2138,7 @@ viewswitcher > button.flat:nth-child(4n + 4):checked * {
   margin: 0px 0px 0px 1px;
 }
 /*end*/
+#NautilusPathButton:active,
 button.current-dir:active {
   box-shadow: var(--shadow-inset-base02);
 }
