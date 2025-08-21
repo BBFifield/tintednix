@@ -139,6 +139,45 @@ $variant: {{scheme-variant}}; // “dark” or “light”
 @define-color light_blue       @base0C;
 @define-color purple           @base0E;
 
+@define-color base00-darker color-mix(in oklab, @base00 80%, black 5%);
+@define-color base00-lighter color-mix(in oklab, @base00 80%, white 10%);
+@define-color base00-extra-dark color-mix(in oklab, @base00 80%, black 15%);
+@define-color base00-extra-extra-dark color-mix(in oklab, @base00 80%, black 20%);
+@define-color base00-darkest color-mix(in oklab, @base00 80%, black 40%);
+@define-color base00-lighter2 color-mix(in oklab, @base00 #{if($variant == dark, "80%, white 5%", "0%, white 100%")});
+@define-color base00-lighter3 color-mix(in oklab, @base00 #{if($variant == dark, "80%, white 10%", "0%, white 100%")});
+
+@define-color base01-darker color-mix(in oklab, @base01 80%, black 5%);
+@define-color base01-lighter color-mix(in oklab, @base01 80%, white 10%);
+@define-color base01-extra-dark color-mix(in oklab, @base01 80%, black 15%);
+@define-color base01-extra-extra-dark color-mix(in oklab, @base01 80%, black 20%);
+@define-color base01-darkest color-mix(in oklab, @base01 80%, black 40%);
+@define-color base01-lighter2 color-mix(in oklab, @base01 #{if($variant == dark, "80%, white 5%", "0%, white 100%")});
+@define-color base01-lighter3 color-mix(in oklab, @base01 #{if($variant == dark, "80%, white 10%", "0%, white 100%")});
+
+@define-color base02-lighter color-mix(in oklab, @base02 80%, white 10%);
+@define-color base02-darker color-mix(in oklab, @base02 80%, black 20%);
+@define-color base02-extra-dark color-mix(in oklab, @base02 80%, black 25%);
+@define-color base02-darkest color-mix(in oklab, @base02 80%, black 40%);
+@define-color base02-lighter2 color-mix(in oklab, @base02 #{if($variant == dark, "80%, white 10%", "0%, white 100%")});
+@define-color base02-lighter3 color-mix(in oklab, @base02 #{if($variant == dark, "80%, white 10%", "50%, white 50%")});
+
+@define-color base08-darker color-mix(in oklab, @base08 50%, black 10%);
+@define-color base08-lighter color-mix(in oklab, @base08 80%, white 40%);
+@define-color base08-extra-dark color-mix(in oklab, @base08 80%, black 50%);
+@define-color base08-darkest color-mix(in oklab, @base08 20%, black 60%);
+
+@define-color base09-lighter color-mix(in oklab, @base09 80%, white 40%);
+
+@define-color base0A-lighter color-mix(in oklab, @base0A 80%, white 40%);
+
+@define-color base0B-darker color-mix(in oklab, @base0B 50%, black 10%);
+@define-color base0B-lighter color-mix(in oklab, @base0B 80%, white 40%);
+@define-color base0B-darkest color-mix(in oklab, @base0B 20%, black 60%);
+
+@define-color base0D-darker color-mix(in oklab, @base0D 80%, black 40%);
+@define-color base0D-extra-dark color-mix(in oklab, @base0D 80%, black 50%);
+@define-color base0D-light color-mix(in oklab, @base0D #{if($variant == dark, "80%, white 60%", "80%, white 20%")});
 
 :root {
   /* Base16 tokens */
@@ -180,7 +219,6 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --light-blue:        @light_blue;
   --purple:            @purple;
 
-
   --shadow-inset-extra-thin-base00: #{top-extra-thin-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)};
   --shadow-inset-extra-thin-base01: #{top-extra-thin-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
   --shadow-inset-extra-thin-base02: #{top-extra-thin-inset-shadow(--base02)}, #{shade-light-bottom-inset-shadow(--base02)};
@@ -189,8 +227,8 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --shadow-inset-thin-base00: #{shade-top-thin-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)};
   --shadow-inset-thin-base01: #{shade-top-thin-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
   --shadow-inset-thin-base02: #{shade-top-thin-inset-shadow(--base02)}, #{shade-light-bottom-inset-shadow(--base02)};
-  --shadow-inset-thin-base0D: #{color-heavy-top-thin-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
   --shadow-inset-thin-base0B: #{color-heavy-top-thin-inset-shadow(--base0B)}, #{color-bottom-inset-shadow(--base0B)};
+  --shadow-inset-thin-base0D: #{color-heavy-top-thin-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
 
   --shadow-inset-base00: #{shade-top-deep-inset-shadow(--base00)}, #{shade-heavy-bottom-inset-shadow(--base00)}; /* Bottom inset shadow for more extreme shades (usually base00 and base01) */
   --shadow-inset-base01: #{shade-top-deep-inset-shadow(--base01)}, #{shade-heavy-bottom-inset-shadow(--base01)};
@@ -199,7 +237,7 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --shadow-inset-base0B: #{color-top-deep-inset-shadow(--base0B)}, #{color-bottom-inset-shadow(--base0B)};
   --shadow-inset-base0D: #{color-top-deep-inset-shadow(--base0D)}, #{color-bottom-inset-shadow(--base0D)};
 
---shadow-inset-base08-dull: #{color-dull-top-deep-inset-shadow(--base08)}, #{color-dull-bottom-inset-shadow(--base08)};
+  --shadow-inset-base08-dull: #{color-dull-top-deep-inset-shadow(--base08)}, #{color-dull-bottom-inset-shadow(--base08)};
   --shadow-inset-base0B-dull: #{color-dull-top-deep-inset-shadow(--base0B)}, #{color-dull-bottom-inset-shadow(--base0B)};
 
   --shadow-thin-base00: #{shade-thin-shadow(--base00)};
@@ -218,7 +256,7 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   --shadow-wide-base02: #{shade-wide-shadow(--base02)};
   --shadow-wide-base08: #{color-wide-shadow(--base08)};
 
- --shadow-light-separator-mimic-horizontal-base00: #{shade-extra-light-horizontal-separator-mimic-shadow(--base00)};
+  --shadow-light-separator-mimic-horizontal-base00: #{shade-extra-light-horizontal-separator-mimic-shadow(--base00)};
 
   --shadow-separator-mimic-horizontal-base00: #{shade-heavy-horizontal-separator-mimic-shadow(--base00)};
   --shadow-separator-mimic-horizontal-base01: #{shade-heavy-horizontal-separator-mimic-shadow(--base01)};

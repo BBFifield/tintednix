@@ -41,15 +41,12 @@
     normal 16px "jetbrainsmono nerd font",
     sans-serif;
   text-decoration: none;
-
   outline: none;
-
   transition:
     box-shadow,
     opacity,
     transform,
     -gtk-icon-transform;
-  transition-duration: 0.2s;
 }
 
 undershoot.top {
