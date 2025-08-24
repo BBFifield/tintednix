@@ -109,6 +109,16 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   @return "0px -2px 0px color-mix(in oklab, var(#{$var-name}) 75%, black) inset, 0px -1px 0px color-mix(in oklab, var(#{$var-name}) 90%, black) inset, 0px 1px 0px color-mix(in oklab, var(#{$var-name}) #{if($variant == dark, '90%', '0%')}, white)";
 }
 
+/// Returns rgb(r, g, b) where r/g/b are integers. We do lose precision, but the difference is negligible
+@function to-rgb($color) {
+  $mixed: color.mix($c1, $c2, $weight: $weight, $method: oklab);
+  $r: red($mixed);
+  $g: green($mixed);
+  $b: blue($mixed);
+
+  @return rgb($r, $g, $b);
+}
+
 
 /// Mixin: ripple-out-keyframes
 /// @param $color-var  CSS custom‐property name (e.g. --ripple-color)
@@ -154,6 +164,8 @@ $variant: {{scheme-variant}}; // “dark” or “light”
     }
   }
 }
+
+
 
 $base00: #{{base00-hex}};
 $base01: #{{base01-hex}};
@@ -220,98 +232,79 @@ $base0F: #{{base0F-hex}};
 @define-color purple           @base0E;
 
 // base00
-@define-color base00-black-95        #{color.mix($base00, black, $weight: 95%, $method: oklab)};
-@define-color base00-white-90       #{color.mix($base00, white, $weight: 90%, $method: oklab)};
-@define-color base00-black-85        #{color.mix($base00, black, $weight: 85%, $method: oklab)};
-@define-color base00-black-80        #{color.mix($base00, black, $weight: 80%, $method: oklab)};
-@define-color base00-black-65        #{color.mix($base00, black, $weight: 65%, $method: oklab)};
-@define-color base00-white-95-dark  #{color.mix(
-  $base00,
-  white,
-  $weight: if($variant == dark, 95%, 0%),
-  $method: oklab
-)};
-@define-color base00-white-90-dark  #{color.mix(
-  $base00,
-  white,
-  $weight: if($variant == dark, 90%, 0%),
-  $method: oklab
-)};
+@define-color base00-black-95        #{mix-rgb($base00, black, 95%)};
+@define-color base00-black-90        #{mix-rgb($base00, black, 90%)};
+@define-color base00-white-90        #{mix-rgb($base00, white, 90%)};
+@define-color base00-black-85        #{mix-rgb($base00, black, 85%)};
+@define-color base00-black-80        #{mix-rgb($base00, black, 80%)};
+@define-color base00-black-65        #{mix-rgb($base00, black, 65%)};
+@define-color base00-white-95-dark   #{mix-rgb($base00, white, if($variant == dark, 95%, 0%))};
+@define-color base00-white-90-dark  #{mix-rgb($base00, white, if($variant == dark, 90%, 0%))};
 
 // base01
-@define-color base01-black-95 #{color.mix($base01, black, $weight: 95%, $method: oklab)};
-@define-color base01-white-90 #{color.mix($base01, white, $weight: 90%, $method: oklab)};
-@define-color base01-black-85 #{color.mix($base01, black, $weight: 85%, $method: oklab)};
-@define-color base01-black-80 #{color.mix($base01, black, $weight: 80%, $method: oklab)};
-@define-color base01-black-65 #{color.mix($base01, black, $weight: 65%, $method: oklab)};
-@define-color base01-white-95-dark #{color.mix(
-  $base01,
-  white,
-  $weight: if($variant == dark, 95%, 0%),
-  $method: oklab
-)};
-@define-color base01-white-90-dark  #{color.mix(
-  $base01,
-  white,
-  $weight: if($variant == dark, 90%, 0%),
-  $method: oklab
-)};
+@define-color base01-black-95 #{mix-rgb($base01, black, 95%)};
+@define-color base01-black-90 #{mix-rgb($base01, black, 90%)};
+@define-color base01-white-90 #{mix-rgb($base01, white, 90%)};
+@define-color base01-black-85 #{mix-rgb($base01, black, 85%)};
+@define-color base01-black-80 #{mix-rgb($base01, black, 80%)};
+@define-color base01-black-65 #{mix-rgb($base01, black, 65%)};
+@define-color base01-white-95-dark #{mix-rgb($base01, white, if($variant == dark, 95%, 0%))};
+@define-color base01-white-90-dark  #{mix-rgb($base01, white, if($variant == dark, 90%, 0%))};
 
 // base02
-@define-color base02-white-90 #{color.mix($base02, white, $weight: 90%, $method: oklab)};
-@define-color base02-black-80 #{color.mix($base02, black, $weight: 80%, $method: oklab)};
-@define-color base02-black-75 #{color.mix($base02, black, $weight: 75%, $method: oklab)};
-@define-color base02-black-65 #{color.mix($base02, black, $weight: 65%, $method: oklab)};
-@define-color base02-white-90-dark #{color.mix(
-  $base02,
-  white,
-  $weight: if($variant == dark, 90%, 0%),
-  $method: oklab
-)};
-@define-color base02-white-0-dark #{color.mix(
-  $base02,
-  white,
-  $weight: if($variant == dark, 0%, 65%),
-  $method: oklab
-)};
+@define-color base02-black-90 #{mix-rgb($base02, black, 90%)};
+@define-color base02-white-90 #{mix-rgb($base02, white, 90%)};
+@define-color base02-black-80 #{mix-rgb($base02, black, 80%)};
+@define-color base02-black-75 #{mix-rgb($base02, black, 75%)};
+@define-color base02-black-65 #{mix-rgb($base02, black, 65%)};
+@define-color base02-white-90-dark #{mix-rgb($base02, white, if($variant == dark, 90%, 0%))};
+@define-color base02-white-0-dark #{mix-rgb($base02, white, if($variant == dark, 0%, 65%))};
 
 // base08
-@define-color base08-black-85 #{color.mix($base08, black, $weight: 85%, $method: oklab)};
-@define-color base08-black-65 #{color.mix($base08, black, $weight: 65%, $method: oklab)};
-@define-color base08-white-65 #{color.mix($base08, white, $weight: 65%, $method: oklab)};
-@define-color base08-black-60 #{color.mix($base08, black, $weight: 60%, $method: oklab)};
-@define-color base08-black-50 #{color.mix($base08, black, $weight: 50%, $method: oklab)};
-@define-color base08-black-25 #{color.mix($base08, black, $weight: 25%, $method: oklab)};
+@define-color base08-black-85 #{mix-rgb($base08, black, 85%)};
+@define-color base08-black-65 #{mix-rgb($base08, black, 65%)};
+@define-color base08-white-65 #{mix-rgb($base08, white, 65%)};
+@define-color base08-black-60 #{mix-rgb($base08, black, 60%)};
+@define-color base08-black-50 #{mix-rgb($base08, black, 50%)};
+@define-color base08-black-25 #{mix-rgb($base08, black, 25%)};
 
 // base09 & base0A
-@define-color base09-white-60 #{color.mix($base09, white, $weight: 60%, $method: oklab)};
-@define-color base0A-white-65 #{color.mix($base0A, white, $weight: 65%, $method: oklab)};
+@define-color base09-white-60 #{mix-rgb($base09, white, 60%)};
+@define-color base0A-white-65 #{mix-rgb($base0A, white, 65%)};
 
 // base0B
-@define-color base0B-black-85 #{color.mix($base0B, black, $weight: 85%, $method: oklab)};
-@define-color base0B-black-80 #{color.mix($base0B, black, $weight: 80%, $method: oklab)};
-@define-color base0B-black-65 #{color.mix($base0B, black, $weight: 65%, $method: oklab)};
-@define-color base0B-white-65 #{color.mix($base0B, white, $weight: 65%, $method: oklab)};
-@define-color base0B-black-60 #{color.mix($base0B, black, $weight: 60%, $method: oklab)};
-@define-color base0B-black-50 #{color.mix($base0B, black, $weight: 50%, $method: oklab)};
-@define-color base0B-black-25 #{color.mix($base0B, black, $weight: 25%, $method: oklab)};
-@define-color base0B-white-55-dark  #{color.mix(
-  $base0B,
-  white,
-  $weight: if($variant == dark, 55%, 80%),
-  $method: oklab
-)};
+@define-color base0B-black-85 #{mix-rgb($base0B, black, 85%)};
+@define-color base0B-black-80 #{mix-rgb($base0B, black, 80%)};
+@define-color base0B-black-65 #{mix-rgb($base0B, black, 65%)};
+@define-color base0B-white-65 #{mix-rgb($base0B, white, 65%)};
+@define-color base0B-black-60 #{mix-rgb($base0B, black, 60%)};
+@define-color base0B-black-50 #{mix-rgb($base0B, black, 50%)};
+@define-color base0B-black-25 #{mix-rgb($base0B, black, 25%)};
+@define-color base0B-white-55-dark  #{mix-rgb($base0B, white, if($variant == dark, 55%, 80%))};
+
+// base0C
+@define-color base0C-black-65 #{mix-rgb($base0C, black, 65%)};
+@define-color base0C-white-65 #{mix-rgb($base0C, white, 65%)};
+@define-color base0C-black-60 #{mix-rgb($base0C, black, 60%)};
+@define-color base0C-white-55-dark  #{mix-rgb($base0C, white, if($variant == dark, 55%, 80%))};
 
 // base0D
-@define-color base0D-black-65 #{color.mix($base0D, black, $weight: 65%, $method: oklab)};
-@define-color base0D-white-65 #{color.mix($base0D, white, $weight: 65%, $method: oklab)};
-@define-color base0D-black-60 #{color.mix($base0D, black, $weight: 60%, $method: oklab)};
-@define-color base0D-white-55-dark  #{color.mix(
-  $base0D,
-  white,
-  $weight: if($variant == dark, 55%, 80%),
-  $method: oklab
-)};
+@define-color base0D-black-65 #{mix-rgb($base0D, black, 65%)};
+@define-color base0D-white-65 #{mix-rgb($base0D, white, 65%)};
+@define-color base0D-black-60 #{mix-rgb($base0D, black, 60%)};
+@define-color base0D-white-55-dark #{mix-rgb($base0D, white, if($variant == dark, 55%, 80%))};
+
+// base0E
+@define-color base0E-black-65 #{mix-rgb($base0E, black, 65%)};
+@define-color base0E-white-65 #{mix-rgb($base0E, white, 65%)};
+@define-color base0E-black-60 #{mix-rgb($base0E, black, 60%)};
+@define-color base0E-white-55-dark  #{mix-rgb($base0E, white, if($variant == dark, 55%, 80%))};
+
+// base0F
+@define-color base0F-black-65 #{mix-rgb($base0F, black, 65%)};
+@define-color base0F-white-65 #{mix-rgb($base0F, white, 65%)};
+@define-color base0F-black-60 #{mix-rgb($base0F, black, 60%)};
+@define-color base0F-white-55-dark  #{mix-rgb($base0F, white, if($variant == dark, 55%, 80%))};
 
 
 :root {

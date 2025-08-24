@@ -70,7 +70,9 @@ arrow.left {
 }
 
 *:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
+
+  -gtk-icon-effect: dim;
 }
 
 window {
@@ -142,10 +144,10 @@ entry > button:checked {
 }
 entry > image {
   color: var(--base0D);
-  opacity: 50%;
+  opacity: 0.5;
 }
 entry > image:hover {
-  opacity: 100%;
+  opacity: 1;
 }
 entry > image.left {
   margin-right: 7px;
@@ -157,7 +159,7 @@ entry.search {
   border: none;
 }
 placeholder {
-  opacity: 55%;
+  opacity: 0.55;
 }
 
 selection {
@@ -212,7 +214,7 @@ banner widget {
   margin: 10px;
   border-radius: 50px;
   background-color: var(--base0D);
-  box-shadow: var(--shadow-inset-base0D);
+  box-shadow: var(--shadow-thin-base0D);
 }
 banner label.heading {
   color: var(--base01);
@@ -305,9 +307,13 @@ switch slider {
 
 /*experimental*/
 scale {
-  min-width: 10px;
+  min-width: 125px;
   min-height: 10px;
-  padding: 6px;
+  padding: 11px;
+}
+scale.vertical {
+  min-width: 10px;
+  min-height: 125px;
 }
 scale.marks-after {
   padding: 6px 6px 0px 6px;
@@ -338,21 +344,17 @@ scale marks indicator {
   color: var(--base0B);
   background-color: var(--base0B);
 }
-scale.vertical trough {
-  min-width: 3px;
-}
 progressbar trough,
 levelbar trough,
 progresscell trough,
-progresscell {
+progresscell,
+scale trough {
   border-radius: 50px;
   background-color: transparent;
   box-shadow: var(--shadow-inset-thin-base01);
 }
-scale trough {
-  border-radius: 50px;
-  background-color: transparent;
-  box-shadow: var(--shadow-inset-extra-thin-base01);
+scale.vertical trough {
+  min-width: 3px;
 }
 
 switch {
@@ -627,7 +629,8 @@ button.text-button:active:checked,
 button.text-button:hover:active:checked,
 button.font:active,
 button.font:hover:active,
-button.font:hover:active:checked {
+button.font:hover:active:checked,
+button.osd:active {
   box-shadow: var(--shadow-inset-base02);
 }
 stack > button:hover,
@@ -929,10 +932,39 @@ spinner {
 treeview.view {
   margin-bottom: 2px;
   padding: 5px 8px 5px 8px;
+  border-top: 0px solid transparent;
+
   background-color: transparent;
+  box-shadow:
+    0px -2px 0px @base00-black-85 inset,
+    0px -1px 0px @base00-black-95 inset,
+    0px 1px 0px @base00-white-90;
+}
+treeview.view.separator {
+  min-height: 5px;
+  color: var(--base01);
+  box-shadow: none;
 }
 treeview.view .cell {
+  border: 0px solid transparent;
   color: var(--base0D);
+}
+treeview.view.expander {
+  color: color-mix(var(--base0D), black 50%);
+
+  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+}
+treeview.view.expander:dir(rtl) {
+  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
+}
+treeview.view.expander:hover {
+  color: var(--base01);
+}
+treeview.view.expander:hover:selected {
+  color: color-mix(var(--base0D), black 50%);
+}
+treeview.view.expander:checked {
+  -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
 }
 treeview.view radio:checked,
 treeview.view check:checked,
@@ -944,13 +976,26 @@ treeview.view check.cell:hover:not(:focus),
 treeview.view radio.cell:hover:not(:focus) {
   box-shadow: var(--shadow-inset-thin-base0D);
 }
-treeview.view .cell:focus:not(check):not(radio) {
-  /*Need :not(check):not(radio) so check and radio byttons don't receive this box-shadow too*/
+treeview.view:hover:selected:not(:focus) {
+  box-shadow: var(--shadow-inset-base0D);
+}
+treeview.view:selected:focus,
+treeview.view:selected {
   box-shadow: var(--shadow-inset-base01);
 }
-scrolledwindow treeview.view .cell:focus:not(check):not(radio),
-scrolledwindow treeview.view button:hover:active {
+scrolledwindow treeview.view:selected:focus,
+scrolledwindow treeview.view:selected {
   box-shadow: var(--shadow-inset-base00);
+}
+.rubberband,
+rubberband,
+XfdesktopIconView.view .rubberband,
+.content-view rubberband,
+.content-view .rubberband,
+treeview.view rubberband,
+flowbox rubberband {
+  border: 1px solid @base0D;
+  background-color: alpha(@base0D, 0.2);
 }
 
 colorswatch {
@@ -969,7 +1014,7 @@ box.dialog-action-area {
 }
 
 grid.dim-label {
-  opacity: 55%;
+  opacity: 0.55;
 }
 
 scrollbar {
@@ -1147,6 +1192,9 @@ frame {
 frame button.image-button:hover:checked {
   box-shadow: var(--shadow-inset-base0D);
 }
+frame button.image-button:hover:active:checked {
+  box-shadow: var(--shadow-inset-base00);
+}
 frame frame > label {
   margin: 4px;
 }
@@ -1202,6 +1250,7 @@ frame button:active,
 frame button:checked,
 frame button:hover:active,
 frame button:active:checked,
+frame button:hover:active:checked,
 frame tab:checked,
 frame tab:active,
 scrolledwindow.frame button:hover:active,
@@ -1242,7 +1291,7 @@ textview {
   box-shadow: var(--shadow-inset-base00);
 }
 
-/*unsure about these, prob in the inspector as well*/
+/*Ex; emoji popover*/
 stack > widget > scrolledwindow > viewport,
 stack > box:not(#NautilusPathBar) > scrolledwindow:not(.frame) > viewport {
   margin-top: 6px;
@@ -1575,6 +1624,7 @@ list:not(.navigation-sidebar) > separator {
 
 /*Ex: Global settings in inspector window*/
 list.boxed-list {
+  padding: 5px 0px;
   border-radius: 10px;
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
@@ -1742,6 +1792,9 @@ listview > row.activatable:selected,
 listview > row:not(.activatable):hover button:hover:active,
 listview row.activatable:not(:hover) progresscell trough,
 listview row.activatable:hover:active progresscell trough,
+listview row.activatable:hover:selected progresscell trough,
+listview row radio:not(:checked):not(:indeterminate),
+listview row check:not(:checked):not(:indeterminate),
 header.activatable button:active,
 header.activatable > button:active {
   box-shadow: var(--shadow-inset-base00);
@@ -1853,10 +1906,6 @@ box.pathbar button {
   min-height: 30px;
   margin: 1px 1px 0px 1px;
   padding: 1px 8px 2px 8px;
-}
-box.pathbar button:not(.current-dir):hover {
-  background-color: var(--base0D);
-  box-shadow: var(--shadow-thin-base0D);
 }
 box.pathbar button:hover:active {
   background-color: var(--base02);
@@ -2186,8 +2235,42 @@ button.current-dir:active {
   background-color: var(--base02);
   box-shadow: var(--shadow-inset-thin-base02);
 }
-
+#NautilusPathBar undershoot.left,
+#NautilusPathBar > scrolledwindow > viewport {
+  border-width: 0px;
+  border-radius: 50px;
+}
+#NautilusPathBar undershoot.right {
+  border-width: 0px;
+}
+widget.content-pane .bottom-bar .toolbar button:active,
+widget.content-pane .bottom-bar .toolbar button:checked:not(:hover) {
+  box-shadow: var(--shadow-inset-base00);
+}
 /*Disk usage analyzer*/
 treemap {
   color: var(--base01);
+}
+overlay-split-view > widget.content-pane {
+  border-radius: 10px;
+}
+overlay-split-view > .sidebar-pane ~ widget.content-pane {
+  margin-left: 10px;
+}
+overlay-split-view > .sidebar-pane > box > box > widget > columnview {
+  border-radius: 10px;
+  box-shadow: var(--shadow-inset-base00);
+}
+overlay-split-view > .sidebar-pane,
+.border.raised,
+revealer.bottom-properties {
+  box-shadow: none;
+}
+overlay > box.toolbar {
+  background-color: alpha(var(--base01), 0.9);
+}
+overlay > box.toolbar > separator {
+  box-shadow:
+    0.5px 0.5px 1.1px 0.2px alpha(@base01-black-65, 0.9) inset,
+    -1px -1px 0px 0px alpha(@base01-white-90-dark, 0.9) inset;
 }

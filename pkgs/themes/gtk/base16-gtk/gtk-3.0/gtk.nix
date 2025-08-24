@@ -86,8 +86,10 @@
     -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
   }
 
-  :disabled {
+  *:disabled {
     opacity: 0.6;
+
+    -gtk-icon-effect: dim;
   }
 
   window {
@@ -191,10 +193,10 @@
   }
   entry > image {
     color: @base0D;
-    opacity: 50%;
+    opacity: 0.5;
   }
   entry > image:hover {
-    opacity: 100%;
+    opacity: 1;
   }
   entry image.left {
     margin-right: 7px;
@@ -269,8 +271,8 @@
     background-color: transparent;
     /*shadow-inset-thin-base01*/
     box-shadow:
-      1px 1px 1px @base01-black-80 inset,
-      2px 2px 2px @base01-black-80 inset,
+      1px 1px 0.6px 0.1px @base01-black-80 inset,
+      2px 2px 1.1px 0.1px @base01-black-80 inset,
       -1px -1px 0px @base01-white-90-dark inset;
   }
   block.filled {
@@ -308,9 +310,13 @@
   }
 
   scale {
-    min-width: 10px;
+    min-width: 125px;
     min-height: 10px;
-    padding: 6px;
+    padding: 11px;
+  }
+  scale.vertical {
+    min-width: 10px;
+    min-height: 125px;
   }
   scale.marks-after {
     padding: 6px 6px 0px 6px;
@@ -345,28 +351,21 @@
     color: @base0B;
     background-color: @base0B;
   }
-  scale.vertical trough {
-    min-width: 3px;
-  }
   progressbar trough,
   levelbar trough,
   progresscell trough,
-  progresscell {
+  progresscell,
+  scale trough {
     border-radius: 50px;
     background-color: transparent;
     /*shadow-inset-thin-base01*/
     box-shadow:
-      1px 1px 1px @base01-black-80 inset,
-      2px 2px 2px @base01-black-80 inset,
+      1px 1px 0.6px 0.1px @base01-black-80 inset,
+      2px 2px 1.1px 0.1px @base01-black-80 inset,
       -1px -1px 0px @base01-white-90-dark inset;
   }
-  scale trough {
-    border-radius: 50px;
-    background-color: transparent;
-    /*shadow-inset-extra-thin-base01*/
-    box-shadow:
-      1px 1px 1px @base01-black-65 inset,
-      -1px -1px 0px @base01-white-90-dark inset;
+  scale.vertical trough {
+    min-width: 3px;
   }
 
   switch {
@@ -417,8 +416,8 @@
     background-color: transparent;
     /*shadow-inset-thin-base01*/
     box-shadow:
-      1px 1px 1px @base01-black-80 inset,
-      2px 2px 2px @base01-black-80 inset,
+      1px 1px 0.6px 0.1px @base01-black-80 inset,
+      2px 2px 1.1px 0.1px @base01-black-80 inset,
       -1px -1px 0px @base01-white-90-dark inset;
 
     animation: ripple-in-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
@@ -430,8 +429,8 @@
     color: @base01;
     /*shadow-inset-thin-base0D*/
     box-shadow:
-      1px 1px 1px @base0D-black-60 inset,
-      2px 2px 2px @base0D-black-60 inset,
+      1px 1px 0.6px 0.1px @base0D-black-60 inset,
+      2px 2px 1.1px 0.1px @base0D-black-60 inset,
       -1px -1px 0px @base0D-white-55-dark inset;
     animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
@@ -441,30 +440,6 @@
   check {
     border-radius: 6px;
   }
-  /* radio:checked { */
-  /*   -gtk-icon-source: image( */
-  /*     -gtk-recolor(url("file:///nix/store/02879zizdv7vmd7prks022gjfb9k43a1-adw-gtk3-5.10/share/themes/adw-gtk3-dark/gtk-3.0/assets/bullet-symbolic.svg")), */
-  /*     -gtk-recolor(url("file:///nix/store/02879zizdv7vmd7prks022gjfb9k43a1-adw-gtk3-5.10/share/themes/adw-gtk3-dark/gtk-3.0/assets/bullet-symbolic.symbolic.png")) */
-  /*   ); */
-  /* } */
-  /* radio:indeterminate { */
-  /*   -gtk-icon-source: image( */
-  /*     -gtk-recolor(url("file:///nix/store/02879zizdv7vmd7prks022gjfb9k43a1-adw-gtk3-5.10/share/themes/adw-gtk3-dark/gtk-3.0/assets/dash-symbolic.svg")), */
-  /*     -gtk-recolor(url("file:///nix/store/02879zizdv7vmd7prks022gjfb9k43a1-adw-gtk3-5.10/share/themes/adw-gtk3-dark/gtk-3.0/assets/dash-symbolic.symbolic.png")) */
-  /*   ); */
-  /* } */
-  /* check:checked { */
-  /*   -gtk-icon-source: image( */
-  /*     -gtk-recolor(url("file:///nix/store/02879zizdv7vmd7prks022gjfb9k43a1-adw-gtk3-5.10/share/themes/adw-gtk3-dark/gtk-3.0/assets/check-symbolic.svg")), */
-  /*     -gtk-recolor(url("file:///nix/store/02879zizdv7vmd7prks022gjfb9k43a1-adw-gtk3-5.10/share/themes/adw-gtk3-dark/gtk-3.0/assets/check-symbolic.symbolic.png")) */
-  /*   ); */
-  /* } */
-  /* check:indeterminate { */
-  /*   -gtk-icon-source: image( */
-  /*     -gtk-recolor(url("file:///nix/store/02879zizdv7vmd7prks022gjfb9k43a1-adw-gtk3-5.10/share/themes/adw-gtk3-dark/gtk-3.0/assets/dash-symbolic.svg")), */
-  /*     -gtk-recolor(url("file:///nix/store/02879zizdv7vmd7prks022gjfb9k43a1-adw-gtk3-5.10/share/themes/adw-gtk3-dark/gtk-3.0/assets/dash-symbolic.symbolic.png")) */
-  /*   ); */
-  /* } */
   radio:checked {
     -gtk-icon-source: image(-gtk-recolor(url("assets/bullet-symbolic.svg")), -gtk-recolor(url("assets/bullet-symbolic.symbolic.png")));
   }
@@ -594,8 +569,8 @@
     padding: 1px 4px 1px 4px;
     /*shadow-inset-thin-base01*/
     box-shadow:
-      1px 1px 1px @base01-black-80 inset,
-      2px 2px 2px @base01-black-80 inset,
+      1px 1px 0.6px 0.1px @base01-black-80 inset,
+      2px 2px 1.1px 0.1px @base01-black-80 inset,
       -1px -1px 0px @base01-white-90-dark inset;
   }
   button:active,
@@ -830,19 +805,17 @@
   }
   button:hover separator,
   button:hover:checked separator {
-    /*shadow-inset-thin-base0D*/
+    /*shadow-inset-extra-thin-base0D*/
     box-shadow:
-      1px 1px 1px @base0D-black-60 inset,
-      2px 2px 2px @base0D-black-60 inset,
+      0.5px 0.5px 1.1px 0.2px @base0D-black-60 inset,
       -1px -1px 0px @base0D-white-55-dark inset;
   }
   button separator,
   button:checked separator,
   button:hover:active separator {
-    /*shadow-inset-thin-base02*/
+    /*shadow-inset-extra-thin-base02*/
     box-shadow:
-      1px 1px 1px @base02-black-80 inset,
-      2px 2px 2px @base02-black-80 inset,
+      0.5px 0.5px 1.1px 0.2px @base02-black-65 inset,
       -1px -1px 0px @base02-white-90-dark inset;
   }
 
@@ -878,11 +851,10 @@
   separator,
   paned > separator {
     background-color: transparent;
-    /*shadow-inset-thin-base01*/
+    /*shadow-inset-extra-thin-base01*/
     box-shadow:
-      1px 1px 1px @base01-black-80 inset,
-      2px 2px 2px @base01-black-80 inset,
-      -1px -1px 0px @base01-white-90-dark inset;
+      0.5px 0.5px 1.1px 0.2px @base01-black-65 inset,
+      -1px -1px 0px 0px @base01-white-90-dark inset;
   }
   paned.horizontal > separator {
     margin: 6px 0px;
@@ -995,8 +967,8 @@
   tab:hover:not(:checked) > box > button.small-button:active {
     /*shadow-inset-thin-base0D*/
     box-shadow:
-      1px 1px 1px @base0D-black-60 inset,
-      2px 2px 2px @base0D-black-60 inset,
+      1px 1px 0.6px 0.1px @base0D-black-60 inset,
+      2px 2px 1.1px 0.1px @base0D-black-60 inset,
       -1px -1px 0px @base0D-white-55-dark inset;
   }
   /*Create the illusion of inset separators*/
@@ -1105,7 +1077,6 @@
   }
   frame button.small-button:active,
   frame button.small-button:hover:active,
-  frame > paned > separator,
   scrolledwindow.frame button.small-button:active,
   scrolledwindow.frame button.small-button:hover:active,
   scrolledwindow.frame textview,
@@ -1117,8 +1088,8 @@
   scrolledwindow.frame check:not(:checked):not(:indeterminate) {
     /*shadow-inset-thin-base00*/
     box-shadow:
-      1px 1px 1px @base00-black-80 inset,
-      2px 2px 2px @base00-black-80 inset,
+      1px 1px 0.6px 0.1px @base00-black-80 inset,
+      2px 2px 1.1px 0.1px @base00-black-80 inset,
       -1px -1px 0px @base00-white-90-dark inset;
   }
   frame > * > separator,
@@ -1126,13 +1097,14 @@
   frame box.toolbar > separator {
     /*shadow-inset-extra-thin-base00*/
     box-shadow:
-      1px 1px 1px @base00-black-65 inset,
+      0.5px 0.5px 1.1px 0.2px @base00-black-65 inset,
       -1px -1px 0px @base00-white-90-dark inset;
   }
   frame button.image-button:active,
   frame button.image-button:checked,
   frame button.image-button:hover:active,
   frame button.image-button:active:checked,
+  frame button.image-button:hover:active:checked,
   frame toolbutton > button.text-button.image-button:active,
   frame toolbutton > button.text-button.image-button:hover:active,
   frame tab:checked,
@@ -1169,9 +1141,9 @@
       2px 4px 4px @base02-black-80 inset,
       -1px -1px 0px @base02-white-90-dark inset;
   }
-  frame list > row:not(.sidebar-row):not(:hover):not(:selected) + row:not(:hover):not(:selected),
-  scrolledwindow > viewport > list > row:not(.sidebar-row):not(:hover):not(:selected) + row:not(:hover):not(:selected),
-  scrolledwindow.frame list > row:not(.sidebar-row):not(:hover):not(:selected) + row:not(:hover):not(:selected) {
+  frame list > row:not(.sidebar-row) + row,
+  scrolledwindow > viewport > list > row:not(.sidebar-row) + row,
+  scrolledwindow.frame list > row:not(.sidebar-row) + row {
     /*shadow-separator-mimic-horizontal-base00*/
     box-shadow:
       0px -2px 0px @base00-black-65,
@@ -1204,10 +1176,39 @@
   treeview.view {
     margin-bottom: 2px;
     padding: 5px 8px 5px 8px;
+    border-top: 0px solid transparent;
+
     background-color: transparent;
+    box-shadow:
+      0px -2px 0px @base00-black-85 inset,
+      0px -1px 0px @base00-black-95 inset,
+      0px 1px 0px @base00-white-90;
+  }
+  treeview.view.separator {
+    min-height: 5px;
+    color: @base01;
+    box-shadow: none;
   }
   treeview.view .cell {
+    border: 0px solid transparent;
     color: @base0D;
+  }
+  treeview.view.expander {
+    color: mix(@base0D, black, 0.5);
+
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+  }
+  treeview.view.expander:dir(rtl) {
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
+  }
+  treeview.view.expander:hover {
+    color: @base01;
+  }
+  treeview.view.expander:hover:selected {
+    color: mix(@base0D, black, 0.3);
+  }
+  treeview.view.expander:checked {
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
   }
   treeview.view radio:checked,
   treeview.view check:checked,
@@ -1219,25 +1220,42 @@
   treeview.view radio.cell:hover:not(:focus) {
     /*shadow-inset-thin-base0D*/
     box-shadow:
-      1px 1px 1px @base0D-black-60 inset,
-      2px 2px 2px @base0D-black-60 inset,
+      1px 1px 0.6px 0.1px @base0D-black-60 inset,
+      2px 2px 1.1px 0.1px @base0D-black-60 inset,
       -1px -1px 0px @base0D-white-55-dark inset;
   }
-  treeview.view .cell:focus:not(check):not(radio) {
-    /*Need :not(check):not(radio) so check and radio buttons don't receive this box-shadow too*/
+  treeview.view:hover:selected:not(:focus) {
+    /*shadow-inset-base0D*/
+    box-shadow:
+      1px 2px 2px @base0D-black-60 inset,
+      2px 4px 4px @base0D-black-60 inset,
+      -1px -1px 0px @base0D-white-55-dark inset;
+  }
+  treeview.view:selected:focus,
+  treeview.view:selected {
     /*shadow-inset-base01*/
     box-shadow:
       1px 2px 2px @base01-black-80 inset,
       2px 4px 4px @base01-black-80 inset,
       -1px -1px 0px @base01-white-90-dark inset;
   }
-  scrolledwindow treeview.view .cell:focus:not(check):not(radio),
-  scrolledwindow treeview.view button:hover:active {
+  scrolledwindow treeview.view:selected:focus,
+  scrolledwindow treeview.view:selected {
     /*shadow-inset-base00*/
     box-shadow:
       1px 2px 2px @base00-black-80 inset,
       2px 4px 4px @base00-black-80 inset,
       -1px -1px 0px @base00-white-90-dark inset;
+  }
+  .rubberband,
+  rubberband,
+  XfdesktopIconView.view .rubberband,
+  .content-view rubberband,
+  .content-view .rubberband,
+  treeview.view rubberband,
+  flowbox rubberband {
+    border: 1px solid @base0D;
+    background-color: alpha(@base0D, 0.2);
   }
   filechooser scrolledwindow {
     box-shadow: none;
@@ -1324,7 +1342,7 @@
       7px 18px 14px rgba(0, 0, 0, 0.21),
       10px 24px 18px rgba(0, 0, 0, 0.25),
       14px 30px 24px rgba(0, 0, 0, 0.3),
-      -1px -1px 0px @base01-white-90;
+      -1px -1px 0px @base02-white-90;
   }
   tooltip label {
     padding: 0px 6px 0px 6px;
@@ -1382,7 +1400,7 @@
     /*shadow-separator-mimic-vertical-base02*/
     box-shadow:
       -2px 0px 0px @base02-black-75,
-      -1px 0px 0px @base01-white-90,
+      -1px 0px 0px @base02-black-90,
       1px 0px 0px @base02-white-90-dark inset;
   }
   .linked > *:first-child {
@@ -1752,8 +1770,8 @@
   modelbutton:hover:not(:active) > radio:not(:checked) {
     /*shadow-inset-thin-base0D*/
     box-shadow:
-      1px 1px 1px @base0D-black-60 inset,
-      2px 2px 2px @base0D-black-60 inset,
+      1px 1px 0.6px 0.1px @base0D-black-60 inset,
+      2px 2px 1.1px 0.1px @base0D-black-60 inset,
       -1px -1px 0px @base0D-white-55-dark inset;
   }
 
@@ -1778,7 +1796,8 @@
   }
   /*Selects two kinds of popover layouts*/
   popover > box,
-  popover > stack > box {
+  popover > stack > box,
+  popover > grid {
     margin: -9px; /*Normalizes boundaries from edge of popover to modelbuttons to align with gtk4 spacing*/
     padding: 0px;
   }
@@ -1786,7 +1805,31 @@
     margin-left: 12px;
   }
   popover.emoji-picker flowboxchild {
-    margin: 0px 3px;
+    margin: 6px 3px 0px 3px;
+  }
+  popover.emoji-picker > box {
+    margin: 0px;
+  }
+  popover.emoji-picker scrolledwindow {
+    margin: 0px;
+  }
+  popover.emoji-picker button.emoji-section.flat {
+    margin: 7px 3px 0px 4px;
+  }
+  popover.emoji-picker button.emoji-section.flat:active,
+  popover.emoji-picker button.emoji-section.flat:checked {
+    margin: 6px 3px 0px 3px;
+  }
+  stack > box > scrolledwindow:not(.frame) > viewport {
+    margin-top: 6px;
+  }
+  stack > box > scrolledwindow > viewport {
+    border-radius: 10px;
+    background-color: @base00;
+    box-shadow:
+      1px 2px 2px @base00-black-80 inset,
+      2px 4px 4px @base00-black-80 inset,
+      -1px -1px 0px @base00-white-90-dark inset;
   }
   popover modelbutton,
   popover modelbutton:hover,
@@ -1940,8 +1983,8 @@
   row.activatable:hover:not(:active):not(:selected) check:not(:checked):not(:indeterminate) {
     /*shadow-inset-thin-base0D*/
     box-shadow:
-      1px 1px 1px @base0D-black-60 inset,
-      2px 2px 2px @base0D-black-60 inset,
+      1px 1px 0.6px 0.1px @base0D-black-60 inset,
+      2px 2px 1.1px 0.1px @base0D-black-60 inset,
       -1px -1px 0px @base0D-white-55-dark inset;
   }
   row.activatable:hover:not(:active):not(:selected) popover block.empty,
@@ -1952,8 +1995,8 @@
   row.activatable:hover:not(:active):not(:selected) popover check:not(:checked):not(:indeterminate) {
     /*shadow-inset-thin-base01*/
     box-shadow:
-      1px 1px 1px @base01-black-80 inset,
-      2px 2px 2px @base01-black-80 inset,
+      1px 1px 0.6px 0.1px @base01-black-80 inset,
+      2px 2px 1.1px 0.1px @base01-black-80 inset,
       -1px -1px 0px @base01-white-90-dark inset;
   }
   row.activatable:hover:not(:active):not(:selected) switch {
@@ -2094,7 +2137,7 @@
   stacksidebar > scrolledwindow > viewport > list > separator.horizontal {
     all: unset;
   }
-  /*Override separators for sidebar rows*/
+  /*Override mimic'd separators for sidebar rows*/
   list > row.sidebar-row + row,
   stacksidebar > scrolledwindow > viewport > list > row:not(#_) + row {
     min-height: 36px;
@@ -2230,7 +2273,7 @@
   }
 
   header {
-    padding: 1px;
+    margin: 0px 4px;
     background-color: transparent;
     /* shadow-separator-mimic-bottom-horizontal-base01 */
     box-shadow:
@@ -2247,15 +2290,12 @@
       0px 1px 0px @base00-white-90-dark;
   }
   header > button {
-    margin: 6px 0px 5px 1px;
+    min-height: 24px;
+    margin: 4px 0px 3px 1px;
+    border: none;
   }
   header > button:hover:active {
-    margin: 5px 0px 5px 0px;
-    /*shadow-inset-base00*/
-    /* box-shadow: */
-    /*   1px 2px 2px @base00-black-80 inset, */
-    /*   2px 4px 4px @base00-black-80 inset, */
-    /*   -1px -1px 0px @base00-white-90-dark inset; */
+    margin: 3px 0px;
   }
 
   /*Inspector global settings dropdowns, which I think were directly pasted from gtk 4 css*/
