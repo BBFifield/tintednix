@@ -114,8 +114,8 @@
 
     background-color: @base01;
     box-shadow:
-      0px -2px 0px @base01-black-65 inset,
-      0px -1px 0px @base01-black-90 inset,
+      0px -2px 0px @base01-black-65-dark inset,
+      0px -1px 0px @base01-black-80-dark inset,
       0px 1px 0px @base01-white-90-dark;
   }
   dialog > headerbar {
@@ -130,7 +130,7 @@
       7px 18px 14px rgba(0, 0, 0, 0.21),
       10px 24px 18px rgba(0, 0, 0, 0.25),
       14px 30px 24px rgba(0, 0, 0, 0.3),
-      -1px -1px 0px @base01-white-90;
+      -1px -1px 0px @base01-white-90-dark;
   }
 
   dialog,
@@ -177,7 +177,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base02-white-90;
+      -1px -1px 0px @base02-white-90-dark;
     caret-color: @base0D;
   }
   entry:focus,
@@ -306,7 +306,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base02-white-90;
+      -1px -1px 0px @base02-white-90-dark;
   }
 
   scale {
@@ -336,7 +336,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
     animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   scale value {
@@ -389,7 +389,7 @@
     box-shadow:
       1px 2px 2px @base0B-black-60 inset,
       2px 4px 4px @base0B-black-60 inset,
-      -1px -1px 0px @base0B-white-55-dark inset;
+      -1px -1px 0px @base0B-white-65-dark inset;
     animation: slide-right 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   switch image {
@@ -431,7 +431,7 @@
     box-shadow:
       1px 1px 0.6px 0.1px @base0D-black-60 inset,
       2px 2px 1.1px 0.1px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
     animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   radio {
@@ -464,7 +464,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base02-white-90;
+      -1px -1px 0px @base02-white-90-dark;
   }
   spinbutton > entry {
     min-width: 30px;
@@ -493,7 +493,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
     animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   spinbutton button.up:active,
@@ -533,20 +533,20 @@
   button.default:not(#_),
   button.suggested-action:not(#_) {
     color: @base0B;
-    background-color: @base0B-black-50;
+    background-color: @base0B-black-60;
     /*shadow-thin-base0B-dull*/
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0B-black-65;
+      -1px -1px 0px @base0B-black-80;
   }
   button.destructive-action:not(#_) {
-    background-color: @base08-black-50;
+    background-color: @base08-black-60;
     /*shadow-thin-base08-dull*/
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base08-black-65;
+      -1px -1px 0px @base08-black-80;
   }
   button.destructive-action:not(#_),
   button.close {
@@ -596,7 +596,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
     animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   button:hover:checked {
@@ -606,7 +606,7 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
     animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   stack > button:not(.image-button),
@@ -618,7 +618,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base02-white-90;
+      -1px -1px 0px @base02-white-90-dark;
   }
   stack > button:not(.image-button):active,
   stack > button:not(.image-button):hover:active,
@@ -646,7 +646,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   button.text-button:hover:checked,
   button.font:hover:checked,
@@ -656,12 +656,9 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
     animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
-  /* button.destructive-action:not(#_):hover:checked { */
-  /*The class is unset when the button is checked*/
-  /* } */
   button.text-button.radio,
   button.text-button.toggle {
     min-width: 100px;
@@ -682,12 +679,12 @@
   frame button.destructive-action:not(#_):checked,
   frame button.destructive-action:not(#_):hover:active,
   frame button.destructive-action:not(#_):hover:active:checked {
-    background-color: @base08-black-50;
+    background-color: @base08-black-60;
     /*shadow-inset-base08-dull*/
     box-shadow:
       1px 2px 2px @base08-black-25 inset,
       2px 4px 4px @base08-black-25 inset,
-      -1px -1px 0px @base08-black-65 inset;
+      -1px -1px 0px @base08-black-80 inset;
   }
   button.default:not(#_):active,
   button.default:not(#_):checked:not(:hover),
@@ -707,12 +704,12 @@
   frame button.suggested-action:not(#_):checked,
   frame button.suggested-action:not(#_):hover:active,
   frame button.suggested-action:not(#_):hover:active:checked {
-    background-color: @base0B-black-50;
+    background-color: @base0B-black-60;
     /*shadow-inset-base0B-dull*/
     box-shadow:
       1px 2px 2px @base0B-black-25 inset,
       2px 4px 4px @base0B-black-25 inset,
-      -1px -1px 0px @base0B-black-65 inset;
+      -1px -1px 0px @base0B-black-80 inset;
   }
   button.destructive-action:not(#_):hover:active,
   button.close:hover:active {
@@ -724,7 +721,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base08-white-65;
+      -1px -1px 0px @base08-white-65-dark;
   }
   button.default:not(#_):hover:active,
   button.suggested-action:not(#_):hover:active {
@@ -736,7 +733,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0B-white-65;
+      -1px -1px 0px @base0B-white-65-dark;
   }
   /*Only declare color nested three nodes down the tree rather than just "button *". This should cover most cases while avoiding unintended colorations in popovers*/
   button > *,
@@ -807,15 +804,15 @@
   button:hover:checked separator {
     /*shadow-inset-extra-thin-base0D*/
     box-shadow:
-      0.5px 0.5px 1.1px 0.2px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      0.5px 0.5px 1.1px 0.2px @base0D-black-65-dark inset,
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   button separator,
   button:checked separator,
   button:hover:active separator {
     /*shadow-inset-extra-thin-base02*/
     box-shadow:
-      0.5px 0.5px 1.1px 0.2px @base02-black-65 inset,
+      0.5px 0.5px 1.1px 0.2px @base02-black-65-dark inset,
       -1px -1px 0px @base02-white-90-dark inset;
   }
 
@@ -828,7 +825,7 @@
   spinbutton button.image-button:hover:active:checked,
   button.image-button.radio:hover:active:checked {
     background-color: transparent;
-    /*shadow-inset-thin-base02*/
+    /*shadow-inset-base02*/
     box-shadow:
       1px 2px 2px @base02-black-80 inset,
       2px 4px 4px @base02-black-80 inset,
@@ -853,7 +850,7 @@
     background-color: transparent;
     /*shadow-inset-extra-thin-base01*/
     box-shadow:
-      0.5px 0.5px 1.1px 0.2px @base01-black-65 inset,
+      0.5px 0.5px 1.1px 0.2px @base01-black-50-dark inset,
       -1px -1px 0px 0px @base01-white-90-dark inset;
   }
   paned.horizontal > separator {
@@ -894,10 +891,13 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   menuitem:hover > * {
     color: @base01;
+  }
+  menuitem accelerator {
+    color: alpha(currentColor, 0.55);
   }
   menu > menuitem label:first-child {
     margin-left: -38px;
@@ -910,7 +910,7 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
 
   toolbar {
@@ -961,7 +961,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
     animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   tab:hover:not(:checked) > box > button.small-button:active {
@@ -969,24 +969,24 @@
     box-shadow:
       1px 1px 0.6px 0.1px @base0D-black-60 inset,
       2px 2px 1.1px 0.1px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   /*Create the illusion of inset separators*/
   tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover) {
     border-radius: 1px;
     /*shadow-separator-mimic-vertical-base01*/
     box-shadow:
-      -2px 0px 0px @base01-black-65,
-      -1px 0px 0px @base01-black-80,
-      1px 0px 0px @base01-white-90 inset;
+      -2px 0px 0px @base01-black-65-dark,
+      -1px 0px 0px @base01-black-80-dark,
+      1px 0px 0px @base01-white-90-dark inset;
   }
   header.right > tabs > tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover),
   header.left > tabs > tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover) {
     border-radius: 1px;
     /* shadow-separator-mimic-horizontal-base01 */
     box-shadow:
-      0px -2px 0px @base01-black-65,
-      0px -1px 0px @base01-black-90,
+      0px -2px 0px @base01-black-65-dark,
+      0px -1px 0px @base01-black-80-dark,
       0px 1px 0px @base01-white-90-dark inset;
   }
   tab + tab:not(:hover):not(:checked) {
@@ -1097,7 +1097,7 @@
   frame box.toolbar > separator {
     /*shadow-inset-extra-thin-base00*/
     box-shadow:
-      0.5px 0.5px 1.1px 0.2px @base00-black-65 inset,
+      0.5px 0.5px 1.1px 0.2px @base00-black-55-dark inset,
       -1px -1px 0px @base00-white-90-dark inset;
   }
   frame button.image-button:active,
@@ -1146,8 +1146,8 @@
   scrolledwindow.frame list > row:not(.sidebar-row) + row {
     /*shadow-separator-mimic-horizontal-base00*/
     box-shadow:
-      0px -2px 0px @base00-black-65,
-      0px -1px 0px @base00-black-90,
+      0px -2px 0px @base00-black-65-dark,
+      0px -1px 0px @base00-black-80-dark,
       0px 1px 0px @base00-white-90-dark inset;
   }
   scrolledwindow > iconview *:selected {
@@ -1180,9 +1180,9 @@
 
     background-color: transparent;
     box-shadow:
-      0px -2px 0px @base00-black-85 inset,
-      0px -1px 0px @base00-black-95 inset,
-      0px 1px 0px @base00-white-90;
+      0px -2px 0px @base00-black-85-dark inset,
+      0px -1px 0px @base00-black-95-dark inset,
+      0px 1px 0px @base00-white-95-dark;
   }
   treeview.view.separator {
     min-height: 5px;
@@ -1222,14 +1222,14 @@
     box-shadow:
       1px 1px 0.6px 0.1px @base0D-black-60 inset,
       2px 2px 1.1px 0.1px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   treeview.view:hover:selected:not(:focus) {
     /*shadow-inset-base0D*/
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   treeview.view:selected:focus,
   treeview.view:selected {
@@ -1342,7 +1342,7 @@
       7px 18px 14px rgba(0, 0, 0, 0.21),
       10px 24px 18px rgba(0, 0, 0, 0.25),
       14px 30px 24px rgba(0, 0, 0, 0.3),
-      -1px -1px 0px @base02-white-90;
+      -1px -1px 0px @base02-white-90-dark;
   }
   tooltip label {
     padding: 0px 6px 0px 6px;
@@ -1391,7 +1391,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base02-white-90;
+      -1px -1px 0px @base02-white-90-dark;
   }
   .linked > * + *,
   .linked > button + * {
@@ -1399,8 +1399,8 @@
     border-radius: 0px;
     /*shadow-separator-mimic-vertical-base02*/
     box-shadow:
-      -2px 0px 0px @base02-black-75,
-      -1px 0px 0px @base02-black-90,
+      -2px 0px 0px @base02-black-75-dark,
+      -1px 0px 0px @base02-black-90-dark,
       1px 0px 0px @base02-white-90-dark inset;
   }
   .linked > *:first-child {
@@ -1414,8 +1414,8 @@
     border-radius: 0px;
     /*shadow-separator-mimic-horizontal-base02*/
     box-shadow:
-      0px -2px 0px @base02-black-75,
-      0px -1px 0px @base02-black-90,
+      0px -2px 0px @base02-black-75-dark,
+      0px -1px 0px @base02-black-90-dark,
       0px 1px 0px @base02-white-90-dark inset;
   }
   .linked.vertical > *:first-child {
@@ -1474,7 +1474,7 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   .linked > * + button:not(:hover):not(:active):not(:checked),
   .linked > * + entry:not(:focus) {
@@ -1487,7 +1487,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   .linked > * + spinbutton,
   .linked > * + button:active,
@@ -1510,7 +1510,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   .linked.vertical > * + spinbutton,
   .linked.vertical > * + button:active,
@@ -1558,7 +1558,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0B-white-65;
+      -1px -1px 0px @base0B-white-65-dark;
   }
   .linked > button.text-button:nth-child(4n + 1),
   .linked > button.text-button:nth-child(4n + 1):not(:hover) *,
@@ -1572,7 +1572,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base08-white-65;
+      -1px -1px 0px @base08-white-65-dark;
   }
   .linked > button.text-button:nth-child(4n + 2),
   .linked > button.text-button:nth-child(4n + 2):not(:hover) *,
@@ -1586,7 +1586,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0A-white-65;
+      -1px -1px 0px @base0A-white-65-dark;
   }
   .linked > button.text-button:nth-child(4n + 3),
   .linked > button.text-button:nth-child(4n + 3):not(:hover) *,
@@ -1600,7 +1600,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base09-white-65;
+      -1px -1px 0px @base09-white-65-dark;
   }
   .linked > button.text-button:nth-child(4n + 4),
   .linked > button.text-button:nth-child(4n + 4):not(:hover) *,
@@ -1625,7 +1625,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base02-white-90;
+      -1px -1px 0px @base02-white-90-dark;
   }
   stack > button:active {
     background-color: @base02;
@@ -1649,13 +1649,25 @@
     background-color: transparent;
   }
 
+  /*Ex: File picker*/
+  .path-bar > * + *:not(:hover):not(:active):not(:checked),
+  .path-bar > button + *:not(:hover):not(:active):not(:checked) {
+    box-shadow: none;
+  }
   #pathbarbox {
     padding: 0px 0px 0px 0px;
     background-color: @base00;
   }
-  #pathbarbox button {
+  #pathbarbox button:not(#_) {
+    margin: 1px 1px 0px 2px;
+    padding: 1px 9px 2px 8px;
     border-radius: 50px;
     background-color: transparent;
+  }
+  #pathbarbox button:not(#_):active,
+  #pathbarbox button:not(#_):checked {
+    margin: 0px 1px 0px 1px;
+    padding: 2px 9px;
   }
   #pathbarbox button.text-button.radio,
   #pathbarbox button.text-button.toggle {
@@ -1667,7 +1679,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   #pathbarbox button:active,
   #pathbarbox button:checked,
@@ -1752,7 +1764,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   modelbutton:active,
   modelbutton:hover:active,
@@ -1772,7 +1784,7 @@
     box-shadow:
       1px 1px 0.6px 0.1px @base0D-black-60 inset,
       2px 2px 1.1px 0.1px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
 
   popover {
@@ -1789,7 +1801,7 @@
       7px 18px 14px rgba(0, 0, 0, 0.21),
       10px 24px 18px rgba(0, 0, 0, 0.25),
       14px 30px 24px rgba(0, 0, 0, 0.3),
-      -1px -1px 0px @base01-white-90;
+      -1px -1px 0px @base01-white-90-dark;
   }
   popover > stack {
     padding: 0px; /*Equivalent to the padding in gtk4 theme */
@@ -1895,7 +1907,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
 
   expander title > arrow {
@@ -1927,7 +1939,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   row.activatable:active {
     background-color: transparent;
@@ -1985,7 +1997,7 @@
     box-shadow:
       1px 1px 0.6px 0.1px @base0D-black-60 inset,
       2px 2px 1.1px 0.1px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   row.activatable:hover:not(:active):not(:selected) popover block.empty,
   row.activatable:hover:not(:active):not(:selected) popover progressbar trough,
@@ -2005,7 +2017,7 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   row.activatable:hover:not(:selected):not(:active) {
     color: @base01;
@@ -2014,7 +2026,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   row > revealer {
     padding: 0px 14px 0px 14px;
@@ -2036,7 +2048,7 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   row.activatable:hover selection:focus {
     background-color: @base02;
@@ -2068,7 +2080,7 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   /*mimic inset separators*/
   list > row + row {
@@ -2077,8 +2089,8 @@
     border-radius: 1px;
     /*shadow-separator-mimic-horizontal-base01*/
     box-shadow:
-      0px -2px 0px @base01-black-65,
-      0px -1px 0px @base01-black-90,
+      0px -2px 0px @base01-black-65-dark,
+      0px -1px 0px @base01-black-80-dark,
       0px 1px 0px @base01-white-90-dark inset;
   }
   list > row.activatable:hover + row:not(:selected),
@@ -2169,7 +2181,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   row.sidebar-row > *:first-child,
   stacksidebar > scrolledwindow > viewport > list > row:not(#_) > *:first-child {
@@ -2189,13 +2201,13 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base02-white-90;
+      -1px -1px 0px @base02-white-90-dark;
   }
   list.boxed-list > row + row {
     /*shadow-separator-mimic-horizontal-base02*/
     box-shadow:
-      0px -2px 0px @base02-black-75,
-      0px -1px 0px @base02-black-90,
+      0px -2px 0px @base02-black-75-dark,
+      0px -1px 0px @base02-black-90-dark,
       0px 1px 0px @base02-white-90-dark inset;
   }
   list.boxed-list > row.activatable:active {
@@ -2244,7 +2256,7 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   list.boxed-list > row.activatable:hover:not(:active) dropdown > button {
     background-color: transparent;
@@ -2252,7 +2264,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   list.boxed-list > row.activatable:hover:not(:active) button * {
     color: @base01;
@@ -2277,16 +2289,16 @@
     background-color: transparent;
     /* shadow-separator-mimic-bottom-horizontal-base01 */
     box-shadow:
-      0px -2px 0px @base01-black-65 inset,
-      0px -1px 0px @base01-black-90 inset,
+      0px -2px 0px @base01-black-65-dark inset,
+      0px -1px 0px @base01-black-80-dark inset,
       0px 1px 0px @base01-white-90-dark;
   }
   frame header,
   scrolledwindow header {
     /* shadow-separator-mimic-bottom-horizontal-base00 */
     box-shadow:
-      0px -2px 0px @base00-black-65 inset,
-      0px -1px 0px @base00-black-90 inset,
+      0px -2px 0px @base00-black-65-dark inset,
+      0px -1px 0px @base00-black-80-dark inset,
       0px 1px 0px @base00-white-90-dark;
   }
   header > button {
@@ -2310,7 +2322,7 @@
     box-shadow:
       1px 2px 2px @base0D-black-60 inset,
       2px 4px 4px @base0D-black-60 inset,
-      -1px -1px 0px @base0D-white-55-dark inset;
+      -1px -1px 0px @base0D-white-65-dark inset;
   }
   row:hover button.text-button:checked *,
   row:hover dropdown > button.toggle:checked * {
@@ -2336,7 +2348,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base01-white-90;
+      -1px -1px 0px @base01-white-90-dark;
   }
   placessidebar + separator {
     all: unset;
@@ -2352,7 +2364,7 @@
     box-shadow:
       1px 2px 2px rgba(0, 0, 0, 0.17),
       2px 4px 4px rgba(0, 0, 0, 0.2),
-      -1px -1px 0px @base0D-white-65;
+      -1px -1px 0px @base0D-white-65-dark;
   }
   popover list.view > row.activatable:focus,
   popover list.view > row.activatable:focus:selected {

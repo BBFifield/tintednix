@@ -1,0 +1,147 @@
+/* Global color definitions */
+
+/* {{{scheme-name}}} by {{{scheme-author}}} */
+
+@use "sass:color";
+
+$variant: {{scheme-variant}}; // “dark” or “light”
+
+/// Returns rgb(r, g, b) where r/g/b are integers. We do lose precision, but the difference is negligible
+@function to-rgb($c1, $c2, $weight) {
+  $mixed: color.mix($c1, $c2, $weight: $weight, $method: oklab);
+
+  $r: red($mixed);
+  $g: green($mixed);
+  $b: blue($mixed);
+
+  @return rgb($r, $g, $b);
+}
+
+$base00: #{{base00-hex}};
+$base01: #{{base01-hex}};
+$base02: #{{base02-hex}};
+$base03: #{{base03-hex}};
+$base04: #{{base04-hex}};
+$base05: #{{base05-hex}};
+$base06: #{{base06-hex}};
+$base07: #{{base07-hex}};
+$base08: #{{base08-hex}};
+$base09: #{{base09-hex}};
+$base0A: #{{base0A-hex}};
+$base0B: #{{base0B-hex}};
+$base0C: #{{base0C-hex}};
+$base0D: #{{base0D-hex}};
+$base0E: #{{base0E-hex}};
+$base0F: #{{base0F-hex}};
+
+@define-color base00 #{$base00};
+@define-color base01 #{$base01};
+@define-color base02 #{$base02};
+@define-color base03 #{$base03};
+@define-color base04 #{$base04};
+@define-color base05 #{$base05};
+@define-color base06 #{$base06};
+@define-color base07 #{$base07};
+@define-color base08 #{$base08};
+@define-color base09 #{$base09};
+@define-color base0A #{$base0A};
+@define-color base0B #{$base0B};
+@define-color base0C #{$base0C};
+@define-color base0D #{$base0D};
+@define-color base0E #{$base0E};
+@define-color base0F #{$base0F};
+
+@define-color window_bg_color #{$base01};
+@define-color window_fg_color #{$base0D};
+@define-color view_bg_color   #{$base00};
+@define-color view_fg_color   @window_fg_color;
+@define-color accent_bg_color #{$base0D};
+@define-color accent_color    @accent_bg_color;
+@define-color headerbar_bg_color    @window_bg_color;
+@define-color headerbar_fg_color    @window_fg_color;
+@define-color headerbar_border_color #{$base02};
+@define-color popover_bg_color #{$base01};
+@define-color popover_fg_color @view_fg_color;
+@define-color dialog_bg_color  @popover_bg_color;
+@define-color dialog_fg_color  @popover_fg_color;
+@define-color card_bg_color    rgba(255,255,255,0.08);
+@define-color card_fg_color    @window_fg_color;
+@define-color sidebar_bg_color @headerbar_bg_color;
+@define-color sidebar_fg_color @window_fg_color;
+@define-color sidebar_backdrop_color @window_bg_color;
+@define-color sidebar_border_color   #{$base02};
+@define-color sidebar_shade_color    rgba(0,0,0,0.25);
+@define-color success_bg_color #{$base0B};
+@define-color success_fg_color #{$base0B};
+@define-color warning_bg_color #{$base0A};
+@define-color warning_fg_color #{$base0A};
+@define-color error_bg_color   #{$base08};
+@define-color error_fg_color   #{$base08};
+@define-color orange           #{$base09};
+@define-color light_blue       #{$base0C};
+@define-color purple           #{$base0E};
+
+// base00
+@define-color base00-black-80      #{to-rgb($base00, black, 80%)};
+@define-color base00-black-95-dark #{to-rgb($base00, black, if($variant == dark, 95%, 100%))};
+@define-color base00-black-85-dark #{to-rgb($base00, black, if($variant == dark, 85%, 95%))};
+@define-color base00-black-80-dark #{to-rgb($base00, black, if($variant == dark, 80%, 95%))};
+@define-color base00-black-65-dark #{to-rgb($base00, black, if($variant == dark, 65%, 80%))};
+@define-color base00-black-55-dark #{to-rgb($base00, black, if($variant == dark, 55%, 80%))};
+@define-color base00-white-95-dark #{to-rgb($base00, white, if($variant == dark, 95%, 20%))};
+@define-color base00-white-90-dark #{to-rgb($base00, white, if($variant == dark, 90%, 20%))};
+
+// base01
+@define-color base01-black-80      #{to-rgb($base01, black, 80%)};
+@define-color base01-black-80-dark #{to-rgb($base01, black, if($variant == dark, 80%, 95%))};
+@define-color base01-black-65-dark #{to-rgb($base01, black, if($variant == dark, 65%, 80%))};
+@define-color base01-black-50-dark #{to-rgb($base01, black, if($variant == dark, 50%, 80%))};
+@define-color base01-white-90-dark #{to-rgb($base01, white, if($variant == dark, 90%, 20%))};
+
+// base02
+@define-color base02-black-80      #{to-rgb($base02, black, 80%)};
+@define-color base02-black-90-dark #{to-rgb($base02, black, if($variant == dark, 90%, 95%))};
+@define-color base02-black-75-dark #{to-rgb($base02, black, if($variant == dark, 75%, 80%))};
+@define-color base02-black-65-dark #{to-rgb($base02, black, if($variant == dark, 65%, 80%))};
+@define-color base02-white-90-dark #{to-rgb($base02, white, if($variant == dark, 90%, 40%))};
+
+// base06
+@define-color base06-black-60      #{to-rgb($base06, black, 60%)};
+@define-color base06-black-65-dark #{to-rgb($base06, black, if($variant == dark, 65%, 80%))};
+@define-color base06-white-65-dark #{to-rgb($base06, white, if($variant == dark, 65%, 45%))};
+
+// base08
+@define-color base08-black-80      #{to-rgb($base08, black, 80%)};
+@define-color base08-black-60      #{to-rgb($base08, black, 60%)};
+@define-color base08-black-25      #{to-rgb($base08, black, 25%)};
+@define-color base08-white-65-dark #{to-rgb($base08, white, if($variant == dark, 65%, 45%))};
+
+// base09 & base0A
+@define-color base09-white-65-dark #{to-rgb($base09, black, if($variant == dark, 65%, 45%))};
+@define-color base0A-white-65-dark #{to-rgb($base0A, black, if($variant == dark, 65%, 45%))};
+
+// base0B
+@define-color base0B-black-80      #{to-rgb($base0B, black, 80%)};
+@define-color base0B-black-60      #{to-rgb($base0B, black, 60%)};
+@define-color base0B-black-25      #{to-rgb($base0B, black, 25%)};
+@define-color base0B-white-65-dark #{to-rgb($base0B, white, if($variant == dark, 65%, 45%))};
+
+// base0C
+@define-color base0C-black-60      #{to-rgb($base0C, black, 60%)};
+@define-color base0C-black-65-dark #{to-rgb($base0C, black, if($variant == dark, 65%, 80%))};
+@define-color base0C-white-65-dark #{to-rgb($base0C, white, if($variant == dark, 65%, 45%))};
+
+// base0D
+@define-color base0D-black-60      #{to-rgb($base0D, black, 60%)};
+@define-color base0D-black-65-dark #{to-rgb($base0D, black, if($variant == dark, 65%, 80%))};
+@define-color base0D-white-65-dark #{to-rgb($base0D, white, if($variant == dark, 65%, 45%))};
+
+// base0E
+@define-color base0E-black-60      #{to-rgb($base0E, black, 60%)};
+@define-color base0E-black-65-dark #{to-rgb($base0E, black, if($variant == dark, 65%, 80%))};
+@define-color base0E-white-65-dark #{to-rgb($base0E, white, if($variant == dark, 65%, 45%))};
+
+// base0F
+@define-color base0F-black-60      #{to-rgb($base0F, black, 60%)};
+@define-color base0F-black-65-dark #{to-rgb($base0F, black, if($variant == dark, 65%, 80%))};
+@define-color base0F-white-65-dark #{to-rgb($base0F, white, if($variant == dark, 65%, 45%))};

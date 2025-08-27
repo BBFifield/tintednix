@@ -1,0 +1,329 @@
+/* Global color definitions */
+
+/* {{{scheme-name}}} by {{{scheme-author}}} */
+
+@use "sass:color";
+
+$variant: {{scheme-variant}}; // “dark” or “light”
+
+/// Returns rgb(r, g, b) where r/g/b are integers. We do lose precision, but the difference is negligible
+@function to-rgb($c1, $c2, $weight) {
+  $mixed: color.mix($c1, $c2, $weight: $weight, $method: oklab);
+
+  $r: red($mixed);
+  $g: green($mixed);
+  $b: blue($mixed);
+
+  @return rgb($r, $g, $b);
+}
+
+
+/// Mixin: ripple-out-keyframes
+/// @param $color-var  CSS custom‐property name (e.g. --ripple-color)
+/// @param $name       Animation name (defaults to ripple-out)
+@mixin ripple-out-keyframes($color-var, $name: ripple-out) {
+  @at-root {
+    @keyframes #{$name} {
+      from {
+        background-image: #{unquote(
+          "radial-gradient(circle farthest-corner at center, \
+           alpha(var(#{$color-var}), 1) 0%, transparent 0%)"
+        )};
+      }
+      to {
+        background-image: #{unquote(
+          "radial-gradient(circle farthest-corner at center, \
+           alpha(var(#{$color-var}), 1) 100%, transparent 0%)"
+        )};
+      }
+    }
+  }
+}
+
+
+/// Mixin: ripple-in-keyframes
+/// @param $color-var  CSS custom‐property name (e.g. --ripple-color)
+/// @param $name       Animation name (defaults to ripple-in)
+@mixin ripple-in-keyframes($color-var, $name: ripple-in) {
+  @at-root {
+    @keyframes #{$name} {
+      from {
+        background-image: #{unquote(
+          "radial-gradient(circle farthest-corner at center, \
+           alpha(var(#{$color-var}), 1) 100%, transparent 0%)"
+        )};
+      }
+      to {
+        background-image: #{unquote(
+          "radial-gradient(circle farthest-corner at center, \
+           alpha(var(#{$color-var}), 1) 0%, transparent 0%)"
+        )};
+      }
+    }
+  }
+}
+
+@function top-extra-thin-inset-shadow($color) {
+  @return "1px 1px 1px #{$color} inset";
+}
+
+@function top-thin-inset-shadow($color) {
+  @return "1px 1px 1px #{$color} inset, 2px 2px 2px #{$color} inset";
+}
+
+@function top-deep-inset-shadow($color) {
+  @return "1px 2px 2px #{$color} inset, 2px 4px 4px #{$color} inset";
+}
+
+@function bottom-inset-shadow($color) {
+  @return "-1px -1px 0px #{$color} inset";
+}
+
+@function thin-shadow($color) {
+  @return "1px 2px 2px rgba(0, 0, 0, 0.17), 2px 4px 4px rgba(0, 0, 0, 0.2), -1px -1px 0px #{$color}";
+}
+
+@function wide-shadow($color) {
+  @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px #{$color}";
+}
+
+@function horizontal-separator-mimic-shadow($c1, $c2, $c3) {
+  @return "0px -2px 0px #{$c1}, 0px -1px 0px #{$c2}, 0px 1px 0px #{$c3} inset";
+}
+
+@function vertical-separator-mimic-shadow($c1, $c2, $c3) {
+  @return "-2px 0px 0px #{$c1}, -1px 0px 0px #{$c2}, 1px 0px 0px #{$c3} inset";
+}
+
+@function bottom-horizontal-separator-mimic-shadow($c1, $c2, $c3) {
+  @return "0px -2px 0px #{$c1} inset, 0px -1px 0px #{$c2} inset, 0px 1px 0px #{$c3}";
+}
+
+
+$base00: #{{base00-hex}};
+$base01: #{{base01-hex}};
+$base02: #{{base02-hex}};
+$base03: #{{base03-hex}};
+$base04: #{{base04-hex}};
+$base05: #{{base05-hex}};
+$base06: #{{base06-hex}};
+$base07: #{{base07-hex}};
+$base08: #{{base08-hex}};
+$base09: #{{base09-hex}};
+$base0A: #{{base0A-hex}};
+$base0B: #{{base0B-hex}};
+$base0C: #{{base0C-hex}};
+$base0D: #{{base0D-hex}};
+$base0E: #{{base0E-hex}};
+$base0F: #{{base0F-hex}};
+
+
+@define-color window_bg_color #{$base01};
+@define-color window_fg_color #{$base0D};
+@define-color view_bg_color   #{$base00};
+@define-color view_fg_color   @window_fg_color;
+@define-color accent_bg_color #{$base0D};
+@define-color accent_color    @accent_bg_color;
+@define-color headerbar_bg_color    @window_bg_color;
+@define-color headerbar_fg_color    @window_fg_color;
+@define-color headerbar_border_color #{$base02};
+@define-color popover_bg_color #{$base01};
+@define-color popover_fg_color @view_fg_color;
+@define-color dialog_bg_color  @popover_bg_color;
+@define-color dialog_fg_color  @popover_fg_color;
+@define-color card_bg_color    rgba(255,255,255,0.08);
+@define-color card_fg_color    @window_fg_color;
+@define-color sidebar_bg_color @headerbar_bg_color;
+@define-color sidebar_fg_color @window_fg_color;
+@define-color sidebar_backdrop_color @window_bg_color;
+@define-color sidebar_border_color   #{$base02};
+@define-color sidebar_shade_color    rgba(0,0,0,0.25);
+@define-color success_bg_color #{$base0B};
+@define-color success_fg_color #{$base0B};
+@define-color warning_bg_color #{$base0A};
+@define-color warning_fg_color #{$base0A};
+@define-color error_bg_color   #{$base08};
+@define-color error_fg_color   #{$base08};
+@define-color orange           #{$base09};
+@define-color light_blue       #{$base0C};
+@define-color purple           #{$base0E};
+
+
+:root {
+  /* Base16 tokens */
+  --base00: #{$base00};  --base01: #{$base01};  --base02: #{$base02};
+  --base03: #{$base03};  --base04: #{$base04};  --base05: #{$base05};
+  --base06: #{$base06};  --base07: #{$base07};  --base08: #{$base08};
+  --base09: #{$base09};  --base0A: #{$base0A};  --base0B: #{$base0B};
+  --base0C: #{$base0C};  --base0D: #{$base0D};  --base0E: #{$base0E};
+  --base0F: #{$base0F};
+
+  /* Semantic colors */
+  --window-bg-color:    @window_bg_color;
+  --window-fg-color:    @window_fg_color;
+  --view-bg-color:      @view_bg_color;
+  --view-fg-color:      @view_fg_color;
+  --accent-bg-color:    @accent_bg_color;
+  --accent-fg-color:    @accent_color;
+  --headerbar-bg-color: @headerbar_bg_color;
+  --headerbar-fg-color: @headerbar_fg_color;
+  --headerbar-border-color: @headerbar_border_color;
+  --popover-bg-color:   @popover_bg_color;
+  --popover-fg-color:   @popover_fg_color;
+  --dialog-bg-color:    @dialog_bg_color;
+  --dialog-fg-color:    @dialog_fg_color;
+  --card-bg-color:      @card_bg_color;
+  --card-fg-color:      @card_fg_color;
+  --sidebar-bg-color:   @sidebar_bg_color;
+  --sidebar-fg-color:   @sidebar_fg_color;
+  --sidebar-backdrop-color: @sidebar_backdrop_color;
+  --sidebar-border-color:   @sidebar_border_color;
+  --sidebar-shade-color:    @sidebar_shade_color;
+  --success-bg-color:  @success_bg_color;
+  --success-fg-color:  @success_fg_color;
+  --warning-bg-color:  @warning_bg_color;
+  --warning-fg-color:  @warning_fg_color;
+  --error-bg-color:    @error_bg_color;
+  --error-fg-color:    @error_fg_color;
+  --orange:            @orange;
+  --light-blue:        @light_blue;
+  --purple:            @purple;
+
+  // base00
+  --base00-black-80:      color-mix(in oklab, #{$base00} 80%, black);
+  --base00-black-95-dark: color-mix(in oklab, #{$base00} #{if($variant == dark, 95%, 100%)}, black);
+  --base00-black-85-dark: color-mix(in oklab, #{$base00} #{if($variant == dark, 85%, 95%)}, black);
+  --base00-black-80-dark: color-mix(in oklab, #{$base00} #{if($variant == dark, 80%, 95%)}, black);
+  --base00-black-65-dark: color-mix(in oklab, #{$base00} #{if($variant == dark, 65%, 80%)}, black);
+  --base00-black-55-dark: color-mix(in oklab, #{$base00} #{if($variant == dark, 55%, 80%)}, black);
+  --base00-white-95-dark: color-mix(in oklab, #{$base00} #{if($variant == dark, 95%, 20%)}, white);
+  --base00-white-90-dark: color-mix(in oklab, #{$base00} #{if($variant == dark, 90%, 20%)}, white);
+
+  // base01
+  --base01-black-80:      color-mix(in oklab, #{$base01} 80%, black);
+  --base01-black-80-dark: color-mix(in oklab, #{$base01} #{if($variant == dark, 80%, 95%)}, black);
+  --base01-black-65-dark: color-mix(in oklab, #{$base01} #{if($variant == dark, 65%, 80%)}, black);
+  --base01-black-50-dark: color-mix(in oklab, #{$base01} #{if($variant == dark, 50%, 80%)}, black);
+  --base01-white-90-dark: color-mix(in oklab, #{$base01} #{if($variant == dark, 90%, 20%)}, white);
+
+  // base02
+  --base02-black-80:      color-mix(in oklab, #{$base02} 80%, black);
+  --base02-black-90-dark: color-mix(in oklab, #{$base02} #{if($variant == dark, 90%, 95%)}, black);
+  --base02-black-75-dark: color-mix(in oklab, #{$base02} #{if($variant == dark, 75%, 80%)}, black);
+  --base02-black-65-dark: color-mix(in oklab, #{$base02} #{if($variant == dark, 65%, 80%)}, black);
+  --base02-white-90-dark: color-mix(in oklab, #{$base02} #{if($variant == dark, 90%, 30%)}, white);
+
+  // base03
+  --base03-black-80:      color-mix(in oklab, #{$base03} 80%, black);
+  --base03-black-90-dark: color-mix(in oklab, #{$base03} #{if($variant == dark, 90%, 95%)}, black);
+  --base03-black-75-dark: color-mix(in oklab, #{$base03} #{if($variant == dark, 75%, 80%)}, black);
+  --base03-black-65-dark: color-mix(in oklab, #{$base03} #{if($variant == dark, 65%, 80%)}, black);
+  --base03-white-90-dark: color-mix(in oklab, #{$base03} #{if($variant == dark, 90%, 30%)}, white);
+
+  // base06
+  --base06-black-60:      color-mix(in oklab, #{$base06} 60%, black);
+  --base06-black-65-dark: color-mix(in oklab, #{$base06} #{if($variant == dark, 65%, 80%)}, black);
+  --base06-white-65-dark: color-mix(in oklab, #{$base06} #{if($variant == dark, 65%, 45%)}, white);
+
+  // base08
+  --base08-black-80:      color-mix(in oklab, #{$base08} 80%, black);
+  --base08-black-60:      color-mix(in oklab, #{$base08} 60%, black);
+  --base08-black-25:      color-mix(in oklab, #{$base08} 25%, black);
+  --base08-white-65-dark: color-mix(in oklab, #{$base08} #{if($variant == dark, 65%, 45%)}, white);
+
+  // base09 & base0A
+  --base09-white-65-dark: color-mix(in oklab, #{$base09} #{if($variant == dark, 65%, 45%)}, white);
+  --base0A-white-65-dark: color-mix(in oklab, #{$base0A} #{if($variant == dark, 65%, 45%)}, white);
+
+  // base0B
+  --base0B-black-80:      color-mix(in oklab, #{$base0B} 80%, black);
+  --base0B-black-60:      color-mix(in oklab, #{$base0B} 60%, black);
+  --base0B-black-25:      color-mix(in oklab, #{$base0B} 25%, black);
+  --base0B-white-65-dark: color-mix(in oklab, #{$base0B} #{if($variant == dark, 65%, 45%)}, white);
+
+  // base0C
+  --base0C-black-60:      color-mix(in oklab, #{$base0C} 60%, black);
+  --base0C-black-65-dark: color-mix(in oklab, #{$base0C} #{if($variant == dark, 65%, 80%)}, black);
+  --base0C-white-65-dark: color-mix(in oklab, #{$base0C} #{if($variant == dark, 65%, 45%)}, white);
+
+  // base0D
+  --base0D-black-60:      color-mix(in oklab, #{$base0D} 60%, black);
+  --base0D-black-65-dark: color-mix(in oklab, #{$base0D} #{if($variant == dark, 65%, 80%)}, black);
+  --base0D-white-65-dark: color-mix(in oklab, #{$base0D} #{if($variant == dark, 65%, 45%)}, white);
+
+  // base0E
+  --base0E-black-60:      color-mix(in oklab, #{$base0E} 60%, black);
+  --base0E-black-65-dark: color-mix(in oklab, #{$base0E} #{if($variant == dark, 65%, 80%)}, black);
+  --base0E-white-65-dark: color-mix(in oklab, #{$base0E} #{if($variant == dark, 65%, 45%)}, white);
+
+  // base0F
+  --base0F-black-60:      color-mix(in oklab, #{$base0F} 60%, black);
+  --base0F-black-65-dark: color-mix(in oklab, #{$base0F} #{if($variant == dark, 65%, 80%)}, black);
+  --base0F-white-65-dark: color-mix(in oklab, #{$base0F} #{if($variant == dark, 65%, 45%)}, white);
+
+  --shadow-inset-extra-thin-base00: #{top-extra-thin-inset-shadow(var(--base00-black-55-dark))}, #{bottom-inset-shadow(var(--base00-white-90-dark))};
+  --shadow-inset-extra-thin-base01: #{top-extra-thin-inset-shadow(var(--base01-black-50-dark))}, #{bottom-inset-shadow(var(--base01-white-90-dark))};
+  --shadow-inset-extra-thin-base02: #{top-extra-thin-inset-shadow(var(--base02-black-65-dark))}, #{bottom-inset-shadow(var(--base02-white-90-dark))};
+  --shadow-inset-extra-thin-base03: #{top-extra-thin-inset-shadow(var(--base03-black-65-dark))}, #{bottom-inset-shadow(var(--base03-white-90-dark))};
+  --shadow-inset-extra-thin-base0D: #{top-extra-thin-inset-shadow(var(--base0D-black-65-dark))}, #{bottom-inset-shadow(var(--base0D-white-65-dark))};
+
+  --shadow-inset-thin-base00: #{top-thin-inset-shadow(var(--base00-black-80))}, #{bottom-inset-shadow(var(--base00-white-90-dark))};
+  --shadow-inset-thin-base01: #{top-thin-inset-shadow(var(--base01-black-80))}, #{bottom-inset-shadow(var(--base01-white-90-dark))};
+  --shadow-inset-thin-base02: #{top-thin-inset-shadow(var(--base02-black-80))}, #{bottom-inset-shadow(var(--base02-white-90-dark))};
+  --shadow-inset-thin-base03: #{top-thin-inset-shadow(var(--base03-black-80))}, #{bottom-inset-shadow(var(--base03-white-90-dark))};
+  --shadow-inset-thin-base0B: #{top-thin-inset-shadow(var(--base0B-black-60))}, #{bottom-inset-shadow(var(--base0B-white-65-dark))};
+  --shadow-inset-thin-base0D: #{top-thin-inset-shadow(var(--base0D-black-60))}, #{bottom-inset-shadow(var(--base0D-white-65-dark))};
+
+  --shadow-inset-base00: #{top-deep-inset-shadow(var(--base00-black-80))}, #{bottom-inset-shadow(var(--base00-white-90-dark))};
+  --shadow-inset-base01: #{top-deep-inset-shadow(var(--base01-black-80))}, #{bottom-inset-shadow(var(--base01-white-90-dark))};
+  --shadow-inset-base02: #{top-deep-inset-shadow(var(--base02-black-80))}, #{bottom-inset-shadow(var(--base02-white-90-dark))};
+  --shadow-inset-base03: #{top-deep-inset-shadow(var(--base03-black-80))}, #{bottom-inset-shadow(var(--base03-white-90-dark))};
+  --shadow-inset-base08: #{top-deep-inset-shadow(var(--base08-black-60))}, #{bottom-inset-shadow(var(--base08-white-65-dark))};
+  --shadow-inset-base0B: #{top-deep-inset-shadow(var(--base0B-black-60))}, #{bottom-inset-shadow(var(--base0B-white-65-dark))};
+  --shadow-inset-base0D: #{top-deep-inset-shadow(var(--base0D-black-60))}, #{bottom-inset-shadow(var(--base0D-white-65-dark))};
+
+  --shadow-inset-base08-dull: #{top-deep-inset-shadow(var(--base08-black-25))}, #{bottom-inset-shadow(var(--base08-black-80))};
+  --shadow-inset-base0B-dull: #{top-deep-inset-shadow(var(--base0B-black-25))}, #{bottom-inset-shadow(var(--base0B-black-80))};
+
+  --shadow-thin-base00: #{thin-shadow(var(--base00-white-90-dark))};
+  --shadow-thin-base01: #{thin-shadow(var(--base01-white-90-dark))};
+  --shadow-thin-base02: #{thin-shadow(var(--base02-white-90-dark))};
+  --shadow-thin-base03: #{thin-shadow(var(--base03-white-90-dark))};
+  --shadow-thin-base08: #{thin-shadow(var(--base08-white-65-dark))};
+  --shadow-thin-base09: #{thin-shadow(var(--base09-white-65-dark))};
+  --shadow-thin-base0A: #{thin-shadow(var(--base0A-white-65-dark))};
+  --shadow-thin-base0B: #{thin-shadow(var(--base0B-white-65-dark))};
+  --shadow-thin-base0D: #{thin-shadow(var(--base0D-white-65-dark))};
+
+  --shadow-thin-base08-dull: #{thin-shadow(var(--base08-black-80))};
+  --shadow-thin-base0B-dull: #{thin-shadow(var(--base0B-black-80))};
+
+  --shadow-wide-base01: #{wide-shadow(var(--base01-white-90-dark))};
+  --shadow-wide-base02: #{wide-shadow(var(--base02-white-90-dark))};
+  --shadow-wide-base08: #{wide-shadow(var(--base08-white-65-dark))};
+
+  --shadow-light-separator-mimic-horizontal-base00: #{horizontal-separator-mimic-shadow(var(--base00-black-85-dark), var(--base00-black-95-dark), var(--base00-white-95-dark))};
+
+  --shadow-separator-mimic-horizontal-base00: #{horizontal-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-black-80-dark), var(--base00-white-90-dark))};
+  --shadow-separator-mimic-horizontal-base01: #{horizontal-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-black-80-dark), var(--base01-white-90-dark))};
+  --shadow-separator-mimic-horizontal-base02: #{horizontal-separator-mimic-shadow(var(--base02-black-75-dark), var(--base02-black-90-dark), var(--base02-white-90-dark))};
+  --shadow-separator-mimic-horizontal-base03: #{horizontal-separator-mimic-shadow(var(--base03-black-75-dark), var(--base03-black-90-dark), var(--base03-white-90-dark))};
+  --shadow-separator-mimic-vertical-base00: #{vertical-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-black-80-dark), var(--base00-white-90-dark))};
+  --shadow-separator-mimic-vertical-base01: #{vertical-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-black-80-dark), var(--base01-white-90-dark))};
+  --shadow-separator-mimic-vertical-base02: #{vertical-separator-mimic-shadow(var(--base02-black-75-dark), var(--base02-black-90-dark), var(--base02-white-90-dark))};
+  --shadow-separator-mimic-vertical-base03: #{vertical-separator-mimic-shadow(var(--base03-black-75-dark), var(--base03-black-90-dark), var(--base03-white-90-dark))};
+
+  --shadow-separator-mimic-bottom-horizontal-base00: #{bottom-horizontal-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-black-80-dark), var(--base00-white-90-dark))};
+  --shadow-separator-mimic-bottom-horizontal-base01: #{bottom-horizontal-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-black-80-dark), var(--base01-white-90-dark))};
+
+  @include ripple-out-keyframes(--base0D, ripple-out-base0D);
+  @include ripple-out-keyframes(--base08, ripple-out-base08);
+  @include ripple-out-keyframes(--base09, ripple-out-base09);
+  @include ripple-out-keyframes(--base0A, ripple-out-base0A);
+  @include ripple-out-keyframes(--base0B, ripple-out-base0B);
+  @include ripple-in-keyframes(--base0D, ripple-in-base0D);
+  @include ripple-in-keyframes(--base08, ripple-in-base08);
+  @include ripple-in-keyframes(--base09, ripple-in-base09);
+  @include ripple-in-keyframes(--base0A, ripple-in-base0A);
+  @include ripple-in-keyframes(--base0B, ripple-in-base0B);
+}

@@ -1,3 +1,6 @@
-gtk:
-    extension: .css
+gtk3:
+    extension: .scss
+    output: colors
+gtk4:
+    extension: .scss
     output: colors

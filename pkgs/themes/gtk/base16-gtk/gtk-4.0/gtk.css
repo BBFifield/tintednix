@@ -554,11 +554,11 @@ button {
 button.default.text-button,
 button.suggested-action.text-button {
   color: var(--base0B);
-  background-color: color-mix(in oklab, var(--base0B) 50%, black 50%);
+  background-color: color-mix(in oklab, var(--base0B) 60%, black);
   box-shadow: var(--shadow-thin-base0B-dull);
 }
 button.destructive-action.text-button {
-  background-color: color-mix(in oklab, var(--base08) 50%, black 50%);
+  background-color: color-mix(in oklab, var(--base08) 60%, black);
   box-shadow: var(--shadow-thin-base08-dull);
 }
 button.destructive-action,
@@ -633,6 +633,9 @@ button.font:hover:active:checked,
 button.osd:active {
   box-shadow: var(--shadow-inset-base02);
 }
+button.osd:active {
+  background-color: var(--base02);
+}
 stack > button:hover,
 dropdown > button.toggle:hover:not(:active):not(:checked),
 button.text-button:hover:not(:active):not(:checked),
@@ -649,7 +652,7 @@ frame button.destructive-action:active,
 frame button.destructive-action:checked,
 frame button.destructive-action:hover:active,
 frame button.destructive-action:hover:active:checked {
-  background-color: color-mix(in oklab, var(--base08) 50%, black 50%);
+  background-color: color-mix(in oklab, var(--base08) 60%, black);
   box-shadow: var(--shadow-inset-base08-dull);
 }
 button.default:active,
@@ -670,7 +673,7 @@ frame button.suggested-action:active,
 frame button.suggested-action:checked,
 frame button.suggested-action:hover:active,
 frame button.suggested-action:hover:active:checked {
-  background-color: color-mix(in oklab, var(--base0B) 50%, black 50%);
+  background-color: color-mix(in oklab, var(--base0B) 60%, black);
   box-shadow: var(--shadow-inset-base0B-dull);
 }
 button.destructive-action:hover:active,
@@ -935,10 +938,7 @@ treeview.view {
   border-top: 0px solid transparent;
 
   background-color: transparent;
-  box-shadow:
-    0px -2px 0px @base00-black-85 inset,
-    0px -1px 0px @base00-black-95 inset,
-    0px 1px 0px @base00-white-90;
+  box-shadow: var(--shadow-light-separator-mimic-horizontal-base00);
 }
 treeview.view.separator {
   min-height: 5px;
@@ -1457,6 +1457,9 @@ popover:focus-within > contents {
   transform: translateY(0px);
   transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
 }
+popover.menu accelerator {
+  color: color-mix(in srgb, currentColor var(--dim-opacity), transparent);
+}
 popover > arrow {
   min-width: 16px;
   min-height: 16px;
@@ -1519,6 +1522,9 @@ child.activatable:hover label,
 child.activatable:hover image,
 header.activatable > button:active label {
   color: var(--base01);
+}
+row.activatable:hover:not(:active):not(:checked) box > widget > scale > marks indicator {
+  background-color: var(--base01);
 }
 row.activatable:hover slider,
 row.activatable:hover button,
@@ -1629,14 +1635,50 @@ list.boxed-list {
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
 }
+list.boxed-list > row.activatable:hover {
+  border-radius: 10px;
+}
+list.boxed-list list.boxed-list {
+  margin: 8px;
+  background-color: var(--base03);
+  box-shadow: var(--shadow-thin-base03);
+}
+list.boxed-list:not(#_) > row + row.activatable:active,
+list.boxed-list:not(#_) > row + row.activatable:selected,
+list.boxed-list:not(#_) > row + row.activatable:hover:active {
+  border-radius: 10px;
+}
+list.boxed-list:not(#_) > row + row.activatable:hover:not(:active):not(:selected) {
+  border-radius: 10px;
+}
 list.boxed-list > row + row {
   box-shadow: var(--shadow-separator-mimic-horizontal-base02);
+}
+list.boxed-list list.boxed-list > row + row {
+  box-shadow: var(--shadow-separator-mimic-horizontal-base03);
 }
 list.boxed-list > row.activatable:active {
   box-shadow: var(--shadow-inset-base02);
 }
-list.boxed-list > row:hover button:active {
+list.boxed-list list.boxed-list > row.activatable:active {
   box-shadow: var(--shadow-inset-base02);
+}
+list.boxed-list > row.activatable:hover button:active {
+  box-shadow: var(--shadow-inset-base02);
+}
+list.boxed-list list.boxed-list > row.activatable:hover button:active {
+  box-shadow: var(--shadow-inset-base02);
+}
+list.boxed-list row:not(:hover) box button.image-button:checked, /*This should select both activatable and non-activatable rows*/
+list.boxed-list row.activatable:hover *:not(box) button:not(.image-button):checked {
+  box-shadow: var(--shadow-inset-base02);
+}
+list.boxed-list list.boxed-list row:not(:hover) box button.image-button:checked, /*This should select both activatable and non-activatable rows*/
+list.boxed-list list.boxed-list row.activatable:hover *:not(box) button:not(.image-button):checked {
+  box-shadow: var(--shadow-inset-base02);
+}
+list.boxed-list row.activatable:hover box button.image-button:checked {
+  box-shadow: var(--shadow-inset-base0D);
 }
 list.boxed-list > row:hover button:active * {
   color: var(--base0D);
@@ -1656,6 +1698,21 @@ list.boxed-list > row.activatable:active switch:not(:checked),
 list.boxed-list > row.activatable:hover:active switch:not(:checked) {
   box-shadow: var(--shadow-inset-base02);
 }
+list.boxed-list list.boxed-list > row block.empty,
+list.boxed-list list.boxed-list > row progressbar trough,
+list.boxed-list list.boxed-list > row levelbar trough,
+list.boxed-list list.boxed-list > row progresscell trough,
+list.boxed-list list.boxed-list > row progresscell,
+list.boxed-list list.boxed-list > row scale > trough,
+list.boxed-list list.boxed-list > row radio:not(:checked):not(:indeterminate),
+list.boxed-list list.boxed-list > row check:not(:checked):not(:indeterminate) {
+  box-shadow: var(--shadow-inset-thin-base02);
+}
+list.boxed-list list.boxed-list > row switch:not(:checked),
+list.boxed-list list.boxed-list > row.activatable:active switch:not(:checked),
+list.boxed-list list.boxed-list > row.activatable:hover:active switch:not(:checked) {
+  box-shadow: var(--shadow-inset-base02);
+}
 list.boxed-list > row.activatable:hover:not(:active) switch:not(:checked),
 list.boxed-list > row.activatable:hover:not(:active) dropdown > button:checked {
   box-shadow: var(--shadow-inset-base0D);
@@ -1664,14 +1721,12 @@ list.boxed-list > row.activatable:hover:not(:active) dropdown > button {
   background-color: transparent;
   box-shadow: var(--shadow-thin-base0D);
 }
-list.boxed-list > row.activatable:hover:not(:active) button * {
+list.boxed-list > row.activatable:hover:not(:active) button *,
+list.boxed-list > row.activatable:hover:not(:active) > box > dropdown > popover row.activatable:hover * {
   color: var(--base01);
 }
 list.boxed-list > row.activatable:hover:not(:active) > box > dropdown > popover row.activatable * {
   color: var(--base0D);
-}
-list.boxed-list > row.activatable:hover:not(:active) > box > dropdown > popover row.activatable:hover * {
-  color: var(--base01);
 }
 list.boxed-list > row > box > frame {
   background-color: var(--base02);
@@ -1931,6 +1986,7 @@ viewswitcher,
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
 }
+viewswitcher > button + button,
 .linked > * + *,
 .linked > button + *,
 .linked > * + menubutton > button:not(:hover):not(:active):not(:checked) {
@@ -1938,10 +1994,12 @@ viewswitcher,
   border-radius: 0px;
   box-shadow: var(--shadow-separator-mimic-vertical-base02);
 }
+viewswitcher > button:first-child,
 .linked > *:first-child,
 .linked > menubutton:first-child > button:not(:hover):not(:active):not(:checked) {
   border-radius: 50px 0px 0px 50px;
 }
+viewswitcher > button:last-child,
 .linked > *:last-child,
 .linked > menubutton:last-child > button:not(:hover):not(:active):not(:checked) {
   border-radius: 0px 50px 50px 0px;
@@ -1960,6 +2018,12 @@ viewswitcher,
 .linked > *:only-child {
   border-radius: 50px;
 }
+viewswitcher > button:hover + button,
+viewswitcher > button:active + button,
+viewswitcher > button:checked + button,
+viewswitcher > button:hover:active + button,
+viewswitcher > button:hover:checked + button,
+viewswitcher > button:first-child:not(:hover):not(:active):not(:checked),
 .linked > *:not(entry):not(spinbutton):hover + *,
 .linked > scrolledwindow:hover + *,
 .linked > entry:focus-within + button:not(:hover):not(:active):not(:checked),
@@ -1976,6 +2040,11 @@ viewswitcher,
 .linked > menubutton {
   box-shadow: none;
 }
+viewswitcher > button:hover:not(#_),
+viewswitcher > button:active,
+viewswitcher > button:checked,
+viewswitcher > button:hover:active,
+viewswitcher > button:hover:checked,
 .linked > button:hover:not(#_),
 .linked > *:not(entry):not(spinbutton):hover,
 .linked > *:not(spinbutton):active,
@@ -1990,6 +2059,11 @@ viewswitcher,
 .linked > menubutton > button:hover:active:checked {
   border-radius: 50px;
 }
+viewswitcher > button:active,
+viewswitcher > button:checked,
+viewswitcher > button:hover:active,
+viewswitcher > button:hover:checked,
+viewswitcher > button:hover:active:checked,
 .linked > menubutton > button:active,
 .linked > menubutton > button:checked:not(:hover),
 .linked > menubutton > button:hover:active,
@@ -2007,23 +2081,31 @@ viewswitcher,
 .linked > entry:focus-within {
   box-shadow: var(--shadow-inset-base02);
 }
-.linked > button:hover:checked,
+viewswitcher > button:hover:checked,
+viewswitcher > button.image-button:hover:checked .linked > button:hover:checked,
 .linked > button.image-button:hover:checked {
   padding: 2px 9px 2px 9px;
   box-shadow: var(--shadow-inset-base0D);
 }
+viewswitcher > button + button:not(:hover):not(:active):not(:checked),
 .linked > * + button:not(:hover):not(:active):not(:checked),
 .linked > * + menubutton > button:not(:hover):not(:active):not(:checked),
 .linked > * + entry:not(:focus-within) {
   margin: 1px 0px 0px 2px;
   padding: 1px 9px 2px 10px;
 }
+viewswitcher > button + button:hover:not(:active):not(:checked),
 .linked > * + button:hover:not(:active):not(:checked),
 .linked > * + menubutton > button:hover:not(:active):not(:checked) {
   margin: 1px 0px 0px 4px;
   padding: 1px 9px 2px 8px;
   box-shadow: var(--shadow-thin-base0D);
 }
+viewswitcher > button + button:active,
+viewswitcher > button + button:checked,
+viewswitcher > button + button:hover:active,
+viewswitcher > button + button:hover:checked,
+viewswitcher > button + button:hover:active:checked,
 .linked > * + spinbutton,
 .linked > * + button:active,
 .linked > * + button:checked,
@@ -2269,8 +2351,7 @@ revealer.bottom-properties {
 overlay > box.toolbar {
   background-color: alpha(var(--base01), 0.9);
 }
+/*TODO: Check this over*/
 overlay > box.toolbar > separator {
-  box-shadow:
-    0.5px 0.5px 1.1px 0.2px alpha(@base01-black-65, 0.9) inset,
-    -1px -1px 0px 0px alpha(@base01-white-90-dark, 0.9) inset;
+  box-shadow: var(--shadow-inset-extra-thin-base01);
 }

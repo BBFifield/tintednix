@@ -10,20 +10,12 @@
 
     src = ./gtk/base16-gtk;
 
-    installPhase = let
-      gtk4style = builtins.readFile ./gtk/base16-gtk/gtk-4.0/gtk.css;
-      gtk3style = import ./gtk/base16-gtk/gtk-3.0/gtk.nix {};
-    in ''
+    installPhase = ''
       theme_dir=$out/share/themes/${pname}
       mkdir -p $theme_dir/{gtk-4.0,gtk-3.0}
 
-      cat > "$theme_dir/gtk-4.0/gtk.css" <<'EOF'
-      ${gtk4style}
-      EOF
-
-      cat > "$theme_dir/gtk-3.0/gtk.css" <<'EOF'
-      ${gtk3style}
-      EOF
+      cp -rf ${src}/gtk-4.0/gtk.css $theme_dir/gtk-4.0/gtk.css
+      cp -rf ${src}/gtk-3.0/gtk.css $theme_dir/gtk-3.0/gtk.css
 
       cp -rf $src/index.theme $theme_dir;
       cp -rf $src/assets $theme_dir/gtk-3.0;
