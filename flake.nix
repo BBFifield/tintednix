@@ -29,6 +29,17 @@
         packages.default = {pkgs, ...}: pkgs.callPackage ./pkgs/base16-schemes {};
         homeManagerModules.default = import ./nix/home-manager/hm-module.nix inputs;
         nixosModules.default = import ./nix/nixos/nixos-module.nix inputs;
+        devShells.default = {pkgs, ...}:
+          pkgs.mkShell {
+            buildInputs = with pkgs; [
+              gtk4
+              /*
+              Required to launch gtk4-widget-factory
+              */
+              gst_all_1.gst-plugins-base
+              gtk3
+            ];
+          };
       };
     };
 }
