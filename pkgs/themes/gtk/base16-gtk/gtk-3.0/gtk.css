@@ -650,14 +650,14 @@ button.sidebar-button {
   min-width: 16px;
   min-height: 22px;
   margin: 1px 0px 0px 1px;
-  padding: 0px 4px 1px 3px;
+  padding: 2px 6px 3px 5px;
 }
 button.small-button:active,
 button.small-button:hover:active,
 button.sidebar-button:active,
 button.sidebar-button:hover:active {
   margin: 0px;
-  padding: 1px 4px 1px 4px;
+  padding: 3px 6px 3px 6px;
   /*shadow-inset-thin-base01*/
   box-shadow:
     1px 1px 0.6px 0.1px @base01-black-80 inset,

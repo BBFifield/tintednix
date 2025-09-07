@@ -165,11 +165,11 @@ label.keycap,
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
 }
-
 entry {
-  min-height: 30px;
-  margin: 1px 0px 0px 1px;
-  padding: 1px 9px 2px 8px;
+  /*Had to change minimum to 34, otherwise epiphany couldn't allocated 34px to menubutton in entry and would crash*/
+  min-height: 30px; /*was 30px*/
+  margin: 1px 0px 0px 1px; /*was 1px 0px 0px 1px*/
+  padding: 1px 9px 2px 8px; /*was 1px 9px 2px 8px*/
   border-radius: 50px;
 
   color: var(--base0D);
@@ -706,32 +706,52 @@ button.suggested-action.text-button {
   background-color: color-mix(in oklab, var(--base0B) 60%, black);
   box-shadow: var(--shadow-thin-base0B-dull);
 }
-button.destructive-action.text-button {
+button.destructive-action.text-button,
+/*Ex: epiphany*/
+tabthumbnail button.tab-close-button {
   background-color: color-mix(in oklab, var(--base08) 60%, black);
   box-shadow: var(--shadow-thin-base08-dull);
 }
 button.destructive-action,
-button.close {
+button.close,
+button.tab-close-button {
   color: var(--base08);
 }
-button.close > * {
+button.starred,
+button.starred:active {
+  color: var(--base0A);
+}
+button.close > *,
+button.tab-close-button > * {
   padding: 0px;
   background-color: transparent;
 }
 button.small-button,
-button.sidebar-button {
+menubutton.entry-icon > button,
+button.entry-icon,
+button.sidebar-button,
+button.tab-close-button {
   /*24x24 allocation*/
   min-width: 16px;
   min-height: 22px;
   margin: 1px 0px 0px 1px;
-  padding: 0px 4px 1px 3px;
+  padding: 2px 6px 3px 5px;
 }
 button.small-button:active,
 button.small-button:hover:active,
+button.small-button:hover:checked,
+button.entry-icon:active,
+button.entry-icon:hover:active,
+button.entry-icon:hover:checked,
+menubutton.entry-icon > button:active,
+menubutton.entry-icon > button:hover:active,
+menubutton.entry-icon > button:hover:checked,
+button.tab-close-button:active,
+button.tab-close-button:hover:active,
 button.sidebar-button:active,
 button.sidebar-button:hover:active {
   margin: 0px;
-  padding: 1px 4px 1px 4px;
+  padding: 3px 6px 3px 6px;
   box-shadow: var(--shadow-inset-thin-base01);
 }
 button:active,
@@ -826,11 +846,13 @@ frame button.suggested-action:hover:active:checked {
   box-shadow: var(--shadow-inset-base0B-dull);
 }
 button.destructive-action:hover:active,
-button.close:hover:active {
+button.close:hover:active,
+button.tab-close-button:hover:active {
   color: var(--base08);
 }
 button.destructive-action:hover:not(:active):not(:checked),
-button.close:hover:not(:active):not(:checked) {
+button.close:hover:not(:active):not(:checked),
+button.tab-close-button:hover:not(:active):not(:checked) {
   color: var(--base08);
   box-shadow: var(--shadow-thin-base08);
 }
@@ -842,6 +864,10 @@ button.default:hover:not(:active):not(:checked),
 button.suggested-action:hover:not(:active):not(:checked) {
   color: var(--base0B);
   box-shadow: var(--shadow-thin-base0B);
+}
+button.starred:hover:not(:active):not(:checked) {
+  color: var(--base0A);
+  box-shadow: var(--shadow-thin-base0A);
 }
 /*Only declare color nested three nodes down the tree rather than just "button *". This should cover most cases while avoiding unintended colorations in popovers*/
 button > *,
@@ -879,12 +905,16 @@ button.destructive-action:hover > box > * > *,
 button.close:hover > *,
 button.close:hover > box > *,
 button.close:hover > box > * > *,
+button.tab-close-button:hover > *,
+button.tab-close-button:hover > box > *,
+button.tab-close-button:hover > box > * > *,
 button.default:hover > *,
 button.default:hover > box > *,
 button.default:hover > box > * > *,
 button.suggested-action:hover > *,
 button.suggested-action:hover > box > *,
-button.suggested-action:hover > box > * > * {
+button.suggested-action:hover > box > * > *,
+button.starred:hover > * {
   color: var(--base01);
 }
 button.destructive-action > *,
@@ -896,7 +926,10 @@ button.destructive-action:hover:active > box > *,
 button.destructive-action:hover:active > box > * > *,
 button.close > *,
 button.close:active > *,
-button.close:hover:active > * {
+button.close:hover:active > *,
+button.tab-close-button > *,
+button.tab-close-button:active > *,
+button.tab-close-button:hover:active > * {
   color: var(--base08);
 }
 button.default > *,
@@ -915,6 +948,14 @@ button.suggested-action:hover:active > box > *,
 button.suggested-action:hover:active > box > * > * {
   /* color: var(--base01); */
   color: var(--base0B);
+}
+button.starred:not(:hover):not(:active):not(:checked) > *,
+button.starred:active > *,
+button.starred:checked:not(:hover) > *,
+button.starred:hover:active > *,
+button.starred:active:checked > *,
+button.starred:hover:checked:active > * {
+  color: var(--base0A);
 }
 button.text-button.toggle {
   min-width: 100px;
@@ -1768,10 +1809,14 @@ row.activatable:hover box > button > *,
 row.activatable:hover:selected button:not(#_):hover > *,
 row.activatable:selected progresscell label.in-progress,
 row.activatable:hover:not(:active):not(:selected) box > widget > scale > marks > mark > label,
+row.activatable.entry:active selection,
 child.activatable:hover label,
 child.activatable:hover image,
 header.activatable > button:active label {
   color: var(--base01);
+}
+row.activatable.entry:hover selection {
+  background-color: var(--base0D-black-65-dark);
 }
 row.activatable:hover switch:checked, /*This :not ia too broad and messes things up*/
 row.activatable:hover > box > switch:checked,
@@ -2267,11 +2312,33 @@ entry > menubutton > button.image-button:active,
 entry > menubutton > button.image-button:checked,
 entry > menubutton > button.image-button:hover:active,
 entry > menubutton > button.image-button:active:checked,
-entry > menubutton > button.image-button:hover:active:checked {
+entry > menubutton > button.image-button:hover:active:checked,
+entry > button.image-button:active,
+entry > button.image-button:checked,
+entry > button.image-button:hover:active,
+entry > button.image-button:active:checked,
+entry > button.image-button:hover:active:checked {
   box-shadow: var(--shadow-inset-base02);
 }
-entry > menubutton > button.image-button:hover:checked {
+entry > menubutton > button.image-button:hover:checked,
+entry > button.image-button:hover:checked {
   box-shadow: var(--shadow-inset-base0D);
+}
+entry > menubutton.entry-icon > button.image-button:active,
+entry > menubutton.entry-icon > button.image-button:checked,
+entry > menubutton.entry-icon > button.image-button:hover:active,
+entry > menubutton.entry-icon > button.image-button:active:checked,
+entry > menubutton.entry-icon > button.image-button:hover:active:checked,
+entry > button.entry-icon:active,
+entry > button.entry-icon:checked,
+entry > button.entry-icon:hover:active,
+entry > button.entry-icon:active:checked,
+entry > button.entry-icon:hover:active:checked {
+  box-shadow: var(--shadow-inset-thin-base02);
+}
+entry > menubutton.entry-icon > button.image-button:hover:checked,
+entry > button.entry-icon:hover:checked {
+  box-shadow: var(--shadow-inset-thin-base0D);
 }
 
 box.pathbar {
@@ -2730,7 +2797,7 @@ overlay > box.toolbar > separator {
 }
 /*test this across other apps*/
 toolbarview > box {
-  margin: 0px 8px 8px 8px;
+  margin: 0px 6px 6px 6px;
   border-radius: 10px;
   background-color: var(--base00);
   box-shadow: var(--shadow-inset-base00);
@@ -2752,6 +2819,12 @@ window:not(.fullscreen) overlay-split-view > * > * > * > * > stack > widget > ov
 window:not(.fullscreen) overlay-split-view > * > * > * > * > stack > widget > overlay > widget > widget > stack > box > scrolledwindow > lpimage {
   margin: 8px;
   border-radius: 10px;
+}
+window.fullscreen .top-bar headerbar {
+  margin-bottom: 1px; /*In absence of inset shadow*/
+}
+window.fullscreen .sidebar-pane {
+  box-shadow: var(--shadow-thin-base01);
 }
 toolbarview > * > * > * > * > stack > widget > overlay > widget > widget > stack > box > scrolledwindow {
   border-radius: 0px;
@@ -2891,4 +2964,57 @@ window:not(.fullscreen) celluloid-video-area > toolbarview {
 window:not(.fullscreen) toolbarview > toastoverlay {
   margin: 0px 6px 6px 6px;
   border-radius: 10px;
+}
+
+/*Epiphany*/
+
+toastoverlay overlay {
+  border-radius: 10px;
+  background-color: var(--base00);
+  box-shadow: var(--shadow-inset-base00);
+}
+toastoverlay overlay > graphicsoffload > webkitwebview {
+  margin: 4px 1px 1px 4px;
+  border-radius: 10px;
+}
+.top-bar .collapse-spacing,
+tabbox {
+  padding: 0px;
+}
+tabbox {
+  min-height: 24px;
+  margin-bottom: 6px;
+}
+tabbox tab:not(#_) {
+  margin: 1px 0px 0px 1px;
+  padding: 2px 17px 3px 16px;
+}
+tabbox tab:selected {
+  margin: 0px;
+  padding: 3px 17px 3px 17px;
+}
+overlay-split-view > widget > toolbarview > box {
+  background-color: transparent;
+  box-shadow: none;
+}
+overlay-split-view > widget > toolbarview > box > label {
+  margin-top: 20px;
+}
+overlay.card {
+  padding: 3px;
+}
+toolbarview > overlay > scrolledwindow {
+  margin: 0px 6px 6px 6px;
+  background-color: var(--base00);
+  box-shadow: var(--shadow-inset-base00);
+}
+#title-box-container entry {
+  /*Had to change minimum to 34, otherwise epiphany couldn't allocated 34px to menubutton in entry and would crash*/
+  min-height: 34px; /*was 30px*/
+  margin: 1px 0px 0px 1px; /*was 1px 0px 0px 1px*/
+  padding: 0px 9px 0px 8px; /*was 1px 9px 2px 8px*/
+}
+#title-box-container entry:focus-within {
+  margin: 0px 0px 0px 0px;
+  padding: 1px 9px 0px 9px;
 }
