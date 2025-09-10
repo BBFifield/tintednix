@@ -36,19 +36,6 @@
   }
 }
 
-* {
-  font:
-    normal 16px "jetbrainsmono nerd font",
-    sans-serif;
-  text-decoration: none;
-  outline: none;
-  transition:
-    /* box-shadow, */
-    opacity,
-    transform,
-    -gtk-icon-transform;
-}
-
 undershoot.top {
   background: none;
   box-shadow: none;
@@ -70,7 +57,8 @@ arrow.left {
 }
 
 *:disabled {
-  opacity: 0.6;
+  /* opacity: 0.6; */
+  filter: opacity(0.6);
 
   -gtk-icon-filter: opacity(0.5);
 }
@@ -87,10 +75,7 @@ headerbar {
   color: var(--base0D);
 
   background-color: var(--base01);
-  box-shadow:
-    0px -2px 0px color-mix(in oklab, var(--base01) 80%, black 40%) inset,
-    0px -1px 0px color-mix(in oklab, var(--base01) 80%, black 10%) inset,
-    0px 1px 0px color-mix(in oklab, var(--base01) 80%, white 10%);
+  box-shadow: var(--shadow-separator-mimic-bottom-horizontal-base01);
 }
 headerbar windowhandle > box {
   padding: 6px 7px 6px 7px;
@@ -102,19 +87,17 @@ headerbar > windowhandle > box > box.end {
 
 label,
 text,
+windowtitle > box > label.title {
+  font:
+    normal 16px "jetbrainsmono nerd font",
+    sans-serif;
+}
+label,
+text,
 image {
   color: var(--base0D);
 }
-arrow,
-#icon,
-.icon,
-icon,
-image {
-  -gtk-icon-shadow:
-    1px 2px 2px rgba(0, 0, 0, 0.17),
-    2px 4px 4px rgba(0, 0, 0, 0.2);
-}
-label.title,
+
 label.subtitle {
   padding: 0px 12px 0px 12px;
 }
@@ -122,6 +105,7 @@ label.large-title {
   font-size: 35px;
   font-weight: 300;
 }
+label.title,
 label.title-1 {
   font-size: 27px;
   font-weight: 800;
@@ -153,9 +137,10 @@ label.title-4,
 label.caption-heading,
 label.link > link {
   font-weight: bold;
+  text-decoration-line: underline;
 }
 label.link > link {
-  color: var(--base0B);
+  color: var(--base0C);
 }
 *.error {
   color: var(--base08);
@@ -373,8 +358,13 @@ scale highlight {
 }
 scale slider {
   margin: -8px;
+
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
+
+  transition:
+    background-color 0.2s cubic-bezier(0, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
   animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 scale slider:hover {
@@ -619,6 +609,16 @@ splitbutton {
 
   background-color: transparent;
 
+  transition:
+    background-color 0.2s cubic-bezier(0, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
+splitbutton:not(:checked) {
+  animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+splitbutton:active,
+splitbutton:hover:active,
+splitbutton:hover:active:checked {
   animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 splitbutton:active,
@@ -629,7 +629,6 @@ splitbutton:hover:active:checked {
   margin: 0px;
   padding: 1px 0px 0px 1px;
   box-shadow: var(--shadow-inset-base01);
-  animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 splitbutton:hover {
   box-shadow: var(--shadow-thin-base0D);
@@ -698,13 +697,37 @@ button {
 
   background-color: transparent;
 
+  transition:
+    background-color 0.2s cubic-bezier(0, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
   animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
+button:checked:not(:hover) {
+  animation: none;
+}
+button.pill {
+  padding: 9px 32px 10px 31px;
+  background-color: color-mix(in oklab, var(--base0D) 60%, black);
+  box-shadow: var(--shadow-thin-base0D-dull);
+}
+button.pill:active,
+button.pill:checked,
+button.pill:hover:active,
+button.pill:hover:checked,
+button.pill:active:checked,
+button.pill:hover:active:checked {
+  padding: 10px 32px 10px 32px;
+  box-shadow: var(--shadow-inset-base01);
+}
 button.default.text-button,
-button.suggested-action.text-button {
+button.suggested-action.text-button,
+button.suggested-action.pill {
   color: var(--base0B);
   background-color: color-mix(in oklab, var(--base0B) 60%, black);
   box-shadow: var(--shadow-thin-base0B-dull);
+}
+button.suggested-action.image-text-button {
+  color: var(--base0B);
 }
 button.destructive-action.text-button,
 /*Ex: epiphany*/
@@ -718,7 +741,7 @@ button.tab-close-button {
   color: var(--base08);
 }
 button.starred,
-button.starred:active {
+button.tab-indicator {
   color: var(--base0A);
 }
 button.close > *,
@@ -727,6 +750,7 @@ button.tab-close-button > * {
   background-color: transparent;
 }
 button.small-button,
+button.tab-indicator,
 menubutton.entry-icon > button,
 button.entry-icon,
 button.sidebar-button,
@@ -740,6 +764,9 @@ button.tab-close-button {
 button.small-button:active,
 button.small-button:hover:active,
 button.small-button:hover:checked,
+button.tab-indicator:active,
+button.tab-indicator:hover:active,
+button.tab-indicator:hover:checked,
 button.entry-icon:active,
 button.entry-icon:hover:active,
 button.entry-icon:hover:checked,
@@ -755,6 +782,11 @@ button.sidebar-button:hover:active {
   box-shadow: var(--shadow-inset-thin-base01);
 }
 button:active,
+button:hover:active {
+  color: var(--base0D);
+  animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+button:active,
 button:checked,
 button:hover:active,
 button:active:checked,
@@ -762,7 +794,6 @@ button:hover:active:checked {
   margin: 0px;
   padding: 2px 9px 2px 9px;
   box-shadow: var(--shadow-inset-base01);
-  animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 button:hover {
   color: var(--base0D); /*the ripple keyframe inherits this for use in the background-image, which is why background-color isn't needed*/
@@ -812,6 +843,14 @@ button.font:hover:not(:active):not(:checked),
 button.file:hover:not(:active):not(:checked) {
   box-shadow: var(--shadow-thin-base0D);
 }
+button.starred:hover:not(:active):not(:checked),
+button.tab-indicator:hover:not(:active):not(:checked) {
+  box-shadow: var(--shadow-thin-base0A);
+}
+button.starred:hover:checked:not(:active),
+button.tab-indicator:hover:checked:not(:active) {
+  box-shadow: var(--shadow-inset-base0A);
+}
 button.destructive-action:active,
 button.destructive-action:checked:not(:hover),
 button.destructive-action:hover:active,
@@ -845,6 +884,26 @@ frame button.suggested-action:hover:active:checked {
   background-color: color-mix(in oklab, var(--base0B) 60%, black);
   box-shadow: var(--shadow-inset-base0B-dull);
 }
+button.suggested-action.image-text-button:not(.pill):active,
+button.suggested-action.image-text-button:not(.pill):checked:not(:hover),
+button.suggested-action.image-text-button:not(.pill):hover:active,
+button.suggested-action.image-text-button:not(.pill):active:checked,
+button.suggested-action.image-text-button:not(.pill):hover:active:checked {
+  background-color: transparent;
+  box-shadow: var(--shadow-inset-base01);
+}
+frame button.suggested-action.image-text-button:not(.pill):active,
+frame button.suggested-action.image-text-button:not(.pill):checked:not(:hover),
+frame button.suggested-action.image-text-button:not(.pill):hover:active,
+frame button.suggested-action.image-text-button:not(.pill):hover:active:checked {
+  background-color: transparent;
+  box-shadow: var(--shadow-inset-base00);
+}
+button.starred:hover:not(:active),
+button.starred:hover:checked:not(:active),
+button.tab-indicator:hover:not(:active) {
+  color: var(--base0A);
+}
 button.destructive-action:hover:active,
 button.close:hover:active,
 button.tab-close-button:hover:active {
@@ -865,10 +924,6 @@ button.suggested-action:hover:not(:active):not(:checked) {
   color: var(--base0B);
   box-shadow: var(--shadow-thin-base0B);
 }
-button.starred:hover:not(:active):not(:checked) {
-  color: var(--base0A);
-  box-shadow: var(--shadow-thin-base0A);
-}
 /*Only declare color nested three nodes down the tree rather than just "button *". This should cover most cases while avoiding unintended colorations in popovers*/
 button > *,
 button:active > *,
@@ -882,7 +937,8 @@ button:checked:not(:hover) > box > *,
 button:hover:active > box > *,
 button:active:checked > box > *,
 button:hover:active:checked > box > *,
-button:hover:active > box > * > * button:active > buttoncontent > box > *,
+button:hover:active > box > * > *,
+button:active > buttoncontent > box > *,
 button:checked:not(:hover) > buttoncontent > box > *,
 button:hover:active > buttoncontent > box > *,
 button:active:checked > buttoncontent > box > *,
@@ -914,7 +970,10 @@ button.default:hover > box > * > *,
 button.suggested-action:hover > *,
 button.suggested-action:hover > box > *,
 button.suggested-action:hover > box > * > *,
-button.starred:hover > * {
+button.suggested-action.image-text-button:hover > buttoncontent > box > *,
+button.starred:hover:not(:active) > *,
+button.tab-indicator:hover > *,
+button:hover:not(:active) > indicatorbin > overlay > * {
   color: var(--base01);
 }
 button.destructive-action > *,
@@ -945,20 +1004,36 @@ button.suggested-action:hover:active > *,
 button.suggested-action > box > *,
 button.suggested-action:active > box > *,
 button.suggested-action:hover:active > box > *,
-button.suggested-action:hover:active > box > * > * {
-  /* color: var(--base01); */
+button.suggested-action:hover:active > box > * > *,
+button.suggested-action.image-text-button > buttoncontent > box > *,
+button.suggested-action.image-text-button:active > buttoncontent > box > *,
+button.suggested-action.image-text-button:checked:not(:hover) > buttoncontent > box > *,
+button.suggested-action.image-text-button:hover:active > buttoncontent > box > *,
+button.suggested-action.image-text-button:active:checked > buttoncontent > box > *,
+button.suggested-action.image-text-button:hover:active:checked > buttoncontent > box > * {
   color: var(--base0B);
 }
 button.starred:not(:hover):not(:active):not(:checked) > *,
 button.starred:active > *,
 button.starred:checked:not(:hover) > *,
 button.starred:hover:active > *,
-button.starred:active:checked > *,
-button.starred:hover:checked:active > * {
+button.starred:active:checked:not(#_) > *,
+button.starred:hover:active:checked:not(#_) > *,
+button.tab-indicator:not(:hover):not(:active):not(:checked) > *,
+button.tab-indicator:active > *,
+button.tab-indicator:checked:not(:hover) > *,
+button.tab-indicator:hover:active > *,
+button.tab-indicator:active:checked > *,
+button.tab-indicator:hover:active:checked > * {
   color: var(--base0A);
 }
 button.text-button.toggle {
   min-width: 100px;
+}
+button.combo > box > cellview {
+  font:
+    normal 16px "jetbrainsmono nerd font",
+    sans-serif;
 }
 spinbutton button.image-button:checked,
 button.image-button.radio:checked,
@@ -1065,6 +1140,9 @@ tab {
 
   background-color: inherit;
 
+  transition:
+    background-color 0.2s cubic-bezier(0, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
   animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 tab:hover:not(:checked):not(:selected) {
@@ -1113,6 +1191,7 @@ tab:hover:not(:checked):not(:selected) label,
 tab:hover:not(:checked):not(:selected) image {
   color: var(--base01);
 }
+/* header.horizontal > tabs > arrow.image-button */
 
 tooltip {
   margin: 1px 30px 45px 15px;
@@ -1122,8 +1201,8 @@ tooltip {
 
   color: var(--base0D);
 
-  background-color: var(--base02);
-  box-shadow: var(--shadow-wide-base02);
+  background-color: var(--base03);
+  box-shadow: var(--shadow-wide-base03);
 }
 tooltip label {
   padding: 0px 6px 0px 6px;
@@ -1131,11 +1210,7 @@ tooltip label {
 
 spinner {
   color: var(--base0D);
-
-  animation-name: spin;
-  animation-duration: 1s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  animation: spin 1s linear infinite;
 
   -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
 }
@@ -1145,6 +1220,10 @@ treeview.view {
   padding: 5px 8px 5px 8px;
   border-top-color: var(--base00-white-95-dark);
   border-left-color: var(--base00-white-90-dark);
+
+  font:
+    normal 16px "jetbrainsmono nerd font",
+    sans-serif;
 
   background-color: transparent;
   box-shadow: var(--shadow-light-separator-mimic-horizontal-base00);
@@ -1263,12 +1342,6 @@ colorswatch {
   border-radius: 50px;
 }
 
-/* box.start { */
-/*   margin-right: 6px; */
-/* } */
-/* box.end { */
-/*   margin-left: 6px; */
-/* } */
 box.dialog-action-area {
   border-spacing: 5px;
   margin: 6px;
@@ -1435,6 +1508,12 @@ expander:disabled {
 expander-widget title {
   margin-bottom: 6px;
 }
+arrow.image-button:not(:hover):not(:disabled) > image {
+  opacity: 0.6;
+}
+arrow.image-button:hover:not(:disabled) > image {
+  opacity: 1;
+}
 
 iconview {
   padding: 5px;
@@ -1452,9 +1531,6 @@ iconview *:hover {
   box-shadow: var(--shadow-thin-base0D);
 }
 
-/* actionbar > revealer { */
-/*   padding: 6px 6px 6px 6px; */
-/* } */
 actionbar > revealer > box,
 actionbar > revealer > box > box {
   padding: 6px;
@@ -1546,7 +1622,8 @@ scrolledwindow.frame row.activatable:active,
 scrolledwindow.frame row.activatable:selected:backdrop,
 scrolledwindow listview row.activatable:selected:backdrop,
 scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.activatable:active,
-scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.activatable:selected:backdrop {
+scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.activatable:selected:backdrop,
+gridview.view > child.activatable:selected {
   background-color: transparent;
   box-shadow: var(--shadow-inset-base00);
 }
@@ -1563,6 +1640,7 @@ scrolledwindow.frame spinbutton > button.image-button:hover:active {
 }
 frame list:not(.navigation-sidebar):not(.boxed-list) > row + row,
 scrolledwindow > viewport > list:not(.navigation-sidebar):not(.boxed-list) > row + row,
+scrolledwindow > viewport > box > clamp > list:not(.navigation-sidebar):not(.boxed-list) > row + row,
 scrolledwindow.frame list:not(.navigation-sidebar):not(.boxed-list) > row + row {
   box-shadow: var(--shadow-separator-mimic-horizontal-base00);
 }
@@ -1574,8 +1652,10 @@ textview {
   /***/
   border-radius: 10px;
 
+  font:
+    normal 16px "jetbrainsmono nerd font",
+    sans-serif;
   color: var(--base0D);
-
   /*background-color and box-shadow only applies when textview isn't inside a frame, otherwise it's overridden via more speicificity above*/
   background-color: var(--base00);
   box-shadow: var(--shadow-inset-base00);
@@ -1726,6 +1806,7 @@ popover listview.view row > box {
 /*In an attempt for uniform spacing around popover*/
 popover > contents > stack,
 popover > contents > box,
+popover > contents > label:only-child,
 popover > contents > scrolledwindow > viewport > stack,
 popover > contents > scrolledwindow > viewport > box {
   padding: 6px;
@@ -1744,8 +1825,15 @@ popover > contents {
   background-color: var(--base01);
   box-shadow: var(--shadow-wide-base01);
 }
+popover label,
+popover accelerator,
+popover cellview:not(#_) {
+  font:
+    normal 16px "jetbrainsmono nerd font",
+    sans-serif;
+}
 popover.menu accelerator {
-  color: color-mix(in srgb, currentColor var(--dim-opacity), transparent);
+  color: color-mix(in srgb, currentColor 55%, transparent);
 }
 popover > arrow {
   min-width: 16px;
@@ -1805,6 +1893,7 @@ row.activatable:hover > button.text-button:only-child > *, /*the row is acting a
 /*First row in properties section of gtk inspector*/
 row.activatable:hover dropdown > button:hover > box > *,
 row.activatable:hover menubutton > button:hover:not(:active) > box > *,
+row.activatable:hover > box > menubutton > button > box > *,
 row.activatable:hover box > button > *,
 row.activatable:hover:selected button:not(#_):hover > *,
 row.activatable:selected progresscell label.in-progress,
@@ -1889,6 +1978,12 @@ row.activatable:hover:not(:selected):not(:active) {
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
 }
+row.activatable:active button.starred:checked:not(:hover):not(#_) > image {
+  color: var(--base0A);
+}
+row.activatable button.starred:hover:checked:not(:active):not(#_) {
+  box-shadow: var(--shadow-inset-base0A);
+}
 
 /*inspector global settings dropdowns.*/
 stack:hover > row.activatable:hover {
@@ -1958,6 +2053,9 @@ list.boxed-list list.nested {
   background-color: var(--base03);
   box-shadow: var(--shadow-thin-base03);
 }
+list.boxed-list > row:first-child {
+  border-radius: 1px;
+}
 list.boxed-list > row.activatable:hover,
 list.boxed-list list > row.activatable:hover,
 list.boxed-list:not(#_) > row.activatable:active,
@@ -1988,12 +2086,14 @@ list.boxed-list list.boxed-list > row.activatable:hover button:active {
   box-shadow: var(--shadow-inset-base03);
 }
 list.boxed-list row box button:active,
-list.boxed-list row box button:checked,
+list.boxed-list row box button:not(:hover):checked,
+list.boxed-list row.activatable box button.image-button:checked:not(:hover),
 list.boxed-list row.activatable:active box button:active,
-list.boxed-list row.activatable:active box button:checked,
+list.boxed-list row.activatable:active box button:not(:hover):checked,
 list.boxed-list row.activatable:not(:hover) box button:checked,
 list.boxed-list row.activatable:hover *:not(box) *:not(dropdown) > button:not(.image-button):not(.image-text-button):not(:hover):checked {
   box-shadow: var(--shadow-inset-base02);
+  animation: none;
 }
 list.boxed-list list.boxed-list row.activatable:active box button.image-button:active,
 list.boxed-list list.boxed-list row.activatable:active box button.image-button:checked,
@@ -2037,8 +2137,11 @@ list.boxed-list > row.expander *:not(revealer) > list > row progressbar trough,
 list.boxed-list > row.expander *:not(revealer) > list > row levelbar trough,
 list.boxed-list > row.expander *:not(revealer) > list > row progresscell trough,
 list.boxed-list > row.expander *:not(revealer) > list > row progresscell,
-list.boxed-list > row.expander*:not(revealer) > list > row radio:not(:checked):not(:indeterminate),
-list.boxed-list > row.expander *:not(revealer) > list > row check:not(:checked):not(:indeterminate) {
+list.boxed-list > row.expander *:not(revealer) > list > row radio:not(:checked):not(:indeterminate),
+list.boxed-list > row.expander *:not(revealer) > list > row check:not(:checked):not(:indeterminate),
+/*epiphany prefs*/
+list.boxed-list > row > box > box > checkbutton > radio:not(:checked):not(:indeterminate),
+list.boxed-list > row > box > box > checkbutton > check:not(:checked):not(:indeterminate) {
   box-shadow: var(--shadow-inset-thin-base02);
 }
 list.boxed-list > row scale > trough {
@@ -2220,6 +2323,12 @@ header.activatable button:active,
 header.activatable > button:active {
   box-shadow: var(--shadow-inset-base00);
 }
+/*Ex: Gnome Music*/
+listview.navigation-sidebar > row.activatable:active,
+listview.navigation-sidebar > row.activatable:selected,
+listview.navigation-sidebar > row.activatable:selected:backdrop {
+  box-shadow: var(--shadow-inset-base01);
+}
 /*the row is acting as a button here, so no need to have styling for the button itself*/
 listview > row.activatable > button.text-button,
 listview > row.activatable:hover > button.text-button,
@@ -2234,6 +2343,9 @@ listview > row + row {
   padding: 2px 4px 1px 3px;
   border-radius: 1px;
   box-shadow: var(--shadow-light-separator-mimic-horizontal-base00);
+}
+listview.navigation-sidebar > row + row {
+  box-shadow: var(--shadow-separator-mimic-horizontal-base01);
 }
 listview > row.activatable:hover + row:not(:selected),
 listview > row.activatable:selected + row:not(:hover) {
@@ -2676,6 +2788,8 @@ viewswitcher > button.flat:nth-child(4n + 4):checked * {
   color: var(--base09);
 }
 
+/*Nautilus*/
+
 /*there be dragons - do not touch unless you have to*/
 .nautilus-window headerbar > windowhandle > box > widget > box > stack > box > entry {
   padding: 0px 9px 0px 8px;
@@ -2762,6 +2876,17 @@ widget.content-pane .bottom-bar .toolbar button:active,
 widget.content-pane .bottom-bar .toolbar button:checked:not(:hover) {
   box-shadow: var(--shadow-inset-base00);
 }
+/*The tooltip thing in the bottom-right of list-view*/
+.floating-bar {
+  padding: 6px 10px;
+  border-width: 0px;
+  border-radius: 50px;
+
+  color: var(--base0D);
+
+  background-color: var(--base02);
+  box-shadow: var(--shadow-thin-base02);
+}
 /*Disk usage analyzer*/
 treemap {
   color: var(--base01);
@@ -2790,52 +2915,51 @@ overlay > box.toolbar > separator {
 }
 
 /*pwvucontrol*/
+
 .vumeter {
   border: none;
   background-color: transparent;
   box-shadow: var(--shadow-inset-thin-base02);
 }
 /*test this across other apps*/
-toolbarview > box {
+/*Where does this occur in pwvucontrol? It also occurs in image-viewer but breaks the smallest view, so I'm disabling it*/
+/* toolbarview > box { */
+/*   margin: 0px 6px 6px 6px; */
+/*   border-radius: 10px; */
+/*   background-color: var(--base00); */
+/*   box-shadow: var(--shadow-inset-base00); */
+/* } */
+toolbarview > stack > scrolledwindow > viewport {
   margin: 0px 6px 6px 6px;
-  border-radius: 10px;
-  background-color: var(--base00);
-  box-shadow: var(--shadow-inset-base00);
 }
 
 /*image-viewer*/
-widget.content-pane lpdragoverlay > overlay > stack > statuspage {
+
+lpdragoverlay > overlay > stack > statuspage {
   margin: 0px 6px 6px 6px;
   border-radius: 10px;
   background-color: var(--base00);
   box-shadow: var(--shadow-inset-base00);
 }
-window:not(.fullscreen) overlay-split-view > * > * > * > * > stack > widget > overlay > widget > widget > stack > box > scrolledwindow {
+window:not(.fullscreen) stack > widget > overlay > widget > widget > stack > box > scrolledwindow {
   margin: 0px 6px 6px 6px;
   border-radius: 10px;
   background-color: #242424; /*Same color as void space in lpimage in dark theme, wonder if same with light theme.*/
   box-shadow: var(--shadow-inset-base01);
 }
-window:not(.fullscreen) overlay-split-view > * > * > * > * > stack > widget > overlay > widget > widget > stack > box > scrolledwindow > lpimage {
+window:not(.fullscreen) stack > widget > overlay > widget > widget > stack > box > scrolledwindow > lpimage {
   margin: 8px;
   border-radius: 10px;
 }
 window.fullscreen .top-bar headerbar {
-  margin-bottom: 1px; /*In absence of inset shadow*/
+  margin-bottom: 1px;
 }
 window.fullscreen .sidebar-pane {
   box-shadow: var(--shadow-thin-base01);
 }
-toolbarview > * > * > * > * > stack > widget > overlay > widget > widget > stack > box > scrolledwindow {
-  border-radius: 0px;
-  background-color: #242424; /*Same color as void space in lpimage in dark theme, wonder if same with light theme.*/
-  box-shadow: var(--shadow-inset-base00);
-}
-toolbarview > * > * > * > * > stack > widget > overlay > widget > widget > stack > box > scrolledwindow > lpimage {
-  margin: 8px;
-}
 
 /*filechooser ex: launch from celluloid*/
+
 placessidebar + separator {
   all: unset;
 }
@@ -2914,6 +3038,13 @@ filechooser #pathbarbox box.linked > button:hover:checked + *,
 filechooser #pathbarbox box.linked > button:first-child:not(:hover):not(:active):not(:checked) {
   box-shadow: none;
 }
+/*Ex: filechooser*/
+window.filechooser scrolledwindow > gridview {
+  margin: 6px 6px 6px 0px;
+  border-radius: 10px;
+  background-color: var(--base00);
+  box-shadow: var(--shadow-inset-base00);
+}
 
 /*celluloid*/
 graphicsoffload + statuspage {
@@ -2968,14 +3099,17 @@ window:not(.fullscreen) toolbarview > toastoverlay {
 
 /*Epiphany*/
 
-toastoverlay overlay {
+window:not(.nautilus-window) toastoverlay *:not(lpdragoverlay):not(.image-view) > overlay {
   border-radius: 10px;
   background-color: var(--base00);
   box-shadow: var(--shadow-inset-base00);
 }
 toastoverlay overlay > graphicsoffload > webkitwebview {
-  margin: 4px 1px 1px 4px;
+  margin: 3px 1px 1px 2px;
   border-radius: 10px;
+}
+window:not(.fullscreen) toolbarview > toastoverlay ~ revealer.bottom-bar.raised box.horizontal.toolbar {
+  padding-top: 0px;
 }
 .top-bar .collapse-spacing,
 tabbox {
@@ -2993,6 +3127,9 @@ tabbox tab:selected {
   margin: 0px;
   padding: 3px 17px 3px 17px;
 }
+tabbox separator.vertical {
+  margin: 0px 6px;
+}
 overlay-split-view > widget > toolbarview > box {
   background-color: transparent;
   box-shadow: none;
@@ -3008,6 +3145,9 @@ toolbarview > overlay > scrolledwindow {
   background-color: var(--base00);
   box-shadow: var(--shadow-inset-base00);
 }
+toolbarview > overlay > scrolledwindow + button:hover:active {
+  box-shadow: var(--shadow-inset-base00);
+}
 #title-box-container entry {
   /*Had to change minimum to 34, otherwise epiphany couldn't allocated 34px to menubutton in entry and would crash*/
   min-height: 34px; /*was 30px*/
@@ -3017,4 +3157,118 @@ toolbarview > overlay > scrolledwindow {
 #title-box-container entry:focus-within {
   margin: 0px 0px 0px 0px;
   padding: 1px 9px 0px 9px;
+}
+tabbutton label.numeric {
+  /*else it clips outside image box if larger*/
+  font-size: 12px;
+}
+.bottom-bar.raised .navigation-box .toolbar-button {
+  margin: 1px 5px 0px 4px;
+}
+.bottom-bar.raised .navigation-box .toolbar-button:active,
+.bottom-bar.raised .navigation-box .toolbar-button:checked {
+  margin: 0px 5px 0px 3px;
+}
+button.bottom,
+button.bottom:active {
+  margin-top: -6px; /*Otherwise you'll get a "Allocation height too small. Tried to allocate 92x21, but AdwButtonContent 0x1bfd0270 needs at least 92x22. error"*/
+  margin-bottom: 15px;
+}
+.navigation-box button:hover:checked > popover row *:not(#_) {
+  color: var(--base0D);
+}
+.navigation-box button:hover:checked > popover row:hover:not(:active):not(:selected):not(:checked) {
+  background-color: var(--base0D);
+  box-shadow: var(--shadow-thin-base0D);
+}
+.navigation-box button > popover row:not(#_):selected,
+.navigation-box button > popover row:not(#_):hover:active {
+  background-color: var(--base01);
+  box-shadow: var(--shadow-inset-base01);
+}
+.navigation-box button > popover row:not(#_):hover:active *:not(#_) {
+  color: var(--base0D);
+}
+.navigation-box button:hover:checked > popover row:hover:not(:selected):not(:checked) *:not(#_) {
+  color: var(--base01);
+}
+
+/*****************/
+/*printing dialog*/
+/*****************/
+window.print header.top + stack {
+  background-color: var(--base01);
+}
+window.print header.top + stack scrolledwindow.frame {
+  border-width: 0px;
+}
+header.top {
+  margin-bottom: 1px; /*To make outset shadow visible*/
+}
+header.top.horizontal tabs {
+  padding-bottom: 6px;
+}
+
+/*****************/
+/*music*/
+/*****************/
+revealer.top-bar {
+  box-shadow: none;
+}
+window:not(#_) > dialog-host > widget > widget > toolbarview > toastoverlay {
+  margin: 0px; /*to override what was set for image-viewer. This one spans entire window*/
+}
+navigation-view-page > toolbarview > overlay:not(#_) {
+  border-radius: 10px;
+  background-color: var(--base01);
+  box-shadow: none;
+}
+navigation-view-page > toolbarview {
+  border-radius: 10px;
+}
+button.app-version > label {
+  color: var(--base0C);
+}
+window:not(.nautilus-window):not(.filechooser) scrolledwindow > gridview {
+  margin: 0px 6px 6px 6px;
+  border-radius: 10px;
+  background-color: var(--base00);
+  box-shadow: var(--shadow-inset-base00);
+}
+list.background {
+  background-color: transparent;
+  box-shadow: none;
+}
+list.background.medium menubutton > button.image-button:active,
+list.background.medium menubutton > button.image-button:checked:not(:hover),
+list.background.medium button.image-button:active,
+list.background.medium button.image-button:checked:not(:hover) {
+  box-shadow: var(--shadow-inset-base00);
+}
+list.background.medium list.background > row {
+  margin: 0px;
+  padding: 0px;
+}
+list.background > row > box > list.boxed-list {
+  margin: 0px;
+  padding: 0px;
+}
+widget#artists > overlay-split-view > widget.content-pane {
+  margin: 0px 6px 6px 0px;
+  border-radius: 10px;
+  background-color: var(--base00);
+  box-shadow: var(--shadow-inset-base00);
+}
+widget#artists > overlay-split-view > widget.content-pane > scrolledwindow {
+  margin: 4px 0px 1px 0px; /*To avoid clipping content-pane shadow*/
+}
+widget#artists > overlay-split-view {
+  background-color: var(--base01);
+}
+revealer.bottom-bar.raised {
+  margin-top: 1px; /*6px + 1px gives us same space between this pseudo separator and the content-pane as headerbar pseudo sep and content-pane*/
+  box-shadow: var(--shadow-separator-mimic-horizontal-base01);
+}
+button.toggle:hover:not(:active) > box > contents > box > image {
+  color: var(--base01);
 }

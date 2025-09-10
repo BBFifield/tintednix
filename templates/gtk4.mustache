@@ -234,8 +234,11 @@ $base0F: #{{base0F-hex}};
   --base08-black-25:      color-mix(in oklab, #{$base08} 25%, black);
   --base08-white-65-dark: color-mix(in oklab, #{$base08} #{if($variant == dark, 65%, 45%)}, white);
 
-  // base09 & base0A
+  // base09
   --base09-white-65-dark: color-mix(in oklab, #{$base09} #{if($variant == dark, 65%, 45%)}, white);
+
+  // base0A
+  --base0A-black-60:      color-mix(in oklab, #{$base0A} 60%, black);
   --base0A-white-65-dark: color-mix(in oklab, #{$base0A} #{if($variant == dark, 65%, 45%)}, white);
 
   // base0B
@@ -245,12 +248,16 @@ $base0F: #{{base0F-hex}};
   --base0B-white-65-dark: color-mix(in oklab, #{$base0B} #{if($variant == dark, 65%, 45%)}, white);
 
   // base0C
+  --base0B-black-80:      color-mix(in oklab, #{$base0B} 80%, black);
   --base0C-black-60:      color-mix(in oklab, #{$base0C} 60%, black);
+  --base0B-black-25:      color-mix(in oklab, #{$base0B} 25%, black);
   --base0C-black-65-dark: color-mix(in oklab, #{$base0C} #{if($variant == dark, 65%, 80%)}, black);
   --base0C-white-65-dark: color-mix(in oklab, #{$base0C} #{if($variant == dark, 65%, 45%)}, white);
 
   // base0D
+  --base0D-black-80:      color-mix(in oklab, #{$base0B} 80%, black);
   --base0D-black-60:      color-mix(in oklab, #{$base0D} 60%, black);
+  --base0D-black-25:      color-mix(in oklab, #{$base0B} 25%, black);
   --base0D-black-65-dark: color-mix(in oklab, #{$base0D} #{if($variant == dark, 65%, 80%)}, black);
   --base0D-white-65-dark: color-mix(in oklab, #{$base0D} #{if($variant == dark, 65%, 45%)}, white);
 
@@ -282,11 +289,14 @@ $base0F: #{{base0F-hex}};
   --shadow-inset-base02: #{top-deep-inset-shadow(var(--base02-black-80))}, #{bottom-inset-shadow(var(--base02-white-90-dark))};
   --shadow-inset-base03: #{top-deep-inset-shadow(var(--base03-black-80))}, #{bottom-inset-shadow(var(--base03-white-90-dark))};
   --shadow-inset-base08: #{top-deep-inset-shadow(var(--base08-black-60))}, #{bottom-inset-shadow(var(--base08-white-65-dark))};
+  --shadow-inset-base0A: #{top-deep-inset-shadow(var(--base0A-black-60))}, #{bottom-inset-shadow(var(--base0A-white-65-dark))};
   --shadow-inset-base0B: #{top-deep-inset-shadow(var(--base0B-black-60))}, #{bottom-inset-shadow(var(--base0B-white-65-dark))};
   --shadow-inset-base0D: #{top-deep-inset-shadow(var(--base0D-black-60))}, #{bottom-inset-shadow(var(--base0D-white-65-dark))};
 
   --shadow-inset-base08-dull: #{top-deep-inset-shadow(var(--base08-black-25))}, #{bottom-inset-shadow(var(--base08-black-80))};
+  --shadow-inset-base0D-dull: #{top-deep-inset-shadow(var(--base0D-black-25))}, #{bottom-inset-shadow(var(--base0D-black-80))};
   --shadow-inset-base0B-dull: #{top-deep-inset-shadow(var(--base0B-black-25))}, #{bottom-inset-shadow(var(--base0B-black-80))};
+  --shadow-inset-base0C-dull: #{top-deep-inset-shadow(var(--base0C-black-25))}, #{bottom-inset-shadow(var(--base0C-black-80))};
 
   --shadow-thin-base00: #{thin-shadow(var(--base00-white-90-dark))};
   --shadow-thin-base01: #{thin-shadow(var(--base01-white-90-dark))};
@@ -299,10 +309,13 @@ $base0F: #{{base0F-hex}};
   --shadow-thin-base0D: #{thin-shadow(var(--base0D-white-65-dark))};
 
   --shadow-thin-base08-dull: #{thin-shadow(var(--base08-black-80))};
+  --shadow-thin-base0D-dull: #{thin-shadow(var(--base0D-black-80))};
   --shadow-thin-base0B-dull: #{thin-shadow(var(--base0B-black-80))};
+  --shadow-thin-base0C-dull: #{thin-shadow(var(--base0C-black-80))};
 
   --shadow-wide-base01: #{wide-shadow(var(--base01-white-90-dark))};
   --shadow-wide-base02: #{wide-shadow(var(--base02-white-90-dark))};
+  --shadow-wide-base03: #{wide-shadow(var(--base03-white-90-dark))};
   --shadow-wide-base08: #{wide-shadow(var(--base08-white-65-dark))};
 
   --shadow-light-separator-mimic-horizontal-base00: #{horizontal-separator-mimic-shadow(var(--base00-black-85-dark), var(--base00-black-95-dark), var(--base00-white-95-dark))};
