@@ -85,9 +85,9 @@ headerbar > windowhandle > box > box.end {
   border-spacing: 6px;
 }
 
+/********************** General Typography * */
 label,
-text,
-windowtitle > box > label.title {
+text {
   font:
     normal 16px "jetbrainsmono nerd font",
     sans-serif;
@@ -98,19 +98,19 @@ image {
   color: var(--base0D);
 }
 
-label.subtitle {
-  padding: 0px 12px 0px 12px;
-}
 label.large-title {
   font-size: 35px;
   font-weight: 300;
 }
-label.title,
-label.title-1 {
+label.title-1,
+statuspage > scrolledwindow > viewport > box > clamp > box > .title {
   font-size: 27px;
   font-weight: 800;
 }
-label.title-2 {
+label.title-2,
+statuspage.spinner > scrolledwindow > viewport > box > clamp > box > .title,
+statuspage.compact > scrolledwindow > viewport > box > clamp > box > .title,
+window.dialog.message box.dialog-vbox.vertical > box > box > box > label.title {
   font-size: 21px;
   font-weight: 800;
 }
@@ -121,26 +121,36 @@ label.title-4 {
   font-size: 19px;
 }
 label.subtitle {
+  /* padding: 0px 12px 0px 12px; */ /*commented out because of fragments*/
   opacity: 0.5;
 }
-label.caption {
+label.caption,
+.body {
   font-weight: 400;
 }
 label.caption,
 label.caption-heading,
-label.subtitle {
+label.subtitle,
+columnview > header > button > box,
+treeview.view > header > button > box,
+window.print:not(.ssd-frame) treeview.dialog-action-box > header > button > box {
   font-size: 14px;
 }
-label.heading,
-label.title-3,
-label.title-4,
-label.caption-heading,
-label.link > link {
+heading,
+row.button .title,
+listview > header {
   font-weight: bold;
-  text-decoration-line: underline;
+}
+.numeric,
+spinbutton,
+scale > value,
+progressbar > text {
+  font-feature-settings: "tnum";
 }
 label.link > link {
+  font-weight: bold;
   color: var(--base0C);
+  text-decoration-line: underline;
 }
 *.error {
   color: var(--base08);
@@ -150,6 +160,13 @@ label.keycap,
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
 }
+
+image.bubble {
+  color: var(--base0D);
+  background-color: color-mix(in oklab, var(--base0D) 60%, black);
+}
+
+/********************** Entry * */
 entry {
   /*Had to change minimum to 34, otherwise epiphany couldn't allocated 34px to menubutton in entry and would crash*/
   min-height: 30px; /*was 30px*/
@@ -305,7 +322,10 @@ block.filled {
   background-color: var(--base0B);
 }
 
-progressbar progress,
+progressbar > trough:not(.full) > progress {
+  background-color: var(--base0D);
+}
+progressbar > trough.full > progress,
 levelbar block.filled {
   background-color: var(--base0B);
 }
@@ -702,6 +722,15 @@ button {
     box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
   animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
+/*Ex: gnome music next and previous buttons*/
+actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):not(:hover):not(:active):not(:checked) {
+  background-color: transparent;
+  box-shadow: none;
+}
+button.circular:not(.star):not(.flat) {
+  background-color: color-mix(in oklab, var(--base0D) 60%, black);
+  box-shadow: var(--shadow-thin-base0D-dull);
+}
 button:checked:not(:hover) {
   animation: none;
 }
@@ -717,7 +746,15 @@ button.pill:hover:checked,
 button.pill:active:checked,
 button.pill:hover:active:checked {
   padding: 10px 32px 10px 32px;
-  box-shadow: var(--shadow-inset-base01);
+  box-shadow: var(--shadow-inset-base0D-dull);
+}
+button.circular:not(.starred):active,
+button.circular:not(.starred):checked,
+button.circular:not(.starred):hover:active,
+button.circular:not(.starred):hover:checked,
+button.circular:not(.starred):active:checked,
+button.circular:not(.starred):hover:active:checked {
+  box-shadow: var(--shadow-inset-base0D-dull);
 }
 button.default.text-button,
 button.suggested-action.text-button,
@@ -795,12 +832,14 @@ button:hover:active:checked {
   padding: 2px 9px 2px 9px;
   box-shadow: var(--shadow-inset-base01);
 }
-button:hover {
+button:hover,
+actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):hover:not(:active):not(:checked) {
   color: var(--base0D); /*the ripple keyframe inherits this for use in the background-image, which is why background-color isn't needed*/
   box-shadow: var(--shadow-thin-base0D);
   animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
-button:hover:checked {
+button:hover:checked,
+actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):hover:checked {
   margin: 0px;
   padding: 2px 9px 2px 9px;
   box-shadow: var(--shadow-inset-base0D);
@@ -888,7 +927,12 @@ button.suggested-action.image-text-button:not(.pill):active,
 button.suggested-action.image-text-button:not(.pill):checked:not(:hover),
 button.suggested-action.image-text-button:not(.pill):hover:active,
 button.suggested-action.image-text-button:not(.pill):active:checked,
-button.suggested-action.image-text-button:not(.pill):hover:active:checked {
+button.suggested-action.image-text-button:not(.pill):hover:active:checked,
+actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
+actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):checked:not(:hover),
+actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover:active,
+actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active:checked,
+actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover:active:checked {
   background-color: transparent;
   box-shadow: var(--shadow-inset-base01);
 }
@@ -1621,8 +1665,8 @@ scrolledwindow.frame switch:not(:checked),
 scrolledwindow.frame row.activatable:active,
 scrolledwindow.frame row.activatable:selected:backdrop,
 scrolledwindow listview row.activatable:selected:backdrop,
-scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.activatable:active,
-scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list) > row.activatable:selected:backdrop,
+scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list):not(.content) > row.activatable:active,
+scrolledwindow > viewport list:not(.navigation-sidebar):not(.boxed-list):not(.content) > row.activatable:selected:backdrop,
 gridview.view > child.activatable:selected {
   background-color: transparent;
   box-shadow: var(--shadow-inset-base00);
@@ -1985,6 +2029,33 @@ row.activatable button.starred:hover:checked:not(:active):not(#_) {
   box-shadow: var(--shadow-inset-base0A);
 }
 
+/*Ex: fragments*/
+row.activatable:not(.inactive):hover:not(:active) image.bubble {
+  color: var(--base0D);
+  background-color: color-mix(in oklab, var(--base0D) 60%, black);
+}
+row.activatable:not(.inactive):hover:not(:active) progressbar > trough:not(.full) > progress {
+  background-color: color-mix(in oklab, var(--base0D) 80%, black);
+}
+row.activatable.inactive progressbar > trough:not(.full) > progress {
+  background-color: var(--base0A);
+}
+row.activatable.inactive:hover:not(:active) progressbar > trough:not(.full) > progress {
+  background-color: color-mix(in oklab, var(--base0A) 80%, black);
+}
+row.inactive image.bubble,
+row.activatable.inactive:active image.bubble {
+  color: var(--base0A);
+  background-color: color-mix(in oklab, var(--base0A) 60%, black);
+}
+row.activatable.inactive:hover:not(:active) {
+  background-color: var(--base0A);
+  box-shadow: var(--shadow-thin-base0A);
+}
+row.activatable.inactive:hover:not(:active) progressbar trough {
+  box-shadow: var(--shadow-inset-thin-base0A);
+}
+
 /*inspector global settings dropdowns.*/
 stack:hover > row.activatable:hover {
   box-shadow: none;
@@ -2040,6 +2111,7 @@ list:not(.navigation-sidebar) > separator {
 
 /*Ex: Global settings in inspector window*/
 list.boxed-list,
+list.content,
 list.nested {
   margin: 5px;
   padding: 5px 0px;
@@ -2053,7 +2125,8 @@ list.boxed-list list.nested {
   background-color: var(--base03);
   box-shadow: var(--shadow-thin-base03);
 }
-list.boxed-list > row:first-child {
+list.boxed-list > row:first-child,
+list.content > row:first-child {
   border-radius: 1px;
 }
 list.boxed-list > row.activatable:hover,
@@ -2061,10 +2134,15 @@ list.boxed-list list > row.activatable:hover,
 list.boxed-list:not(#_) > row.activatable:active,
 list.boxed-list:not(#_) > row.activatable:selected,
 list.boxed-list:not(#_) > row.activatable:hover:active,
-list.boxed-list:not(#_) > row.activatable:hover:not(:active):not(:selected) {
+list.boxed-list:not(#_) > row.activatable:hover:not(:active):not(:selected),
+list.content:not(#_) > row.activatable:active,
+list.content:not(#_) > row.activatable:selected,
+list.content:not(#_) > row.activatable:hover:active,
+list.content:not(#_) > row.activatable:hover:not(:active):not(:selected) {
   border-radius: 10px;
 }
-list.boxed-list > row + row {
+list.boxed-list > row + row,
+list.content > row + row {
   box-shadow: var(--shadow-separator-mimic-horizontal-base02);
 }
 /*Ex: pwvucontrol*/
@@ -2074,7 +2152,8 @@ list.boxed-list list.nested > row + row {
   box-shadow: var(--shadow-separator-mimic-horizontal-base03);
 }
 list.boxed-list > row.activatable:active,
-list.boxed-list > row.expander *:not(revealer) > list:not(#_) > row.activatable:active {
+list.boxed-list > row.expander *:not(revealer) > list:not(#_) > row.activatable:active,
+list.content > row.activatable:active {
   box-shadow: var(--shadow-inset-base02);
 }
 list.boxed-list list.boxed-list > row.activatable:active,
@@ -2091,9 +2170,14 @@ list.boxed-list row.activatable box button.image-button:checked:not(:hover),
 list.boxed-list row.activatable:active box button:active,
 list.boxed-list row.activatable:active box button:not(:hover):checked,
 list.boxed-list row.activatable:not(:hover) box button:checked,
-list.boxed-list row.activatable:hover *:not(box) *:not(dropdown) > button:not(.image-button):not(.image-text-button):not(:hover):checked {
+list.boxed-list row.activatable:hover *:not(box) *:not(dropdown) > button:not(.image-button):not(.image-text-button):not(:hover):checked,
+list.content row box button:active,
+list.content row box button:not(:hover):checked,
+list.content row.activatable box button.image-button:checked:not(:hover),
+list.content row.activatable:active box button:active,
+list.content row.activatable:active box button:not(:hover):checked,
+list.content row.activatable:not(:hover) box button:checked {
   box-shadow: var(--shadow-inset-base02);
-  animation: none;
 }
 list.boxed-list list.boxed-list row.activatable:active box button.image-button:active,
 list.boxed-list list.boxed-list row.activatable:active box button.image-button:checked,
@@ -2106,10 +2190,13 @@ list.boxed-list list.boxed-list row.activatable:hover *:not(box) button:not(.ima
   box-shadow: var(--shadow-inset-base03);
 }
 list.boxed-list row.activatable:hover:not(:active) box button.image-button:checked,
-list.boxed-list row.activatable:hover:not(:active) box button.image-text-button:checked {
+list.boxed-list row.activatable:hover:not(:active) box button.image-text-button:checked,
+list.content row.activatable:hover:not(:active) box button.image-button:checked,
+list.content row.activatable:hover:not(:active) box button.image-text-button:checked {
   box-shadow: var(--shadow-inset-base0D);
 }
-list.boxed-list > row:hover button:active * {
+list.boxed-list > row:hover button:active *,
+list.content > row:hover button:active * {
   color: var(--base0D);
 }
 list.boxed-list list.boxed-list > row:not(.activatable):not(#_) box > widget > scale > marks > mark > indicator {
@@ -2141,13 +2228,18 @@ list.boxed-list > row.expander *:not(revealer) > list > row radio:not(:checked):
 list.boxed-list > row.expander *:not(revealer) > list > row check:not(:checked):not(:indeterminate),
 /*epiphany prefs*/
 list.boxed-list > row > box > box > checkbutton > radio:not(:checked):not(:indeterminate),
-list.boxed-list > row > box > box > checkbutton > check:not(:checked):not(:indeterminate) {
+list.boxed-list > row > box > box > checkbutton > check:not(:checked):not(:indeterminate),
+list.content > row > box > box > checkbutton > radio:not(:checked):not(:indeterminate),
+list.content > row > box > box > checkbutton > check:not(:checked):not(:indeterminate),
+list.content > row > box > box > box > progressbar > trough {
   box-shadow: var(--shadow-inset-thin-base02);
 }
-list.boxed-list > row scale > trough {
+list.boxed-list > row scale > trough,
+list.content > row scale > trough {
   box-shadow: var(--shadow-inset-extra-thin-base02);
 }
-list.boxed-list > row popover scale > trough {
+list.boxed-list > row popover scale > trough,
+list.content > row popover scale > trough {
   box-shadow: var(--shadow-inset-extra-thin-base01);
 }
 list.boxed-list > row switch:not(:checked),
@@ -2155,7 +2247,10 @@ list.boxed-list > row.activatable:active switch:not(:checked),
 list.boxed-list > row.activatable:hover:active switch:not(:checked),
 list.boxed-list > row.expander *:not(revealer) > list > row switch:not(:checked),
 list.boxed-list > row.expander *:not(revealer) > list > row.activatable:active switch:not(:checked),
-list.boxed-list > row.expander *:not(revealer) > list > row.activatable:hover:active switch:not(:checked) {
+list.boxed-list > row.expander *:not(revealer) > list > row.activatable:hover:active switch:not(:checked),
+list.content > row switch:not(:checked),
+list.content > row.activatable:active switch:not(:checked),
+list.content > row.activatable:hover:active switch:not(:checked) {
   box-shadow: var(--shadow-inset-base02);
 }
 list.boxed-list list.boxed-list > row block.empty,
@@ -2198,8 +2293,11 @@ list.boxed-list list.nested > row.activatable:active switch:not(:checked),
 list.boxed-list list.nested > row.activatable:hover:active switch:not(:checked) {
   box-shadow: var(--shadow-inset-base03);
 }
+/*Row acts as button, so no need to have decoration for button inside it*/
 list.boxed-list > row.activatable:hover:not(:active) > button.text-button:hover,
-list.boxed-list > row.activatable:active > button.text-button:active {
+list.boxed-list > row.activatable:active > button.text-button:active,
+list.content > row.activatable:hover:not(:active) > button.text-button:hover,
+list.content > row.activatable:active > button.text-button:active {
   background-color: transparent;
   box-shadow: none;
   animation: none;
@@ -2329,6 +2427,9 @@ listview.navigation-sidebar > row.activatable:selected,
 listview.navigation-sidebar > row.activatable:selected:backdrop {
   box-shadow: var(--shadow-inset-base01);
 }
+listview.navigation-sidebar {
+  margin: 0px 0px 1px 0px;
+}
 /*the row is acting as a button here, so no need to have styling for the button itself*/
 listview > row.activatable > button.text-button,
 listview > row.activatable:hover > button.text-button,
@@ -2338,27 +2439,24 @@ listview > row.activatable:hover > button.image-text-button {
   box-shadow: none;
 }
 /*mimic inset separators*/
-listview > row + row {
+listview:not(.navigation-sidebar) > row + row {
   margin: 2px 3px 0px 4px;
   padding: 2px 4px 1px 3px;
   border-radius: 1px;
   box-shadow: var(--shadow-light-separator-mimic-horizontal-base00);
 }
-listview.navigation-sidebar > row + row {
-  box-shadow: var(--shadow-separator-mimic-horizontal-base01);
-}
-listview > row.activatable:hover + row:not(:selected),
-listview > row.activatable:selected + row:not(:hover) {
+listview:not(.navigation-sidebar) > row.activatable:hover + row:not(:selected),
+listview:not(.navigation-sidebar) > row.activatable:selected + row:not(:hover) {
   box-shadow: none;
 }
-listview > row + row.activatable:active,
-listview > row + row.activatable:selected,
-listview > row + row.activatable:hover:active {
+listview:not(.navigation-sidebar) > row + row.activatable:active,
+listview:not(.navigation-sidebar) > row + row.activatable:selected,
+listview:not(.navigation-sidebar) > row + row.activatable:hover:active {
   margin: 3px 3px 0px 3px;
   padding: 1px 4px;
   border-radius: 50px;
 }
-listview > row + row.activatable:hover:not(:active):not(:selected) {
+listview:not(.navigation-sidebar) > row + row.activatable:hover:not(:active):not(:selected) {
   margin: 4px 3px 0px 4px;
   padding: 0px 4px 1px 3px;
   border-radius: 50px;
@@ -2862,7 +2960,7 @@ button.current-dir:active {
 #NautilusQueryEditorTag,
 #NautilusQueryEditorTag button:active {
   background-color: var(--base02);
-  box-shadow: var(--shadow-inset-thin-base02);
+  box-shadow: var(--shadow-inset-base02);
 }
 #NautilusPathBar undershoot.left,
 #NautilusPathBar > scrolledwindow > viewport {
@@ -3045,6 +3143,19 @@ window.filechooser scrolledwindow > gridview {
   background-color: var(--base00);
   box-shadow: var(--shadow-inset-base00);
 }
+window.filechooser actionbar > revealer > box {
+  margin-top: 2px;
+  padding-top: 6px;
+  box-shadow: var(--shadow-separator-mimic-horizontal-base01);
+}
+window.filechooser actionbar > revealer > box {
+  background-color: transparent;
+}
+window.filechooser placesview > actionbar > revealer > box {
+  margin-top: 0px;
+  padding-top: 0px;
+  box-shadow: none;
+}
 
 /*celluloid*/
 graphicsoffload + statuspage {
@@ -3210,7 +3321,7 @@ header.top.horizontal tabs {
 }
 
 /*****************/
-/*music*/
+/*gnome music*/
 /*****************/
 revealer.top-bar {
   box-shadow: none;
@@ -3251,7 +3362,7 @@ list.background.medium list.background > row {
 }
 list.background > row > box > list.boxed-list {
   margin: 0px;
-  padding: 0px;
+  padding: 5px 0px;
 }
 widget#artists > overlay-split-view > widget.content-pane {
   margin: 0px 6px 6px 0px;
@@ -3265,10 +3376,18 @@ widget#artists > overlay-split-view > widget.content-pane > scrolledwindow {
 widget#artists > overlay-split-view {
   background-color: var(--base01);
 }
-revealer.bottom-bar.raised {
+revealer.bottom-bar.raised:not(.border) {
   margin-top: 1px; /*6px + 1px gives us same space between this pseudo separator and the content-pane as headerbar pseudo sep and content-pane*/
   box-shadow: var(--shadow-separator-mimic-horizontal-base01);
 }
-button.toggle:hover:not(:active) > box > contents > box > image {
+button.toggle:hover:not(:active) > box > contents > box > image,
+button.toggle:hover:not(:active) > box > contents > box > label {
   color: var(--base01);
+}
+
+/*****************/
+/*fragments*/
+/*****************/
+widget:not(.image-view) > overlay {
+  margin: 0px 6px 6px 6px;
 }
