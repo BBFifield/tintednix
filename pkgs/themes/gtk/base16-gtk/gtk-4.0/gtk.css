@@ -172,6 +172,24 @@ image.bubble {
   background-color: color-mix(in oklab, var(--base0D) 60%, black);
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+spinner {
+  color: var(--base0D);
+  background: none;
+  opacity: 0;
+  -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
+}
+
+spinner:checked {
+  opacity: 1;
+  animation: spin 1s linear infinite;
+}
+
 /********************** Entry * */
 entry {
   /*Had to change minimum to 34, otherwise epiphany couldn't allocated 34px to menubutton in entry and would crash*/
@@ -774,6 +792,7 @@ button.suggested-action.image-text-button {
   color: var(--base0B);
 }
 button.destructive-action.text-button,
+button.destructive-action:not(.text-button):not(.image-button),
 /*Ex: epiphany*/
 tabthumbnail button.tab-close-button {
   background-color: color-mix(in oklab, var(--base08) 60%, black);
@@ -795,13 +814,17 @@ button.tab-close-button > * {
 }
 button.small-button,
 button.tab-indicator,
-menubutton.entry-icon > button,
-button.entry-icon,
-button.sidebar-button,
-button.tab-close-button {
+button.sidebar-button {
   min-width: 16px;
   min-height: 22px;
   margin: 8px 0px 0px 8px;
+  padding: 2px 6px 3px 5px;
+}
+button.entry-icon,
+menubutton.entry-icon > button {
+  min-width: 16px;
+  min-height: 22px;
+  margin: 1px 0px 0px 1px;
   padding: 2px 6px 3px 5px;
 }
 button.tab-close-button {
@@ -811,8 +834,8 @@ button.tab-close-button {
   padding: 0px 0px 0px 0px;
 }
 button.tab-close-button > image {
-  min-height: 16px;
   min-width: 16px;
+  min-height: 16px;
   margin: 6px;
 }
 button.small-button:active,
@@ -1280,13 +1303,6 @@ tooltip {
 }
 tooltip label {
   padding: 0px 6px 0px 6px;
-}
-
-spinner {
-  color: var(--base0D);
-  animation: spin 1s linear infinite;
-
-  -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
 }
 
 treeview.view {
@@ -3463,4 +3479,22 @@ button.toggle:hover:not(:active) > box > contents > box > label {
 /*****************/
 widget:not(.image-view) > overlay {
   margin: 0px 6px 6px 6px;
+}
+
+/*****************/
+/*nmgui*/
+/*****************/
+label#wifi-label {
+  font-size: 19px;
+  font-weight: 700;
+}
+label#wifi-networks-label {
+  font-size: 16px;
+  font-weight: 700;
+}
+label#wifi-scan-label:hover {
+  color: color-mix(in oklab, var(--base0D) 60%, white);
+}
+label#scanning-label {
+  font-style: italic;
 }

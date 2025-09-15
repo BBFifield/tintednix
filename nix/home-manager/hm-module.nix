@@ -181,7 +181,7 @@ in {
           ''
             #!/usr/bin/env bash
 
-            ### 1) Usage / help function
+            ### Usage / help function
             usage() {
               cat <<-EOF
             Usage: $(basename "$0") [OPTIONS]
@@ -193,50 +193,56 @@ in {
             EOF
             }
 
-            ### 2) Default vars
+            ### Default vars
             _action=""
             _key=""
             _theme=""
             config_dir="$HOME/.config"
             tintednix="/etc/profiles/per-user/$(whoami)/bin/tintednix"
 
-            ### 3) Parse short options
-            while getopts ":g:u:h" opt; do
-              case $opt in
-                g) _action="get";    _key="$OPTARG"      ;;
-                u) _action="update"; _theme="$OPTARG"    ;;
-                h) usage; exit 0                         ;;
-                \?) echo "Invalid option: -$OPTARG" >&2; usage; exit 1 ;;
-                :)  echo "Option -$OPTARG requires an argument." >&2; usage; exit 1 ;;
-              esac
-            done
-            shift $(( OPTIND - 1 ))
+            # 1) Pre-parse all options
+            PARSED=$(getopt \
+              --options g:u:h \
+              --longoptions get:,update:,help \
+              --name "$(basename "$0")" \
+              -- "$@"
+            ) || exit 1
 
-            ### 4) Parse long options
-            # (only if you want --get/--update instead of -g/-u)
-            while [[ $# -gt 0 ]]; do
-              case $1 in
-                --get)
+            # 2) Re-initialize the positional parameters
+            eval set -- "$PARSED"
+
+            # 3) Handle options
+            _action=""
+            _key=""
+            _theme=""
+            while true; do
+              case "$1" in
+                -g|--get)
                   _action="get"
                   _key="$2"
                   shift 2
                   ;;
-                --update)
+                -u|--update)
                   _action="update"
                   _theme="$2"
                   shift 2
                   ;;
-                --help)
-                  usage; exit 0
+                -h|--help)
+                  usage
+                  exit 0
+                  ;;
+                --)
+                  shift
+                  break
                   ;;
                 *)
-                  echo "Unknown option: $1" >&2
-                  usage
+                  echo "Unhandled option: $1" >&2
                   exit 1
                   ;;
               esac
             done
 
+            # 4) Dispatch
             case $_action in
               get)
                 grep "$_key=" "$config_dir/tintednix/settings.txt" | cut -d '=' -f 2
