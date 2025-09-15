@@ -180,23 +180,88 @@ in {
         (lib.mkOrder 5
           ''
             #!/usr/bin/env bash
-            arg1=$1
-            directory=${config.home.homeDirectory}/.config
-            arg2="$2"
 
-            tintednix=/etc/profiles/per-user/$(whoami)/bin/tintednix
+            ### 1) Usage / help function
+            usage() {
+              cat <<-EOF
+            Usage: $(basename "$0") [OPTIONS]
 
-            if [[ $arg1 == "get" ]]; then
-              grep "$arg2=" "$directory/tintednix/settings.txt" | cut -d '=' -f 2
-            elif [[ $arg1 == "update" ]]; then
-              # Clear the contents of the target file
-              sed -i '1,$d' "$directory/tintednix/settings.txt"
-              source_file_content=$(cat "$directory/tintednix/color-schemes/$arg2.txt")
-              gawk -i inplace -v src="$source_file_content" '{ print } ENDFILE { print src }' "$directory/tintednix/settings.txt" || echo "Failed to update settings"
+            Options:
+              -g, --get KEY       print the value of KEY from settings.txt
+              -u, --update THEME  switch to THEME (propagate to all configs)
+              -h, --help          show this message and exit
+            EOF
+            }
+
+            ### 2) Default vars
+            _action=""
+            _key=""
+            _theme=""
+            config_dir="$HOME/.config"
+            tintednix="/etc/profiles/per-user/$(whoami)/bin/tintednix"
+
+            ### 3) Parse short options
+            while getopts ":g:u:h" opt; do
+              case $opt in
+                g) _action="get";    _key="$OPTARG"      ;;
+                u) _action="update"; _theme="$OPTARG"    ;;
+                h) usage; exit 0                         ;;
+                \?) echo "Invalid option: -$OPTARG" >&2; usage; exit 1 ;;
+                :)  echo "Option -$OPTARG requires an argument." >&2; usage; exit 1 ;;
+              esac
+            done
+            shift $(( OPTIND - 1 ))
+
+            ### 4) Parse long options
+            # (only if you want --get/--update instead of -g/-u)
+            while [[ $# -gt 0 ]]; do
+              case $1 in
+                --get)
+                  _action="get"
+                  _key="$2"
+                  shift 2
+                  ;;
+                --update)
+                  _action="update"
+                  _theme="$2"
+                  shift 2
+                  ;;
+                --help)
+                  usage; exit 0
+                  ;;
+                *)
+                  echo "Unknown option: $1" >&2
+                  usage
+                  exit 1
+                  ;;
+              esac
+            done
+
+            case $_action in
+              get)
+                grep "$_key=" "$config_dir/tintednix/settings.txt" | cut -d '=' -f 2
+                ;;
+            update)
+              if [[ -z "$_theme" ]]; then
+                echo "Error: --update requires a theme name." >&2
+                usage
+                exit 1
+              fi
+
+              # Clear settings.txt and append the new theme’s file
+              sed -i '1,$d' "$config_dir/tintednix/settings.txt"
+              src_file_content=$(cat "$config_dir/tintednix/color-schemes/$_theme.txt")
+              gawk -i inplace -v src="$src_file_content" '{ print } ENDFILE { print src }' "$config_dir/tintednix/settings.txt" || echo "Failed to update settings"
           '')
         (lib.mkOrder 2000
           ''
-            fi
+                ;;
+              *)
+                echo "Error: no mode specified." >&2
+                usage
+                exit 1
+                ;;
+            esac
           '')
       ];
       targetHooks' = lib.mkMerge [targetHooks scriptParts];

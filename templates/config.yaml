@@ -4,3 +4,6 @@ gtk3:
 gtk4:
     extension: .scss
     output: colors
+epiphany:
+    extension: .scss
+    output: user-stylesheet

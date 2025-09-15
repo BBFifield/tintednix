@@ -55,6 +55,12 @@ arrow {
 arrow.left {
   -gtk-icon-source: -gtk-icontheme("go-previous-symbolic");
 }
+arrow.down {
+  -gtk-icon-source: -gtk-icontheme("go-down-symbolic");
+}
+arrow.up {
+  -gtk-icon-source: -gtk-icontheme("go-up-symbolic");
+}
 
 *:disabled {
   /* opacity: 0.6; */
@@ -690,7 +696,7 @@ splitbutton arrow {
   transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 splitbutton:checked arrow {
-  -gtk-icon-transform: rotate(0.25turn);
+  -gtk-icon-transform: rotate(-0.5turn);
 }
 splitbutton > separator.vertical {
   margin: 3px 2px;
@@ -727,7 +733,7 @@ actionbar > revealer > box button.image-button:not(.raised):not(.suggested-actio
   background-color: transparent;
   box-shadow: none;
 }
-button.circular:not(.star):not(.flat) {
+button.circular:not(.star):not(.flat):not(:hover) {
   background-color: color-mix(in oklab, var(--base0D) 60%, black);
   box-shadow: var(--shadow-thin-base0D-dull);
 }
@@ -748,12 +754,13 @@ button.pill:hover:active:checked {
   padding: 10px 32px 10px 32px;
   box-shadow: var(--shadow-inset-base0D-dull);
 }
-button.circular:not(.starred):active,
-button.circular:not(.starred):checked,
-button.circular:not(.starred):hover:active,
-button.circular:not(.starred):hover:checked,
-button.circular:not(.starred):active:checked,
-button.circular:not(.starred):hover:active:checked {
+button.circular:not(.star):not(.flat):active,
+button.circular:not(.star):not(.flat):checked,
+button.circular:not(.star):not(.flat):hover:active,
+button.circular:not(.star):not(.flat):hover:checked,
+button.circular:not(.star):not(.flat):active:checked,
+button.circular:not(.star):not(.flat):hover:active:checked {
+  background-color: color-mix(in oklab, var(--base0D) 60%, black);
   box-shadow: var(--shadow-inset-base0D-dull);
 }
 button.default.text-button,
@@ -792,11 +799,21 @@ menubutton.entry-icon > button,
 button.entry-icon,
 button.sidebar-button,
 button.tab-close-button {
-  /*24x24 allocation*/
   min-width: 16px;
   min-height: 22px;
-  margin: 1px 0px 0px 1px;
+  margin: 8px 0px 0px 8px;
   padding: 2px 6px 3px 5px;
+}
+button.tab-close-button {
+  min-width: 15px;
+  min-height: 15px;
+  margin: 1px 0px 0px 1px;
+  padding: 0px 0px 0px 0px;
+}
+button.tab-close-button > image {
+  min-height: 16px;
+  min-width: 16px;
+  margin: 6px;
 }
 button.small-button:active,
 button.small-button:hover:active,
@@ -810,12 +827,16 @@ button.entry-icon:hover:checked,
 menubutton.entry-icon > button:active,
 menubutton.entry-icon > button:hover:active,
 menubutton.entry-icon > button:hover:checked,
-button.tab-close-button:active,
-button.tab-close-button:hover:active,
 button.sidebar-button:active,
 button.sidebar-button:hover:active {
   margin: 0px;
   padding: 3px 6px 3px 6px;
+  box-shadow: var(--shadow-inset-thin-base01);
+}
+button.tab-close-button:active,
+button.tab-close-button:hover:active {
+  margin: 0px;
+  padding: 1px 0px 0px 1px;
   box-shadow: var(--shadow-inset-thin-base01);
 }
 button:active,
@@ -839,7 +860,7 @@ actionbar > revealer > box button.image-button:not(.raised):not(.suggested-actio
   animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 button:hover:checked,
-actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):hover:checked {
+actionbar > revealer > box *:not(.linked) > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):hover:checked {
   margin: 0px;
   padding: 2px 9px 2px 9px;
   box-shadow: var(--shadow-inset-base0D);
@@ -884,11 +905,15 @@ button.file:hover:not(:active):not(:checked) {
 }
 button.starred:hover:not(:active):not(:checked),
 button.tab-indicator:hover:not(:active):not(:checked) {
+  color: var(--base0A);
   box-shadow: var(--shadow-thin-base0A);
 }
 button.starred:hover:checked:not(:active),
 button.tab-indicator:hover:checked:not(:active) {
   box-shadow: var(--shadow-inset-base0A);
+}
+button.starred:hover:active {
+  color: var(--base0A);
 }
 button.destructive-action:active,
 button.destructive-action:checked:not(:hover),
@@ -928,11 +953,11 @@ button.suggested-action.image-text-button:not(.pill):checked:not(:hover),
 button.suggested-action.image-text-button:not(.pill):hover:active,
 button.suggested-action.image-text-button:not(.pill):active:checked,
 button.suggested-action.image-text-button:not(.pill):hover:active:checked,
-actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
-actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):checked:not(:hover),
-actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover:active,
-actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active:checked,
-actionbar > revealer > box button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover:active:checked {
+actionbar > revealer > box *:not(.linked) > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active,
+actionbar > revealer > box *:not(.linked) > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):checked:not(:hover),
+actionbar > revealer > box *:not(.linked) > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover:active,
+actionbar > revealer > box *:not(.linked) > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):active:checked,
+actionbar > revealer > box *:not(.linked) > button.image-button:not(.raised):not(.suggested-action):not(.destructive-action):not(.opaque):hover:active:checked {
   background-color: transparent;
   box-shadow: var(--shadow-inset-base01);
 }
@@ -1114,11 +1139,16 @@ button:hover:checked:not(:active) row * {
 button > box > arrow {
   transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+button.combo > box > arrow {
+  -gtk-icon-source: -gtk-icontheme("go-down-symbolic");
+}
 button:checked > box > arrow {
-  -gtk-icon-transform: rotate(0.25turn);
+  -gtk-icon-transform: rotate(-0.5turn);
 }
 dropdown > button.toggle arrow {
   margin: 0px 0px 0px 10px;
+
+  -gtk-icon-source: -gtk-icontheme("go-down-symbolic");
 }
 /*Ex: Copy version number in about dialogs*/
 toast {
@@ -1943,6 +1973,12 @@ row.activatable:hover:selected button:not(#_):hover > *,
 row.activatable:selected progresscell label.in-progress,
 row.activatable:hover:not(:active):not(:selected) box > widget > scale > marks > mark > label,
 row.activatable.entry:active selection,
+row.activatable:hover:not(:active):not(:selected) button.starred:not(:hover):not(:active):not(:checked) > *,
+row.activatable:hover:not(:active):not(:selected) button.starred:active > *,
+row.activatable:hover:not(:active):not(:selected) button.starred:checked:not(:hover) > *,
+row.activatable:hover:not(:active):not(:selected) button.starred:hover:active > *,
+row.activatable:hover:not(:active):not(:selected) button.starred:active:checked:not(#_) > *,
+row.activatable:hover:not(:active):not(:selected) button.starred:hover:active:checked:not(#_) > *,
 child.activatable:hover label,
 child.activatable:hover image,
 header.activatable > button:active label {
@@ -1977,10 +2013,10 @@ row.activatable:active *,
 row.activatable:selected *,
 row.activatable:hover:active *,
 row.activatable:hover:selected *,
-row.activatable:hover:active button:not(#_) > *,
-row.activatable:hover:selected button:not(#_) > *,
-row.activatable:hover:selected button:not(#_):active > *,
-row.activatable:hover:selected button:not(#_):hover:active > *,
+row.activatable:hover:active button:not(.starred):not(#_) > *,
+row.activatable:hover:selected button:not(.starred):not(#_) > *,
+row.activatable:hover:selected button:not(.starred):not(#_):active > *,
+row.activatable:hover:selected button:not(.starred):not(#_):hover:active > *,
 /*First row in properties section of gtk inspector*/
 row.activatable:hover dropdown box row *,
 row.activatable:hover dropdown box arrow,
@@ -2022,10 +2058,15 @@ row.activatable:hover:not(:selected):not(:active) {
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
 }
+row.activatable:selected button.starred,
+row.activatable:hover:active button.starred:active,
+row.activatable:hover:active button.starred:hover:active:not(#_) > *,
+row.activatable:hover:selected button.starred:hover:active:not(#_) > *,
 row.activatable:active button.starred:checked:not(:hover):not(#_) > image {
   color: var(--base0A);
 }
 row.activatable button.starred:hover:checked:not(:active):not(#_) {
+  color: var(--base0A);
   box-shadow: var(--shadow-inset-base0A);
 }
 
@@ -2916,9 +2957,19 @@ button.current-dir:active {
 .nautilus-window widget.content-pane toolbarview {
   background-color: var(--base00);
 }
-.nautilus-window headerbar,
-.nautilus-list-view scrolledwindow:not(.frame) > columnview.view {
+.nautilus-window .content-pane headerbar,
+.nautilus-window .sidebar-pane headerbar {
   box-shadow: none;
+}
+.nautilus-window .content-pane scrolledwindow:not(.frame) > columnview.view {
+  box-shadow: none;
+}
+.nautilus-window overlay > widget > overlay,
+.nautilus-list-view scrolledwindow:not(.frame) > columnview.view {
+  margin: 0px;
+}
+.nautilus-window actionbar > revealer > box {
+  padding: 0px;
 }
 .nautilus-window widget.content-pane headerbar {
   background-color: var(--base00);
@@ -3146,10 +3197,8 @@ window.filechooser scrolledwindow > gridview {
 window.filechooser actionbar > revealer > box {
   margin-top: 2px;
   padding-top: 6px;
-  box-shadow: var(--shadow-separator-mimic-horizontal-base01);
-}
-window.filechooser actionbar > revealer > box {
   background-color: transparent;
+  box-shadow: var(--shadow-separator-mimic-horizontal-base01);
 }
 window.filechooser placesview > actionbar > revealer > box {
   margin-top: 0px;
@@ -3214,6 +3263,10 @@ window:not(.nautilus-window) toastoverlay *:not(lpdragoverlay):not(.image-view) 
   border-radius: 10px;
   background-color: var(--base00);
   box-shadow: var(--shadow-inset-base00);
+}
+*:not(lpdragoverlay):not(.image-view) > overlay > frame {
+  border: none;
+  box-shadow: none;
 }
 toastoverlay overlay > graphicsoffload > webkitwebview {
   margin: 3px 1px 1px 2px;
@@ -3303,6 +3356,9 @@ button.bottom:active {
 .navigation-box button:hover:checked > popover row:hover:not(:selected):not(:checked) *:not(#_) {
   color: var(--base01);
 }
+toolbarview.overview {
+  background-color: var(--base01);
+}
 
 /*****************/
 /*printing dialog*/
@@ -3337,8 +3393,25 @@ navigation-view-page > toolbarview > overlay:not(#_) {
 navigation-view-page > toolbarview {
   border-radius: 10px;
 }
-button.app-version > label {
+button.app-version {
+  background-color: color-mix(in oklab, var(--base0C) 60%, black);
+  box-shadow: var(--shadow-thin-base0C-dull);
+}
+button.app-version,
+button.app-version > label,
+button.app-version:active > label {
   color: var(--base0C);
+}
+button.app-version:hover:not(:active):not(:checked) {
+  box-shadow: var(--shadow-thin-base0C);
+}
+button.app-version:active,
+button.app-version:hover:active {
+  color: var(--base0C);
+  box-shadow: var(--shadow-inset-base0C-dull);
+}
+button.app-version:hover:not(:active) > label {
+  color: var(--base01);
 }
 window:not(.nautilus-window):not(.filechooser) scrolledwindow > gridview {
   margin: 0px 6px 6px 6px;
