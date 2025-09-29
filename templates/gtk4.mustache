@@ -96,7 +96,7 @@ $variant: {{scheme-variant}}; // “dark” or “light”
 }
 
 @function bottom-horizontal-separator-mimic-shadow($c1, $c2) {
-  "0px -1px 0px #{$c1} inset, 0px 1px 0px #{$c2}";
+  @return "0px -1px 0px #{$c1} inset, 0px 1px 0px #{$c2}";
 }
 
 
