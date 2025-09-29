@@ -87,16 +87,16 @@ $variant: {{scheme-variant}}; // “dark” or “light”
   @return "4px 12px 10px rgba(0, 0, 0, 0.2), 7px 18px 14px rgba(0, 0, 0, 0.21), 10px 24px 18px rgba(0, 0, 0, 0.25), 14px 30px 24px rgba(0, 0, 0, 0.3), -1px -1px 0px #{$color}";
 }
 
-@function horizontal-separator-mimic-shadow($c1, $c2, $c3) {
-  @return "0px -2px 0px #{$c1}, 0px -1px 0px #{$c2}, 0px 1px 0px #{$c3} inset";
+@function horizontal-separator-mimic-shadow($c1, $c2) {
+  @return "0px -1px 0px #{$c1}, 0px 1px 0px #{$c2} inset";
 }
 
-@function vertical-separator-mimic-shadow($c1, $c2, $c3) {
-  @return "-2px 0px 0px #{$c1}, -1px 0px 0px #{$c2}, 1px 0px 0px #{$c3} inset";
+@function vertical-separator-mimic-shadow($c1, $c2) {
+  @return "-1px 0px 0px #{$c1}, 1px 0px 0px #{$c2} inset";
 }
 
-@function bottom-horizontal-separator-mimic-shadow($c1, $c2, $c3) {
-  @return "0px -2px 0px #{$c1} inset, 0px -1px 0px #{$c2} inset, 0px 1px 0px #{$c3}";
+@function bottom-horizontal-separator-mimic-shadow($c1, $c2) {
+  "0px -1px 0px #{$c1} inset, 0px 1px 0px #{$c2}";
 }
 
 
@@ -324,20 +324,20 @@ $base0F: #{{base0F-hex}};
   --shadow-wide-base08: #{wide-shadow(var(--base08-white-65-dark))};
   --shadow-wide-base0D: #{wide-shadow(var(--base0D-white-65-dark))};
 
-  --shadow-light-separator-mimic-horizontal-base00: #{horizontal-separator-mimic-shadow(var(--base00-black-85-dark), var(--base00-black-95-dark), var(--base00-white-95-dark))};
+  --shadow-light-separator-mimic-horizontal-base00: #{horizontal-separator-mimic-shadow(var(--base00-black-85-dark), var(--base00-white-95-dark))};
 
-  --shadow-separator-mimic-horizontal-base00: #{horizontal-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-black-80-dark), var(--base00-white-90-dark))};
-  --shadow-separator-mimic-horizontal-base01: #{horizontal-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-black-80-dark), var(--base01-white-90-dark))};
-  --shadow-separator-mimic-horizontal-base02: #{horizontal-separator-mimic-shadow(var(--base02-black-75-dark), var(--base02-black-90-dark), var(--base02-white-90-dark))};
-  --shadow-separator-mimic-horizontal-base03: #{horizontal-separator-mimic-shadow(var(--base03-black-75-dark), var(--base03-black-90-dark), var(--base03-white-90-dark))};
-  --shadow-separator-mimic-vertical-base00: #{vertical-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-black-80-dark), var(--base00-white-90-dark))};
-  --shadow-separator-mimic-vertical-base01: #{vertical-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-black-80-dark), var(--base01-white-90-dark))};
-  --shadow-separator-mimic-vertical-base02: #{vertical-separator-mimic-shadow(var(--base02-black-75-dark), var(--base02-black-90-dark), var(--base02-white-90-dark))};
-  --shadow-separator-mimic-vertical-base03: #{vertical-separator-mimic-shadow(var(--base03-black-75-dark), var(--base03-black-90-dark), var(--base03-white-90-dark))};
+  --shadow-separator-mimic-horizontal-base00: #{horizontal-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-white-90-dark))};
+  --shadow-separator-mimic-horizontal-base01: #{horizontal-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-white-90-dark))};
+  --shadow-separator-mimic-horizontal-base02: #{horizontal-separator-mimic-shadow(var(--base02-black-75-dark), var(--base02-white-90-dark))};
+  --shadow-separator-mimic-horizontal-base03: #{horizontal-separator-mimic-shadow(var(--base03-black-75-dark), var(--base03-white-90-dark))};
+  --shadow-separator-mimic-vertical-base00: #{vertical-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-white-90-dark))};
+  --shadow-separator-mimic-vertical-base01: #{vertical-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-white-90-dark))};
+  --shadow-separator-mimic-vertical-base02: #{vertical-separator-mimic-shadow(var(--base02-black-75-dark), var(--base02-white-90-dark))};
+  --shadow-separator-mimic-vertical-base03: #{vertical-separator-mimic-shadow(var(--base03-black-75-dark), var(--base03-white-90-dark))};
 
-  --shadow-separator-mimic-bottom-horizontal-base00: #{bottom-horizontal-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-black-80-dark), var(--base00-white-90-dark))};
-  --shadow-separator-mimic-bottom-horizontal-base01: #{bottom-horizontal-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-black-80-dark), var(--base01-white-90-dark))};
-  --shadow-separator-mimic-bottom-horizontal-base02: #{bottom-horizontal-separator-mimic-shadow(var(--base02-black-75-dark), var(--base02-black-90-dark), var(--base02-white-90-dark))};
+  --shadow-separator-mimic-bottom-horizontal-base00: #{bottom-horizontal-separator-mimic-shadow(var(--base00-black-65-dark), var(--base00-white-90-dark))};
+  --shadow-separator-mimic-bottom-horizontal-base01: #{bottom-horizontal-separator-mimic-shadow(var(--base01-black-65-dark), var(--base01-white-90-dark))};
+  --shadow-separator-mimic-bottom-horizontal-base02: #{bottom-horizontal-separator-mimic-shadow(var(--base02-black-75-dark), var(--base02-white-90-dark))};
 
   @include ripple-out-keyframes(--base0D, ripple-out-base0D);
   @include ripple-out-keyframes(--base08, ripple-out-base08);

@@ -45,7 +45,7 @@ list.boxed-list list {
   --shadow-inset-thin: var(--shadow-inset-thin-base02);
   --shadow-inset: var(--shadow-inset-base02);
   --shadow-separator-mimic-vertical: var(--shadow-separator-mimic-vertical-base02);
-  --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base02);
+  --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-horizontal-base02);
 }
 list.boxed-list list.boxed-list,
 list.boxed-list .rich-list,
@@ -144,6 +144,7 @@ window:not(.fullscreen) {
 headerbar {
   min-height: 46px;
   margin: 0px -1px 6px -1px;
+  border-bottom: 1px solid var(--base01-black-80-dark);
 
   color: var(--base0D);
 
@@ -914,18 +915,19 @@ dropdown > button.toggle:hover:checked:not(:active),
 button.text-button:hover:checked:not(:active),
 button.font:hover:checked:not(:active),
 button.file:hover:checked:not(:active),
-button.pill:hover:checked,
-button.circular:hover:checked,
-menubutton.circular.popup > button:hover:checked {
+button.pill:hover:checked {
   box-shadow: var(--shadow-inset-base0D);
 }
+button.circular:hover:checked,
 button.circular.star:hover:checked,
-button.circular.flat:hover:checked {
+button.circular.flat:hover:checked,
+menubutton.circular.popup > button:hover:checked {
   background-color: var(--base0D);
   box-shadow: var(--shadow-inset-base0D);
 }
-button.starred:hover:checked,
+button.star.starred:hover:checked,
 button.tab-indicator:hover:checked {
+  background-color: vaR(--base0A);
   box-shadow: var(--shadow-inset-base0A);
 }
 button.entry-icon:hover:checked:not(:active),
@@ -1944,8 +1946,8 @@ list > row.activatable:selected {
   padding: 1px 15px;
 }
 /*Adjacent combinator saw a performance reduction of about 1/3 in long lists*/
-row {
-  box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
+row:not(:first-child) {
+  box-shadow: var(--shadow-separator-mimic-horizontal);
 }
 list.navigation-sidebar > row,
 listview.navigation-sidebar > row {
