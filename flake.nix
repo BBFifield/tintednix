@@ -7,21 +7,27 @@
     };
     base16-nix.url = "github:SenchoPens/base16.nix";
   };
+
   outputs = {
+    self,
     nixpkgs,
     flake-parts,
-    self,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = [
-        "aarch64-linux"
-        "x86_64-linux"
-      ];
+      systems = ["aarch64-linux" "x86_64-linux"];
+
       perSystem = {pkgs, ...}: {
         formatter = pkgs.alejandra;
-      };
 
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            gtk4
+            gst_all_1.gst-plugins-base
+            gtk3
+          ];
+        };
+      };
       flake = {
         overlays.default = final: prev: {
           base16 = final.callPackage ./pkgs/base16-schemes {};
@@ -29,17 +35,6 @@
         packages.default = {pkgs, ...}: pkgs.callPackage ./pkgs/base16-schemes {};
         homeManagerModules.default = import ./nix/home-manager/hm-module.nix inputs;
         nixosModules.default = import ./nix/nixos/nixos-module.nix inputs;
-        devShells.default = {pkgs, ...}:
-          pkgs.mkShell {
-            buildInputs = with pkgs; [
-              gtk4
-              /*
-              Required to launch gtk4-widget-factory
-              */
-              gst_all_1.gst-plugins-base
-              gtk3
-            ];
-          };
       };
     };
 }
