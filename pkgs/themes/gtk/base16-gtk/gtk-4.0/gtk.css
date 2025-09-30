@@ -17,11 +17,13 @@ stacksidebar + stack {
   --shadow-separator-mimic-vertical: var(--shadow-separator-mimic-vertical-base00);
   --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-horizontal-base00);
   --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base00);
+  --border-color: var(--base00-black-80-dark);
 }
 columnview > listview,
 paned > scrolledwindow > listview,
 stack > scrolledwindow > viewport > list {
-  --shadow-separator-mimic-horizontal: var(--shadow-light-separator-mimic-horizontal-base00);
+  --shadow-separator-mimic-bottom-horizontal: var(--shadow-light-separator-mimic-bottom-horizontal-base00);
+  --border-color: var(--base00-black-95-dark);
 }
 .osd-box,
 window,
@@ -34,6 +36,7 @@ list,
   --shadow-separator-mimic-vertical: var(--shadow-separator-mimic-vertical-base01);
   --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-horizontal-base01);
   --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base01);
+  --border-color: var(--base01-black-80-dark);
 }
 entry,
 box.pathbar,
@@ -45,7 +48,8 @@ list.boxed-list list {
   --shadow-inset-thin: var(--shadow-inset-thin-base02);
   --shadow-inset: var(--shadow-inset-base02);
   --shadow-separator-mimic-vertical: var(--shadow-separator-mimic-vertical-base02);
-  --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-horizontal-base02);
+  --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base02);
+  --border-color: var(--base02-black-90-dark);
 }
 list.boxed-list list.boxed-list,
 list.boxed-list .rich-list,
@@ -55,6 +59,7 @@ list.boxed-list list.nested {
   --shadow-inset: var(--shadow-inset-base03);
   --shadow-separator-mimic-vertical: var(--shadow-separator-mimic-vertical-base03);
   --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-horizontal-base03);
+  --border-color: var(--base03-black-90-dark);
 }
 popover modelbutton:hover:not(:active),
 row.activatable:hover:not(:active):not(:selected) {
@@ -143,7 +148,7 @@ window:not(.fullscreen) {
 
 headerbar {
   min-height: 46px;
-  margin: 0px -1px 6px -1px;
+  margin: 0px -1px 5px -1px;
   border-bottom: 1px solid var(--base01-black-80-dark);
 
   color: var(--base0D);
@@ -1842,6 +1847,7 @@ child.activatable {
 }
 row.activatable:hover,
 child.activatable:hover {
+  border-top-color: var(--base0D);
   color: var(--base01);
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
@@ -1855,6 +1861,7 @@ child.activatable:active,
 child.activatable:selected,
 child.activatable:hover:active,
 columnview row:selected {
+  border-top-color: transparent;
   color: inherit;
   background-color: transparent;
   box-shadow: var(--shadow-inset);
@@ -1938,67 +1945,32 @@ listview {
 list > row {
   min-height: 35px;
   margin: 2px 6px 1px 7px;
-  padding: 0px 15px 1px 14px;
+  padding: 0px 15px 2px 14px;
 }
 list > row.activatable:active,
 list > row.activatable:selected {
   margin: 1px 6px 1px 6px;
-  padding: 1px 15px;
+  padding: 1px 15px 2px 15px;
 }
 /*Adjacent combinator saw a performance reduction of about 1/3 in long lists*/
-row:not(:first-child) {
-  box-shadow: var(--shadow-separator-mimic-horizontal);
+row:not(:last-child) {
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
 }
 list.navigation-sidebar > row,
 listview.navigation-sidebar > row {
   box-shadow: none;
 }
 list:not(.navigation-sidebar) > row {
-  /* margin: 3px 6px 1px 7px; */
-  /* padding: 2px 15px 1px 14px; */
   border-radius: 0px;
 }
 list:not(.navigation-sidebar) > row.activatable:hover {
-  /* margin: 5px 6px 1px 7px; */
-  /* padding: 0px 15px 1px 14px; */
   border-radius: 50px;
 }
 list:not(.navigation-sidebar) > row.activatable:active,
 list:not(.navigation-sidebar) > row.activatable:selected {
-  /* list:not(.navigation-sidebar) > row + row.activatable:hover:active {  */
-  /* margin: 4px 6px 1px 6px; */
-  /* padding: 1px 15px 1px 15px; */
   border-radius: 50px;
 }
-/* row + row { */
-/*   box-shadow: var(--shadow-separator-mimic-horizontal); */
-/* } */
-/* list.navigation-sidebar > row + row, */
-/* listview.navigation-sidebar > row + row { */
-/*   box-shadow: none; */
-/* } */
-/* /* mimic inset separators  */
-/* list:not(.navigation-sidebar) > row + row { */
-/* margin: 3px 6px 1px 7px; */
-/* padding: 2px 15px 1px 14px; */
-/*   border-radius: 0px; */
-/* } */
-/* list:not(.navigation-sidebar) > row.activatable:hover + row:not(:selected), */
-/* list:not(.navigation-sidebar) > row.activatable:selected + row:not(:hover) { */
-/*   box-shadow: none; */
-/* } */
-/* list:not(.navigation-sidebar) > row + row.activatable:hover { */
-/* margin: 5px 6px 1px 7px; */
-/* padding: 0px 15px 1px 14px; */
-/*   border-radius: 50px; */
-/* } */
-/* list:not(.navigation-sidebar) > row + row.activatable:active, */
-/* list:not(.navigation-sidebar) > row + row.activatable:selected { */
-/* list:not(.navigation-sidebar) > row + row.activatable:hover:active {  */
-/* margin: 4px 6px 1px 6px; */
-/* padding: 1px 15px 1px 15px; */
-/*   border-radius: 50px; */
-/* } */
 list:not(.navigation-sidebar) > separator {
   all: unset;
 }
@@ -2057,13 +2029,13 @@ list.boxed-list > row > box > frame {
 list.rich-list > row {
   /* list.rich-list > row + row.activatable:hover:not(:active):not(:selected) { */
   min-height: 32px;
-  padding: 7px 15px 8px 14px;
+  padding: 6px 15px 8px 14px;
 }
 /* list.rich-list > row + row { */
 /*   padding: 9px 15px 8px 14px; */
 /* } */
 list.rich-list.separators > row {
-  border-bottom: none;
+  border-color: var(--border-color);
 }
 list.rich-list > row.activatable:active,
 list.rich-list > row.activatable:selected {
@@ -2124,7 +2096,8 @@ scrolledwindow > listview.view {
   padding: 3px;
 }
 header {
-  margin: 0px 3px 2px 3px;
+  border-bottom: 1px solid var(--border-color);
+  margin: 0px 3px 1px 3px;
   box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
 }
 header > button {
