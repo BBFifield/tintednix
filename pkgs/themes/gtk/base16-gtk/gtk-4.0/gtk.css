@@ -1,5 +1,15 @@
 @import url("colors.css");
 
+overlay-split-view.gradient,
+overlay-split-view.gradient .navigation-sidebar,
+overlay-split-view.gradient widget.content-pane,
+overlay-split-view.gradient stack > scrolledwindow > viewport {
+  --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-transparent);
+  --shadow-inset-thin: var(--shadow-inset-thin-transparent);
+  --shadow-inset: var(--shadow-inset-transparent);
+  --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-transparent);
+  --border-color: var(--bg-hl-transparent);
+}
 frame,
 scrolledwindow.frame,
 textview,
@@ -28,7 +38,7 @@ stack > scrolledwindow > viewport > list {
 .osd-box,
 window,
 popover > contents,
-list,
+.navigation-sidebar,
 .sidebarpane > box > box > scrolledwindow > columnview {
   --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-base01);
   --shadow-inset-thin: var(--shadow-inset-thin-base01);
@@ -38,6 +48,8 @@ list,
   --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base01);
   --border-color: var(--base01-black-80-dark);
 }
+.linked,
+viewswitcher,
 entry,
 box.pathbar,
 list.boxed-list,
@@ -48,7 +60,8 @@ list.boxed-list list {
   --shadow-inset-thin: var(--shadow-inset-thin-base02);
   --shadow-inset: var(--shadow-inset-base02);
   --shadow-separator-mimic-vertical: var(--shadow-separator-mimic-vertical-base02);
-  --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base02);
+  --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-horizontal-base02);
+  --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base02);
   --border-color: var(--base02-black-90-dark);
 }
 list.boxed-list list.boxed-list,
@@ -66,6 +79,7 @@ row.activatable:hover:not(:active):not(:selected) {
   --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-base0D);
   --shadow-inset-thin: var(--shadow-inset-thin-base0D);
   --shadow-inset: var(--shadow-inset-base0D);
+  --hl-border-color: var(--base0D-black-60);
 }
 
 @keyframes ripple-out {
@@ -148,13 +162,13 @@ window:not(.fullscreen) {
 
 headerbar {
   min-height: 46px;
-  margin: 0px -1px 5px -1px;
-  border-bottom: 1px solid var(--base01-black-80-dark);
+  margin: 0px -1px 7px -1px;
+  border-bottom: 1px solid var(--border-color);
 
   color: var(--base0D);
 
   background-color: var(--base01);
-  box-shadow: var(--shadow-separator-mimic-bottom-horizontal-base01);
+  box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
 }
 headerbar windowhandle > box {
   padding: 6px 7px 6px 7px;
@@ -349,7 +363,7 @@ menubar > item:hover:selected:not(:focus) {
 }
 item:selected:not(:focus) {
   color: var(--base0D);
-  background-color: var(--base01);
+  background-color: transparent;
   box-shadow: var(--shadow-inset-base01);
 }
 
@@ -594,195 +608,9 @@ check:indeterminate {
   -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
 }
 
-spinbutton {
-  min-height: 35px;
-  margin: 1px 0px 0px 1px;
-  border-radius: 50px;
-
-  color: var(--base0D);
-
-  background-color: var(--base02);
-  box-shadow: var(--shadow-thin-base02);
-}
-spinbutton > button {
-  border: none;
-}
-spinbutton.horizontal > .up {
-  border-radius: 0px 50px 50px 0px;
-}
-spinbutton.vertical > .up {
-  border-radius: 50px 50px 0px 0px;
-}
-spinbutton.vertical > .down {
-  border-radius: 0px 0px 50px 50px;
-}
-spinbutton.horizontal > .down:hover + .up:not(:hover):not(:active),
-spinbutton.horizontal > .down:active + .up:not(:hover):not(:active),
-spinbutton > text:focus-within + .down:not(:hover):not(:active),
-spinbutton.vertical > .up:hover + text:not(:focus-within),
-spinbutton.vertical > .up:active + text:not(:focus-within) {
-  box-shadow: none;
-}
-spinbutton.horizontal > text + .down {
-  border-radius: 0px;
-  box-shadow: var(--shadow-separator-mimic-vertical-base02);
-}
-spinbutton.horizontal > .down + .up {
-  box-shadow: var(--shadow-separator-mimic-vertical-base02);
-}
-spinbutton.vertical > .up + text {
-  border-radius: 0px;
-  box-shadow: var(--shadow-separator-mimic-horizontal-base02);
-}
-spinbutton.vertical > text + .down {
-  box-shadow: var(--shadow-separator-mimic-horizontal-base02);
-}
-spinbutton.horizontal > button:hover,
-spinbutton.vertical > button:hover {
-  border-radius: 50px;
-  box-shadow: var(--shadow-thin-base0D);
-}
-spinbutton.horizontal > button:active:not(#_),
-spinbutton.vertical > button:active:not(#_) {
-  box-shadow: var(--shadow-inset-base02);
-}
-spinbutton.horizontal > button,
-spinbutton.horizontal > button:hover:not(:active) {
-  min-width: 23px;
-  min-height: 23px;
-  padding: 1px 5px 0px 6px;
-}
-spinbutton.horizontal > button:active,
-spinbutton.horizontal > button:hover:active {
-  padding: 2px 5px 0px 7px;
-}
-spinbutton.vertical > button,
-spinbutton.vertical > button:hover:not(:active) {
-  min-height: 39px;
-}
-spinbutton > text {
-  min-width: 30px;
-  margin: 1px 0px 0px 1px;
-  padding: 0px 6px 0px 6px;
-  border-radius: 50px;
-
-  background-color: transparent;
-  box-shadow: none;
-}
-spinbutton > text:focus-within {
-  margin: 0px;
-  padding: 1px 6px 0px 7px;
-  border-radius: 50px;
-  box-shadow: var(--shadow-inset-base02);
-}
-spinbutton.vertical > text {
-  padding: 6px 0px 6px 0px;
-}
-spinbutton.vertical > text:focus-within {
-  padding: 7px 0px 6px 1px;
-  border-radius: 50px;
-  box-shadow: var(--shadow-inset-base02);
-}
-spinbutton.horizontal > text + .down:not(:hover):not(:active),
-spinbutton.horizontal > .down + .up:not(:hover):not(:active) {
-  margin: 1px 0px 0px 2px;
-  padding: 1px 5px 0px 8px;
-}
-spinbutton.horizontal > text + .down:hover:not(:active),
-spinbutton.horizontal > .down + .up:hover:not(:active) {
-  margin: 1px 0px 0px 4px;
-  padding: 1px 5px 0px 6px;
-  box-shadow: var(--shadow-thin-base0D);
-}
-spinbutton.horizontal > text + .down:active,
-spinbutton.horizontal > .down + .up:active,
-spinbutton.horizontal > text + .down:hover:active,
-spinbutton.horizontal > .down + .up:hover:active {
-  margin: 0px 0px 0px 3px;
-}
-spinbutton.vertical > text + .down:not(:hover):not(:active) {
-  margin: 2px 0px 0px 1px;
-  padding: 3px 5px 0px 6px;
-}
-spinbutton.vertical > .up + text:not(:focus-within) {
-  margin: 2px 0px 0px 1px;
-  padding: 8px 0px 6px 0px;
-}
-spinbutton.vertical > text + .down:hover:not(:active) {
-  margin: 4px 0px 0px 1px;
-  padding: 1px 5px 0px 6px;
-  box-shadow: var(--shadow-thin-base0D);
-}
-spinbutton.vertical > .up + text:focus-within {
-  margin: 3px 0px 0px 0px;
-}
-spinbutton.vertical > text + .down:active,
-spinbutton.vertical > text + .down:hover:active {
-  margin: 3px 0px 0px 0px;
-  padding: 2px 5px 0px 7px;
-}
-spinbutton.horizontal > .image-button:hover {
-  color: var(--base01);
-}
-spinbutton.horizontal > .image-button:hover:active {
-  color: inherit;
-}
-splitbutton {
-  margin: 1px 0px 0px 1px;
-  padding: 0px;
-  border-radius: 50px;
-  background-color: transparent;
-}
-splitbutton:active,
-splitbutton:checked,
-splitbutton:hover:active,
-splitbutton:active:checked,
-splitbutton:hover:active:checked {
-  margin: 0px;
-  padding: 1px 0px 0px 1px;
-
-  color: var(--base0D);
-
-  background-color: transparent;
-  box-shadow: var(--shadow-inset);
-}
-splitbutton:hover {
-  color: var(--base01);
-  background-color: var(--base0D);
-  box-shadow: var(--shadow-thin-base0D);
-}
-splitbutton:hover:checked {
-  margin: 0px;
-  padding: 1px 0px 0px 1px;
-  box-shadow: var(--shadow-inset-base0D);
-}
-splitbutton:hover > menubutton > button:checked {
-  box-shadow: var(--shadow-inset-base0D);
-}
-splitbutton > menubutton > button:checked:not(:hover) {
-  color: inherit;
-}
-splitbutton arrow {
-  transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-splitbutton:checked arrow {
-  -gtk-icon-transform: rotate(-0.5turn);
-}
-splitbutton > separator.vertical {
-  margin: 3px 2px;
-  background-color: transparent;
-}
-splitbutton:hover > separator,
-splitbutton:hover:checked > separator {
-  box-shadow: var(--shadow-inset-extra-thin-base0D);
-}
-splitbutton:checked > separator,
-splitbutton:hover:active > separator {
-  box-shadow: var(--shadow-inset-extra-thin-base01);
-}
-
 /***************** button **************************/
-button {
+button,
+toggle {
   min-width: 16px;
   min-height: 30px;
   margin: 1px 0px 0px 1px;
@@ -802,6 +630,10 @@ button.file {
   background-color: var(--base02);
   box-shadow: var(--shadow-thin-base02);
 }
+stack > button.image-button,
+stack > button.image-text-button {
+  box-shadow: none;
+}
 button.pill {
   padding: 9px 32px 10px 31px;
 }
@@ -813,8 +645,9 @@ menubutton.circular.popup > button:not(:hover) {
 }
 button.circular.star:not(:hover),
 button.circular.flat:not(:hover),
-entry > menubutton.circular.popup > button.star:not(:hover),
-entry > menubutton.circular.popup > button.flat:not(:hover) {
+menubutton.circular.popup > button.star:not(:hover),
+menubutton.circular.popup > button.flat:not(:hover),
+entry > menubutton.circular.popup > button:not(:hover) {
   background-color: transparent;
   box-shadow: none;
 }
@@ -870,13 +703,14 @@ button.app-version {
 /**********************/
 /**** button:hover ****/
 /**********************/
-button:hover:not(:active) {
+button:hover:not(:active),
+toggle:hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
 }
 /* stack > button:not(.image-button):not(.image-text-button):hover { */
-stack > button:hover {
+stack > button:hover:not(:active) {
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
 }
@@ -905,7 +739,7 @@ button.tab-indicator:hover:not(:active) {
 /******************************/
 /**** button:hover:checked ****/
 /******************************/
-button:hover:checked:not(:active) {
+button:hover:checked {
   margin: 0px;
   padding: 2px 9px 2px 9px;
 
@@ -943,7 +777,9 @@ menubutton.entry-icon > button:hover:checked:not(:active) {
 
 /***************** button:hover:active **************************/
 button:active,
-button:checked {
+button:checked,
+toggle:active,
+toggle:checked {
   margin: 0px;
   padding: 2px 9px 2px 9px;
   box-shadow: var(--shadow-inset);
@@ -973,15 +809,18 @@ menubutton.circular.popup > button:checked {
   box-shadow: var(--shadow-inset-base0D-dull);
 }
 stack > button.image-button:active,
+stack > button.image-button:checked,
 stack > button.image-text-button:active,
 button.circular.star:checked,
 button.circular.star:active,
 button.circular.flat:checked,
 button.circular.flat:active,
-entry > menubutton.circular.popup > button.star:active,
-entry > menubutton.circular.popup > button.flat:active,
-entry > menubutton.circular.popup > button.star:checked,
-entry > menubutton.circular.popup > button.flat:checked {
+menubutton.circular.popup > button.star:active,
+menubutton.circular.popup > button.flat:active,
+menubutton.circular.popup > button.star:checked,
+menubutton.circular.popup > button.flat:checked,
+entry > menubutton.circular.popup > button:active,
+entry > menubutton.circular.popup > button:checked {
   background-color: transparent;
   box-shadow: var(--shadow-inset);
 }
@@ -1115,6 +954,164 @@ dropdown > button.toggle arrow {
 
   -gtk-icon-source: -gtk-icontheme("go-down-symbolic");
 }
+
+spinbutton {
+  min-height: 34px;
+  margin: 1px 0px 0px 1px;
+  border-radius: 50px;
+
+  color: var(--base0D);
+
+  background-color: var(--base02);
+  box-shadow: var(--shadow-thin-base02);
+}
+spinbutton > text {
+  min-width: 30px;
+  min-height: 32px;
+  margin: 0px;
+  padding: 0px 6px 0px 6px;
+  border-radius: 50px 0px 0px 50px;
+}
+
+spinbutton > text:focus-within {
+  margin: 0px;
+  padding: 0px 6px 0px 6px;
+  border-radius: 50px;
+  box-shadow: var(--shadow-inset-base02);
+}
+/*vert text is _x34px*/
+spinbutton.vertical > text {
+  margin: 2px 0px 0px 1px;
+  padding: 0px 0px 0px 0px;
+  border-top: 1px solid var(--base02);
+  border-radius: 0px;
+
+  box-shadow: var(--shadow-separator-mimic-horizontal-base02);
+}
+spinbutton.vertical > text:focus-within {
+  margin: 1px 0px 0px 0px;
+  padding: 2px 0px 0px 1px;
+  border-top: 0px;
+  border-radius: 50px;
+
+  box-shadow: var(--shadow-inset-base02);
+}
+
+spinbutton > button.image-button:hover {
+  border-color: transparent;
+  border-radius: 50px;
+  box-shadow: var(--shadow-thin-base0D);
+}
+spinbutton > button.image-button:active {
+  border: 0px;
+  box-shadow: var(--shadow-inset-base02);
+}
+/*horiz button is 34x34*/
+spinbutton.horizontal > button {
+  min-width: 24px;
+  min-height: 24px;
+  margin: 1px 0px 0px 2px;
+  padding: 1px 5px 0px 3px;
+  border-left: 1px solid var(--base02-black-90-dark);
+  border-radius: 0px;
+
+  box-shadow: var(--shadow-separator-mimic-vertical-base02);
+}
+spinbutton.horizontal > button:active {
+  margin: 0px 0px 0px 1px;
+  padding: 2px 5px 0px 5px;
+  border-left: 0px;
+}
+spinbutton.horizontal > .up {
+  border-radius: 0px 50px 50px 0px;
+  box-shadow: var(--shadow-separator-mimic-vertical-base02);
+}
+
+/*vert button is 41x41px*/
+spinbutton.vertical > button {
+  min-height: 36px;
+}
+spinbutton.vertical > .up {
+  border-radius: 50px 50px 0px 0px;
+}
+spinbutton.vertical > .down {
+  border-top: 1px solid var(--base02-black-90-dark);
+  border-radius: 0px 0px 50px 50px;
+  box-shadow: var(--shadow-separator-mimic-horizontal-base02);
+}
+spinbutton.vertical > .down,
+spinbutton.vertical > .down:hover {
+  margin: 2px 0px 0px 1px;
+  padding: 3px 5px 0px 4px;
+}
+spinbutton.vertical > .down:active {
+  margin: 1px 0px 0px 0px;
+  padding: 5px 5px 0px 5px;
+  border-top: 0px;
+}
+spinbutton > .down:hover + .up,
+spinbutton > .down:active + .up,
+spinbutton > text:focus-within + .down:not(:hover):not(:active),
+spinbutton > .up:hover + text:not(:focus-within),
+spinbutton > .up:active + text:not(:focus-within) {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+splitbutton {
+  margin: 1px 0px 0px 1px;
+  padding: 0px;
+  border-radius: 50px;
+  background-color: transparent;
+}
+splitbutton:active,
+splitbutton:checked,
+splitbutton:hover:active,
+splitbutton:active:checked,
+splitbutton:hover:active:checked {
+  margin: 0px;
+  padding: 1px 0px 0px 1px;
+
+  color: var(--base0D);
+
+  background-color: transparent;
+  box-shadow: var(--shadow-inset);
+}
+splitbutton:hover {
+  color: var(--base01);
+  background-color: var(--base0D);
+  box-shadow: var(--shadow-thin-base0D);
+}
+splitbutton:hover:checked {
+  margin: 0px;
+  padding: 1px 0px 0px 1px;
+  box-shadow: var(--shadow-inset-base0D);
+}
+splitbutton:hover > menubutton > button:checked {
+  box-shadow: var(--shadow-inset-base0D);
+}
+splitbutton > menubutton > button:checked:not(:hover) {
+  color: inherit;
+}
+splitbutton arrow {
+  transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+splitbutton:checked arrow {
+  -gtk-icon-transform: rotate(-0.5turn);
+}
+splitbutton > separator.vertical {
+  margin: 3px 2px;
+  background-color: transparent;
+}
+splitbutton:hover > separator,
+splitbutton:hover:checked > separator {
+  box-shadow: var(--shadow-inset-extra-thin);
+}
+splitbutton:checked > separator,
+splitbutton:hover:active > separator {
+  box-shadow: var(--shadow-inset-extra-thin);
+}
+
 /*Ex: Copy version number in about dialogs*/
 toast {
   background-color: var(--base02);
@@ -1169,12 +1166,15 @@ tab {
   min-height: 24px;
   margin: 6px 0px 5px 1px;
   padding: 4px 17px 5px 16px;
-  border-radius: 50px;
 
   background-color: transparent;
 }
 tab:hover {
+  border-color: transparent;
+  border-radius: 50px;
+
   color: var(--base01);
+
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
 }
@@ -1182,38 +1182,64 @@ tab:checked,
 tab:selected {
   margin: 5px 0px 5px 0px;
   padding: 5px 17px 5px 17px;
+  border-radius: 50px;
 
   color: inherit;
 
   background-color: transparent;
   box-shadow: var(--shadow-inset);
 }
+
 /*Create the illusion of inset separators*/
 tab + tab {
-  margin: 6px 0px 5px 2px;
-  padding: 4px 17px 5px 18px;
+  margin-left: 2px;
+  padding-left: 15px;
+  border-left: 1px solid var(--border-color);
   border-radius: 0px;
+
   box-shadow: var(--shadow-separator-mimic-vertical);
 }
+tab + tab:checked {
+  margin-left: 1px;
+  padding: 5px 17px 5px 17px;
+  border-left: 0px;
+}
+header.vertical > tabs > tab {
+  margin: 1px 5px 0px 6px;
+  padding: 4px 17px 5px 16px;
+}
+header.vertical > tabs > tab:hover {
+  border-radius: 50px;
+  box-shadow: var(--shadow-thin-base0D);
+}
+header.vertical > tabs > tab:checked {
+  margin: 0px 5px 0px 5px;
+  padding: 5px 17px 5px 17px;
+  border-radius: 50px;
+  box-shadow: var(--shadow-inset);
+}
 header.vertical > tabs > tab + tab {
-  margin: 2px 5px 0px 6px;
-  padding: 6px 17px 5px 16px;
+  margin-top: 2px;
+  padding-top: 3px;
+  border-top: 1px solid var(--border-color);
+  border-left: none;
   border-radius: 0px;
+
   box-shadow: var(--shadow-separator-mimic-horizontal);
 }
-tab + tab:hover {
-  margin: 6px 0px 5px 4px;
-  padding: 4px 17px 5px 16px;
-}
-tab + tab:checked {
-  margin: 5px 0px 5px 3px;
-}
 header.vertical > tabs > tab + tab:hover {
-  margin: 4px 5px 0px 6px;
-  padding: 4px 17px 5px 16px;
+  border-top-color: transparent;
 }
 header.vertical > tabs > tab + tab:checked {
-  margin: 3px 5px 0px 5px;
+  margin: 1px 5px 0px 5px;
+  padding: 5px 17px 5px 17px;
+  border-top: 0px;
+}
+tab:hover + tab:not(:checked):not(:selected),
+tab:checked + tab:not(:hover):not(:selected),
+tab:selected + tab:not(:hover):not(:checked) {
+  border-color: transparent;
+  box-shadow: none;
 }
 
 tooltip {
@@ -1706,6 +1732,7 @@ popover > contents > box > scrolledwindow > listview.view > row.activatable:hove
 }
 popover > contents > box > list > row,
 popover > contents > box > scrolledwindow > listview.view > row:not(:hover):not(:active):not(:selected) {
+  border-bottom-width: 0px;
   box-shadow: none;
 }
 popover modelbutton:focus,
@@ -1818,7 +1845,7 @@ stack > scrolledwindow > viewport {
   margin: 6px;
   border-radius: 10px;
   background-color: var(--base00);
-  box-shadow: var(--shadow-inset-base00);
+  box-shadow: var(--shadow-inset);
 }
 /*because list covers the viewport and its box-shadow*/
 stack > scrolledwindow > viewport > list {
@@ -1847,7 +1874,6 @@ child.activatable {
 }
 row.activatable:hover,
 child.activatable:hover {
-  border-top-color: var(--base0D);
   color: var(--base01);
   background-color: var(--base0D);
   box-shadow: var(--shadow-thin-base0D);
@@ -1861,16 +1887,16 @@ child.activatable:active,
 child.activatable:selected,
 child.activatable:hover:active,
 columnview row:selected {
-  border-top-color: transparent;
   color: inherit;
   background-color: transparent;
   box-shadow: var(--shadow-inset);
 }
-/* row.activatable:hover button.text-button:hover, */
+row.activatable:selected button.image-button:hover,
 row.activatable:selected progresscell label.in-progress,
 row.activatable:hover:not(:active) box > widget > scale > marks > mark,
 row.activatable.entry:active selection,
-row.activatable:hover > cell > treeexpander > expander,
+row.activatable:hover:not(:active):not(:selected) > treeexpander > expander,
+row.activatable:hover:not(:active):not(:selected) > cell > treeexpander > expander,
 header.activatable > button:active {
   color: var(--base01);
 }
@@ -1882,10 +1908,6 @@ row.activatable:hover > box > switch:checked {
   color: var(--base0B);
 }
 row.activatable > row:active,
-/* row.activatable:hover button.text-button, */
-/* row.activatable:hover button.image-text-button, */
-/* row.activatable:hover entry, */
-/* row.activatable:hover box.linked > button, */
 row.activatable:hover popover,
 row.activatable:hover:selected popover,
 row.activatable:hover scale > trough > slider {
@@ -1942,33 +1964,56 @@ listview {
   border-radius: 10px;
   color: var(--base0D);
 }
+.suffixes > listview {
+  color: inherit;
+}
 list > row {
   min-height: 35px;
-  margin: 2px 6px 1px 7px;
-  padding: 0px 15px 2px 14px;
+  margin: 1px 6px 2px 7px;
+  padding: 2px 15px 1px 14px;
+}
+list > row.activatable:hover {
+  margin: 1px 6px 1px 7px;
+  padding: 2px 15px 2px 14px;
 }
 list > row.activatable:active,
 list > row.activatable:selected {
-  margin: 1px 6px 1px 6px;
-  padding: 1px 15px 2px 15px;
+  margin: 0px 6px 0px 6px;
+  padding: 3px 15px 3px 15px;
 }
 /*Adjacent combinator saw a performance reduction of about 1/3 in long lists*/
-row:not(:last-child) {
+row {
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
 }
-list.navigation-sidebar > row,
-listview.navigation-sidebar > row {
+row.activatable:hover {
+  border-bottom: 1px solid var(--base0D);
+}
+row.activatable:active,
+row.activatable:selected {
+  border-bottom-color: transparent;
+}
+row:last-child {
+  border-bottom-color: transparent;
   box-shadow: none;
 }
-list:not(.navigation-sidebar) > row {
+list.navigation-sidebar > row,
+listview.navigation-sidebar > row {
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+list:not(.navigation-sidebar) > row,
+listview:not(.navigation-sidebar) > row {
   border-radius: 0px;
 }
-list:not(.navigation-sidebar) > row.activatable:hover {
+list:not(.navigation-sidebar) > row.activatable:hover,
+listview:not(.navigation-sidebar) > row.activatable:hover {
   border-radius: 50px;
 }
 list:not(.navigation-sidebar) > row.activatable:active,
-list:not(.navigation-sidebar) > row.activatable:selected {
+list:not(.navigation-sidebar) > row.activatable:selected,
+listview:not(.navigation-sidebar) > row.activatable:active,
+listview:not(.navigation-sidebar) > row.activatable:selected {
   border-radius: 50px;
 }
 list:not(.navigation-sidebar) > separator {
@@ -1999,10 +2044,8 @@ list.boxed-list:not(#_) > row.activatable:hover,
 list.boxed-list:not(#_) list > row.activatable:hover,
 list.boxed-list:not(#_) > row.activatable:active,
 list.boxed-list:not(#_) > row.activatable:selected,
-/* list.boxed-list:not(#_) > row.activatable:hover:active,*/
 list.content:not(#_) > row.activatable:active,
 list.content:not(#_) > row.activatable:selected,
-/* list.content:not(#_) > row.activatable:hover:active, */
 list.content:not(#_) > row.activatable:hover {
   border-radius: 10px;
 }
@@ -2016,32 +2059,40 @@ list.boxed-list list.boxed-list > row:not(.activatable) box > widget > scale > m
 list.boxed-list list.boxed-list > row:not(.activatable) box > widget > scale > marks > mark > indicator {
   background-color: currentColor;
 }
-list.boxed-list > row.expander {
-  margin: 0px;
-  padding: 0px 0px 1px 0px;
-}
+/* list.boxed-list > row.expander { */
+/*   margin: 0px; */
+/*   padding: 0px 0px 1px 0px; */
+/* } */
 list.boxed-list > row > box > frame {
   border: none;
   background-color: transparent;
   box-shadow: var(--shadow-inset-thin-base02);
 }
-/* /*End*/
-list.rich-list > row {
-  /* list.rich-list > row + row.activatable:hover:not(:active):not(:selected) { */
-  min-height: 32px;
-  padding: 6px 15px 8px 14px;
+row.expander > box > list > row.activatable {
+  margin: -2px -15px -1px -14px;
+  box-shadow: none;
 }
-/* list.rich-list > row + row { */
-/*   padding: 9px 15px 8px 14px; */
-/* } */
+row.expander > box > list > row.activatable:hover {
+  margin: -2px -15px -2px -14px;
+}
+row.expander > box > list > row.activatable:active,
+row.expander > box > list > row.activatable:selected {
+  margin: -3px -15px -3px -15px;
+  box-shadow: none;
+}
+
+list.rich-list > row {
+  min-height: 32px;
+  padding: 7px 15px 6px 14px;
+}
+list.rich-list > row.activatable:hover {
+  padding: 7px 15px 7px 14px;
+}
 list.rich-list.separators > row {
-  border-color: var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 list.rich-list > row.activatable:active,
 list.rich-list > row.activatable:selected {
-  /* list.rich-list > row + row.activatable:active, */
-  /* list.rich-list > row + row.activatable:selected, */
-  /* list.rich-list > row + row.activatable:hover:active { */
   padding: 8px 15px;
 }
 list.rich-list > header {
@@ -2052,14 +2103,15 @@ list.rich-list > header {
 list.navigation-sidebar {
   background-color: var(--base01);
 }
-list.navigation-sidebar > row {
+list.navigation-sidebar > row,
+list.navigation-sidebar > row.activatable:hover {
   min-height: 35px;
-  margin: 2px 6px 1px 7px;
-  padding: 0px 1px 1px 0px;
+  margin: 1px 6px 1px 7px;
+  padding: 0px 1px 0px 0px;
 }
 list.navigation-sidebar > row.activatable:active,
 list.navigation-sidebar > row.activatable:selected {
-  margin: 1px 6px 1px 6px;
+  margin: 0px 6px 0px 6px;
   padding: 1px;
 }
 list.navigation-sidebar > row > image:first-child,
@@ -2080,10 +2132,6 @@ list.navigation-sidebar row > revealer {
   padding: 0px;
 }
 
-/*end*/
-.sidebar list row {
-  min-height: 36px;
-}
 .sidebar list > row > label {
   padding: 0px 6px 0px 6px;
 }
@@ -2096,8 +2144,8 @@ scrolledwindow > listview.view {
   padding: 3px;
 }
 header {
-  border-bottom: 1px solid var(--border-color);
   margin: 0px 3px 1px 3px;
+  border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
 }
 header > button {
@@ -2111,6 +2159,7 @@ header > button:hover:active {
 }
 
 /*End*/
+
 listview {
   border-spacing: 0px 0px;
   margin: 0px 0px 1px 0px;
@@ -2120,43 +2169,22 @@ listview > separator {
   all: unset;
 }
 listview > row {
-  margin: 1px 3px 0px 4px;
-  padding: 0px 4px 1px 3px;
+  margin: 1px 3px 2px 4px;
+  padding: 2px 4px 1px 3px;
+}
+listview > row.activatable:hover {
+  margin: 1px 3px 1px 4px;
+  padding: 2px 4px 2px 3px;
 }
 listview > row.activatable:active,
 listview > row.activatable:selected {
-  margin: 0px 3px;
-  padding: 1px 4px;
+  margin: 0px 3px 0px 3px;
+  padding: 3px 4px 3px 4px;
 }
 listview.navigation-sidebar {
   margin: 0px 0px 1px 0px;
 }
-/* /*mimic inset separators*/
-/* listview:not(.navigation-sidebar) > row + row { */
-/*   margin: 2px 3px 0px 4px; */
-/*   padding: 2px 4px 1px 3px; */
-/*   border-radius: 0px; */
-/* } */
-/* .sidebar-pane > box > box > scrolledwindow > columnview > listview > row + row, */
-/* .sidebar-pane > box > box > widget > columnview > listview > row + row { */
-/*   box-shadow: none; */
-/* } */
-/* listview:not(.navigation-sidebar) > row.activatable:hover + row:not(:selected), */
-/* listview:not(.navigation-sidebar) > row.activatable:selected + row:not(:hover) { */
-/*   box-shadow: none; */
-/* } */
-/* listview:not(.navigation-sidebar) > row + row.activatable:active, */
-/* listview:not(.navigation-sidebar) > row + row.activatable:selected, */
-/* listview:not(.navigation-sidebar) > row + row.activatable:hover:active { */
-/*   margin: 3px 3px 0px 3px; */
-/*   padding: 1px 4px; */
-/*   border-radius: 50px; */
-/* } */
-/* listview:not(.navigation-sidebar) > row + row.activatable:hover:not(:active):not(:selected) { */
-/*   margin: 4px 3px 0px 4px; */
-/*   padding: 0px 4px 1px 3px; */
-/*   border-radius: 50px; */
-/* } */
+
 /* /*Actions section of gtk inspector*/
 listview > row button,
 listview > row entry,
@@ -2175,23 +2203,6 @@ listview > row entry:focus-within {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-/* listview > row box + button.image-button, */
-/* listview > row box + button.image-text-button { */
-/*   margin-top: 1px; */
-/* } */
-/* listview > row box + button.image-button:active, */
-/* listview > row box + button.image-text-button:active { */
-/*   margin-top: 0px; */
-/* } */
-/* listview > row spinbutton > button { */
-/*   margin: 1px 0px; */
-/* } */
-/* listview > row box.linked > entry { */
-/*   margin: 1px 0px 0px 1px; */
-/* } */
-/* listview > row box.linked > entry:focus-within { */
-/*   margin: 0px; */
-/* } */
 listview > row > image:first-child,
 listview > row > label:first-child,
 listview > row > box:first-child,
@@ -2250,40 +2261,26 @@ viewswitcher,
 viewswitcher.narrow {
   border-radius: 10px;
 }
-viewswitcher > button + button,
-.linked > button + button,
-.linked > entry + button,
-.linked > entry + entry,
-.linked > entry + menubutton > button:not(:hover):not(:active):not(:checked),
-.linked > scrolledwindow + menubutton > button:not(:hover):not(:active):not(:checked) {
-  border-left-width: 0px;
-  border-radius: 0px;
-  box-shadow: var(--shadow-separator-mimic-vertical-base02);
-}
 viewswitcher > button:first-child,
 .linked > button:first-child,
 .linked > entry:first-child,
 .linked > scrolledwindow:first-child,
-.linked > menubutton:first-child > button:not(:hover):not(:active):not(:checked) {
+.linked > menubutton:first-child > button {
   border-radius: inherit 0px 0px inherit;
 }
 viewswitcher > button:last-child,
 .linked > button:last-child,
 .linked > entry:last-child,
-.linked > menubutton:last-child > button:not(:hover):not(:active):not(:checked) {
+.linked > menubutton:last-child,
+.linked > menubutton:last-child > button {
   border-top-left-radius: 0px;
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: 0px;
 }
-.linked.vertical > button + button,
-.linked.vertical > spinbutton + button,
-.linked.vertical > spinbutton + spinbutton,
-.linked.vertical > combobox + spinbutton,
-.linked.vertical > entry + entry {
-  border-top-width: 0px;
-  border-radius: 0px;
-  box-shadow: var(--shadow-separator-mimic-horizontal-base02);
+.linked > button:hover,
+.linked > entry:focus-within {
+  border-radius: inherit;
 }
 .linked.vertical > combobox:first-child,
 .linked.vertical > button:first-child,
@@ -2297,188 +2294,155 @@ viewswitcher > button:last-child,
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
 }
+.linked.vertical > button:hover,
+.linked.vertical > entry:focus-within {
+  border-radius: inherit;
+}
 .linked > button:only-child {
   border-radius: inherit;
 }
-viewswitcher > button:hover + button,
-viewswitcher > button:active + button,
-viewswitcher > button:checked + button,
-viewswitcher > button:hover:active + button,
-viewswitcher > button:hover:checked + button,
-viewswitcher > button:first-child:not(:hover):not(:active):not(:checked),
-.linked > button:hover + button,
-.linked > button:active + button,
-.linked > button:checked + button,
-.linked > button:hover:active + button,
-.linked > button:hover:checked + button,
-.linked > button:first-child:not(:hover):not(:active):not(:checked),
-.linked > combobox:hover + spinbutton,
-.linked > scrolledwindow:hover + menubutton,
-.linked > entry:focus-within + button:not(:hover):not(:active):not(:checked),
-.linked > entry:focus-within + entry:not(:focus-within),
-.linked > entry:focus-within + menubutton > button:not(:hover):not(:active):not(:checked),
-.linked > entry:first-child:not(:focus-within),
-.linked > spinbutton:first-child {
-  box-shadow: none;
-}
-viewswitcher > button:hover:not(#_),
 viewswitcher > button:active,
 viewswitcher > button:checked,
-viewswitcher > button:hover:active,
-viewswitcher > button:hover:checked,
-.linked > button:hover:not(#_),
 .linked > button:active,
 .linked > button:checked,
-.linked > button:hover:active,
-.linked > button:hover:checked,
-.linked > combobox:hover,
-.linked > entry:active,
-.linked > combobox:active,
-.linked > combobox:checked,
-.linked > entry:hover:active,
-.linked > combobox:hover:active,
-.linked > combobox:hover:checked,
-.linked > entry:focus-within:not(#_),
-.linked > menubutton,
-.linked > menubutton > button:hover,
+.linked > entry:focus-within,
 .linked > menubutton > button:active,
-.linked > menubutton > button:checked:not(:hover),
-.linked > menubutton > button:hover:active,
-.linked > menubutton > button:hover:active:checked {
-  border-radius: inherit;
-}
-viewswitcher > button:active,
-viewswitcher > button:checked,
-viewswitcher > button:hover:active,
-viewswitcher > button:hover:checked,
-viewswitcher > button:hover:active:checked,
-.linked > button:active,
-.linked > button:checked,
-.linked > button:hover:active,
-.linked > button:hover:checked,
-.linked > button:hover:active:checked,
-.linked > button.image-button:active,
-.linked > button.image-button:checked,
-.linked > button.image-button:hover:active,
-.linked > button.image-button:active:checked,
-.linked > button.image-button:hover:active:checked,
-.linked > menubutton > button:active,
-.linked > menubutton > button:checked:not(:hover),
-.linked > menubutton > button:hover:active,
-.linked > menubutton > button:hover:active:checked,
-.linked > entry:focus-within {
-  box-shadow: var(--shadow-inset-base02);
+.linked > menubutton > button:checked {
+  padding: 2px 9px 2px 9px;
+  border: 0px;
+  border-radius: 17px;
+  box-shadow: var(--shadow-inset);
 }
 viewswitcher > button:hover:checked,
-viewswitcher > button.image-button:hover:checked,
 .linked > button:hover:checked,
-.linked > button.image-button:hover:checked {
+.linked > menubutton > button:hover:checked {
   padding: 2px 9px 2px 9px;
   box-shadow: var(--shadow-inset-base0D);
 }
-viewswitcher > button + button:not(:hover):not(:active):not(:checked),
-.linked > button + button:not(:hover):not(:active):not(:checked),
-.linked > entry + button:not(:hover):not(:active):not(:checked),
-.linked > scrolledwindow + menubutton > button:not(:hover):not(:active):not(:checked),
-.linked > entry + entry:not(:focus-within) {
+viewswitcher > button + button,
+.linked > button + button,
+.linked > entry + button,
+.linked > entry + entry,
+.linked > entry + menubutton > button,
+.linked > scrolledwindow + menubutton > button {
   margin: 1px 0px 0px 2px;
-  padding: 1px 9px 2px 10px;
-}
-viewswitcher > button + button:hover:not(:active):not(:checked),
-.linked > button + button:hover:not(:active):not(:checked),
-.linked > entry + button:hover:not(:active):not(:checked),
-.linked > scrolledwindow + menubutton > button:hover:not(:active):not(:checked) {
-  margin: 1px 0px 0px 4px;
   padding: 1px 9px 2px 8px;
+  border-left: 1px solid var(--border-color);
+  border-radius: 0px;
+
+  box-shadow: var(--shadow-separator-mimic-vertical);
+}
+.linked.vertical > button + button,
+.linked.vertical > spinbutton + button,
+.linked.vertical > entry + entry {
+  margin: 2px 0px 0px 1px;
+  padding: 1px 9px 2px 8px;
+  border-top: 1px solid var(--border-color);
+  border-left: 0px;
+  border-radius: 0px;
+
+  box-shadow: var(--shadow-separator-mimic-horizontal);
+}
+viewswitcher > button + button:hover,
+.linked > button + button:hover,
+.linked > spinbutton + button:hover,
+.linked > entry + button:hover,
+.linked > entry + menubutton > button:hover,
+.linked > scrolledwindow + menubutton > button:hover {
+  border-color: transparent;
+  border-radius: 17px;
   box-shadow: var(--shadow-thin-base0D);
 }
 viewswitcher > button + button:active,
-viewswitcher > button + button:checked:not(:hover),
-viewswitcher > button + button:hover:active,
-viewswitcher > button + button:hover:checked:not(:active),
-viewswitcher > button + button:hover:active:checked,
+viewswitcher > button + button.flat:checked,
 .linked > button + button:active,
 .linked > button + button:checked,
-.linked > button + button:hover:active,
-.linked > button + button:hover:checked,
-.linked > button + button:hover:active:checked,
+.linked > spinbutton + button:active,
 .linked > entry + button:active,
 .linked > entry + button:checked,
-.linked > entry + button:hover:active,
-.linked > entry + button:hover:checked,
-.linked > entry + button:hover:active:checked,
+.linked > entry + menubutton > button:active,
+.linked > entry + menubutton > button:checked,
 .linked > scrolledwindow + menubutton > button:active,
 .linked > scrolledwindow + menubutton > button:checked,
-.linked > scrolledwindow + menubutton > button:hover:active,
-.linked > scrolledwindow + menubutton > button:hover:checked,
-.linked > scrolledwindow + menubutton > button:hover:active:checked,
 .linked > entry + entry:focus-within {
-  margin: 0px 0px 0px 3px;
+  margin: 0px 0px 0px 2px;
+  padding: 2px 9px 2px 9px;
+  border-left-width: 0px;
+  box-shadow: var(--shadow-inset);
 }
-.linked.vertical > button + button:not(:hover):not(:active):not(:checked),
-.linked.vertical > entry + entry:not(:focus-within) {
-  margin: 2px 0px 0px 1px;
-  padding: 3px 9px 2px 8px;
+viewswitcher > button:hover + button:not(:checked),
+viewswitcher > button:active + button:not(:checked),
+viewswitcher > button:checked + button:not(:hover),
+.linked > button:first-child:not(:hover):not(:checked),
+.linked > button:hover + button:not(:checked),
+.linked > button:active + button:not(:checked),
+.linked > button:checked + button:not(:hover),
+.linked > combobox:hover + spinbutton,
+.linked > scrolledwindow:hover + menubutton,
+.linked > entry:focus-within + button:not(:hover):not(:checked),
+.linked > entry:focus-within + entry:not(:focus-within),
+.linked > entry:focus-within + menubutton > button:not(:hover):not(:checked),
+.linked > entry:first-child:not(:focus-within) {
+  border-color: transparent;
+  box-shadow: none;
 }
-.linked.vertical > button + button:hover:not(:active):not(:checked) {
-  margin: 4px 0px 0px 1px;
-  padding: 1px 9px 2px 8px;
-  box-shadow: var(--shadow-thin-base0D);
-}
-.linked.vertical > combobox + spinbutton,
 .linked.vertical > button + button:active,
 .linked.vertical > button + button:checked,
-.linked.vertical > button + button:hover:active,
-.linked.vertical > button + button:hover:checked,
-.linked.vertical > button + button:hover:active:checked,
 .linked.vertical > spinbutton + button:active,
-.linked.vertical > spinbutton + button:checked,
-.linked.vertical > spinbutton + button:hover:active,
-.linked.vertical > spinbutton + button:hover:checked,
-.linked.vertical > spinbutton + button:hover:active:checked,
 .linked.vertical > entry + entry:focus-within {
-  margin: 3px 0px 0px 0px;
+  margin: 2px 0px 0px 0px;
+  padding: 2px 9px 2px 9px;
+  border-top-width: 0px;
 }
 /*For when there's ever a horizontally linked spinbutton*/
 .linked > spinbutton {
-  margin: 0px 0px 0px 2px;
-  padding: 0px 0px 0px 1px;
+  margin: 0px 0px 0px 1px;
+  padding: 0px 0px 0px 0px;
 }
 .linked.vertical > spinbutton {
   margin: 2px 0px 0px 0px;
-  padding: 1px 0px 0px 0px;
+  padding: 2px 0px 0px 0px;
+  border-top: 1px solid var(--border-color);
+  border-radius: 0px;
+
+  box-shadow: var(--shadow-separator-mimic-horizontal);
 }
-/* .linked > combobox, */
-/* .linked > combobox:active { */
-/*   padding: 0px; */
-/* } */
+
 .linked > entry + combobox:hover,
 .linked > entry + combobox:hover:checked {
-  padding-left: 1px;
+  padding-left: 0px;
 }
-.linked > combobox > .linked {
+.linked > combobox > .linked,
+.linked > dropdown > button {
+  border-left: 0px solid transparent;
   box-shadow: none;
 }
 /*Any button that doesn't open a menu should not be highlighted during :hover:check*/
-.linked > button:not(.combo):checked,
-.linked > button:not(.combo):hover:checked,
-viewswitcher > button:not(.combo):active,
-viewswitcher > button:not(.combo):checked,
-viewswitcher > button:not(.combo):hover:checked {
+.linked > button:checked,
+.linked > button:hover:checked,
+viewswitcher > button:active,
+viewswitcher > button:checked,
+viewswitcher > button:hover:checked {
+  border-left: 0px solid transparent;
   color: var(--base0D);
   background-color: var(--base02);
-  box-shadow: var(--shadow-inset-base02);
+  box-shadow: var(--shadow-inset);
 }
-viewswitcher > button:not(.combo):hover {
+.linked > button.toggle:hover:checked,
+.linked > button.combo:hover:checked {
+  color: var(--base01);
+  background-color: var(--base0D);
+  box-shadow: var(--shadow-inset-base0D);
+}
+viewswitcher > button:hover {
+  border-left-color: transparent;
   color: var(--base01);
 }
 
 .linked > button.text-button:checked,
-.linked > button.text-button:hover:checked,
 filechooser pathbar box.linked > button:not(#_):checked,
 filechooser pathbar box.linked > button:not(#_):hover:checked,
-viewswitcher > button.flat:checked,
-viewswitcher > button.flat:hover:checked {
+viewswitcher > button.flat:checked {
   background-color: var(--base02);
 }
 .linked > button.text-button:nth-child(4n + 1):hover:not(:active):not(:checked),
@@ -2489,11 +2453,9 @@ filechooser pathbar box.linked > button:not(#_):nth-child(4n + 1):hover:not(:act
   box-shadow: var(--shadow-thin-base0B);
 }
 .linked > button.text-button:nth-child(4n + 1),
-.linked > button.text-button:nth-child(4n + 1):not(:hover),
 .linked > button.text-button:nth-child(4n + 1):active,
 .linked > button.text-button:nth-child(4n + 1):checked,
 viewswitcher > button.flat:nth-child(4n + 1),
-viewswitcher > button.flat:nth-child(4n + 1):not(:hover),
 viewswitcher > button.flat:nth-child(4n + 1):active,
 viewswitcher > button.flat:nth-child(4n + 1):checked,
 filechooser pathbar box.linked > button:nth-child(4n + 1),
@@ -2511,15 +2473,12 @@ box.dialog-action-area > button.text-button:first-child:hover:not(:active) {
   box-shadow: var(--shadow-thin-base08);
 }
 .linked > button.text-button:nth-child(4n + 2),
-.linked > button.text-button:nth-child(4n + 2):not(:hover),
 .linked > button.text-button:nth-child(4n + 2):active,
 .linked > button.text-button:nth-child(4n + 2):checked,
 viewswitcher > button.flat:nth-child(4n + 2),
-viewswitcher > button.flat:nth-child(4n + 2):not(:hover),
 viewswitcher > button.flat:nth-child(4n + 2):active,
 viewswitcher > button.flat:nth-child(4n + 2):checked,
 filechooser pathbar box.linked > button:nth-child(4n + 2),
-filechooser pathbar box.linked > button:nth-child(4n + 2):not(:hover),
 filechooser pathbar box.linked > button:nth-child(4n + 2):active,
 filechooser pathbar box.linked > button:not(#_):nth-child(4n + 2):checked,
 box.dialog-action-area > button.text-button:first-child,
@@ -2537,15 +2496,12 @@ viewswitcher > button.flat:nth-child(4n + 3):hover:not(:active):not(:checked) {
   box-shadow: var(--shadow-thin-base0A);
 }
 .linked > button.text-button:nth-child(4n + 3),
-.linked > button.text-button:nth-child(4n + 3):not(:hover),
 .linked > button.text-button:nth-child(4n + 3):active,
 .linked > button.text-button:nth-child(4n + 3):checked,
 filechooser pathbar box.linked > button:nth-child(4n + 3),
-filechooser pathbar box.linked > button:nth-child(4n + 3):not(:hover),
 filechooser pathbar box.linked > button:nth-child(4n + 3):active,
 filechooser pathbar box.linked > button:not(#_):nth-child(4n + 3):checked,
 viewswitcher > button.flat:nth-child(4n + 3),
-viewswitcher > button.flat:nth-child(4n + 3):not(:hover),
 viewswitcher > button.flat:nth-child(4n + 3):active,
 viewswitcher > button.flat:nth-child(4n + 3):checked {
   color: var(--base0A);
@@ -2558,15 +2514,12 @@ viewswitcher > button.flat:nth-child(4n + 4):hover:not(:active):not(:checked) {
   box-shadow: var(--shadow-thin-base09);
 }
 .linked > button.text-button:nth-child(4n + 4),
-.linked > button.text-button:nth-child(4n + 4):not(:hover),
 .linked > button.text-button:nth-child(4n + 4):active,
 .linked > button.text-button:nth-child(4n + 4):checked,
 filechooser pathbar box.linked > button:nth-child(4n + 4),
-filechooser pathbar box.linked > button:nth-child(4n + 4):not(:hover),
 filechooser pathbar box.linked > button:nth-child(4n + 4):active,
 filechooser pathbar box.linked > button:not(#_):nth-child(4n + 4):checked,
 viewswitcher > button.flat:nth-child(4n + 4),
-viewswitcher > button.flat:nth-child(4n + 4):not(:hover),
 viewswitcher > button.flat:nth-child(4n + 4):active,
 viewswitcher > button.flat:nth-child(4n + 4):checked {
   color: var(--base09);
@@ -2608,6 +2561,7 @@ widget.content-pane {
 }
 .nautilus-window .content-pane headerbar,
 .nautilus-window .sidebar-pane headerbar {
+  border-bottom: 0px;
   box-shadow: none;
 }
 .nautilus-window .content-pane scrolledwindow:not(.frame) > columnview.view {
@@ -2679,16 +2633,16 @@ window:not(.nautilus-window):not(.fullscreen) overlay-split-view > widget.conten
   margin: 0px 6px 6px 6px;
   border-radius: 10px;
 }
-widget.content-pane ~ widget.sidebar-pane:not(.end),
-widget.content-pane ~ widget.sidebar-pane.end > widget {
-  margin-right: -6px;
-}
-widget.content-pane ~ widget.sidebar-pane.end,
-widget.content-pane ~ widget.sidebar-pane:not(.end) > toolbarview,
-widget.content-pane ~ widget.sidebar-pane:not(.end) > box,
-widget.content-pane ~ widget.sidebar-pane:not(.end) > scrolledwindow {
-  margin-left: -6px;
-}
+/* widget.content-pane ~ widget.sidebar-pane:not(.end), */
+/* widget.content-pane ~ widget.sidebar-pane.end > widget { */
+/*   margin-right: -6px; */
+/* } */
+/* widget.content-pane ~ widget.sidebar-pane.end, */
+/* widget.content-pane ~ widget.sidebar-pane:not(.end) > toolbarview, */
+/* widget.content-pane ~ widget.sidebar-pane:not(.end) > box, */
+/* widget.content-pane ~ widget.sidebar-pane:not(.end) > scrolledwindow { */
+/*   margin-left: -6px; */
+/* } */
 widget.content-pane > toolbarview {
   background-color: transparent;
 }
@@ -2843,6 +2797,8 @@ window.filechooser scrolledwindow > gridview {
 window.filechooser actionbar > revealer > box {
   margin-top: 2px;
   padding-top: 6px;
+  border-top: 1px solid var(--base01-black-80-dark);
+
   background-color: transparent;
   box-shadow: var(--shadow-separator-mimic-horizontal-base01);
 }
@@ -3056,6 +3012,9 @@ list.background > row > box > list.boxed-list {
   margin: 0px;
   padding: 5px 0px;
 }
+row.activatable > box > image.normal-icons.playlist-icon {
+  background-color: transparent;
+}
 navigation-view-page#search {
   background-color: var(--base01);
 }
@@ -3077,7 +3036,8 @@ navigation-view-page#search {
   margin: 6px 6px 0px 6px;
 }
 revealer.bottom-bar.raised:not(.border) {
-  margin-top: 1px; /*6px + 1px gives us same space between this pseudo separator and the content-pane as headerbar pseudo sep and content-pane*/
+  margin-top: 1px;
+  border-top: 1px solid var(--base01-black-80-dark);
   box-shadow: var(--shadow-separator-mimic-horizontal-base01);
 }
 button.toggle:hover:not(:active) > box > contents > box {
@@ -3163,4 +3123,76 @@ scrolledwindow.frame > listview.view {
 frame > scrolledwindow,
 frame > scrolledwindow > listview {
   background-color: transparent;
+}
+
+/*****************/
+/*Recordbox*/
+/*****************/
+overlay-split-view.gradient {
+  /* margin: 0px; */
+  /* border-radius: 0px; */
+}
+overlay-split-view.gradient .content-pane {
+  margin: 0px;
+  border-radius: 0px;
+  background-color: transparent;
+  box-shadow: none;
+}
+.lyrics-text,
+window:not(.nautilus-window):not(.fullscreen) overlay-split-view.gradient > widget.content-pane {
+  margin: 0px;
+  background-color: transparent;
+  box-shadow: none;
+}
+overlay-split-view.gradient navigation-split-view > .content-pane {
+  margin: 6px 6px 6px 0px;
+  border-radius: 10px;
+  background-color: var(--bg-hl-transparent);
+  box-shadow: var(--shadow-inset);
+}
+overlay-split-view.gradient navigation-split-view > .sidebar-pane {
+  box-shadow: none;
+}
+overlay-split-view.gradient headerbar {
+  margin-bottom: 1px;
+  background-color: transparent;
+}
+overlay-split-view.gradient viewport {
+  background-color: transparent;
+}
+.library-list > scrolledwindow > listview > row.activatable {
+  border-radius: 10px;
+}
+overlay-split-view.gradient .library-list > scrolledwindow > listview > row.activatable:active,
+overlay-split-view.gradient .library-list > scrolledwindow > listview > row.activatable:selected {
+  background-color: var(--bg-hl-transparent);
+}
+window:not(.nautilus-window):not(.fullscreen) .content-pane > overlay-split-view > .content-pane {
+  margin: 6px 6px 6px 0px;
+}
+overlay-split-view.gradient .content-pane > overlay-split-view > .content-pane {
+  background-color: var(--bg-hl-transparent);
+  box-shadow: var(--shadow-inset);
+}
+overlay-split-view.gradient > .sidebar-pane {
+  box-shadow: var(--shadow-thin-base01);
+}
+seekbar {
+  margin: 6px;
+  border-radius: 50px;
+  background-color: var(--bg-hl-transparent);
+  box-shadow: var(--shadow-inset);
+}
+
+.collapse-spacing > revealer > widget {
+  padding: 6px 0px 6px 0px;
+}
+.collapse-spacing {
+  margin: 0px 0px 1px 0px;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
+}
+.collapse-spacing > headerbar {
+  border: none;
+  box-shadow: none;
 }
