@@ -3,12 +3,13 @@
 overlay-split-view.gradient,
 overlay-split-view.gradient .navigation-sidebar,
 overlay-split-view.gradient widget.content-pane,
-overlay-split-view.gradient stack > scrolledwindow > viewport {
-  --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-transparent);
-  --shadow-inset-thin: var(--shadow-inset-thin-transparent);
-  --shadow-inset: var(--shadow-inset-transparent);
-  --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-transparent);
-  --border-color: var(--bg-hl-transparent);
+overlay-split-view.gradient stack > scrolledwindow > viewport,
+.album-card {
+  --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-transparent-base00);
+  --shadow-inset-thin: var(--shadow-inset-thin-transparent-base00);
+  --shadow-inset: var(--shadow-inset-transparent-base00);
+  --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-transparent-base00);
+  --border-color: var(--base00-black-80-dark-transparent);
 }
 frame,
 scrolledwindow.frame,
@@ -72,6 +73,7 @@ list.boxed-list list.nested {
   --shadow-inset: var(--shadow-inset-base03);
   --shadow-separator-mimic-vertical: var(--shadow-separator-mimic-vertical-base03);
   --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-horizontal-base03);
+  --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base03);
   --border-color: var(--base03-black-90-dark);
 }
 popover modelbutton:hover:not(:active),
@@ -157,12 +159,13 @@ window {
 
 window:not(.fullscreen) {
   border-radius: 10px;
-  background-color: var(--base01);
+  /* background-color: var(--base01); */
+  background-color: transparent;
 }
 
 headerbar {
   min-height: 46px;
-  margin: 0px -1px 7px -1px;
+  margin: 0px 5px 7px 5px; /*-1px + 6px for separator mimic*/
   border-bottom: 1px solid var(--border-color);
 
   color: var(--base0D);
@@ -174,8 +177,14 @@ headerbar windowhandle > box {
   padding: 6px 7px 6px 7px;
 }
 headerbar > windowhandle > box > box.start,
-headerbar > windowhandle > box > box.end {
+headerbar > windowhandle > box > widget > box.start {
   border-spacing: 6px;
+  margin-left: -6px;
+}
+headerbar > windowhandle > box > box.end,
+headerbar > windowhandle > box > widget > box.end {
+  border-spacing: 6px;
+  margin-right: -6px;
 }
 
 /********************** General Typography * */
@@ -791,8 +800,8 @@ dropdown > button.toggle:checked:not(:hover),
 button.file:active,
 button.text-button:active,
 button.text-button:checked,
-button.font:active,
-button.osd:active {
+button.font:active {
+  /* button.osd:active { */
   box-shadow: var(--shadow-inset-base02);
 }
 button.pill:active,
@@ -871,9 +880,10 @@ menubutton.entry-icon > button:checked {
   padding: 3px 6px 3px 6px;
   box-shadow: var(--shadow-inset-thin);
 }
-button.osd:active {
-  background-color: var(--base02);
-}
+/* button.osd:active { */
+/*   background-color: var(--base02); */
+/*   background-color: inherit; */
+/* } */
 
 button.default,
 button.default:active,
@@ -1072,7 +1082,7 @@ splitbutton:hover:active:checked {
   margin: 0px;
   padding: 1px 0px 0px 1px;
 
-  color: var(--base0D);
+  color: inherit;
 
   background-color: transparent;
   box-shadow: var(--shadow-inset);
@@ -1105,10 +1115,9 @@ splitbutton > separator.vertical {
 }
 splitbutton:hover > separator,
 splitbutton:hover:checked > separator {
-  box-shadow: var(--shadow-inset-extra-thin);
+  box-shadow: var(--shadow-inset-extra-thin-base0D);
 }
-splitbutton:checked > separator,
-splitbutton:hover:active > separator {
+splitbutton:active > separator {
   box-shadow: var(--shadow-inset-extra-thin);
 }
 
@@ -1867,7 +1876,20 @@ row.activatable button.image-button {
 }
 row {
   border-width: 0px;
+  border-bottom: 1px solid var(--border-color);
   border-radius: 50px;
+  box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
+}
+row.activatable:hover {
+  border-bottom: 1px solid var(--base0D);
+}
+row.activatable:active,
+row.activatable:selected {
+  border-bottom-color: transparent;
+}
+row:last-child {
+  border-bottom-color: transparent;
+  box-shadow: none;
 }
 child.activatable {
   border-radius: 10px;
@@ -1883,6 +1905,7 @@ row.activatable:selected,
 row.activatable:hover:active,
 row.activatable:selected:backdrop,
 row.activatable.sidebar-row:selected,
+row.expander:checked,
 child.activatable:active,
 child.activatable:selected,
 child.activatable:hover:active,
@@ -1891,12 +1914,14 @@ columnview row:selected {
   background-color: transparent;
   box-shadow: var(--shadow-inset);
 }
-row.activatable:selected button.image-button:hover,
+row.activatable:hover:not(:active):not(:selected) > treeexpander > expander,
+row.activatable:hover:not(:active):not(:selected) > cell > treeexpander > expander {
+  color: inherit;
+}
+row.activatable:selected button.image-button:hover:not(:active),
 row.activatable:selected progresscell label.in-progress,
 row.activatable:hover:not(:active) box > widget > scale > marks > mark,
 row.activatable.entry:active selection,
-row.activatable:hover:not(:active):not(:selected) > treeexpander > expander,
-row.activatable:hover:not(:active):not(:selected) > cell > treeexpander > expander,
 header.activatable > button:active {
   color: var(--base01);
 }
@@ -1981,22 +2006,7 @@ list > row.activatable:selected {
   margin: 0px 6px 0px 6px;
   padding: 3px 15px 3px 15px;
 }
-/*Adjacent combinator saw a performance reduction of about 1/3 in long lists*/
-row {
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
-}
-row.activatable:hover {
-  border-bottom: 1px solid var(--base0D);
-}
-row.activatable:active,
-row.activatable:selected {
-  border-bottom-color: transparent;
-}
-row:last-child {
-  border-bottom-color: transparent;
-  box-shadow: none;
-}
+
 list.navigation-sidebar > row,
 listview.navigation-sidebar > row {
   border-bottom-color: transparent;
@@ -2044,6 +2054,7 @@ list.boxed-list:not(#_) > row.activatable:hover,
 list.boxed-list:not(#_) list > row.activatable:hover,
 list.boxed-list:not(#_) > row.activatable:active,
 list.boxed-list:not(#_) > row.activatable:selected,
+list.boxed-list:not(#_) > row.expander:checked,
 list.content:not(#_) > row.activatable:active,
 list.content:not(#_) > row.activatable:selected,
 list.content:not(#_) > row.activatable:hover {
@@ -2070,7 +2081,6 @@ list.boxed-list > row > box > frame {
 }
 row.expander > box > list > row.activatable {
   margin: -2px -15px -1px -14px;
-  box-shadow: none;
 }
 row.expander > box > list > row.activatable:hover {
   margin: -2px -15px -2px -14px;
@@ -2078,6 +2088,8 @@ row.expander > box > list > row.activatable:hover {
 row.expander > box > list > row.activatable:active,
 row.expander > box > list > row.activatable:selected {
   margin: -3px -15px -3px -15px;
+}
+row.expander.activatable > box > list > row.activatable {
   box-shadow: none;
 }
 
@@ -2313,6 +2325,11 @@ viewswitcher > button:checked,
   border-radius: 17px;
   box-shadow: var(--shadow-inset);
 }
+viewswitcher > button,
+viewswitcher > button:active,
+viewswitcher > button:checked {
+  border-radius: inherit;
+}
 viewswitcher > button:hover:checked,
 .linked > button:hover:checked,
 .linked > menubutton > button:hover:checked {
@@ -2440,10 +2457,12 @@ viewswitcher > button:hover {
 }
 
 .linked > button.text-button:checked,
+.linked > button.text-button:hover:checked,
 filechooser pathbar box.linked > button:not(#_):checked,
 filechooser pathbar box.linked > button:not(#_):hover:checked,
 viewswitcher > button.flat:checked {
   background-color: var(--base02);
+  box-shadow: var(--shadow-inset-base02);
 }
 .linked > button.text-button:nth-child(4n + 1):hover:not(:active):not(:checked),
 viewswitcher > button.flat:nth-child(4n + 1):hover:not(:active):not(:checked),
@@ -3153,10 +3172,6 @@ overlay-split-view.gradient navigation-split-view > .content-pane {
 overlay-split-view.gradient navigation-split-view > .sidebar-pane {
   box-shadow: none;
 }
-overlay-split-view.gradient headerbar {
-  margin-bottom: 1px;
-  background-color: transparent;
-}
 overlay-split-view.gradient viewport {
   background-color: transparent;
 }
@@ -3175,6 +3190,7 @@ overlay-split-view.gradient .content-pane > overlay-split-view > .content-pane {
   box-shadow: var(--shadow-inset);
 }
 overlay-split-view.gradient > .sidebar-pane {
+  background-color: transparent;
   box-shadow: var(--shadow-thin-base01);
 }
 seekbar {
@@ -3183,16 +3199,24 @@ seekbar {
   background-color: var(--bg-hl-transparent);
   box-shadow: var(--shadow-inset);
 }
-
+overlay-split-view.gradient headerbar {
+  margin-bottom: 1px;
+  background-color: transparent;
+}
 .collapse-spacing > revealer > widget {
   padding: 6px 0px 6px 0px;
 }
 .collapse-spacing {
-  margin: 0px 0px 1px 0px;
+  margin: 0px 6px 1px 6px;
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
 }
-.collapse-spacing > headerbar {
+.collapse-spacing > headerbar,
+.collapse-spacing > widget > headerbar {
+  margin-bottom: 0px;
   border: none;
   box-shadow: none;
+}
+.album-view > toolbarview > stack > scrolledwindow > viewport {
+  margin-top: 6px;
 }
