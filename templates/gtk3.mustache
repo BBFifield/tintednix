@@ -53,24 +53,27 @@ $base0F: #{{base0F-hex}};
 
 @define-color window_bg_color #{$base01};
 @define-color window_fg_color #{$base0D};
-@define-color view_bg_color   #{$base00};
-@define-color view_fg_color   @window_fg_color;
-@define-color accent_bg_color #{$base0D};
-@define-color accent_color    @accent_bg_color;
 @define-color headerbar_bg_color    @window_bg_color;
 @define-color headerbar_fg_color    @window_fg_color;
 @define-color headerbar_border_color #{$base02};
-@define-color popover_bg_color #{$base01};
-@define-color popover_fg_color @view_fg_color;
-@define-color dialog_bg_color  @popover_bg_color;
-@define-color dialog_fg_color  @popover_fg_color;
-@define-color card_bg_color    rgba(255,255,255,0.08);
-@define-color card_fg_color    @window_fg_color;
 @define-color sidebar_bg_color @headerbar_bg_color;
 @define-color sidebar_fg_color @window_fg_color;
 @define-color sidebar_backdrop_color @window_bg_color;
 @define-color sidebar_border_color   #{$base02};
 @define-color sidebar_shade_color    rgba(0,0,0,0.25);
+@define-color secondary_sidebar_bg_color @window_bg_color;
+@define-color secondary_sidebar_fg_color @window_fg_color;
+@define-color secondary_sidebar_backdrop_color @window_bg_color;
+@define-color popover_bg_color @window_bg_color;
+@define-color popover_fg_color @window_fg_color;
+@define-color view_bg_color   #{$base00};
+@define-color view_fg_color   @window_fg_color;
+@define-color accent_bg_color @window_fg_color;
+@define-color accent_color    @accent_bg_color;
+@define-color dialog_bg_color  @popover_bg_color;
+@define-color dialog_fg_color  @popover_fg_color;
+@define-color card_bg_color    #{$base02};
+@define-color card_fg_color    @window_fg_color;
 @define-color success_color #{$base0B};
 @define-color success_bg_color #{$base0B};
 @define-color success_fg_color #{$base0B};
@@ -121,6 +124,7 @@ $base0F: #{{base0F-hex}};
 
 // base09 & base0A
 @define-color base09-white-65-dark #{to-rgb($base09, white, if($variant == dark, 65%, 45%))};
+@define-color base0A-black-60      #{to-rgb($base0A, black, 60%)};
 @define-color base0A-white-65-dark #{to-rgb($base0A, white, if($variant == dark, 65%, 45%))};
 
 // base0B
@@ -130,12 +134,16 @@ $base0F: #{{base0F-hex}};
 @define-color base0B-white-65-dark #{to-rgb($base0B, white, if($variant == dark, 65%, 45%))};
 
 // base0C
+@define-color base0C-black-80:     #{to-rgb($base0C, black, 80%)};
 @define-color base0C-black-60      #{to-rgb($base0C, black, 60%)};
+@define-color base0C-black-25:     #{to-rgb($base0C, black, 25%)};
 @define-color base0C-black-65-dark #{to-rgb($base0C, black, if($variant == dark, 65%, 80%))};
 @define-color base0C-white-65-dark #{to-rgb($base0C, white, if($variant == dark, 65%, 45%))};
 
 // base0D
+@define-color base0D-black-80:     #{to-rgb($base0D, black, 80%)};
 @define-color base0D-black-60      #{to-rgb($base0D, black, 60%)};
+@define-color base0D-black-25:     #{to-rgb($base0D, black, 25%)};
 @define-color base0D-black-65-dark #{to-rgb($base0D, black, if($variant == dark, 65%, 80%))};
 @define-color base0D-white-65-dark #{to-rgb($base0D, white, if($variant == dark, 65%, 45%))};
 

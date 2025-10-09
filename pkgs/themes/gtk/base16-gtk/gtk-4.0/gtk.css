@@ -4,12 +4,14 @@ overlay-split-view.gradient,
 overlay-split-view.gradient .navigation-sidebar,
 overlay-split-view.gradient widget.content-pane,
 overlay-split-view.gradient stack > scrolledwindow > viewport,
+overlay-split-view.gradient list.boxed-list,
 .album-card {
-  --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-transparent-base00);
-  --shadow-inset-thin: var(--shadow-inset-thin-transparent-base00);
-  --shadow-inset: var(--shadow-inset-transparent-base00);
-  --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-transparent-base00);
-  --border-color: var(--base00-black-80-dark-transparent);
+  --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-transparent);
+  --shadow-inset-thin: var(--shadow-inset-thin-transparent);
+  --shadow-inset: var(--shadow-inset-transparent);
+  --shadow-thin: var(--shadow-thin-transparent);
+  --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-transparent);
+  --border-color: rgba(0, 0, 0, 0.2);
 }
 frame,
 scrolledwindow.frame,
@@ -40,7 +42,7 @@ stack > scrolledwindow > viewport > list {
 window,
 popover > contents,
 .navigation-sidebar,
-.sidebarpane > box > box > scrolledwindow > columnview {
+.sidebar-pane > box > box > scrolledwindow > columnview > listview {
   --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-base01);
   --shadow-inset-thin: var(--shadow-inset-thin-base01);
   --shadow-inset: var(--shadow-inset-base01);
@@ -60,6 +62,7 @@ list.boxed-list list {
   --shadow-inset-extra-thin: var(--shadow-inset-extra-thin-base02);
   --shadow-inset-thin: var(--shadow-inset-thin-base02);
   --shadow-inset: var(--shadow-inset-base02);
+  --shadow-thin: var(--shadow-thin-base02);
   --shadow-separator-mimic-vertical: var(--shadow-separator-mimic-vertical-base02);
   --shadow-separator-mimic-horizontal: var(--shadow-separator-mimic-horizontal-base02);
   --shadow-separator-mimic-bottom-horizontal: var(--shadow-separator-mimic-bottom-horizontal-base02);
@@ -159,13 +162,11 @@ window {
 
 window:not(.fullscreen) {
   border-radius: 10px;
-  /* background-color: var(--base01); */
-  background-color: transparent;
 }
 
 headerbar {
   min-height: 46px;
-  margin: 0px 5px 7px 5px; /*-1px + 6px for separator mimic*/
+  margin: 0px -1px 7px -1px; /*-1px + 6px for separator mimic*/
   border-bottom: 1px solid var(--border-color);
 
   color: var(--base0D);
@@ -175,16 +176,6 @@ headerbar {
 }
 headerbar windowhandle > box {
   padding: 6px 7px 6px 7px;
-}
-headerbar > windowhandle > box > box.start,
-headerbar > windowhandle > box > widget > box.start {
-  border-spacing: 6px;
-  margin-left: -6px;
-}
-headerbar > windowhandle > box > box.end,
-headerbar > windowhandle > box > widget > box.end {
-  border-spacing: 6px;
-  margin-right: -6px;
 }
 
 /********************** General Typography * */
@@ -1039,7 +1030,7 @@ spinbutton.horizontal > .up {
 
 /*vert button is 41x41px*/
 spinbutton.vertical > button {
-  min-height: 36px;
+  min-height: 37px;
 }
 spinbutton.vertical > .up {
   border-radius: 50px 50px 0px 0px;
@@ -1052,11 +1043,11 @@ spinbutton.vertical > .down {
 spinbutton.vertical > .down,
 spinbutton.vertical > .down:hover {
   margin: 2px 0px 0px 1px;
-  padding: 3px 5px 0px 4px;
+  padding: 0px 5px 2px 4px;
 }
 spinbutton.vertical > .down:active {
   margin: 1px 0px 0px 0px;
-  padding: 5px 5px 0px 5px;
+  padding: 2px 5px 2px 5px;
   border-top: 0px;
 }
 spinbutton > .down:hover + .up,
@@ -2004,7 +1995,7 @@ list > row.activatable:hover {
 list > row.activatable:active,
 list > row.activatable:selected {
   margin: 0px 6px 0px 6px;
-  padding: 3px 15px 3px 15px;
+  padding: 3px 15px;
 }
 
 list.navigation-sidebar > row,
@@ -2037,7 +2028,7 @@ list.nested {
   margin: 5px;
   padding: 5px 0px;
   background-color: var(--base02);
-  box-shadow: var(--shadow-thin-base02);
+  box-shadow: var(--shadow-thin);
 }
 list.boxed-list list.boxed-list,
 list.boxed-list .rich-list,
@@ -2925,7 +2916,10 @@ overlay-split-view > widget > toolbarview > box > label {
   margin-top: 20px;
 }
 overlay.card {
-  padding: 3px;
+  box-shadow: var(--shadow-thin-transparent);
+}
+overlay.card > picture {
+  outline-width: 0px;
 }
 toolbarview > overlay > scrolledwindow {
   margin: 0px 6px 6px 6px;
@@ -3147,26 +3141,19 @@ frame > scrolledwindow > listview {
 /*****************/
 /*Recordbox*/
 /*****************/
-overlay-split-view.gradient {
-  /* margin: 0px; */
-  /* border-radius: 0px; */
-}
-overlay-split-view.gradient .content-pane {
+.lyrics-text,
+window:not(.nautilus-window):not(.fullscreen) overlay-split-view.gradient > widget.content-pane {
   margin: 0px;
   border-radius: 0px;
   background-color: transparent;
   box-shadow: none;
 }
-.lyrics-text,
-window:not(.nautilus-window):not(.fullscreen) overlay-split-view.gradient > widget.content-pane {
-  margin: 0px;
-  background-color: transparent;
-  box-shadow: none;
-}
-overlay-split-view.gradient navigation-split-view > .content-pane {
+window:not(.nautilus-window):not(.fullscreen) .content-pane > overlay-split-view > .content-pane,
+overlay-split-view.gradient navigation-split-view > .content-pane,
+overlay-split-view.gradient .content-pane > overlay-split-view > .content-pane {
   margin: 6px 6px 6px 0px;
   border-radius: 10px;
-  background-color: var(--bg-hl-transparent);
+  background-color: rgba(255, 255, 255, 0.02);
   box-shadow: var(--shadow-inset);
 }
 overlay-split-view.gradient navigation-split-view > .sidebar-pane {
@@ -3178,25 +3165,12 @@ overlay-split-view.gradient viewport {
 .library-list > scrolledwindow > listview > row.activatable {
   border-radius: 10px;
 }
-overlay-split-view.gradient .library-list > scrolledwindow > listview > row.activatable:active,
-overlay-split-view.gradient .library-list > scrolledwindow > listview > row.activatable:selected {
-  background-color: var(--bg-hl-transparent);
-}
-window:not(.nautilus-window):not(.fullscreen) .content-pane > overlay-split-view > .content-pane {
-  margin: 6px 6px 6px 0px;
-}
-overlay-split-view.gradient .content-pane > overlay-split-view > .content-pane {
-  background-color: var(--bg-hl-transparent);
-  box-shadow: var(--shadow-inset);
-}
 overlay-split-view.gradient > .sidebar-pane {
-  background-color: transparent;
   box-shadow: var(--shadow-thin-base01);
 }
 seekbar {
   margin: 6px;
-  border-radius: 50px;
-  background-color: var(--bg-hl-transparent);
+  border-radius: 6px;
   box-shadow: var(--shadow-inset);
 }
 overlay-split-view.gradient headerbar {
@@ -3206,17 +3180,6 @@ overlay-split-view.gradient headerbar {
 .collapse-spacing > revealer > widget {
   padding: 6px 0px 6px 0px;
 }
-.collapse-spacing {
-  margin: 0px 6px 1px 6px;
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: var(--shadow-separator-mimic-bottom-horizontal);
-}
-.collapse-spacing > headerbar,
-.collapse-spacing > widget > headerbar {
-  margin-bottom: 0px;
-  border: none;
-  box-shadow: none;
-}
 .album-view > toolbarview > stack > scrolledwindow > viewport {
-  margin-top: 6px;
+  box-shadow: none;
 }
