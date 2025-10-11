@@ -1,5 +1,9 @@
 @import url("colors.css");
 
+:root {
+  --disabled-opacity: 0.6;
+}
+
 overlay > box.toolbar.toolbar-top.top,
 overlay > box.toolbar.toolbar-bottom.bottom,
 overlay-split-view.gradient,
@@ -152,8 +156,6 @@ arrow.up {
 }
 
 *:disabled {
-  --disabled-opacity: 0.6;
-
   filter: opacity(var(--disabled-opacity));
 
   -gtk-icon-filter: opacity(0.5);
@@ -622,6 +624,9 @@ toggle {
   border-radius: 50px;
 
   background-color: transparent;
+
+  transition-duration: 0.2s;
+  transition-property: background-color, box-shadow;
 }
 /* stack > button:not(.image-button):not(.image-text-button), */
 stack > button,
