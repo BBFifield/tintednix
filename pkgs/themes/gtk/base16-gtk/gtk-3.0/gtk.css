@@ -752,7 +752,8 @@ button:checked > box > arrow {
   -gtk-icon-transform: rotate(-0.5turn);
 }
 
-spinbutton {
+spinbutton,
+GimpSpinScale {
   min-height: 34px;
   margin: 1px 0px 0px 1px;
   border-radius: 50px;
@@ -766,17 +767,20 @@ spinbutton {
     2px 4px 4px rgba(0, 0, 0, 0.2),
     -1px -1px 0px @base02-white-90-dark;
 }
-spinbutton > entry {
+spinbutton > entry,
+GimpSpinScale > entry {
   min-width: 30px;
   min-height: 32px;
   margin: 0px;
   padding: 0px 6px 0px 6px;
   border-radius: 50px 0px 0px 50px;
 }
-spinbutton.horizontal > entry {
+spinbutton.horizontal > entry,
+GimpSpinScale.horizontal > entry {
   box-shadow: none;
 }
-spinbutton > entry:focus {
+spinbutton > entry:focus,
+GimpSpinScale > entry:focus {
   margin: 0px;
   padding: 0px 6px 0px 6px;
   border-radius: 50px;
@@ -787,7 +791,8 @@ spinbutton > entry:focus {
     -1px -1px 0px @base02-white-90-dark inset;
 }
 /*vert text is _x34px*/
-spinbutton.vertical > entry {
+spinbutton.vertical > entry,
+GimpSpinScale.vertical > entry {
   margin: 2px 0px 0px 1px;
   padding: 0px 0px 0px 0px;
   border-top: 1px solid @base02;
@@ -797,7 +802,8 @@ spinbutton.vertical > entry {
     0px -1px 0px @base02-black-75-dark,
     0px 1px 0px @base02-white-90-dark inset;
 }
-spinbutton.vertical > entry:focus {
+spinbutton.vertical > entry:focus,
+GimpSpinScale.vertical > entry:focus {
   margin: 1px 0px 0px 0px;
   padding: 2px 0px 0px 1px;
   border-top: 0px;
@@ -810,7 +816,9 @@ spinbutton.vertical > entry:focus {
 }
 
 spinbutton > button.down:hover,
-spinbutton > button.up:hover {
+spinbutton > button.up:hover,
+GimpSpinScale > button.down:hover,
+GimpSpinScale > button.up:hover {
   border-color: transparent;
   border-radius: 50px;
   /*shadow-thin-base0D*/
@@ -820,7 +828,9 @@ spinbutton > button.up:hover {
     -1px -1px 0px @base0D-white-65-dark;
 }
 spinbutton > button.down:active,
-spinbutton > button.up:active {
+spinbutton > button.up:active,
+GimpSpinScale > button.down:active,
+GimpSpinScale > button.up:active {
   border: 0px;
   border-radius: 50px;
   box-shadow:
@@ -829,7 +839,8 @@ spinbutton > button.up:active {
     -1px -1px 0px @base02-white-90-dark inset;
 }
 /*horiz button is 34x34*/
-spinbutton.horizontal > button {
+spinbutton.horizontal > button,
+GimpSpinScale.horizontal > button {
   min-width: 24px;
   min-height: 24px;
   margin: 1px 0px 0px 2px;
@@ -842,12 +853,14 @@ spinbutton.horizontal > button {
     -1px 0px 0px @base02-black-75-dark,
     1px 0px 0px @base02-white-90-dark inset;
 }
-spinbutton.horizontal > button:active {
+spinbutton.horizontal > button:active,
+GimpSpinScale.horizontal > button:active {
   margin: 0px 0px 0px 1px;
   padding: 2px 5px 0px 5px;
   border-left: 0px;
 }
-spinbutton.horizontal > .up {
+spinbutton.horizontal > .up,
+GimpSpinScale.horizontal > .up {
   border-radius: 0px 50px 50px 0px;
   /*shadow-separator-mimic-vertical-base02*/
   box-shadow:
@@ -856,13 +869,16 @@ spinbutton.horizontal > .up {
 }
 
 /*vert button is 41x41px*/
-spinbutton.vertical > button {
+spinbutton.vertical > button,
+GimpSpinScale.vertical > button {
   min-height: 37px;
 }
-spinbutton.vertical > .up {
+spinbutton.vertical > .up,
+GimpSpinScale.vertical > .up {
   border-radius: 50px 50px 0px 0px;
 }
-spinbutton.vertical > .down {
+spinbutton.vertical > .down,
+GimpSpinScale.vertical > .down {
   border-top: 1px solid @base02-black-90-dark;
   border-radius: 0px 0px 50px 50px;
   /*shadow-separator-mimic-horizontal-base02*/
@@ -871,11 +887,14 @@ spinbutton.vertical > .down {
     0px 1px 0px @base02-white-90-dark inset;
 }
 spinbutton.vertical > .down,
-spinbutton.vertical > .down:hover {
+spinbutton.vertical > .down:hover,
+GimpSpinScale.vertical > .down,
+GimpSpinScale.vertical > .down:hover {
   margin: 2px 0px 0px 1px;
   padding: 0px 5px 2px 4px;
 }
-spinbutton.vertical > .down:active {
+spinbutton.vertical > .down:active,
+GimpSpinScale.vertical > .down:active {
   margin: 1px 0px 0px 0px;
   padding: 2px 5px 2px 5px;
   border-top: 0px;
@@ -884,7 +903,12 @@ spinbutton > .down:hover + .up,
 spinbutton > .down:active + .up,
 spinbutton > entry:focus + .down:not(:hover):not(:active),
 spinbutton:not(:focus) > .up:hover + entry, /*using entry:not(:focus) doesn't work, a bug I guess unless the entry becomes focused when the button is hovered*/
-spinbutton > .up:active + entry:not(:focus) {
+spinbutton > .up:active + entry:not(:focus),
+GimpSpinScale > .down:hover + .up,
+GimpSpinScale > .down:active + .up,
+GimpSpinScale > entry:focus + .down:not(:hover):not(:active),
+GimpSpinScale:not(:focus) > .up:hover + entry, /*using entry:not(:focus) doesn't work, a bug I guess unless the entry becomes focused when the button is hovered*/
+GimpSpinScale > .up:active + entry:not(:focus) {
   border-color: transparent;
   box-shadow: none;
 }

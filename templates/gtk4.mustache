@@ -241,7 +241,9 @@ $base0F: #{{base0F-hex}};
   --base09-white-65-dark: color-mix(in oklab, #{$base09} #{if($variant == dark, 65%, 45%)}, white);
 
   // base0A
+  --base0A-black-80:      color-mix(in oklab, #{$base0A} 80%, black);
   --base0A-black-60:      color-mix(in oklab, #{$base0A} 60%, black);
+  --base0A-black-25:      color-mix(in oklab, #{$base0A} 25%, black);
   --base0A-white-65-dark: color-mix(in oklab, #{$base0A} #{if($variant == dark, 65%, 45%)}, white);
 
   // base0B
@@ -312,6 +314,7 @@ $base0F: #{{base0F-hex}};
   --shadow-inset-base0C-dull: #{top-deep-inset-shadow(var(--base0C-black-25))}, #{bottom-inset-shadow(var(--base0C-black-80))};
   --shadow-inset-base0D-dull: #{top-deep-inset-shadow(var(--base0D-black-25))}, #{bottom-inset-shadow(var(--base0D-black-80))};
 
+  --shadow-thin-transparent: #{thin-shadow(rgba(255, 255, 255, 0.12))};
   --shadow-thin-base00: #{thin-shadow(var(--base00-white-90-dark))};
   --shadow-thin-base01: #{thin-shadow(var(--base01-white-90-dark))};
   --shadow-thin-base02: #{thin-shadow(var(--base02-white-90-dark))};

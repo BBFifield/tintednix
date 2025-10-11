@@ -1,5 +1,7 @@
 @import url("colors.css");
 
+overlay > box.toolbar.toolbar-top.top,
+overlay > box.toolbar.toolbar-bottom.bottom,
 overlay-split-view.gradient,
 overlay-split-view.gradient .navigation-sidebar,
 overlay-split-view.gradient widget.content-pane,
@@ -150,8 +152,9 @@ arrow.up {
 }
 
 *:disabled {
-  /* opacity: 0.6; */
-  filter: opacity(0.6);
+  --disabled-opacity: 0.6;
+
+  filter: opacity(var(--disabled-opacity));
 
   -gtk-icon-filter: opacity(0.5);
 }
@@ -201,7 +204,7 @@ image.expander-row-arrow {
 modelbutton,
 row.activatable > button.text-button:only-child,/*the row is acting as a button here, so no need to have styling for the button itself*/
 button.image-button {
-  background-color: inherit;
+  background-color: transparent;
 }
 
 label.large-title {
@@ -2661,13 +2664,6 @@ overlay-split-view > .sidebar-pane,
 revealer.bottom-properties {
   box-shadow: none;
 }
-overlay > box.toolbar {
-  background-color: alpha(var(--base01), 0.9);
-}
-/*TODO: Check this over*/
-overlay > box.toolbar > separator {
-  box-shadow: var(--shadow-inset-extra-thin-base01);
-}
 
 /*****************/
 /*pwvucontrol*/
@@ -3182,4 +3178,18 @@ overlay-split-view.gradient headerbar {
 }
 .album-view > toolbarview > stack > scrolledwindow > viewport {
   box-shadow: none;
+}
+
+/*****************/
+/*Satty*/
+/*****************/
+overlay > box.toolbar.toolbar-top.top,
+overlay > box.toolbar.toolbar-bottom.bottom {
+  color: var(--base0D);
+  background-color: alpha(var(--base01), 0.8);
+  box-shadow: var(--shadow-thin);
+}
+/*TODO: Check this over*/
+overlay > box.toolbar > separator {
+  box-shadow: var(--shadow-inset-extra-thin);
 }
