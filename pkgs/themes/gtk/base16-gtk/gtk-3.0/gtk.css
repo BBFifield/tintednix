@@ -1,5 +1,54 @@
 @import url("file:///home/brandon/.config/gtk-3.0/colors.css");
 
+/*Resets*/
+widget > box > scrolledwindow > viewport.frame > box > box > frame {
+  margin: 0px;
+  box-shadow: none;
+}
+
+/*base00*/
+GimpDock > box > box notebook > header {
+  border-bottom-color: @base00-black-80-dark;
+  /* shadow-separator-mimic-bottom-horizontal-base00 */
+  box-shadow:
+    0px -1px 0px @base00-black-65-dark inset,
+    0px 1px 0px @base00-white-90-dark;
+}
+stack > widget > box > box > button.flat:active, /*Ex: GimpDock*/
+stack > widget > box > box > button.flat:checked,
+stack > widget > box > box > box > button.flat:active,
+stack > widget > box > box > box > button.flat:checked,
+stack > box > scrolledwindow > viewport > box > frame > box > box > button:active,
+stack > box > scrolledwindow > viewport > box > frame > box > box > button:checked,
+stack > box > scrolledwindow > viewport > box > frame > box > box > box > button:active,
+stack > box > scrolledwindow > viewport > box > frame > box > box > box > button:checked,
+stack > box > scrolledwindow > viewport > box > box > frame > grid > box > box > box > button:active,
+stack > box > scrolledwindow > viewport > box > box > frame > grid > box > box > box > button:checked,
+widget > box > scrolledwindow > viewport.frame > box > box > box > button:active,
+widget > box > scrolledwindow > viewport.frame > box > box > box > button:checked,
+GimpDock > box > box notebook > header > tabs > tab:checked {
+  /*shadow-inset-base00*/
+  box-shadow:
+    1px 2px 2px @base00-black-80 inset,
+    2px 4px 4px @base00-black-80 inset,
+    -1px -1px 0px @base00-white-90-dark inset;
+}
+GimpDock > box > box notebook > header > tabs > tab + tab {
+  border-left: 1px solid @base00-black-80;
+  /*shadow-separator-mimic-vertical-base00*/
+  box-shadow:
+    -1px 0px 0px @base00-black-65-dark,
+    1px 0px 0px @base00-white-90-dark inset;
+}
+stack > box > scrolledwindow > viewport check,
+GimpDock > box > box notebook check {
+  /*shadow-inset-thin-base00*/
+  box-shadow:
+    1px 1px 0.6px 0.1px @base00-black-80 inset,
+    2px 2px 1.1px 0.1px @base00-black-80 inset,
+    -1px -1px 0px @base00-white-90-dark inset;
+}
+
 @keyframes ripple-out {
   from {
     background-image: radial-gradient(circle farthest-corner at center, alpha(currentColor, 1) 0%, transparent 0%);
@@ -59,29 +108,28 @@
 }
 
 arrow {
-  color: @base0D;
-
+  min-width: 16px;
+  min-height: 16px;
+  /* color: @base0D; */
   /* -gtk-icon-source: -gtk-icontheme("go-next-symbolic"); */
 }
 arrow.left {
-  -gtk-icon-source: -gtk-icontheme("go-previous-symbolic");
+  -gtk-icon-source: -gtk-icontheme("pan-start-symbolic");
 }
 arrow.right {
-  -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
+  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
 }
 arrow.down,
 arrow.bottom {
-  -gtk-icon-source: -gtk-icontheme("go-down-symbolic");
+  -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
 }
 arrow.up,
 arrow.top {
-  -gtk-icon-source: -gtk-icontheme("go-up-symbolic");
+  -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
 }
 
 *:disabled {
   opacity: 0.6;
-
-  -gtk-icon-effect: dim;
 }
 
 window {
@@ -136,6 +184,7 @@ label,
 text,
 cellview,
 entry,
+treeview,
 textview,
 spinbutton,
 popover,
@@ -144,7 +193,6 @@ window {
     normal 16px "JetBrainsMono Nerd Font",
     sans-serif;
 }
-
 sort-indicator,
 cellview,
 scrolledwindow,
@@ -553,6 +601,11 @@ button.sidebar-button {
   min-height: 22px;
   padding: 2px 6px 3px 5px;
 }
+button.flat.link {
+  color: @base0C;
+  background-color: transparent;
+  box-shadow: none;
+}
 
 /**********************/
 /**** button:hover ****/
@@ -592,6 +645,14 @@ button.tab-close-button:hover:not(:active) {
     2px 4px 4px rgba(0, 0, 0, 0.2),
     -1px -1px 0px @base08-white-65-dark;
 }
+button.flat.link:hover:not(:active) {
+  color: @base0C;
+  background-color: transparent;
+  box-shadow: none;
+}
+button.flat.link:hover:not(:active) > label {
+  text-decoration-line: underline;
+}
 
 /******************************/
 /**** button:hover:checked ****/
@@ -599,10 +660,6 @@ button.tab-close-button:hover:not(:active) {
 button:hover:checked {
   margin: 0px;
   padding: 2px 9px 2px 9px;
-
-  /* color: @base01; */
-
-  /* background-color: @base0D; */
   box-shadow:
     1px 2px 2px @base0D-black-60 inset,
     2px 4px 4px @base0D-black-60 inset,
@@ -622,7 +679,8 @@ button.pill:hover:checked {
 
 /***************** button:hover:active **************************/
 button:active,
-button:checked {
+button:checked,
+button:hover:checked:active {
   margin: 0px;
   padding: 2px 9px 2px 9px;
   box-shadow:
@@ -702,6 +760,12 @@ toolbutton > button.text-button.image-button:active {
 button.image-button.text-button.toggle:active {
   background-color: @base02;
 }
+button.suggested-action:hover,
+button.default:hover,
+button.destructive-action:hover,
+button.close:hover {
+  color: @base01;
+}
 button.default,
 button.default:active,
 button.suggested-action,
@@ -712,17 +776,19 @@ button.suggested-action.image-text-button:active,
 button.suggested-action.image-text-button:checked {
   color: @base0B;
 }
-button.suggested-action:hover,
-button.default:hover,
-button.destructive-action:hover,
-button.close:hover {
-  color: @base01;
-}
 button.destructive-action,
 button.destructive-action:active,
 button.close,
 button.close:active {
   color: @base08;
+}
+button.flat.link:active {
+  color: @base0C;
+  background-color: transparent;
+  box-shadow: none;
+}
+button.flat.link:active > label {
+  text-decoration-line: underline;
 }
 
 button separator.vertical {
@@ -744,13 +810,10 @@ button:hover:active separator {
     -1px -1px 0px @base02-white-90-dark inset;
 }
 button > box > arrow {
-  min-width: 16px;
-  min-height: 16px;
-  color: @base0D;
   transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 button.combo > box > arrow {
-  -gtk-icon-source: -gtk-icontheme("go-down-symbolic");
+  -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
 }
 button:checked > box > arrow {
   -gtk-icon-transform: rotate(-0.5turn);
@@ -772,9 +835,9 @@ GimpSpinScale {
     -1px -1px 0px @base02-white-90-dark;
 }
 entry > progress {
-  border-radius: inherit;
-  margin-left: -6px;
   margin-right: -6px;
+  margin-left: -6px;
+  border-radius: inherit;
   background-color: @base0D-black-60;
 }
 spinbutton > entry,
@@ -982,6 +1045,7 @@ menu > menuitem {
   color: @base0D;
 }
 menuitem:hover {
+  color: @base01;
   background-color: @base0D;
   /*shadow-thin-base0D*/
   box-shadow:
@@ -989,24 +1053,35 @@ menuitem:hover {
     2px 4px 4px rgba(0, 0, 0, 0.2),
     -1px -1px 0px @base0D-white-65-dark;
 }
-menuitem:hover > * {
-  color: @base01;
-}
 menuitem accelerator {
   color: alpha(currentColor, 0.55);
 }
-menu > menuitem label:first-child {
+menu > menuitem > label:first-child,
+menu > menuitem > box:first-child {
   margin-left: -38px;
   /* For the popup menuitem boundary spacing*/
   padding-left: 10px;
 }
+menu > menuitem > box:first-child > image:first-child {
+  margin-right: 10px;
+}
+menu > menuitem > check:first-child,
+menu > menuitem > radio:first-child {
+  margin-right: 10px;
+  margin-left: -2px;
+}
 menuitem:hover > check:not(:checked),
 menuitem:hover > radio:not(:checked) {
-  /*shadow-inset-base0D*/
+  /*shadow-inset-thin-base0D*/
   box-shadow:
-    1px 2px 2px @base0D-black-60 inset,
-    2px 4px 4px @base0D-black-60 inset,
+    1px 1px 0.6px 0.1px @base0D-black-60 inset,
+    2px 2px 1.1px 0.1px @base0D-black-60 inset,
     -1px -1px 0px @base0D-white-65-dark inset;
+}
+menu > separator {
+  box-shadow:
+    0.5px 0.5px 1.1px 0.2px @base01-black-50-dark inset,
+    -1px -1px 0px 0px @base01-white-90-dark inset;
 }
 
 toolbar {
@@ -1030,35 +1105,51 @@ tabs {
   padding: 0px 4px 0px 4px;
 }
 tab {
-  min-width: 115px; /*Had to bump to 115 here to increase spacing between labels and buttons*/
+  /*min-width: 50px;*/ /*Had to bump to 115 here to increase spacing between labels and buttons*/
   min-height: 24px;
   margin: 6px 0px 5px 1px;
   padding: 4px 17px 5px 16px;
+
+  background-color: transparent;
+
+  transition-duration: 0.2s;
+  transition-property: background-color, box-shadow;
+}
+tab:hover {
+  border-color: transparent;
   border-radius: 50px;
 
-  color: @base0D;
+  color: @base01;
 
-  background-color: inherit;
-
-  animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-tab:checked {
-  margin: 5px 0px 5px 0px;
-  padding: 5px 17px 5px 17px;
-  /*shadow-inset-base01*/
-  box-shadow:
-    1px 2px 2px @base01-black-80 inset,
-    2px 4px 4px @base01-black-80 inset,
-    -1px -1px 0px @base01-white-90-dark inset;
-}
-tab:hover:not(:checked) {
-  color: @base0D;
+  background-color: @base0D;
   /*shadow-thin-base0D*/
   box-shadow:
     1px 2px 2px rgba(0, 0, 0, 0.17),
     2px 4px 4px rgba(0, 0, 0, 0.2),
     -1px -1px 0px @base0D-white-65-dark;
-  animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+tab:checked {
+  margin: 5px 0px 5px 0px;
+  padding: 5px 17px 5px 17px;
+  border-radius: 50px;
+
+  color: inherit;
+  /*shadow-inset-base01*/
+  background-color: transparent;
+  box-shadow:
+    1px 2px 2px @base01-black-80 inset,
+    2px 4px 4px @base01-black-80 inset,
+    -1px -1px 0px @base01-white-90-dark inset;
+}
+tab > image {
+  min-width: 30px;
+}
+tab > label {
+  min-width: 115px;
+}
+tab:hover:not(:checked) > label,
+tab:hover:not(:checked) > image {
+  color: @base01;
 }
 tab:hover:not(:checked) > box > button.small-button:active {
   /*shadow-inset-thin-base0D*/
@@ -1068,51 +1159,91 @@ tab:hover:not(:checked) > box > button.small-button:active {
     -1px -1px 0px @base0D-white-65-dark inset;
 }
 /*Create the illusion of inset separators*/
-tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover) {
-  border-radius: 1px;
+tab + tab {
+  margin-left: 2px;
+  padding-left: 15px;
+  border-left: 1px solid @base01-black-80;
+  border-radius: 0px;
   /*shadow-separator-mimic-vertical-base01*/
   box-shadow:
-    -2px 0px 0px @base01-black-65-dark,
-    -1px 0px 0px @base01-black-80-dark,
+    -1px 0px 0px @base01-black-65-dark,
     1px 0px 0px @base01-white-90-dark inset;
 }
-header.right > tabs > tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover),
-header.left > tabs > tab:not(:checked):not(:hover) + tab:not(:checked):not(:hover) {
-  border-radius: 1px;
+tab + tab:checked {
+  margin-left: 1px;
+  padding: 5px 17px 5px 17px;
+  border-left: 0px;
+}
+header.right > tabs > tab,
+header.left > tabs > tab {
+  margin: 1px 5px 0px 6px;
+  padding: 4px 17px 5px 16px;
+}
+header.right > tabs > tab:hover,
+header.left > tabs > tab:hover {
+  border-radius: 50px;
+  /*shadow-thin-base0D*/
+  box-shadow:
+    1px 2px 2px rgba(0, 0, 0, 0.17),
+    2px 4px 4px rgba(0, 0, 0, 0.2),
+    -1px -1px 0px @base0D-white-65-dark;
+}
+header.right > tabs > tab:checked,
+header.left > tabs > tab:checked {
+  margin: 0px 5px 0px 5px;
+  padding: 5px 17px 5px 17px;
+  border-radius: 50px;
+  /*shadow-inset-base01*/
+  box-shadow:
+    1px 2px 2px @base01-black-80 inset,
+    2px 4px 4px @base01-black-80 inset,
+    -1px -1px 0px @base01-white-90-dark inset;
+}
+header.right > tabs > tab + tab,
+header.left > tabs > tab + tab {
+  margin-top: 2px;
+  padding-top: 3px;
+  border-top: 1px solid @base01-black-80;
+  border-left: none;
+  border-radius: 0px;
   /* shadow-separator-mimic-horizontal-base01 */
   box-shadow:
-    0px -2px 0px @base01-black-65-dark,
-    0px -1px 0px @base01-black-80-dark,
+    0px -1px 0px @base01-black-65-dark,
     0px 1px 0px @base01-white-90-dark inset;
 }
-tab + tab:not(:hover):not(:checked) {
-  margin: 6px 0px 5px 2px;
-  padding: 4px 17px 5px 18px;
-}
-tab + tab:hover:not(:checked) {
-  margin: 6px 0px 5px 4px;
-  padding: 4px 17px 5px 16px;
-}
-tab + tab:checked {
-  margin: 5px 0px 5px 3px;
-}
-header.right > tabs > tab + tab:not(:hover):not(:checked),
-header.left > tabs > tab + tab:not(:hover):not(:checked) {
-  margin: 2px 5px 0px 6px;
-  padding: 6px 17px 5px 16px;
-}
-header.right > tabs > tab + tab:hover:not(:checked),
-header.left > tabs > tab + tab:hover:not(:checked) {
-  margin: 4px 5px 0px 6px;
-  padding: 4px 17px 5px 16px;
+header.right > tabs > tab + tab:hover,
+header.left > tabs > tab + tab:hover {
+  border-top-color: transparent;
 }
 header.right > tabs > tab + tab:checked,
 header.left > tabs > tab + tab:checked {
-  margin: 3px 5px 0px 5px;
+  margin: 1px 5px 0px 5px;
+  padding: 5px 17px 5px 17px;
+  border-top: 0px;
 }
-tab:hover:not(:checked) label,
-tab:hover:not(:checked) image {
-  color: @base01;
+tab:hover + tab:not(:checked),
+tab:checked + tab:not(:hover) {
+  border-color: transparent;
+  box-shadow: none;
+}
+header.top > tabs > arrow.up {
+  margin-left: 6px;
+  color: alpha(currentColor, 0.5);
+
+  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+}
+header.top > tabs > arrow.down {
+  margin-right: 6px;
+  color: alpha(currentColor, 0.75);
+
+  -gtk-icon-source: -gtk-icontheme("pan-start-symbolic");
+}
+header.top > tabs > arrow:disabled {
+  color: alpha(currentColor, 0.25);
+}
+
+header.top > tabs > arrow:hover {
+  color: alpha(currentColor, 1);
 }
 
 actionbar > revealer,
@@ -1163,6 +1294,21 @@ scrolledwindow.frame textview,
 frame textview {
   box-shadow: none;
 }
+stack > box > scrolledwindow:not(.frame) {
+  margin: 6px;
+}
+stack > box > scrolledwindow > viewport {
+  border-radius: 10px;
+  background-color: @base00;
+  box-shadow:
+    1px 2px 2px @base00-black-80 inset,
+    2px 4px 4px @base00-black-80 inset,
+    -1px -1px 0px @base00-white-90-dark inset;
+}
+stack > box > scrolledwindow > viewport > box.vertical > box.horizontal:first-child,
+stack > box > scrolledwindow > viewport > box.vertical > grid.horizontal:first-child {
+  margin: 6px 6px 0px 6px;
+}
 /*Why use padding 8px 6px 6px 8px?*/
 frame > scrolledwindow {
   margin: 6px;
@@ -1174,7 +1320,6 @@ frame button.small-button:active,
 frame button.small-button:hover:active,
 scrolledwindow.frame button.small-button:active,
 scrolledwindow.frame button.small-button:hover:active,
-scrolledwindow.frame textview,
 scrolledwindow.frame block.empty,
 scrolledwindow.frame progressbar trough,
 scrolledwindow.frame levelbar trough,
@@ -1471,17 +1616,10 @@ spinner {
   -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
 }
 
-.popup arrow {
-  min-width: 16px;
-  min-height: 16px;
-}
-.popup label * {
-  opacity: 0.5;
-}
 .popup {
   border-radius: 10px;
 }
-.popup decoration {
+.popup > decoration {
   background-color: @base01;
 }
 
@@ -1665,143 +1803,6 @@ viewswitcher > button:last-child,
     0px 1px 0px @base02-white-90-dark inset;
 }
 
-/* .linked > * + *, */
-/* .linked > button + * { */
-/*   border-left-width: 0px; */
-/*   border-radius: 0px; */
-/*   /*shadow-separator-mimic-vertical-base02*/
-/*   box-shadow: */
-/*     -2px 0px 0px @base02-black-75-dark, */
-/*     -1px 0px 0px @base02-black-90-dark, */
-/*     1px 0px 0px @base02-white-90-dark inset; */
-/* } */
-/* .linked > *:first-child { */
-/*   border-radius: 50px 0px 0px 50px; */
-/* } */
-/* .linked > *:last-child { */
-/*   border-radius: 0px 50px 50px 0px; */
-/* } */
-/* .linked.vertical > * + * { */
-/*   border-top-width: 0px; */
-/*   border-radius: 0px; */
-/*   /*shadow-separator-mimic-horizontal-base02*/
-/*   box-shadow: */
-/*     0px -2px 0px @base02-black-75-dark, */
-/*     0px -1px 0px @base02-black-90-dark, */
-/*     0px 1px 0px @base02-white-90-dark inset; */
-/* } */
-/* .linked.vertical > *:first-child { */
-/*   border-radius: 50px 50px 0px 0px; */
-/* } */
-/* .linked.vertical > *:last-child { */
-/*   border-radius: 0px 0px 50px 50px; */
-/* } */
-/* .linked > *:only-child { */
-/*   border-radius: 50px; */
-/* } */
-/* .linked > *:not(entry):not(spinbutton):hover + *, */
-/* .linked > scrolledwindow:hover + *, */
-/* .linked > entry:focus + button:not(:hover):not(:active):not(:checked), */
-/* .linked > entry:focus + entry:not(:focus), */
-/* .linked > entry:first-child:not(:focus), */
-/* .linked > button:hover + *, */
-/* .linked > button:active + *, */
-/* .linked > button:checked + *, */
-/* .linked > button:hover:active + *, */
-/* .linked > button:hover:checked + *, */
-/* .linked > button:first-child:not(:hover):not(:active):not(:checked), */
-/* .linked > spinbutton:first-child { */
-/*   box-shadow: none; */
-/* } */
-/* .linked > button:hover:not(#_), */
-/* .linked > *:not(entry):not(spinbutton):hover, */
-/* .linked > *:not(spinbutton):active, */
-/* .linked > *:checked, */
-/* .linked > *:not(spinbutton):hover:active, */
-/* .linked > *:hover:checked, */
-/* .linked > entry:focus:not(#_) { */
-/*   border-radius: 50px; */
-/* } */
-/* .linked > button:active, */
-/* .linked > button:checked, */
-/* .linked > button:hover:active, */
-/* .linked > button:hover:checked, */
-/* .linked > button:hover:active:checked, */
-/* .linked > button.image-button:active, */
-/* .linked > button.image-button:checked, */
-/* .linked > button.image-button:hover:active, */
-/* .linked > button.image-button:active:checked, */
-/* .linked > button.image-button:hover:active:checked, */
-/* .linked > entry:focus { */
-/*   /*shadow-inset-base02*/
-/*   box-shadow: */
-/*     1px 2px 2px @base02-black-80 inset, */
-/*     2px 4px 4px @base02-black-80 inset, */
-/*     -1px -1px 0px @base02-white-90-dark inset; */
-/* } */
-/* .linked > button:hover:checked, */
-/* .linked > button.image-button:hover:checked { */
-/*   padding: 2px 9px 2px 9px; */
-/*   /*shadow-inset-base0D*/
-/*   box-shadow: */
-/*     1px 2px 2px @base0D-black-60 inset, */
-/*     2px 4px 4px @base0D-black-60 inset, */
-/*     -1px -1px 0px @base0D-white-65-dark inset; */
-/* } */
-/* .linked > * + button:not(:hover):not(:active):not(:checked), */
-/* .linked > * + entry:not(:focus) { */
-/*   margin: 1px 0px 0px 2px; */
-/*   padding: 1px 9px 2px 10px; */
-/* } */
-/* .linked > * + button:hover:not(:active):not(:checked) { */
-/*   margin: 1px 0px 0px 4px; */
-/*   padding: 1px 9px 2px 8px; */
-/*   box-shadow: */
-/*     1px 2px 2px rgba(0, 0, 0, 0.17), */
-/*     2px 4px 4px rgba(0, 0, 0, 0.2), */
-/*     -1px -1px 0px @base0D-white-65-dark; */
-/* } */
-/* .linked > * + spinbutton, */
-/* .linked > * + button:active, */
-/* .linked > * + button:checked, */
-/* .linked > * + button:hover:active, */
-/* .linked > * + button:hover:checked, */
-/* .linked > * + button:hover:active:checked, */
-/* .linked > * + entry:focus { */
-/*   margin: 0px 0px 0px 3px; */
-/* } */
-/* .linked.vertical > * + button:not(:hover):not(:active):not(:checked), */
-/* .linked.vertical > * + entry:not(:focus) { */
-/*   margin: 2px 0px 0px 1px; */
-/*   padding: 3px 9px 2px 8px; */
-/* } */
-/* .linked.vertical > * + button:hover:not(:active):not(:checked) { */
-/*   margin: 4px 0px 0px 1px; */
-/*   padding: 1px 9px 2px 8px; */
-/*   /*shadow-thin-base0D*/
-/*   box-shadow: */
-/*     1px 2px 2px rgba(0, 0, 0, 0.17), */
-/*     2px 4px 4px rgba(0, 0, 0, 0.2), */
-/*     -1px -1px 0px @base0D-white-65-dark; */
-/* } */
-/* .linked.vertical > * + spinbutton, */
-/* .linked.vertical > * + button:active, */
-/* .linked.vertical > * + button:checked, */
-/* .linked.vertical > * + button:hover:active, */
-/* .linked.vertical > * + button:hover:checked, */
-/* .linked.vertical > * + button:hover:active:checked, */
-/* .linked.vertical > * + entry:focus { */
-/*   margin: 3px 0px 0px 0px; */
-/* } */
-/* /*For when there's ever a horizontally linked spinbutton*/
-/* .linked > spinbutton { */
-/*   margin: 0px 0px 0px 2px; */
-/*   padding: 0px 0px 0px 1px; */
-/* } */
-/* .linked.vertical > spinbutton { */
-/*   margin: 2px 0px 0px 0px; */
-/*   padding: 1px 0px 0px 0px; */
-/* } */
 .linked > button:not(.combo):checked,
 .linked > button:not(.combo):hover:checked {
   /*shadow-inset-base02*/
@@ -1918,9 +1919,6 @@ filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(
 }
 
 combobox arrow {
-  min-width: 16px;
-  min-height: 16px;
-
   -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
 }
 
@@ -2071,20 +2069,7 @@ popover.emoji-picker button.emoji-section.flat:active,
 popover.emoji-picker button.emoji-section.flat:checked {
   margin: 6px 3px 0px 3px;
 }
-stack > box > scrolledwindow:not(.frame) {
-  margin: 6px;
-}
-/* stack > box > scrolledwindow:not(.frame) > viewport { */
-/*   margin-top: 6px; */
-/* } */
-stack > box > scrolledwindow > viewport {
-  border-radius: 10px;
-  background-color: @base00;
-  box-shadow:
-    1px 2px 2px @base00-black-80 inset,
-    2px 4px 4px @base00-black-80 inset,
-    -1px -1px 0px @base00-white-90-dark inset;
-}
+
 popover modelbutton,
 popover modelbutton:hover,
 popover modelbutton:hover:focus,
@@ -2110,24 +2095,7 @@ button:hover:active popover modelbutton:focus {
     2px 4px 4px @base01-black-80 inset,
     -1px -1px 0px @base01-white-90-dark inset;
 }
-/* modelbutton:hover > box > *, */
-/* modelbutton:hover:focus > box > *, */
-/* popover modelbutton:hover > box > *, */
-/* popover modelbutton:hover:focus > box > *, */
-/* button:hover popover modelbutton > box > * { */
-/*   color: @base01; */
-/* } */
-/* modelbutton:active > box > *, */
-/* modelbutton:focus > box > *, */
-/* modelbutton:active:focus > box > *, */
-/* popover modelbutton > box > *, */
-/* popover modelbutton:active > box > *, */
-/* popover modelbutton:hover:active > box > *, */
-/* button:hover:active popover modelbutton:active > *, */
-/* button:hover popover modelbutton > *, */
-/* button:hover:active popover modelbutton:focus > * { */
-/*   color: @base0D; */
-/* } */
+
 popover > arrow {
   border: none;
   background-color: transparent;
@@ -2153,15 +2121,12 @@ calendar *:selected {
 }
 
 expander title > arrow {
-  min-width: 16px;
-  min-height: 16px;
-  color: @base0D;
   transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-expander title > arrow:dir(ltl) {
+expander title > arrow:dir(ltr) {
   -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
 }
-expander title > arrow:checked:dir(ltl) {
+expander title > arrow:checked:dir(ltr) {
   -gtk-icon-transform: rotate(0.25turn);
 }
 expander title > arrow:dir(rtl) {
@@ -2400,19 +2365,19 @@ stacksidebar > scrolledwindow > viewport > list > row > cell:last-child {
 
 header {
   margin: 0px 4px;
+  border-bottom: 1px solid @base01-black-80-dark;
   background-color: transparent;
   /* shadow-separator-mimic-bottom-horizontal-base01 */
   box-shadow:
-    0px -2px 0px @base01-black-65-dark inset,
-    0px -1px 0px @base01-black-80-dark inset,
+    0px -1px 0px @base01-black-65-dark inset,
     0px 1px 0px @base01-white-90-dark;
 }
 frame header,
 scrolledwindow header {
+  border-bottom-color: @base00-black-80-dark;
   /* shadow-separator-mimic-bottom-horizontal-base00 */
   box-shadow:
-    0px -2px 0px @base00-black-65-dark inset,
-    0px -1px 0px @base00-black-80-dark inset,
+    0px -1px 0px @base00-black-65-dark inset,
     0px 1px 0px @base00-white-90-dark;
 }
 header > button {
@@ -2597,4 +2562,31 @@ filechooser #pathbarbox {
 }
 #pathbarbox button * + * {
   padding: 0px 0px 0px 4px;
+}
+
+/*****************/
+/*GIMP*/
+/*****************/
+GimpDock > box > box notebook {
+  padding: 0px 6px;
+  border-radius: 10px;
+  background-color: @base00;
+  box-shadow:
+    1px 2px 2px @base00-black-80 inset,
+    2px 4px 4px @base00-black-80 inset,
+    -1px -1px 0px @base00-white-90-dark inset;
+}
+GimpDock > box > box > notebook {
+  margin: 6px 0px 6px 6px;
+}
+GimpDock > box > box > paned > notebook {
+  margin: 6px 6px 6px 0px;
+}
+GimpDock > box > box notebook > header {
+  margin-bottom: 4px;
+}
+grid.horizontal > spinbutton.horizontal,
+grid.horizontal > combobox {
+  margin-right: 3px;
+  margin-bottom: 3px;
 }
