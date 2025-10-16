@@ -1,0 +1,232 @@
+// ---- examples of usage
+/* .header { @include apply-shadow(inset-extra-thin, base00); } */
+/* .card { @include apply-shadow(wide, base01); } */
+/* .fused { @include apply-shadow-multi(inset, base00, base01); } */
+
+$gtk-version: "gtk3" !default;
+@use "helpers" as h; // expects helpers to be configured before @use in entry file
+
+// --- presets (unchanged) ---
+$shadow-presets: (
+  inset-extra-thin: (
+    stops-gtk3: ((0.5px, 0.5px, 1.1px, 0.2px), (-1px, -1px, 0px)),
+    inset-gtk3: (true, true),
+    stops-gtk4: ((1px, 1px, 1px), (-1px, -1px, 0px)),
+    inset-gtk4: (true, true)
+  ),
+  inset-thin: (
+    stops-gtk3: ((1px, 1px, 0.6px, 0.1px), (2px, 2px, 1.1px, 0.1px), (-1px, -1px, 0px)),
+    inset-gtk3: (true, true, true),
+    stops-gtk4: ((1px, 1px, 1px), (2px, 2px, 2px), (-1px, -1px, 0px)),
+    inset-gtk4: (true, true, true)
+  ),
+  inset: (
+    stops: ((1px, 2px, 2px), (2px, 4px, 4px), (-1px, -1px, 0px)),
+    inset: (true, true, true)
+  ),
+  thin: (
+    stops: ((1px, 2px, 2px), (2px, 4px, 4px), (-1px, -1px, 0px)),
+    inset: (false, false, false)
+  ),
+  wide: (
+    stops: ((4px,12px,10px), (7px,18px,14px), (10px,24px,18px), (14px,30px,24px), (-1px,-1px,0px)),
+    inset: (false, false, false, false, false)
+  ),
+  separator-horizontal: (
+    stops: ((0px,-1px,0px), (0px,1px,0px)),
+    inset: (false, true)
+  ),
+  separator-bottom-horizontal: (
+    stops: ((0px,-1px,0px), (0px,1px,0px)),
+    inset: (true, false)
+  ),
+  separator-vertical: (
+    stops: ((-1px,0px,0px), (1px,0px,0px)),
+    inset: (false, true)
+  )
+) !default;
+
+// --- tokens (unchanged structure) ---
+$shadow-tokens: (
+  inset-extra-thin: (
+    transparent: ("rgba(0,0,0,0.6)", "rgba(255,255,255,0.12)"),
+    base00: ("@base00-black-55-dark", "@base00-white-90-dark"),
+    base01: ("@base01-black-50-dark", "@base01-white-90-dark"),
+    base02: ("@base02-black-65-dark", "@base02-white-90-dark"),
+    base03: ("@base03-black-65-dark", "@base03-white-90-dark"),
+    base0D: ("@base0D-black-65-dark", "@base0D-white-65-dark")
+  ),
+
+  inset-thin: (
+    transparent: ("rgba(0,0,0,0.3)", "rgba(0,0,0,0.3)", "rgba(255,255,255,0.12)"),
+    base00: ("@base00-black-80", "@base00-black-80", "@base00-white-90-dark"),
+    base01: ("@base01-black-80", "@base01-black-80", "@base01-white-90-dark"),
+    base02: ("@base02-black-80", "@base02-black-80", "@base02-white-90-dark"),
+    base03: ("@base03-black-80", "@base03-black-80", "@base03-white-90-dark"),
+    base08: ("@base08-black-60", "@base08-black-60", "@base08-white-65-dark"),
+    base0A: ("@base0A-black-60", "@base0A-black-60", "@base0A-white-65-dark"),
+    base0B: ("@base0B-black-60", "@base0B-black-60", "@base0B-white-65-dark"),
+    base0D: ("@base0D-black-60", "@base0D-black-60", "@base0D-white-65-dark"),
+    base08-dull: ("@base08-black-25", "@base08-black-25", "@base08-black-80")
+  ),
+
+  inset: (
+    transparent: ("rgba(0,0,0,0.3)", "rgba(0,0,0,0.3)", "rgba(255,255,255,0.12)"),
+    base00: ("@base00-black-80", "@base00-black-80", "@base00-white-90-dark"),
+    base01: ("@base01-black-80", "@base01-black-80", "@base01-white-90-dark"),
+    base02: ("@base02-black-80", "@base02-black-80", "@base02-white-90-dark"),
+    base03: ("@base03-black-80", "@base03-black-80", "@base03-white-90-dark"),
+    base08: ("@base08-black-60", "@base08-black-60", "@base08-white-65-dark"),
+    base0A: ("@base0A-black-60", "@base0A-black-60", "@base0A-white-65-dark"),
+    base0B: ("@base0B-black-60", "@base0B-black-60", "@base0B-white-65-dark"),
+    base0D: ("@base0D-black-60", "@base0D-black-60", "@base0D-white-65-dark"),
+    base08-dull: ("@base08-black-25", "@base08-black-25", "@base08-black-80"),
+    base0A-dull: ("@base0A-black-25", "@base0A-black-25", "@base0A-black-80"),
+    base0B-dull: ("@base0B-black-25", "@base0B-black-25", "@base0B-black-80"),
+    base0C-dull: ("@base0C-black-25", "@base0C-black-25", "@base0C-black-80"),
+    base0D-dull: ("@base0D-black-25", "@base0D-black-25", "@base0D-black-80")
+  ),
+
+  thin: (
+    transparent: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "rgba(255,255,255,0.12)"),
+    base00: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base00-white-90-dark"),
+    base01: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base01-white-90-dark"),
+    base02: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base02-white-90-dark"),
+    base03: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base03-white-90-dark"),
+    base08: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base08-white-65-dark"),
+    base09: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base09-white-65-dark"),
+    base0A: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base0A-white-65-dark"),
+    base0B: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base0B-white-65-dark"),
+    base0C: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base0C-white-65-dark"),
+    base0D: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base0D-white-65-dark"),
+    base08-dull: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base08-black-80"),
+    base0A-dull: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base0A-black-80"),
+    base0B-dull: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base0B-black-80"),
+    base0C-dull: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base0C-black-80"),
+    base0D-dull: ("rgba(0,0,0,0.17)", "rgba(0,0,0,0.2)", "@base0D-black-80")
+  ),
+
+  wide: (
+    base01: ("rgba(0,0,0,0.2)","rgba(0,0,0,0.21)","rgba(0,0,0,0.25)","rgba(0,0,0,0.3)","@base01-white-90-dark"),
+    base02: ("rgba(0,0,0,0.2)","rgba(0,0,0,0.21)","rgba(0,0,0,0.25)","rgba(0,0,0,0.3)","@base02-white-90-dark"),
+    base03: ("rgba(0,0,0,0.2)","rgba(0,0,0,0.21)","rgba(0,0,0,0.25)","rgba(0,0,0,0.3)","@base03-white-90-dark"),
+    base08: ("rgba(0,0,0,0.2)","rgba(0,0,0,0.21)","rgba(0,0,0,0.25)","rgba(0,0,0,0.3)","@base08-white-65-dark"),
+    base0D: ("rgba(0,0,0,0.2)","rgba(0,0,0,0.21)","rgba(0,0,0,0.25)","rgba(0,0,0,0.3)","@base0D-white-65-dark")
+  ),
+
+  separator-horizontal: (
+    base00-light: ("@base00-black-85-dark", "@base00-white-95-dark"),
+    base00: ("@base00-black-65-dark", "@base00-white-90-dark"),
+    base01: ("base01-black-65-dark", "@base01-white-90-dark"),
+    base02: ("@base02-black-75-dark", "@base02-white-90-dark"),
+    base03: ("@base03-black-75-dark", "@base03-white-90-dark")
+  ),
+
+  separator-bottom-horizontal: (
+    base00-light: ("@base00-black-85-dark", "base00-white-95-dark"),
+    base00: ("@base00-black-65-dark", "@base00-white-90-dark"),
+    base01: ("@base01-black-65-dark", "@base01-white-90-dark"),
+    base02: ("@base02-black-75-dark", "@base02-white-90-dark"),
+    base03: ("@base03-black-75-dark", "@base03-white-90-dark"),
+    transparent: ("rgba(0,0,0,0.5)","rgba(255,255,255,0.1)")
+  ),
+
+  separator-vertical: (
+    base00: ("@base00-black-65-dark", "@base00-white-90-dark"),
+    base01: ("@base01-black-65-dark", "@base01-white-90-dark"),
+    base02: ("@base02-black-75-dark", "@base02-white-90-dark"),
+    base03: ("@base03-black-75-dark", "@base03-white-90-dark")
+  )
+) !default;
+
+// --- helpers wrapper getters ---
+@function _get-preset($preset) {
+  $spec: map-get($shadow-presets, $preset);
+  @if $spec == null { @error "Unknown shadow preset `#{$preset}`."; }
+  @return $spec;
+}
+
+@function _get-token-list($preset, $base) {
+  $preset-map: map-get($shadow-tokens, $preset);
+  @if $preset-map == null { @error "No tokens defined for preset `#{$preset}`."; }
+  $list: map-get($preset-map, $base);
+  @if $list == null { @error "No tokens for base `#{$base}` in preset `#{$preset}`."; }
+  @return $list;
+}
+
+// choose stops map key depending on $gtk-version; fall back to "stops"
+@function _get-stops-for-preset($preset) {
+  $spec: _get-preset($preset); // reuse your existing getter that errors if unknown
+
+  // prefer versioned key if present
+  @if $gtk-version == "gtk3" and map-has-key($spec, 'stops-gtk3') {
+    @return map-get($spec, 'stops-gtk3');
+  } @else if $gtk-version == "gtk4" and map-has-key($spec, 'stops-gtk4') {
+    @return map-get($spec, 'stops-gtk4');
+  } @else if map-has-key($spec, 'stops') {
+    @return map-get($spec, 'stops');
+  } @else {
+    @error "Preset `#{$preset}` has no stops for #{$gtk-version}.";
+  }
+}
+
+// choose inset flags depending on $gtk-version; fall back to "inset"
+@function _get-inset-for-preset($preset) {
+  $spec: _get-preset($preset);
+
+  @if $gtk-version == "gtk3" and map-has-key($spec, 'inset-gtk3') {
+    @return map-get($spec, 'inset-gtk3');
+  } @else if $gtk-version == "gtk4" and map-has-key($spec, 'inset-gtk4') {
+    @return map-get($spec, 'inset-gtk4');
+  } @else if map-has-key($spec, 'inset') {
+    @return map-get($spec, 'inset');
+  } @else {
+    @error "Preset `#{$preset}` has no inset flags for #{$gtk-version}.";
+  }
+}
+
+/// build-shadow-piece($dx, $dy, $blur, $spread, $color, $inset)
+@function _build-shadow-piece($dx, $dy, $blur, $spread: null, $color, $inset: false) {
+  $color-out: h.token-resolve($color);
+  $spread-str: if($spread == null, "", " " + #{$spread});
+  $inset-str: if($inset, " inset", "");
+  @return unquote("#{#{$dx}} #{#{$dy}} #{#{$blur}}#{$spread-str} #{$color-out}#{$inset-str}");
+}
+
+// --- builder using helpers.token-resolve and helpers.build-shadow-piece ---
+@function shadow-value($preset, $base) {
+  $spec: _get-preset($preset);
+  $stops: _get-stops-for-preset($preset);
+  $insets: _get-inset-for-preset($preset);
+  $tokens: _get-token-list($preset, $base);
+
+  @if length($stops) != length($tokens) {
+    @error "Mismatch: preset `#{$preset}` has #{length($stops)} stops but tokens list for `#{$base}` has #{length($tokens)}.";
+  }
+
+  $parts: ();
+  @for $i from 1 through length($stops) {
+    $s: nth($stops, $i);
+    $dx: nth($s, 1);
+    $dy: nth($s, 2);
+    $blur: nth($s, 3);
+    $spread: if(length($s) >= 4, nth($s, 4), null);
+
+    $rawTok: nth($tokens, $i);
+    // use helpers.token-resolve to produce css-ready token
+    $tokOut: h.token-resolve($rawTok);
+    $inset-flag: nth($insets, $i);
+
+    // use helpers.build-shadow-piece (it accepts a token, resolves internally)
+    $piece: _build-shadow-piece($dx, $dy, $blur, $spread, $tokOut, $inset-flag);
+    $parts: append($parts, $piece);
+  }
+
+  // final join
+  @return h.join-list-comma($parts);
+}
+
+// mixin that emits the property
+@mixin apply-shadow($preset, $base) {
+  box-shadow: shadow-value($preset, $base);
+}

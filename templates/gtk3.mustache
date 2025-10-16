@@ -109,7 +109,7 @@ $base0F: #{{base0F-hex}};
 @define-color base02-black-90-dark #{to-rgb($base02, black, if($variant == dark, 90%, 95%))};
 @define-color base02-black-75-dark #{to-rgb($base02, black, if($variant == dark, 75%, 80%))};
 @define-color base02-black-65-dark #{to-rgb($base02, black, if($variant == dark, 65%, 80%))};
-@define-color base02-white-90-dark #{to-rgb($base02, white, if($variant == dark, 90%, 40%))};
+@define-color base02-white-90-dark #{to-rgb($base02, white, if($variant == dark, 90%, 30%))};
 
 // base06
 @define-color base06-black-60      #{to-rgb($base06, black, 60%)};
@@ -157,3 +157,5 @@ $base0F: #{{base0F-hex}};
 @define-color base0F-black-60      #{to-rgb($base0F, black, 60%)};
 @define-color base0F-black-65-dark #{to-rgb($base0F, black, if($variant == dark, 65%, 80%))};
 @define-color base0F-white-65-dark #{to-rgb($base0F, white, if($variant == dark, 65%, 45%))};
+
+@define-color theme_selected_bg_color @base0D-black-60;

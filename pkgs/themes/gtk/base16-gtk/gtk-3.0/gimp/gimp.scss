@@ -1,0 +1,168 @@
+@use "../common/helpers" as h with (
+  $gtk-version: 3; $token-mode: "define-color"
+);
+@use "../shadows" as shadows;
+@use "../spinbutton" as *;
+
+/*base00*/
+GimpDock > box > box notebook > header {
+  border-bottom-color: @base00-black-80-dark;
+  box-shadow: @include shadows.apply-shadow(separator-bottom-horizontal, base00);
+}
+GimpDock > box > box notebook > header > tabs > tab:checked {
+  box-shadow: @include shadows.apply-shadow(inset, base00);
+}
+GimpDock > box > box notebook > header > tabs > tab + tab {
+  border-left: 1px solid @base00-black-80;
+  box-shadow: @include shadows.apply-shadow(separator-vertical, base00);
+}
+stack > box > scrolledwindow > viewport check,
+GimpDock > box > box notebook check {
+  box-shadow: @include shadows.apply-shadow(inset-thin, base00);
+}
+* {
+  -gtkdialog-action-area-border: 12;
+  -gimpunitcombobox-appears-as-list: 0;
+  -gimpeditor-button-icon-size: menu;
+  -gimptoolpalette-button-relief: none;
+  -gimpeditor-button-spacing: 2;
+  -gtkdialog-button-spacing: 6;
+  -gtkdialog-content-area-border: 0;
+  -gimpdockable-content-border: 2;
+  -gimpeditor-content-spacing: 2;
+  -gimpdockwindow-default-height: 300;
+  -gtk-icon-style: symbolic;
+  -gimpdockwindow-menu-preview-size: button;
+  -gimpdataeditor-minimal-height: 96;
+  -gimpmenudock-minimal-width: 200;
+  -gimpdockbook-tab-icon-size: button;
+  -gimpcolornotebook-tab-icon-size: button;
+  -gimptoolpalette-tool-icon-size: large-toolbar;
+  -gimpdock-tool-icon-size: large-toolbar;
+}
+
+GimpToolDialog {
+  -gtkdialog-action-area-border: 6;
+}
+
+GimpColorNotebook tab,
+GimpDock notebook tab {
+  padding: 4px 17px 5px 16px;
+}
+
+/* Define colors so the nib handle appears in Gimp Ink Options */
+GimpBlobEditor {
+  border: 0.1em solid @theme_fg_color;
+  color: @theme_fg_color;
+  background-color: @theme_bg_color;
+}
+
+GimpDock entry {
+  min-height: 30px;
+  padding: 1px 9px 2px 8px;
+}
+GimpDock spinbutton,
+GimpDock GimpColorScales spinbutton,
+GimpDock GimpColorNotebook spinbutton {
+  min-height: 34px;
+  padding: 0px;
+}
+GimpDock GimpColorNotebook spinbutton entry,
+GimpDock GimpColorScales spinbutton entry {
+  min-height: 32px;
+  padding: 0px 6px 0px 6px;
+}
+
+GimpDock :not(toolbutton) > button,
+GimpOverlayDialog button,
+GimpToolDialog :not(headerbar) button,
+GimpTextStyleEditor button {
+  padding: 1px 9px 2px 8px;
+}
+
+GimpToolDialog headerbar {
+  min-height: 46px;
+}
+
+GimpDisplayShell grid > button {
+  min-width: 16px;
+  min-height: 30px;
+  padding: 1px 9px 2px 8px;
+}
+
+GimpDisplayShell progressbar trough,
+GimpDisplayShell progressbar progress {
+  min-height: 1em;
+}
+
+GimpFileDialog progressbar trough,
+GimpFileDialog progressbar progress {
+  min-width: 150px;
+  min-height: 8px;
+}
+
+spinbutton entry {
+  border-radius: 3px;
+}
+
+GimpSpinScale entry {
+  min-height: 32px;
+  padding: 0px 6px 0px 6px;
+}
+
+GimpSpinScale entry progress {
+  margin-right: -6px;
+  margin-left: -6px;
+  border-width: 0px;
+  border-radius: inherit;
+
+  background-color: @base0D-black-60;
+}
+
+@include spinbutton-styles(GimpSpinScale);
+
+entry.italic {
+  font-style: italic;
+}
+
+tooltip decoration {
+  box-shadow: @include shadows.apply-shadow(wide, base03);
+}
+
+treeview header button {
+  padding: 1px 9px 2px 8px;
+}
+
+treeview .toggle-icon:not(.visible):hover {
+  border: none;
+  border-radius: 50px;
+}
+
+treeview .toggle-icon:not(.visible):selected {
+  border-color: none;
+}
+
+.metadata-tag-row box {
+  margin: 3px;
+  background-color: transparent;
+}
+
+.metadata-value-label {
+  margin-left: 12px;
+}
+
+GimpDock > box > box notebook {
+  padding: 0px 6px;
+  border-radius: 10px;
+  background-color: @base00;
+  box-shadow: @include shadows.apply-shadow(inset, base00);
+}
+GimpDock > box > box > notebook {
+  margin: 6px 0px 6px 6px;
+}
+GimpDock > box > box > paned > notebook {
+  margin: 6px 6px 6px 0px;
+}
+GimpDock > box > box notebook > header {
+  margin-bottom: 4px;
+}

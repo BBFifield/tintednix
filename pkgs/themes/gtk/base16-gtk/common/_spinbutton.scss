@@ -1,0 +1,131 @@
+$gtk-version: "gtk3" !default;
+@use "helpers" as h;
+@use "shadows" as shadows;
+
+$entry-sel: null;
+$focus-pseudo: null;
+
+@if $gtk-version == "gtk3" {
+  $entry-sel: "entry";
+  $focus-pseudo: "focus";
+} @else {
+  $entry-sel: "text";
+  $focus-pseudo: "focus-within";
+}
+
+@mixin spinbutton-styles($sel) {
+  #{$sel} {
+    min-height: 34px;
+    margin: 1px 0px 0px 1px;
+    border-radius: 50px;
+
+    color: h.token-resolve(base0D);
+
+    background-color: h.token-resolve(base02);
+    @include shadows.apply-shadow(thin, base02);
+  }
+  #{$sel} > #{$entry-sel} {
+    min-width: 30px;
+    min-height: 32px;
+    margin: 0px;
+    padding: 0px 6px 0px 6px;
+    border-radius: 50px 0px 0px 50px;
+  }
+  #{$sel}.horizontal > #{$entry-sel} {
+    box-shadow: none;
+  }
+  @if $gtk-version == "gtk3" {
+    #{$sel} > entry:not(:focus) {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+  }
+  #{$sel}.horizontal > #{$entry-sel}:#{$focus-pseudo} {
+    margin: 0px;
+    padding: 0px 6px 0px 6px;
+    border-radius: 50px;
+    @include shadows.apply-shadow(inset, base02);
+  }
+  /*vert text is _x34px*/
+  #{$sel}.vertical > #{$entry-sel} {
+    margin: 2px 0px 0px 1px;
+    padding: 0px 0px 0px 0px;
+    border-top: 1px solid h.token-resolve(base02);
+    border-radius: 0px;
+
+    @include shadows.apply-shadow(separator-horizontal, base02);
+  }
+  #{$sel}.vertical > #{$entry-sel}:#{$focus-pseudo} {
+    margin: 1px 0px 0px 0px;
+    padding: 2px 0px 0px 1px;
+    border-top: 0px;
+    border-radius: 50px;
+
+    @include shadows.apply-shadow(inset, base02);
+  }
+
+  #{$sel} > button.down:hover,
+  #{$sel} > button.up:hover {
+    border-color: transparent;
+    border-radius: 50px;
+    @include shadows.apply-shadow(thin, base0D);
+  }
+  #{$sel} > button.down:active,
+  #{$sel} > button.up:active {
+    border: 0px;
+    border-radius: 50px;
+    @include shadows.apply-shadow(inset, base02);
+  }
+  /*horiz button is 34x34*/
+  #{$sel}.horizontal > button {
+    min-width: 24px;
+    min-height: 24px;
+    margin: 1px 0px 0px 2px;
+    padding: 1px 5px 0px 3px;
+    border-left: 1px solid h.token-resolve(base02-black-90-dark);
+    border-radius: 0px;
+
+    @include shadows.apply-shadow(separator-vertical, base02);
+  }
+  #{$sel}.horizontal > button:active {
+    margin: 0px 0px 0px 1px;
+    padding: 2px 5px 0px 5px;
+    border-left: 0px;
+  }
+  #{$sel}.horizontal > .up {
+    border-radius: 0px 50px 50px 0px;
+    @include shadows.apply-shadow(separator-vertical, base02);
+  }
+
+  /*vert button is 41x41px*/
+  #{$sel}.vertical > button {
+    min-height: 37px;
+  }
+  #{$sel}.vertical > .up {
+    border-radius: 50px 50px 0px 0px;
+  }
+  #{$sel}.vertical > .down {
+    border-top: 1px solid h.token-resolve(base02-black-90-dark);
+    border-radius: 0px 0px 50px 50px;
+    @include shadows.apply-shadow(separator-horizontal, base02);
+  }
+  #{$sel}.vertical > .down,
+  #{$sel}.vertical > .down:hover {
+    margin: 2px 0px 0px 1px;
+    padding: 0px 5px 2px 4px;
+  }
+  #{$sel}.vertical > .down:active {
+    margin: 1px 0px 0px 0px;
+    padding: 2px 5px 2px 5px;
+    border-top: 0px;
+  }
+  #{$sel} > .down:hover + .up,
+  #{$sel} > .down:active + .up,
+  #{$sel} > #{$entry-sel}:#{$focus-pseudo} + .down:not(:hover):not(:active),
+  /*In gtk3, using entry:not(:focus) doesn't work, a bug I guess unless the entry becomes focused when the button is hovered*/
+  #{$sel}#{if($gtk-version == 'gtk3', ':not(:focus)', '')} > .up:hover + #{$entry-sel},
+  #{$sel} > .up:active + #{$entry-sel}:not(:#{$focus-pseudo}) {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}

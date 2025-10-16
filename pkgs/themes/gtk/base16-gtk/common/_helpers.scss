@@ -1,0 +1,113 @@
+// _helpers.scss
+// Generic token resolver and small helpers
+$token-mode: "define-color" !default; // 'define-color' | 'css-var'
+$css-var-prefix: "" !default;
+
+// helpers (top-level, not nested)
+@function _starts-with($str, $prefix) {
+  @if type-of($str) != "string" or type-of($prefix) != "string" {
+    @return false;
+  }
+  @return str-index($str, $prefix) == 1;
+}
+
+@function _join-comma($list) {
+  $out: "";
+  @for $i from 1 through length($list) {
+    $out: if($out == "", nth($list, $i), $out + ", " + nth($list, $i));
+  }
+  @return $out;
+}
+
+// token-resolve
+@function token-resolve($tok) {
+  // 1) Sass color
+  @if type-of($tok) == "color" {
+    @return $tok;
+  }
+
+  // 2) normalize non-strings to string
+  @if type-of($tok) != "string" {
+    $tok: "#{ $tok }";
+  }
+  $s: $tok;
+
+  // 3) var(...) verbatim or convert simple var(--name) -> @name in define-color mode
+  @if _starts-with($s, "var(") {
+    @if $token-mode == "css-var" {
+      @return unquote($s);
+    } @else if $token-mode == "define-color" {
+      // extract inner content; keep simple parsing
+      $open: str-index($s, "(");
+      $close: str-index($s, ")");
+      @if $open and $close {
+        $inner: str-slice($s, $open + 1, $close - 1);
+        // trim surrounding spaces (best-effort)
+        $inner: if(str-index($inner, " "), str-slice($inner, str-index($inner, " ") + 1), $inner);
+        @if _starts-with($inner, "--") {
+          $name: str-slice($inner, 3);
+          @if $css-var-prefix != "" and _starts-with($name, $css-var-prefix) {
+            $name: str-slice($name, str-length($css-var-prefix) + 1);
+          }
+          @return unquote("@" + $name);
+        }
+      }
+      @return unquote($s);
+    }
+  }
+
+  // 4) explicit custom property name --foo
+  @if _starts-with($s, "--") {
+    @if $token-mode == "css-var" {
+      @return unquote("var(#{$s})");
+    } @else {
+      $name: str-slice($s, 3);
+      @if $css-var-prefix != "" and _starts-with($name, $css-var-prefix) {
+        $name: str-slice($name, str-length($css-var-prefix) + 1);
+      }
+      @return unquote("@" + $name);
+    }
+  }
+
+  // 5) @define-color token
+  @if _starts-with($s, "@") {
+    @if $token-mode == "define-color" {
+      @return unquote($s);
+    } @else {
+      $name: str-slice($s, 2);
+      $css-name: "--" + $css-var-prefix + $name;
+      @return unquote("var(#{$css-name})");
+    }
+  }
+
+  // 6) literal CSS color/function (emit verbatim)
+  @if _starts-with($s, "rgba(") or _starts-with($s, "rgb(") or _starts-with($s, "hsla(") or _starts-with($s, "hsl(") or _starts-with($s, "color-") or _starts-with($s, "#") {
+    @return unquote($s);
+  }
+
+  // 7) bare identifier (e.g. base00) -> implied token
+  @if not(_starts-with($s, "@") or _starts-with($s, "--") or str-index($s, "var(")) {
+    @if $token-mode == "define-color" {
+      @return unquote("@" + $s);
+    } @else {
+      $css-name: "--" + $css-var-prefix + $s;
+      @return unquote("var(#{$css-name})");
+    }
+  }
+
+  // 8) fallback
+  @return unquote($s);
+}
+
+// small utility exposed
+@function join-list-comma($list) {
+  @return unquote(_join-comma($list));
+}
+
+// build helper (optional)
+@function build-shadow-piece($dx, $dy, $blur, $spread: null, $color, $inset: false) {
+  $color-out: token-resolve($color);
+  $spread-str: if($spread == null, "", " " + #{$spread});
+  $inset-str: if($inset, " inset", "");
+  @return unquote("#{#{$dx}} #{#{$dy}} #{#{$blur}}#{$spread-str} #{$color-out}#{$inset-str}");
+}
