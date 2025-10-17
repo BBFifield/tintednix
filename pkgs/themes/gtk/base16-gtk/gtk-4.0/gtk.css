@@ -2,6 +2,7 @@
 /* .header { @include apply-shadow(inset-extra-thin, base00); } */
 /* .card { @include apply-shadow(wide, base01); } */
 /* .fused { @include apply-shadow-multi(inset, base00, base01); } */
+/* ---- usage: inline declarations with @content, keep source compact ---- */
 :root {
   --disabled-opacity: 0.6;
 }
@@ -708,7 +709,7 @@ button.pill:not(:hover),
 button.circular:not(:hover),
 menubutton.circular.popup > button:not(:hover) {
   background-color: color-mix(in oklab, currentColor 60%, black);
-  box-shadow: var(--shadow-thin-base0D-dull);
+  box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base0D-black-80);
 }
 
 button.circular.star:not(:hover),
@@ -725,13 +726,13 @@ button.suggested-action.text-button,
 button.suggested-action.pill {
   color: var(--base0B);
   background-color: color-mix(in oklab, currentColor 60%, black);
-  box-shadow: var(--shadow-thin-base0B-dull);
+  box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base0B-black-80);
 }
 
 button.destructive-action,
 tabthumbnail button.tab-close-button {
   background-color: color-mix(in oklab, currentColor 60%, black);
-  box-shadow: var(--shadow-thin-base08-dull);
+  box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base08-black-80);
 }
 
 button.tab-close-button {
@@ -773,7 +774,7 @@ menubutton.entry-icon > button {
 button.app-version {
   color: var(--base0C);
   background-color: color-mix(in oklab, currentColor 60%, black);
-  box-shadow: var(--shadow-thin-base0C-dull);
+  box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base0C-black-80);
 }
 
 /**********************/
@@ -892,7 +893,7 @@ button.circular:checked,
 menubutton.circular.popup > button:active,
 menubutton.circular.popup > button:checked {
   background-color: color-mix(in oklab, currentColor 60%, black);
-  box-shadow: var(--shadow-inset-base0D-dull);
+  box-shadow: 1px 2px 2px var(--base0D-black-25) inset, 2px 4px 4px var(--base0D-black-25) inset, -1px -1px 0px var(--base0D-black-80) inset;
 }
 
 stack > button.image-button:active,
@@ -917,7 +918,7 @@ button.default:checked,
 button.suggested-action:active,
 button.suggested-action:checked {
   background-color: color-mix(in oklab, currentColor 60%, black);
-  box-shadow: var(--shadow-inset-base0B-dull);
+  box-shadow: 1px 2px 2px var(--base0B-black-25) inset, 2px 4px 4px var(--base0B-black-25) inset, -1px -1px 0px var(--base0B-black-80) inset;
 }
 
 button.suggested-action.image-text-button:not(.pill):active,
@@ -929,7 +930,7 @@ button.suggested-action.image-text-button:not(.pill):checked {
 button.destructive-action:active,
 button.destructive-action:checked {
   background-color: color-mix(in oklab, currentColor 60%, black);
-  box-shadow: var(--shadow-inset-base08-dull);
+  box-shadow: 1px 2px 2px var(--base08-black-25) inset, 2px 4px 4px var(--base08-black-25) inset, -1px -1px 0px var(--base08-black-80) inset;
 }
 
 button.close:active {
@@ -1301,6 +1302,8 @@ tab {
   margin: 6px 0px 5px 1px;
   padding: 4px 17px 5px 16px;
   background-color: transparent;
+  transition-duration: 0.2s;
+  transition-property: background-color, box-shadow;
 }
 
 tab:hover {
@@ -1311,8 +1314,7 @@ tab:hover {
   box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base0D-white-65-dark);
 }
 
-tab:checked,
-tab:selected {
+tab:checked, tab:selected {
   margin: 5px 0px 5px 0px;
   padding: 5px 17px 5px 17px;
   border-radius: 50px;
@@ -1372,13 +1374,12 @@ header.vertical > tabs > tab + tab:checked {
   border-top: 0px;
 }
 
-tab:hover + tab:not(:checked):not(:selected),
-tab:checked + tab:not(:hover):not(:selected),
-tab:selected + tab:not(:hover):not(:checked) {
+tab:hover + tab:not(:checked):not(:selected), tab:checked + tab:not(:hover):not(:selected), tab:selected + tab:not(:hover):not(:checked) {
   border-color: transparent;
   box-shadow: none;
 }
 
+/*Create the illusion of inset separators*/
 tooltip {
   margin: 1px 30px 45px 15px;
   padding: 6px 10px;
@@ -2525,18 +2526,18 @@ widget.sidebar-pane > box > box + separator {
   all: unset;
 }
 
-stackswitcher,
-viewswitcher,
-box.linked {
+/* min-height group */
+viewswitcher, stackswitcher, .linked {
   min-height: 24px;
 }
 
+/* stackswitcher.linked margin */
 stackswitcher.linked {
   margin: 7px 0px 6px 1px;
 }
 
-viewswitcher,
-.linked {
+/* box background + margin */
+viewswitcher, box.linked {
   margin: 1px 0px 0px 1px;
   border-radius: 17px;
   background-color: var(--base02);
@@ -2547,25 +2548,20 @@ viewswitcher.narrow {
   border-radius: 10px;
 }
 
-viewswitcher > button:first-child,
-.linked > button:first-child,
-.linked > entry:first-child,
-.linked > scrolledwindow:first-child,
-.linked > menubutton:first-child > button {
+/* first-child radii */
+viewswitcher > button:first-child, .linked > button:first-child, .linked > entry:first-child, .linked > scrolledwindow:first-child, .linked > menubutton:first-child > button {
   border-radius: inherit 0px 0px inherit;
 }
 
-viewswitcher > button:last-child,
-.linked > button:last-child,
-.linked > entry:last-child,
-.linked > menubutton:last-child,
-.linked > menubutton:last-child > button {
+/* last-child radii */
+viewswitcher > button:last-child, .linked > button:last-child, .linked > entry:last-child, .linked > menubutton:last-child, .linked > menubutton:last-child > button {
   border-top-left-radius: 0px;
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: 0px;
 }
 
+/* linked borders using computed pseudo */
 .linked > button:hover,
 .linked > entry:focus-within {
   border-radius: inherit;
@@ -2594,38 +2590,29 @@ viewswitcher > button:last-child,
   border-radius: inherit;
 }
 
-viewswitcher > button:active,
-viewswitcher > button:checked,
-.linked > button:active,
-.linked > button:checked,
-.linked > entry:focus-within,
-.linked > menubutton > button:active,
-.linked > menubutton > button:checked {
+/* active / checked / focused compact block */
+viewswitcher > button:active, viewswitcher > button:checked, .linked > button:active, .linked > button:checked, .linked > entry:focus-within, .linked > menubutton > button:active, .linked > menubutton > button:checked {
   padding: 2px 9px 2px 9px;
   border: 0px;
   border-radius: 17px;
   box-shadow: var(--shadow-inset);
 }
 
+/* viewswitcher radii (gtk4 only) */
 viewswitcher > button,
 viewswitcher > button:active,
 viewswitcher > button:checked {
   border-radius: inherit;
 }
 
-viewswitcher > button:hover:checked,
-.linked > button:hover:checked,
-.linked > menubutton > button:hover:checked {
+/* hover/checked highlight */
+viewswitcher > button:hover:checked, .linked > button:hover:checked, .linked > menubutton > button:hover:checked {
   padding: 2px 9px 2px 9px;
   box-shadow: 1px 2px 2px var(--base0D-black-60) inset, 2px 4px 4px var(--base0D-black-60) inset, -1px -1px 0px var(--base0D-white-65-dark) inset;
 }
 
-viewswitcher > button + button,
-.linked > button + button,
-.linked > entry + button,
-.linked > entry + entry,
-.linked > entry + menubutton > button,
-.linked > scrolledwindow + menubutton > button {
+/* separators / adjacent elements */
+viewswitcher > button + button, .linked > button + button, .linked > entry + button, .linked > entry + entry, .linked > entry + menubutton > button, .linked > scrolledwindow + menubutton > button {
   margin: 1px 0px 0px 2px;
   padding: 1px 9px 2px 8px;
   border-left: 1px solid var(--border-color);
@@ -2633,6 +2620,7 @@ viewswitcher > button + button,
   box-shadow: var(--shadow-separator-mimic-vertical);
 }
 
+/* vertical linked adjustments */
 .linked.vertical > button + button,
 .linked.vertical > spinbutton + button,
 .linked.vertical > entry + entry {
@@ -2644,52 +2632,28 @@ viewswitcher > button + button,
   box-shadow: var(--shadow-separator-mimic-horizontal);
 }
 
-viewswitcher > button + button:hover,
-.linked > button + button:hover,
-.linked > spinbutton + button:hover,
-.linked > entry + button:hover,
-.linked > entry + menubutton > button:hover,
-.linked > scrolledwindow + menubutton > button:hover {
+/* hover separator shadow */
+viewswitcher > button + button:hover, .linked > button + button:hover, .linked > spinbutton + button:hover, .linked > entry + button:hover, .linked > entry + menubutton > button:hover, .linked > scrolledwindow + menubutton > button:hover {
   border-color: transparent;
   border-radius: 17px;
   box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base0D-white-65-dark);
 }
 
-viewswitcher > button + button:active,
-viewswitcher > button + button.flat:checked,
-.linked > button + button:active,
-.linked > button + button:checked,
-.linked > spinbutton + button:active,
-.linked > entry + button:active,
-.linked > entry + button:checked,
-.linked > entry + menubutton > button:active,
-.linked > entry + menubutton > button:checked,
-.linked > scrolledwindow + menubutton > button:active,
-.linked > scrolledwindow + menubutton > button:checked,
-.linked > entry + entry:focus-within {
+/* inset shadow group */
+viewswitcher > button + button:active, viewswitcher > button + button.flat:checked, .linked > button + button:active, .linked > button + button:checked, .linked > spinbutton + button:active, .linked > entry + button:active, .linked > entry + button:checked, .linked > entry + menubutton > button:active, .linked > entry + menubutton > button:checked, .linked > scrolledwindow + menubutton > button:active, .linked > scrolledwindow + menubutton > button:checked, .linked > entry + entry:focus-within {
   margin: 0px 0px 0px 2px;
   padding: 2px 9px 2px 9px;
   border-left-width: 0px;
   box-shadow: var(--shadow-inset);
 }
 
-viewswitcher > button:hover + button:not(:checked),
-viewswitcher > button:active + button:not(:checked),
-viewswitcher > button:checked + button:not(:hover),
-.linked > button:first-child:not(:hover):not(:checked),
-.linked > button:hover + button:not(:checked),
-.linked > button:active + button:not(:checked),
-.linked > button:checked + button:not(:hover),
-.linked > combobox:hover + spinbutton,
-.linked > scrolledwindow:hover + menubutton,
-.linked > entry:focus-within + button:not(:hover):not(:checked),
-.linked > entry:focus-within + entry:not(:focus-within),
-.linked > entry:focus-within + menubutton > button:not(:hover):not(:checked),
-.linked > entry:first-child:not(:focus-within) {
+/* complex focus/hover/checked combos */
+viewswitcher > button:hover + button:not(:checked), viewswitcher > button:active + button:not(:checked), viewswitcher > button:checked + button:not(:hover), .linked > button:first-child:not(:hover):not(:checked), .linked > button:hover + button:not(:checked), .linked > button:active + button:not(:checked), .linked > button:checked + button:not(:hover), .linked > combobox:hover + spinbutton, .linked > scrolledwindow:hover + menubutton, .linked > entry + menubutton > button:checked, .linked > entry:focus-within + button:not(:hover):not(:checked), .linked > entry:focus-within + menubutton > button:not(:hover):not(:checked), .linked > entry:first-child:not(:focus-within) {
   border-color: transparent;
   box-shadow: none;
 }
 
+/* vertical active/checked tweaks */
 .linked.vertical > button + button:active,
 .linked.vertical > button + button:checked,
 .linked.vertical > spinbutton + button:active,
@@ -2748,99 +2712,48 @@ viewswitcher > button:hover {
   color: var(--base01);
 }
 
-.linked > button.text-button:checked,
-.linked > button.text-button:hover:checked,
-filechooser pathbar box.linked > button:not(#_):checked,
-filechooser pathbar box.linked > button:not(#_):hover:checked,
-viewswitcher > button.flat:checked {
+viewswitcher > button.flat:checked, filechooser pathbar box.linked > button:not(#_):checked, filechooser pathbar box.linked > button:not(#_):hover:checked, .linked > button.text-button:checked, .linked > button.text-button:hover:checked {
   background-color: var(--base02);
   box-shadow: 1px 2px 2px var(--base02-black-80) inset, 2px 4px 4px var(--base02-black-80) inset, -1px -1px 0px var(--base02-white-90-dark) inset;
 }
 
-.linked > button.text-button:nth-child(4n+1):hover:not(:active):not(:checked),
-viewswitcher > button.flat:nth-child(4n+1):hover:not(:active):not(:checked),
-filechooser pathbar box.linked > button:not(#_):nth-child(4n+1):hover:not(:active):not(:checked) {
+viewswitcher > button.flat:nth-child(4n+1):hover:not(:active):not(:checked), filechooser pathbar box.linked > button:not(#_):nth-child(4n+1):hover:not(:active):not(:checked), .linked > button.text-button:nth-child(4n+1):hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base0B);
   box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base0B-white-65-dark);
 }
 
-.linked > button.text-button:nth-child(4n+1),
-.linked > button.text-button:nth-child(4n+1):active,
-.linked > button.text-button:nth-child(4n+1):checked,
-viewswitcher > button.flat:nth-child(4n+1),
-viewswitcher > button.flat:nth-child(4n+1):active,
-viewswitcher > button.flat:nth-child(4n+1):checked,
-filechooser pathbar box.linked > button:nth-child(4n+1),
-filechooser pathbar box.linked > button:nth-child(4n+1):not(:hover),
-filechooser pathbar box.linked > button:nth-child(4n+1):active,
-filechooser pathbar box.linked > button:not(#_):nth-child(4n+1):checked {
+viewswitcher > button.flat:nth-child(4n+1), viewswitcher > button.flat:nth-child(4n+1):active, viewswitcher > button.flat:nth-child(4n+1):checked, filechooser pathbar box.linked > button:nth-child(4n+1), filechooser pathbar box.linked > button:nth-child(4n+1):not(:hover), filechooser pathbar box.linked > button:nth-child(4n+1):active, filechooser pathbar box.linked > button:not(#_):nth-child(4n+1):checked, .linked > button.text-button:nth-child(4n+1), .linked > button.text-button:nth-child(4n+1):active, .linked > button.text-button:nth-child(4n+1):checked {
   color: var(--base0B);
 }
 
-.linked > button.text-button:nth-child(4n+2):hover:not(:active):not(:checked),
-viewswitcher > button.flat:nth-child(4n+2):hover:not(:active):not(:checked),
-filechooser pathbar box.linked > button:not(#_):nth-child(4n+2):hover:not(:active):not(:checked),
-box.dialog-action-area > button.text-button:first-child:hover:not(:active) {
+viewswitcher > button.flat:nth-child(4n+2):hover:not(:active):not(:checked), filechooser pathbar box.linked > button:not(#_):nth-child(4n+2):hover:not(:active):not(:checked), box.dialog-action-area > button.text-button:first-child:hover:not(:active), .linked > button.text-button:nth-child(4n+2):hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base08);
   box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base08-white-65-dark);
 }
 
-.linked > button.text-button:nth-child(4n+2),
-.linked > button.text-button:nth-child(4n+2):active,
-.linked > button.text-button:nth-child(4n+2):checked,
-viewswitcher > button.flat:nth-child(4n+2),
-viewswitcher > button.flat:nth-child(4n+2):active,
-viewswitcher > button.flat:nth-child(4n+2):checked,
-filechooser pathbar box.linked > button:nth-child(4n+2),
-filechooser pathbar box.linked > button:nth-child(4n+2):active,
-filechooser pathbar box.linked > button:not(#_):nth-child(4n+2):checked,
-box.dialog-action-area > button.text-button:first-child,
-box.dialog-action-area > button.text-button:first-child:hover,
-box.dialog-action-area > button.text-button:first-child:active,
-box.dialog-action-area > button.text-button:first-child:hover:active,
-box.dialog-action-area > button.text-button:first-child:not(:hover) {
+viewswitcher > button.flat:nth-child(4n+2), viewswitcher > button.flat:nth-child(4n+2):active, viewswitcher > button.flat:nth-child(4n+2):checked, filechooser pathbar box.linked > button:nth-child(4n+2), filechooser pathbar box.linked > button:nth-child(4n+2):active, filechooser pathbar box.linked > button:not(#_):nth-child(4n+2):checked, box.dialog-action-area > button.text-button:first-child, box.dialog-action-area > button.text-button:first-child:hover, box.dialog-action-area > button.text-button:first-child:active, box.dialog-action-area > button.text-button:first-child:hover:active, box.dialog-action-area > button.text-button:first-child:not(:hover), .linked > button.text-button:nth-child(4n+2), .linked > button.text-button:nth-child(4n+2):active, .linked > button.text-button:nth-child(4n+2):checked {
   color: var(--base08);
 }
 
-.linked > button.text-button:nth-child(4n+3):hover:not(:active):not(:checked),
-filechooser pathbar box.linked > button:not(#_):nth-child(4n+3):hover:not(:active):not(:checked),
-viewswitcher > button.flat:nth-child(4n+3):hover:not(:active):not(:checked) {
+viewswitcher > button.flat:nth-child(4n+3):hover:not(:active):not(:checked), filechooser pathbar box.linked > button:not(#_):nth-child(4n+3):hover:not(:active):not(:checked), .linked > button.text-button:nth-child(4n+3):hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base0A);
   box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base0A-white-65-dark);
 }
 
-.linked > button.text-button:nth-child(4n+3),
-.linked > button.text-button:nth-child(4n+3):active,
-.linked > button.text-button:nth-child(4n+3):checked,
-filechooser pathbar box.linked > button:nth-child(4n+3),
-filechooser pathbar box.linked > button:nth-child(4n+3):active,
-filechooser pathbar box.linked > button:not(#_):nth-child(4n+3):checked,
-viewswitcher > button.flat:nth-child(4n+3),
-viewswitcher > button.flat:nth-child(4n+3):active,
-viewswitcher > button.flat:nth-child(4n+3):checked {
+viewswitcher > button.flat:nth-child(4n+3), viewswitcher > button.flat:nth-child(4n+3):active, viewswitcher > button.flat:nth-child(4n+3):checked, filechooser pathbar box.linked > button:nth-child(4n+3), filechooser pathbar box.linked > button:nth-child(4n+3):active, filechooser pathbar box.linked > button:not(#_):nth-child(4n+3):checked, .linked > button.text-button:nth-child(4n+3), .linked > button.text-button:nth-child(4n+3):active, .linked > button.text-button:nth-child(4n+3):checked {
   color: var(--base0A);
 }
 
-.linked > button.text-button:nth-child(4n+4):hover:not(:active):not(:checked),
-filechooser pathbar box.linked > button:not(#_):nth-child(4n+4):hover:not(:active):not(:checked),
-viewswitcher > button.flat:nth-child(4n+4):hover:not(:active):not(:checked) {
+viewswitcher > button.flat:nth-child(4n+4):hover:not(:active):not(:checked), filechooser pathbar box.linked > button:not(#_):nth-child(4n+4):hover:not(:active):not(:checked), .linked > button.text-button:nth-child(4n+4):hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base09);
   box-shadow: 1px 2px 2px rgba(0,0,0,0.17), 2px 4px 4px rgba(0,0,0,0.2), -1px -1px 0px var(--base09-white-65-dark);
 }
 
-.linked > button.text-button:nth-child(4n+4),
-.linked > button.text-button:nth-child(4n+4):active,
-.linked > button.text-button:nth-child(4n+4):checked,
-filechooser pathbar box.linked > button:nth-child(4n+4),
-filechooser pathbar box.linked > button:nth-child(4n+4):active,
-filechooser pathbar box.linked > button:not(#_):nth-child(4n+4):checked,
-viewswitcher > button.flat:nth-child(4n+4),
-viewswitcher > button.flat:nth-child(4n+4):active,
-viewswitcher > button.flat:nth-child(4n+4):checked {
+viewswitcher > button.flat:nth-child(4n+4), viewswitcher > button.flat:nth-child(4n+4):active, viewswitcher > button.flat:nth-child(4n+4):checked, filechooser pathbar box.linked > button:nth-child(4n+4), filechooser pathbar box.linked > button:nth-child(4n+4):active, filechooser pathbar box.linked > button:not(#_):nth-child(4n+4):checked, .linked > button.text-button:nth-child(4n+4), .linked > button.text-button:nth-child(4n+4):active, .linked > button.text-button:nth-child(4n+4):checked {
   color: var(--base09);
 }
 
@@ -3131,7 +3044,7 @@ filechooser #pathbarbox button:not(#_):hover:checked {
 /*   padding: 0px 0px 0px 4px; */
 /* } */
 /* filechooser #pathbarbox box.linked > * + * { */
-/*   @include shadows.apply-shadow(separator-vertical, base01); */
+/*   @include s.apply-shadow(separator-vertical, base01); */
 /* } */
 /* filechooser #pathbarbox box.linked > button:hover + *, */
 /* filechooser #pathbarbox box.linked > button:active + *, */

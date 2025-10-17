@@ -1,0 +1,407 @@
+$gtk-version: "gtk3" !default;
+@use "helpers" as h;
+@use "shadows" as s;
+
+$focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
+
+/* ---- usage: inline declarations with @content, keep source compact ---- */
+@mixin linked-styles() {
+  /* min-height group */
+  @include h.emit-rule((if($gtk-version != "gtk3", "viewswitcher", null), "stackswitcher", ".linked")) {
+    min-height: 24px;
+  }
+
+  /* stackswitcher.linked margin */
+  stackswitcher.linked {
+    margin: 7px 0px 6px 1px;
+  }
+
+  /* box background + margin */
+  @include h.emit-rule((if($gtk-version != "gtk3", "viewswitcher", null), "box.linked")) {
+    margin: 1px 0px 0px 1px;
+    border-radius: 17px;
+    background-color: h.token-resolve(base02);
+    @include s.apply-shadow(thin, base02);
+  }
+
+  @if $gtk-version != "gtk3" {
+    viewswitcher.narrow {
+      border-radius: 10px;
+    }
+  }
+
+  /* first-child radii */
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button:first-child", null),
+      ".linked > button:first-child",
+      ".linked > entry:first-child",
+      ".linked > scrolledwindow:first-child",
+      ".linked > menubutton:first-child > button"
+    )
+  ) {
+    border-radius: inherit 0px 0px inherit;
+  }
+
+  /* last-child radii */
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button:last-child", null),
+      ".linked > button:last-child",
+      ".linked > entry:last-child",
+      ".linked > menubutton:last-child",
+      ".linked > menubutton:last-child > button"
+    )
+  ) {
+    border-top-left-radius: 0px;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: 0px;
+  }
+
+  /* linked borders using computed pseudo */
+  .linked > button:hover,
+  .linked > entry:#{$focus-pseudo} {
+    border-radius: inherit;
+  }
+
+  .linked.vertical > combobox:first-child,
+  .linked.vertical > button:first-child,
+  .linked.vertical > entry:first-child {
+    border-radius: inherit inherit 0px 0px;
+  }
+
+  .linked.vertical > button:last-child,
+  .linked.vertical > entry:last-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+
+  .linked.vertical > button:hover,
+  .linked.vertical > entry:#{$focus-pseudo} {
+    border-radius: inherit;
+  }
+  .linked > button:only-child {
+    border-radius: inherit;
+  }
+
+  /* active / checked / focused compact block */
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button:active", null),
+      if($gtk-version != "gtk3", "viewswitcher > button:checked", null),
+      ".linked > button:active",
+      ".linked > button:checked",
+      ".linked > entry:#{$focus-pseudo}",
+      ".linked > menubutton > button:active",
+      ".linked > menubutton > button:checked"
+    )
+  ) {
+    padding: 2px 9px 2px 9px;
+    border: 0px;
+    border-radius: 17px;
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-inset)"), s.shadow-value(inset, base02));
+  }
+
+  /* viewswitcher radii (gtk4 only) */
+  @if $gtk-version != "gtk3" {
+    viewswitcher > button,
+    viewswitcher > button:active,
+    viewswitcher > button:checked {
+      border-radius: inherit;
+    }
+  }
+
+  /* hover/checked highlight */
+  @include h.emit-rule((if($gtk-version != "gtk3", "viewswitcher > button:hover:checked", null), ".linked > button:hover:checked", ".linked > menubutton > button:hover:checked")) {
+    padding: 2px 9px 2px 9px;
+    @include s.apply-shadow(inset, base0D);
+  }
+
+  /* separators / adjacent elements */
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button + button", null),
+      ".linked > button + button",
+      ".linked > entry + button",
+      ".linked > entry + entry",
+      ".linked > entry + menubutton > button",
+      ".linked > scrolledwindow + menubutton > button"
+    )
+  ) {
+    margin: 1px 0px 0px 2px;
+    padding: 1px 9px 2px 8px;
+    border-left: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base02-black-90-dark));
+    border-radius: 0px;
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-vertical)"), s.shadow-value(separator-vertical, base02));
+  }
+
+  /* vertical linked adjustments */
+  .linked.vertical > button + button,
+  .linked.vertical > spinbutton + button,
+  .linked.vertical > entry + entry {
+    margin: 2px 0px 0px 1px;
+    padding: 1px 9px 2px 8px;
+    border-top: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base02-black-90-dark));
+    border-left: 0px;
+    border-radius: 0px;
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-horizontal)"), s.shadow-value(separator-horizontal, base02));
+  }
+
+  /* hover separator shadow */
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button + button:hover", null),
+      ".linked > button + button:hover",
+      ".linked > spinbutton + button:hover",
+      ".linked > entry + button:hover",
+      ".linked > entry + menubutton > button:hover",
+      ".linked > scrolledwindow + menubutton > button:hover"
+    )
+  ) {
+    border-color: transparent;
+    border-radius: 17px;
+    @include s.apply-shadow(thin, base0D);
+  }
+
+  /* inset shadow group */
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button + button:active", null),
+      if($gtk-version != "gtk3", "viewswitcher > button + button.flat:checked", null),
+      ".linked > button + button:active",
+      ".linked > button + button:checked",
+      ".linked > spinbutton + button:active",
+      ".linked > entry + button:active",
+      ".linked > entry + button:checked",
+      ".linked > entry + menubutton > button:active",
+      ".linked > entry + menubutton > button:checked",
+      ".linked > scrolledwindow + menubutton > button:active",
+      ".linked > scrolledwindow + menubutton > button:checked",
+      ".linked > entry + entry:#{$focus-pseudo}"
+    )
+  ) {
+    margin: 0px 0px 0px 2px;
+    padding: 2px 9px 2px 9px;
+    border-left-width: 0px;
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-inset)"), s.shadow-value(inset, base02));
+  }
+
+  /* complex focus/hover/checked combos */
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button:hover + button:not(:checked)", null),
+      if($gtk-version != "gtk3", "viewswitcher > button:active + button:not(:checked)", null),
+      if($gtk-version != "gtk3", "viewswitcher > button:checked + button:not(:hover)", null),
+      ".linked > button:first-child:not(:hover):not(:checked)",
+      ".linked > button:hover + button:not(:checked)",
+      ".linked > button:active + button:not(:checked)",
+      ".linked > button:checked + button:not(:hover)",
+      ".linked > combobox:hover + spinbutton",
+      ".linked > scrolledwindow:hover + menubutton",
+      ".linked > entry + menubutton > button:checked",
+      ".linked > entry:focus-within + button:not(:hover):not(:checked)",
+      ".linked > entry:focus-within + menubutton > button:not(:hover):not(:checked)",
+      ".linked > entry:first-child:not(:focus-within)"
+    )
+  ) {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  /* vertical active/checked tweaks */
+  .linked.vertical > button + button:active,
+  .linked.vertical > button + button:checked,
+  .linked.vertical > spinbutton + button:active,
+  .linked.vertical > entry + entry:#{$focus-pseudo} {
+    margin: 2px 0px 0px 0px;
+    padding: 2px 9px 2px 9px;
+    border-top-width: 0px;
+  }
+
+  /*For when there's ever a horizontally linked spinbutton*/
+  .linked > spinbutton {
+    margin: 0px 0px 0px 1px;
+    padding: 0px 0px 0px 0px;
+  }
+  .linked.vertical > spinbutton {
+    margin: 2px 0px 0px 0px;
+    padding: 2px 0px 0px 0px;
+    border-top: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base02-black-90-dark));
+    border-radius: 0px;
+
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-horizontal)"), s.shadow-value(separator-horizontal, base02));
+  }
+}
+
+@mixin linked-colors() {
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:checked", null),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:not(#_):checked", null),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:not(#_):hover:checked", null),
+      ".linked > button.text-button:checked",
+      ".linked > button.text-button:hover:checked"
+    )
+  ) {
+    background-color: h.token-resolve(base02);
+    box-shadow: s.shadow-value(inset, base02);
+  }
+
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 1):hover:not(:active):not(:checked)", null),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:not(#_):nth-child(4n + 1):hover:not(:active):not(:checked)",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2):hover:not(:active):not(:checked)"
+      ),
+      ".linked > button.text-button:nth-child(4n + 1):hover:not(:active):not(:checked)"
+    )
+  ) {
+    color: h.token-resolve(base01);
+    background-color: h.token-resolve(base0B);
+    box-shadow: s.shadow-value(thin, base0B);
+  }
+
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 1)", null),
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 1):active", null),
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 1):checked", null),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:nth-child(4n + 1)", "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2)"),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:nth-child(4n + 1):not(:hover)",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2):not(:hover)"
+      ),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:nth-child(4n + 1):active", "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2):active"),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:not(#_):nth-child(4n + 1):checked",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2):checked"
+      ),
+      ".linked > button.text-button:nth-child(4n + 1)",
+      ".linked > button.text-button:nth-child(4n + 1):active",
+      ".linked > button.text-button:nth-child(4n + 1):checked"
+    )
+  ) {
+    color: h.token-resolve(base0B);
+  }
+
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 2):hover:not(:active):not(:checked)", null),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:not(#_):nth-child(4n + 2):hover:not(:active):not(:checked)",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3):hover:not(:active):not(:checked)"
+      ),
+      if($gtk-version != "gtk3", "box.dialog-action-area > button.text-button:first-child:hover:not(:active)", null),
+      ".linked > button.text-button:nth-child(4n + 2):hover:not(:active):not(:checked)"
+    )
+  ) {
+    color: h.token-resolve(base01);
+    background-color: h.token-resolve(base08);
+    box-shadow: s.shadow-value(thin, base08);
+  }
+
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 2)", null),
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 2):active", null),
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 2):checked", null),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:nth-child(4n + 2)", "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3)"),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:nth-child(4n + 2):active", "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3):active"),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:not(#_):nth-child(4n + 2):checked",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3):checked"
+      ),
+      if($gtk-version != "gtk3", "box.dialog-action-area > button.text-button:first-child", null),
+      if($gtk-version != "gtk3", "box.dialog-action-area > button.text-button:first-child:hover", null),
+      if($gtk-version != "gtk3", "box.dialog-action-area > button.text-button:first-child:active", null),
+      if($gtk-version != "gtk3", "box.dialog-action-area > button.text-button:first-child:hover:active", null),
+      if($gtk-version != "gtk3", "box.dialog-action-area > button.text-button:first-child:not(:hover)", null),
+      ".linked > button.text-button:nth-child(4n + 2)",
+      ".linked > button.text-button:nth-child(4n + 2):active",
+      ".linked > button.text-button:nth-child(4n + 2):checked"
+    )
+  ) {
+    color: h.token-resolve(base08);
+  }
+
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 3):hover:not(:active):not(:checked)", null),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:not(#_):nth-child(4n + 3):hover:not(:active):not(:checked)",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4):hover:not(:active):not(:checked)"
+      ),
+      ".linked > button.text-button:nth-child(4n + 3):hover:not(:active):not(:checked)"
+    )
+  ) {
+    color: h.token-resolve(base01);
+    background-color: h.token-resolve(base0A);
+    box-shadow: s.shadow-value(thin, base0A);
+  }
+
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 3)", null),
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 3):active", null),
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 3):checked", null),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:nth-child(4n + 3)", "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4)"),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:nth-child(4n + 3):active", "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4):active"),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:not(#_):nth-child(4n + 3):checked",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4):checked"
+      ),
+      ".linked > button.text-button:nth-child(4n + 3)",
+      ".linked > button.text-button:nth-child(4n + 3):active",
+      ".linked > button.text-button:nth-child(4n + 3):checked"
+    )
+  ) {
+    color: h.token-resolve(base0A);
+  }
+
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 4):hover:not(:active):not(:checked)", null),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:not(#_):nth-child(4n + 4):hover:not(:active):not(:checked)",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5):hover:not(:active):not(:checked)"
+      ),
+      ".linked > button.text-button:nth-child(4n + 4):hover:not(:active):not(:checked)"
+    )
+  ) {
+    color: h.token-resolve(base01);
+    background-color: h.token-resolve(base09);
+    box-shadow: s.shadow-value(thin, base09);
+  }
+
+  @include h.emit-rule(
+    (
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 4)", null),
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 4):active", null),
+      if($gtk-version != "gtk3", "viewswitcher > button.flat:nth-child(4n + 4):checked", null),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:nth-child(4n + 4)", "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5)"),
+      if($gtk-version != "gtk3", "filechooser pathbar box.linked > button:nth-child(4n + 4):active", "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5):active"),
+      if(
+        $gtk-version != "gtk3",
+        "filechooser pathbar box.linked > button:not(#_):nth-child(4n + 4):checked",
+        "filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5):checked"
+      ),
+      ".linked > button.text-button:nth-child(4n + 4)",
+      ".linked > button.text-button:nth-child(4n + 4):active",
+      ".linked > button.text-button:nth-child(4n + 4):checked"
+    )
+  ) {
+    color: h.token-resolve(base09);
+  }
+}

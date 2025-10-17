@@ -1,5 +1,8 @@
 // _helpers.scss
 // Generic token resolver and small helpers
+@use "sass:list";
+@use "sass:selector";
+
 $token-mode: "define-color" !default; // 'define-color' | 'css-var'
 $css-var-prefix: "" !default;
 
@@ -110,4 +113,53 @@ $css-var-prefix: "" !default;
   $spread-str: if($spread == null, "", " " + #{$spread});
   $inset-str: if($inset, " inset", "");
   @return unquote("#{#{$dx}} #{#{$dy}} #{#{$blur}}#{$spread-str} #{$color-out}#{$inset-str}");
+}
+
+// helpers: parse string list to selector list and emit rule with @content
+@function _to-selector-list($strings) {
+  $sels: null;
+  @for $i from 1 through length($strings) {
+    $s: nth($strings, $i);
+    @if $s != null and $s != "" {
+      $sel-val: selector.parse($s);
+      @if $sels == null {
+        $sels: $sel-val;
+      } @else {
+        $sels: selector.append($sels, $sel-val);
+      }
+    }
+  }
+  @return if($sels == null, selector.parse(""), $sels);
+}
+
+// Fallback: treat selectors as quoted strings and join safely
+@function _join-selectors($list) {
+  $out: "";
+  @for $i from 1 through length($list) {
+    $s: nth($list, $i);
+    @if $s != null and $s != "" {
+      $piece: if(type-of($s) == "string", $s, "#{$s}");
+      $out: if($out == "", $piece, $out + ", " + $piece);
+    }
+  }
+  @return $out;
+}
+
+// Emit-rule that accepts a sequence of selector strings (or identifiers) and uses @content
+@mixin emit-rule($strings) {
+  $seq: $strings;
+  @if type-of($strings) == "string" {
+    $seq: ($strings);
+  }
+
+  $joined: _join-selectors($seq);
+
+  // do nothing when there's nothing to emit
+  @if $joined == "" {
+    @warn "emit-rule: no selectors supplied, skipping rule";
+  } @else {
+    #{ $joined } {
+      @content;
+    }
+  }
 }

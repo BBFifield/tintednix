@@ -2,6 +2,8 @@
 @use "../common/shadows" as s;
 @use "../common/entry" as *;
 @use "../common/spinbutton" as *;
+@use "../common/linked" as *;
+@use "../common/tabs" as *;
 @import url("file:///home/brandon/.config/gtk-3.0/colors.css");
 
 /*Resets*/
@@ -415,14 +417,14 @@ radio:indeterminate {
 radio {
   border-radius: 100%;
 }
-check {
-  border-radius: 6px;
-}
 radio:checked {
   -gtk-icon-source: image(-gtk-recolor(url("assets/bullet-symbolic.svg")), -gtk-recolor(url("assets/bullet-symbolic.symbolic.png")));
 }
 radio:indeterminate {
   -gtk-icon-source: image(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
+}
+check {
+  border-radius: 6px;
 }
 check:checked {
   -gtk-icon-source: image(-gtk-recolor(url("assets/check-symbolic.svg")), -gtk-recolor(url("assets/check-symbolic.symbolic.png")));
@@ -744,123 +746,7 @@ statusbar frame {
   box-shadow: none;
 }
 
-tabs {
-  padding: 0px 4px 0px 4px;
-}
-tab {
-  /*min-width: 50px;*/ /*Had to bump to 115 here to increase spacing between labels and buttons*/
-  min-height: 24px;
-  margin: 6px 0px 5px 1px;
-  padding: 4px 17px 5px 16px;
-
-  background-color: transparent;
-
-  transition-duration: 0.2s;
-  transition-property: background-color, box-shadow;
-}
-tab:hover {
-  border-color: transparent;
-  border-radius: 50px;
-
-  color: h.token-resolve(base01);
-
-  background-color: h.token-resolve(base0D);
-  @include s.apply-shadow(thin, base0D);
-}
-tab:checked {
-  margin: 5px 0px 5px 0px;
-  padding: 5px 17px 5px 17px;
-  border-radius: 50px;
-  color: inherit;
-  background-color: transparent;
-  @include s.apply-shadow(inset, base01);
-}
-tab > image {
-  min-width: 30px;
-}
-tab > label {
-  min-width: 115px;
-}
-tab:hover:not(:checked) > label,
-tab:hover:not(:checked) > image {
-  color: h.token-resolve(base01);
-}
-tab:hover:not(:checked) > box > button.small-button:active {
-  @include s.apply-shadow(inset-thin, base0D);
-}
-/*Create the illusion of inset separators*/
-tab + tab {
-  margin-left: 2px;
-  padding-left: 15px;
-  border-left: 1px solid h.token-resolve(base01-black-80);
-  border-radius: 0px;
-  @include s.apply-shadow(separator-vertical, base01);
-}
-tab + tab:checked {
-  margin-left: 1px;
-  padding: 5px 17px 5px 17px;
-  border-left: 0px;
-}
-header.right > tabs > tab,
-header.left > tabs > tab {
-  margin: 1px 5px 0px 6px;
-  padding: 4px 17px 5px 16px;
-}
-header.right > tabs > tab:hover,
-header.left > tabs > tab:hover {
-  border-radius: 50px;
-  @include s.apply-shadow(thin, base0D);
-}
-header.right > tabs > tab:checked,
-header.left > tabs > tab:checked {
-  margin: 0px 5px 0px 5px;
-  padding: 5px 17px 5px 17px;
-  border-radius: 50px;
-  @include s.apply-shadow(inset, base01);
-}
-header.right > tabs > tab + tab,
-header.left > tabs > tab + tab {
-  margin-top: 2px;
-  padding-top: 3px;
-  border-top: 1px solid h.token-resolve(base01-black-80);
-  border-left: none;
-  border-radius: 0px;
-  @include s.apply-shadow(separator-horizontal, base01);
-}
-header.right > tabs > tab + tab:hover,
-header.left > tabs > tab + tab:hover {
-  border-top-color: transparent;
-}
-header.right > tabs > tab + tab:checked,
-header.left > tabs > tab + tab:checked {
-  margin: 1px 5px 0px 5px;
-  padding: 5px 17px 5px 17px;
-  border-top: 0px;
-}
-tab:hover + tab:not(:checked),
-tab:checked + tab:not(:hover) {
-  border-color: transparent;
-  box-shadow: none;
-}
-header.top > tabs > arrow.up {
-  margin-left: 6px;
-  color: unquote("alpha(currentColor, 0.5)");
-
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
-}
-header.top > tabs > arrow.down {
-  margin-right: 6px;
-  color: unquote("alpha(currentColor, 0.75)");
-
-  -gtk-icon-source: -gtk-icontheme("pan-start-symbolic");
-}
-header.top > tabs > arrow:disabled {
-  color: unquote("alpha(currentColor, 0.25)");
-}
-
-header.top > tabs > arrow:hover {
-  color: unquote("alpha(currentColor, 1)");
-}
+@include tab-styles();
 
 actionbar > revealer,
 actionbar > revealer > box {
@@ -1192,154 +1078,7 @@ spinner {
 
 /*-------------------------------------------*/
 
-/* container */
-stackswitcher,
-box.linked {
-  min-height: 24px;
-}
-stackswitcher.linked {
-  margin: 7px 0px 6px 1px;
-}
-.linked {
-  margin: 1px 0px 0px 1px;
-  border-radius: 17px;
-  background-color: h.token-resolve(base02);
-  @include s.apply-shadow(thin, base02);
-}
-viewswitcher > button:first-child,
-.linked > button:first-child,
-.linked > entry:first-child,
-.linked > scrolledwindow:first-child,
-.linked > menubutton:first-child > button {
-  border-radius: inherit 0px 0px inherit;
-}
-viewswitcher > button:last-child,
-.linked > button:last-child,
-.linked > entry:last-child,
-.linked > menubutton:last-child,
-.linked > menubutton:last-child > button {
-  border-top-left-radius: 0px;
-  border-top-right-radius: inherit;
-  border-bottom-right-radius: inherit;
-  border-bottom-left-radius: 0px;
-}
-.linked > button:hover,
-.linked > entry:focus {
-  border-radius: inherit;
-}
-.linked.vertical > combobox:first-child,
-.linked.vertical > button:first-child,
-.linked.vertical > entry:first-child {
-  border-radius: inherit inherit 0px 0px;
-}
-.linked.vertical > button:last-child,
-.linked.vertical > entry:last-child {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: inherit;
-  border-bottom-left-radius: inherit;
-}
-.linked.vertical > button:hover,
-.linked.vertical > entry:focus {
-  border-radius: inherit;
-}
-.linked > button:only-child {
-  border-radius: inherit;
-}
-.linked > button:active,
-.linked > button:checked,
-.linked > entry:focus,
-.linked > menubutton > button:active,
-.linked > menubutton > button:checked {
-  padding: 2px 9px 2px 9px;
-  border: 0px;
-  border-radius: 17px;
-  @include s.apply-shadow(inset, base02);
-}
-.linked > button:hover:checked,
-.linked > menubutton > button:hover:checked {
-  padding: 2px 9px 2px 9px;
-  @include s.apply-shadow(inset, base0D);
-}
-.linked > button + button,
-.linked > entry + button,
-.linked > entry + entry,
-.linked > entry + menubutton > button,
-.linked > scrolledwindow + menubutton > button {
-  margin: 1px 0px 0px 2px;
-  padding: 1px 9px 2px 8px;
-  border-left: 1px solid h.token-resolve(base02-black-90-dark);
-  border-radius: 0px;
-  @include s.apply-shadow(separator-vertical, base02);
-}
-.linked.vertical > button + button,
-.linked.vertical > spinbutton + button,
-.linked.vertical > entry + entry {
-  margin: 2px 0px 0px 1px;
-  padding: 1px 9px 2px 8px;
-  border-top: 1px solid h.token-resolve(base02-black-90-dark);
-  border-left: 0px;
-  border-radius: 0px;
-
-  @include s.apply-shadow(separator-horizontal, base02);
-}
-.linked > button + button:hover,
-.linked > spinbutton + button:hover,
-.linked > entry + button:hover,
-.linked > entry + menubutton > button:hover,
-.linked > scrolledwindow + menubutton > button:hover {
-  border-color: transparent;
-  border-radius: 17px;
-  @include s.apply-shadow(thin, base0D);
-}
-.linked > button + button:active,
-.linked > button + button:checked,
-.linked > spinbutton + button:active,
-.linked > entry + button:active,
-.linked > entry + button:checked,
-.linked > entry + menubutton > button:active,
-.linked > entry + menubutton > button:checked,
-.linked > scrolledwindow + menubutton > button:active,
-.linked > scrolledwindow + menubutton > button:checked,
-.linked > entry + entry:focus {
-  margin: 0px 0px 0px 2px;
-  padding: 2px 9px 2px 9px;
-  border-left-width: 0px;
-  @include s.apply-shadow(inset, base02);
-}
-.linked > button:first-child:not(:hover):not(:checked),
-.linked > button:hover + button:not(:checked),
-.linked > button:active + button:not(:checked),
-.linked > button:checked + button:not(:hover),
-.linked > combobox:hover + spinbutton,
-.linked > scrolledwindow:hover + menubutton,
-.linked > entry:focus + button:not(:hover):not(:checked),
-.linked > entry:focus + entry:not(:focus),
-.linked > entry:focus + menubutton > button:not(:hover):not(:checked),
-.linked > entry:first-child:not(:focus) {
-  border-color: transparent;
-  box-shadow: none;
-}
-.linked.vertical > button + button:active,
-.linked.vertical > button + button:checked,
-.linked.vertical > spinbutton + button:active,
-.linked.vertical > entry + entry:focus {
-  margin: 2px 0px 0px 0px;
-  padding: 2px 9px 2px 9px;
-  border-top-width: 0px;
-}
-/*For when there's ever a horizontally linked spinbutton*/
-.linked > spinbutton {
-  margin: 0px 0px 0px 1px;
-  padding: 0px 0px 0px 0px;
-}
-.linked.vertical > spinbutton {
-  margin: 2px 0px 0px 0px;
-  padding: 2px 0px 0px 0px;
-  border-top: 1px solid h.token-resolve(base02-black-90-dark);
-  border-radius: 0px;
-  @include s.apply-shadow(separator-horizontal, base02);
-}
+@include linked-styles();
 
 .linked > button:not(.combo):checked,
 .linked > button:not(.combo):hover:checked {
@@ -1353,84 +1092,11 @@ viewswitcher > button:last-child,
   box-shadow: none;
 }
 
-.linked:not(buttonbox) > button:not(.text-button):not(#_):hover:checked * {
+.linked:not(buttonbox) > button:not(.text-button):not(#_):hover:checked {
   color: h.token-resolve(base0D);
 }
 
-.linked > button.text-button:checked,
-.linked > button.text-button:hover:checked {
-  background-color: h.token-resolve(base02);
-  @include s.apply-shadow(inset, base02);
-}
-/*  Linked widgets that function as tabs  */
-.linked > button.text-button:nth-child(4n + 1):hover:not(:active):not(:checked),
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2):hover:not(:active):not(:checked),
-buttonbox.linked > button.text-button:nth-child(4n + 1):hover:not(:active) {
-  color: h.token-resolve(base01);
-  background-color: h.token-resolve(base0B);
-  @include s.apply-shadow(thin, base0B);
-}
-.linked > button.text-button:nth-child(4n + 1),
-.linked > button.text-button:nth-child(4n + 1):not(:hover) *,
-.linked > button.text-button:nth-child(4n + 1):active *,
-.linked > button.text-button:nth-child(4n + 1):checked *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2),
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2):not(:hover) *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2):active *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 2):checked * {
-  color: h.token-resolve(base0B);
-}
-.linked > button.text-button:nth-child(4n + 2):hover:not(:active):not(:checked),
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3):hover:not(:active):not(:checked),
-buttonbox.linked > button.text-button:nth-child(4n + 2):hover:not(:active) {
-  color: h.token-resolve(base01);
-  background-color: h.token-resolve(base08);
-  @include s.apply-shadow(thin, base08);
-}
-.linked > button.text-button:nth-child(4n + 2),
-.linked > button.text-button:nth-child(4n + 2):not(:hover) *,
-.linked > button.text-button:nth-child(4n + 2):active *,
-.linked > button.text-button:nth-child(4n + 2):checked *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3),
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3):not(:hover) *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3):active *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 3):checked * {
-  color: h.token-resolve(base08);
-}
-.linked > button.text-button:nth-child(4n + 3):hover:not(:active):not(:checked),
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4):hover:not(:active):not(:checked),
-buttonbox.linked > button.text-button:nth-child(4n + 3):hover:not(:active) {
-  color: h.token-resolve(base01);
-  background-color: h.token-resolve(base0A);
-  @include s.apply-shadow(thin, base0A);
-}
-.linked > button.text-button:nth-child(4n + 3),
-.linked > button.text-button:nth-child(4n + 3):not(:hover) *,
-.linked > button.text-button:nth-child(4n + 3):active *,
-.linked > button.text-button:nth-child(4n + 3):checked *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4),
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4):not(:hover) *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4):active *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 4):checked * {
-  color: h.token-resolve(base0A);
-}
-.linked > button.text-button:nth-child(4n + 4):hover:not(:active):not(:checked),
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5):hover:not(:active):not(:checked),
-buttonbox.linked > button.text-button:nth-child(4n + 4):hover:not(:active) {
-  color: h.token-resolve(base01);
-  background-color: h.token-resolve(base09);
-  @include s.apply-shadow(thin, base09);
-}
-.linked > button.text-button:nth-child(4n + 4),
-.linked > button.text-button:nth-child(4n + 4):not(:hover) *,
-.linked > button.text-button:nth-child(4n + 4):active *,
-.linked > button.text-button:nth-child(4n + 4):checked *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5),
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5):not(:hover) *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5):active *,
-filechooser #pathbarbox .path-bar.linked > button:not(.slider-button):nth-child(4n + 5):checked * {
-  color: h.token-resolve(base09);
-}
+@include linked-colors();
 
 combobox arrow {
   -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
@@ -1964,4 +1630,47 @@ grid.horizontal > spinbutton.horizontal,
 grid.horizontal > combobox {
   margin-right: 3px;
   margin-bottom: 3px;
+}
+
+/************
+ * Chromium *
+ ************/
+window.background.chromium {
+  background-color: h.token-resolve(base00);
+}
+window.background.chromium headerbar,
+window.background.chromium menu {
+  background-color: h.token-resolve(base01);
+}
+window.background.chromium menu menuitem:hover {
+  border-top: 1px solid h.token-resolve(base0D-white-65-dark);
+  border-left: 1px solid h.token-resolve(base0D-white-65-dark);
+  box-shadow: none;
+}
+// Border of toolbar
+window.background.chromium box.frame {
+  border: 1px solid h.token-resolve(base00-black-80-dark);
+}
+window.background.chromium entry.chromium {
+  border-image: none;
+  color: h.token-resolve(base0D);
+  background-color: h.token-resolve(base02);
+}
+window.background.chromium entry.chromium:focus {
+  border-image: none;
+  color: h.token-resolve(base0D);
+}
+// Internals of address field
+window.background.chromium textview,
+window.background.chromium > textview.view {
+  color: h.token-resolve(base0D);
+  background-color: h.token-resolve(base02);
+}
+// Switches in "Customize Chromium" revealer
+window.background.chromium button.text-button.toggle {
+  color: h.token-resolve(base02);
+  background-color: h.token-resolve(base01);
+}
+window.background.chromium button.text-button.toggle:checked {
+  background-color: h.token-resolve(base0D);
 }

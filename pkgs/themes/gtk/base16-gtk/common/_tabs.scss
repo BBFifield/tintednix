@@ -1,0 +1,133 @@
+@use "sass:selector";
+
+$gtk-version: "gtk3" !default;
+@use "helpers" as h;
+@use "shadows" as s;
+
+@mixin tab-styles {
+  tabs {
+    padding: 0px 4px 0px 4px;
+  }
+  tab {
+    min-width: 100px;
+    min-height: 24px;
+    margin: 6px 0px 5px 1px;
+    padding: 4px 17px 5px 16px;
+
+    background-color: transparent;
+
+    transition-duration: 0.2s;
+    transition-property: background-color, box-shadow;
+  }
+  tab:hover {
+    border-color: transparent;
+    border-radius: 50px;
+
+    color: h.token-resolve(base01);
+
+    background-color: h.token-resolve(base0D);
+    @include s.apply-shadow(thin, base0D);
+  }
+
+  @include h.emit-rule(("tab:checked", if($gtk-version != "gtk3", "tab:selected", null))) {
+    margin: 5px 0px 5px 0px;
+    padding: 5px 17px 5px 17px;
+    border-radius: 50px;
+
+    color: inherit;
+
+    background-color: transparent;
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-inset)"), s.shadow-value(inset, base01));
+  }
+
+  @if $gtk-version == "gtk3" {
+    tab > image {
+      min-width: 30px;
+    }
+    tab > label {
+      min-width: 115px;
+    }
+    tab:hover:not(:checked) > label,
+    tab:hover:not(:checked) > image {
+      color: h.token-resolve(base01);
+    }
+  }
+
+  /*Create the illusion of inset separators*/
+  tab + tab {
+    margin-left: 2px;
+    padding-left: 15px;
+    border-left: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base01-black-80));
+    border-radius: 0px;
+
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-vertical)"), s.shadow-value(separator-vertical, base02));
+  }
+  tab + tab:checked {
+    margin-left: 1px;
+    padding: 5px 17px 5px 17px;
+    border-left: 0px;
+  }
+
+  @include h.emit-rule((if($gtk-version != "gtk3", "header.vertical > tabs > tab", selector.nest("header.right, header.left", " > tabs > tab")))) {
+    margin: 1px 5px 0px 6px;
+    padding: 4px 17px 5px 16px;
+  }
+
+  @include h.emit-rule((if($gtk-version != "gtk3", "header.vertical > tabs > tab:hover", selector.nest("header.right, header.left", " > tabs > tab:hover")))) {
+    border-radius: 50px;
+    @include s.apply-shadow(thin, base0D);
+  }
+
+  @include h.emit-rule((if($gtk-version != "gtk3", "header.vertical > tabs > tab:checked", selector.nest("header.right, header.left", " > tabs > tab:checked")))) {
+    margin: 0px 5px 0px 5px;
+    padding: 5px 17px 5px 17px;
+    border-radius: 50px;
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-inset)"), s.shadow-value(inset, base01));
+  }
+
+  @include h.emit-rule((if($gtk-version != "gtk3", "header.vertical > tabs > tab + tab", selector.nest("header.right, header.left", " > tabs > tab + tab")))) {
+    margin-top: 2px;
+    padding-top: 3px;
+    border-top: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base01-black-80));
+    border-left: none;
+    border-radius: 0px;
+
+    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-horizontal)"), s.shadow-value(separator-horizontal, base01));
+  }
+
+  @include h.emit-rule((if($gtk-version != "gtk3", "header.vertical > tabs > tab + tab:hover", selector.nest("header.right, header.left", " > tabs > tab + tab:hover")))) {
+    border-top-color: transparent;
+  }
+
+  @include h.emit-rule((if($gtk-version != "gtk3", "header.vertical > tabs > tab + tab:checked", selector.nest("header.right, header.left", " > tabs > tab + tab:checked")))) {
+    margin: 1px 5px 0px 5px;
+    padding: 5px 17px 5px 17px;
+    border-top: 0px;
+  }
+
+  @include h.emit-rule(
+    ("tab:hover + tab:not(:checked):not(:selected)", "tab:checked + tab:not(:hover):not(:selected)", if($gtk-version != "gtk3", "tab:selected + tab:not(:hover):not(:checked)", null))
+  ) {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  @if $gtk-version == "gtk3" {
+    header.top > tabs > arrow.up {
+      margin-left: 6px;
+      color: unquote("alpha(currentColor, 0.5)");
+      -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+    }
+    header.top > tabs > arrow.down {
+      margin-right: 6px;
+      color: unquote("alpha(currentColor, 0.75)");
+      -gtk-icon-source: -gtk-icontheme("pan-start-symbolic");
+    }
+    header.top > tabs > arrow:disabled {
+      color: unquote("alpha(currentColor, 0.25)");
+    }
+    header.top > tabs > arrow:hover {
+      color: unquote("alpha(currentColor, 1)");
+    }
+  }
+}
