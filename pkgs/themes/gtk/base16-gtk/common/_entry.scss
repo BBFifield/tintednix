@@ -1,7 +1,7 @@
 $gtk-version: "gtk3" !default;
 
 @use "helpers" as h;
-@use "shadows" as shadows;
+@use "shadows" as s;
 
 $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
 
@@ -17,7 +17,7 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
     background-color: h.token-resolve(base02);
     background-clip: padding-box;
     outline: none;
-    @include shadows.apply-shadow(thin, base02);
+    @include s.apply-shadow(thin, base02);
     caret-color: h.token-resolve(base0D);
   }
   entry:#{$focus-pseudo},
@@ -25,7 +25,7 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
   entry > button:checked {
     margin: 0px 0px 0px 0px;
     padding: 2px 9px 2px 9px;
-    @include shadows.apply-shadow(inset, base02);
+    @include s.apply-shadow(inset, base02);
   }
   entry > image {
     color: h.token-resolve(base0D);

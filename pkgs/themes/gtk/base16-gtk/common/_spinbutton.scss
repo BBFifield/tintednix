@@ -1,6 +1,6 @@
 $gtk-version: "gtk3" !default;
 @use "helpers" as h;
-@use "shadows" as shadows;
+@use "shadows" as s;
 
 $entry-sel: null;
 $focus-pseudo: null;
@@ -22,7 +22,7 @@ $focus-pseudo: null;
     color: h.token-resolve(base0D);
 
     background-color: h.token-resolve(base02);
-    @include shadows.apply-shadow(thin, base02);
+    @include s.apply-shadow(thin, base02);
   }
   #{$sel} > #{$entry-sel} {
     min-width: 30px;
@@ -44,7 +44,7 @@ $focus-pseudo: null;
     margin: 0px;
     padding: 0px 6px 0px 6px;
     border-radius: 50px;
-    @include shadows.apply-shadow(inset, base02);
+    @include s.apply-shadow(inset, base02);
   }
   /*vert text is _x34px*/
   #{$sel}.vertical > #{$entry-sel} {
@@ -53,7 +53,7 @@ $focus-pseudo: null;
     border-top: 1px solid h.token-resolve(base02);
     border-radius: 0px;
 
-    @include shadows.apply-shadow(separator-horizontal, base02);
+    @include s.apply-shadow(separator-horizontal, base02);
   }
   #{$sel}.vertical > #{$entry-sel}:#{$focus-pseudo} {
     margin: 1px 0px 0px 0px;
@@ -61,20 +61,20 @@ $focus-pseudo: null;
     border-top: 0px;
     border-radius: 50px;
 
-    @include shadows.apply-shadow(inset, base02);
+    @include s.apply-shadow(inset, base02);
   }
 
   #{$sel} > button.down:hover,
   #{$sel} > button.up:hover {
     border-color: transparent;
     border-radius: 50px;
-    @include shadows.apply-shadow(thin, base0D);
+    @include s.apply-shadow(thin, base0D);
   }
   #{$sel} > button.down:active,
   #{$sel} > button.up:active {
     border: 0px;
     border-radius: 50px;
-    @include shadows.apply-shadow(inset, base02);
+    @include s.apply-shadow(inset, base02);
   }
   /*horiz button is 34x34*/
   #{$sel}.horizontal > button {
@@ -85,7 +85,7 @@ $focus-pseudo: null;
     border-left: 1px solid h.token-resolve(base02-black-90-dark);
     border-radius: 0px;
 
-    @include shadows.apply-shadow(separator-vertical, base02);
+    @include s.apply-shadow(separator-vertical, base02);
   }
   #{$sel}.horizontal > button:active {
     margin: 0px 0px 0px 1px;
@@ -94,7 +94,7 @@ $focus-pseudo: null;
   }
   #{$sel}.horizontal > .up {
     border-radius: 0px 50px 50px 0px;
-    @include shadows.apply-shadow(separator-vertical, base02);
+    @include s.apply-shadow(separator-vertical, base02);
   }
 
   /*vert button is 41x41px*/
@@ -107,7 +107,7 @@ $focus-pseudo: null;
   #{$sel}.vertical > .down {
     border-top: 1px solid h.token-resolve(base02-black-90-dark);
     border-radius: 0px 0px 50px 50px;
-    @include shadows.apply-shadow(separator-horizontal, base02);
+    @include s.apply-shadow(separator-horizontal, base02);
   }
   #{$sel}.vertical > .down,
   #{$sel}.vertical > .down:hover {

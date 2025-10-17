@@ -1,7 +1,7 @@
 @use "../common/helpers" as h with (
   $token-mode: "css-var"
 );
-@use "../common/shadows" as shadows with (
+@use "../common/shadows" as s with (
   $gtk-version: "gtk4"
 );
 @use "../common/entry" as * with (
@@ -24,11 +24,11 @@ overlay-split-view.gradient widget.content-pane,
 overlay-split-view.gradient stack > scrolledwindow > viewport,
 overlay-split-view.gradient list.boxed-list,
 .album-card {
-  --shadow-inset-extra-thin: #{shadows.shadow-value(inset-extra-thin, transparent)};
-  --shadow-inset-thin: #{shadows.shadow-value(inset-thin, transparent)};
-  --shadow-inset: #{shadows.shadow-value(inset, transparent)};
-  --shadow-thin: #{shadows.shadow-value(thin, transparent)};
-  --shadow-separator-mimic-bottom-horizontal: #{shadows.shadow-value(separator-bottom-horizontal, transparent)};
+  --shadow-inset-extra-thin: #{s.shadow-value(inset-extra-thin, transparent)};
+  --shadow-inset-thin: #{s.shadow-value(inset-thin, transparent)};
+  --shadow-inset: #{s.shadow-value(inset, transparent)};
+  --shadow-thin: #{s.shadow-value(thin, transparent)};
+  --shadow-separator-mimic-bottom-horizontal: #{s.shadow-value(separator-bottom-horizontal, transparent)};
   --border-color: rgba(0, 0, 0, 0.2);
 }
 frame,
@@ -42,18 +42,18 @@ stack > box:not(#NautilusPathBar) > scrolledwindow:not(.frame) > viewport,
 columnview.data-table,
 widget.content-pane,
 stacksidebar + stack {
-  --shadow-inset-extra-thin: #{shadows.shadow-value(inset-extra-thin, base00)};
-  --shadow-inset-thin: #{shadows.shadow-value(inset-thin, base00)};
-  --shadow-inset: #{shadows.shadow-value(inset, base00)};
-  --shadow-separator-mimic-vertical: #{shadows.shadow-value(separator-vertical, base00)};
-  --shadow-separator-mimic-horizontal: #{shadows.shadow-value(separator-horizontal, base00)};
-  --shadow-separator-mimic-bottom-horizontal: #{shadows.shadow-value(separator-bottom-horizontal, base00)};
+  --shadow-inset-extra-thin: #{s.shadow-value(inset-extra-thin, base00)};
+  --shadow-inset-thin: #{s.shadow-value(inset-thin, base00)};
+  --shadow-inset: #{s.shadow-value(inset, base00)};
+  --shadow-separator-mimic-vertical: #{s.shadow-value(separator-vertical, base00)};
+  --shadow-separator-mimic-horizontal: #{s.shadow-value(separator-horizontal, base00)};
+  --shadow-separator-mimic-bottom-horizontal: #{s.shadow-value(separator-bottom-horizontal, base00)};
   --border-color: var(--base00-black-80-dark);
 }
 columnview > listview,
 paned > scrolledwindow > listview,
 stack > scrolledwindow > viewport > list {
-  --shadow-light-separator-mimic-bottom-horizontal: #{shadows.shadow-value(separator-bottom-horizontal, base00-light)};
+  --shadow-light-separator-mimic-bottom-horizontal: #{s.shadow-value(separator-bottom-horizontal, base00-light)};
   --border-color: var(--base00-black-95-dark);
 }
 .osd-box,
@@ -61,12 +61,12 @@ window,
 popover > contents,
 .navigation-sidebar,
 .sidebar-pane > box > box > scrolledwindow > columnview > listview {
-  --shadow-inset-extra-thin: #{shadows.shadow-value(inset-extra-thin, base01)};
-  --shadow-inset-thin: #{shadows.shadow-value(inset-thin, base01)};
-  --shadow-inset: #{shadows.shadow-value(inset, base01)};
-  --shadow-separator-mimic-vertical: #{shadows.shadow-value(separator-vertical, base01)};
-  --shadow-separator-mimic-horizontal: #{shadows.shadow-value(separator-horizontal, base01)};
-  --shadow-separator-mimic-bottom-horizontal: #{shadows.shadow-value(separator-bottom-horizontal, base01)};
+  --shadow-inset-extra-thin: #{s.shadow-value(inset-extra-thin, base01)};
+  --shadow-inset-thin: #{s.shadow-value(inset-thin, base01)};
+  --shadow-inset: #{s.shadow-value(inset, base01)};
+  --shadow-separator-mimic-vertical: #{s.shadow-value(separator-vertical, base01)};
+  --shadow-separator-mimic-horizontal: #{s.shadow-value(separator-horizontal, base01)};
+  --shadow-separator-mimic-bottom-horizontal: #{s.shadow-value(separator-bottom-horizontal, base01)};
   --border-color: var(--base01-black-80-dark);
 }
 .linked,
@@ -77,31 +77,31 @@ list.boxed-list,
 list.content,
 list.nested,
 list.boxed-list list {
-  --shadow-inset-extra-thin: #{shadows.shadow-value(inset-extra-thin, base02)};
-  --shadow-inset-thin: #{shadows.shadow-value(inset-thin, base02)};
-  --shadow-inset: #{shadows.shadow-value(inset, base02)};
-  --shadow-thin: #{shadows.shadow-value(thin, base02)};
-  --shadow-separator-mimic-vertical: #{shadows.shadow-value(separator-vertical, base02)};
-  --shadow-separator-mimic-horizontal: #{shadows.shadow-value(separator-horizontal, base02)};
-  --shadow-separator-mimic-bottom-horizontal: #{shadows.shadow-value(separator-bottom-horizontal, base02)};
+  --shadow-inset-extra-thin: #{s.shadow-value(inset-extra-thin, base02)};
+  --shadow-inset-thin: #{s.shadow-value(inset-thin, base02)};
+  --shadow-inset: #{s.shadow-value(inset, base02)};
+  --shadow-thin: #{s.shadow-value(thin, base02)};
+  --shadow-separator-mimic-vertical: #{s.shadow-value(separator-vertical, base02)};
+  --shadow-separator-mimic-horizontal: #{s.shadow-value(separator-horizontal, base02)};
+  --shadow-separator-mimic-bottom-horizontal: #{s.shadow-value(separator-bottom-horizontal, base02)};
   --border-color: var(--base02-black-90-dark);
 }
 list.boxed-list list.boxed-list,
 list.boxed-list .rich-list,
 list.boxed-list list.nested {
-  --shadow-inset-extra-thin: #{shadows.shadow-value(inset-extra-thin, base03)};
-  --shadow-inset-thin: #{shadows.shadow-value(inset-thin, base03)};
-  --shadow-inset: #{shadows.shadow-value(inset, base03)};
-  --shadow-separator-mimic-vertical: #{shadows.shadow-value(separator-vertical, base03)};
-  --shadow-separator-mimic-horizontal: #{shadows.shadow-value(separator-horizontal, base03)};
-  --shadow-separator-mimic-bottom-horizontal: #{shadows.shadow-value(separator-bottom-horizontal, base03)};
+  --shadow-inset-extra-thin: #{s.shadow-value(inset-extra-thin, base03)};
+  --shadow-inset-thin: #{s.shadow-value(inset-thin, base03)};
+  --shadow-inset: #{s.shadow-value(inset, base03)};
+  --shadow-separator-mimic-vertical: #{s.shadow-value(separator-vertical, base03)};
+  --shadow-separator-mimic-horizontal: #{s.shadow-value(separator-horizontal, base03)};
+  --shadow-separator-mimic-bottom-horizontal: #{s.shadow-value(separator-bottom-horizontal, base03)};
   --border-color: var(--base03-black-90-dark);
 }
 popover modelbutton:hover:not(:active),
 row.activatable:hover:not(:active):not(:selected) {
-  --shadow-inset-extra-thin: #{shadows.shadow-value(inset-extra-thin, base0D)};
-  --shadow-inset-thin: #{shadows.shadow-value(inset-thin, base0D)};
-  --shadow-inset: #{shadows.shadow-value(inset, base0D)};
+  --shadow-inset-extra-thin: #{s.shadow-value(inset-extra-thin, base0D)};
+  --shadow-inset-thin: #{s.shadow-value(inset-thin, base0D)};
+  --shadow-inset: #{s.shadow-value(inset, base0D)};
   --hl-border-color: var(--base0D-black-60);
 }
 
@@ -281,7 +281,7 @@ label.link > link {
 label.keycap,
 .card {
   background-color: var(--base02);
-  @include shadows.apply-shadow(thin, base02);
+  @include s.apply-shadow(thin, base02);
 }
 
 image.bubble {
@@ -324,7 +324,7 @@ menubar > item {
 menubar > item:hover {
   color: var(--base01);
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 menubar > item:selected {
   margin: 3px 3px 3px 3px;
@@ -336,7 +336,7 @@ menubar > item:hover:selected:not(:focus) {
 item:selected:not(:focus) {
   color: var(--base0D);
   background-color: transparent;
-  @include shadows.apply-shadow(inset, base01);
+  @include s.apply-shadow(inset, base01);
 }
 
 widget.cutout button {
@@ -348,7 +348,7 @@ banner > revealer > widget {
   margin: 6px;
   border-radius: 50px;
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 banner {
   color: var(--base01);
@@ -423,7 +423,7 @@ levelbar.discrete > trough > block:last-child {
 progresscell progress {
   border-radius: 50px;
   background-color: var(--base0B);
-  @include shadows.apply-shadow(thin, base0B);
+  @include s.apply-shadow(thin, base0B);
 }
 label.in-progress {
   color: var(--base01);
@@ -436,7 +436,7 @@ switch slider {
   border-radius: 100%;
 
   background: var(--base02);
-  @include shadows.apply-shadow(thin, base02);
+  @include s.apply-shadow(thin, base02);
 }
 
 /*experimental*/
@@ -463,7 +463,7 @@ scale slider {
   margin: -8px;
 
   background-color: var(--base02);
-  @include shadows.apply-shadow(thin, base02);
+  @include s.apply-shadow(thin, base02);
 
   transition:
     background-color 0.2s cubic-bezier(0, 0, 0.2, 1),
@@ -471,7 +471,7 @@ scale slider {
   animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 scale slider:hover {
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
   animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 scale value {
@@ -526,7 +526,7 @@ switch {
 }
 switch:checked {
   color: var(--base0B);
-  @include shadows.apply-shadow(inset, base0B);
+  @include s.apply-shadow(inset, base0B);
   animation: slide-right 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 switch image {
@@ -558,7 +558,7 @@ check:indeterminate,
 radio:checked,
 radio:indeterminate {
   color: var(--base01);
-  @include shadows.apply-shadow(inset-thin, base0D);
+  @include s.apply-shadow(inset-thin, base0D);
   animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 radio {
@@ -603,7 +603,7 @@ button.font,
 button.file {
   color: var(--base0D);
   background-color: var(--base02);
-  @include shadows.apply-shadow(thin, base02);
+  @include s.apply-shadow(thin, base02);
 }
 stack > button.image-button,
 stack > button.image-text-button {
@@ -682,33 +682,33 @@ button:hover:not(:active),
 toggle:hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 /* stack > button:not(.image-button):not(.image-text-button):hover { */
 stack > button:hover:not(:active) {
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 button.default:hover,
 button.suggested-action:hover {
   background-color: var(--base0B);
-  @include shadows.apply-shadow(thin, base0B);
+  @include s.apply-shadow(thin, base0B);
 }
 button.destructive-action:hover:not(:active),
 button.close:hover:not(:active),
 button.tab-close-button:hover:not(:active) {
   background-color: var(--base08);
-  @include shadows.apply-shadow(thin, base08);
+  @include s.apply-shadow(thin, base08);
 }
 button.app-version:hover:not(:active) {
   color: var(--base01);
   background-color: var(--base0C);
-  @include shadows.apply-shadow(thin, base0C);
+  @include s.apply-shadow(thin, base0C);
 }
 button.starred:hover:not(:active),
 button.tab-indicator:hover:not(:active) {
   background-color: var(--base0A);
-  @include shadows.apply-shadow(thin, base0A);
+  @include s.apply-shadow(thin, base0A);
 }
 
 /******************************/
@@ -721,7 +721,7 @@ button:hover:checked {
   color: var(--base01);
 
   background-color: var(--base0D);
-  @include shadows.apply-shadow(inset, base0D);
+  @include s.apply-shadow(inset, base0D);
 }
 /* stack > button:not(.image-button):not(.image-text-button):hover:checked:not(:active), */
 stack > button:hover:checked:not(:active),
@@ -730,24 +730,24 @@ button.text-button:hover:checked:not(:active),
 button.font:hover:checked:not(:active),
 button.file:hover:checked:not(:active),
 button.pill:hover:checked {
-  @include shadows.apply-shadow(inset, base0D);
+  @include s.apply-shadow(inset, base0D);
 }
 button.circular:hover:checked,
 button.circular.star:hover:checked,
 button.circular.flat:hover:checked,
 menubutton.circular.popup > button:hover:checked {
   background-color: var(--base0D);
-  @include shadows.apply-shadow(inset, base0D);
+  @include s.apply-shadow(inset, base0D);
 }
 button.star.starred:hover:checked,
 button.tab-indicator:hover:checked {
   background-color: vaR(--base0A);
-  @include shadows.apply-shadow(inset, base0A);
+  @include s.apply-shadow(inset, base0A);
 }
 button.entry-icon:hover:checked:not(:active),
 menubutton.entry-icon > button:hover:checked:not(:active) {
   padding: 3px 6px 3px 6px;
-  @include shadows.apply-shadow(inset-thin, base0D);
+  @include s.apply-shadow(inset-thin, base0D);
 }
 
 /***************** button:hover:active **************************/
@@ -768,7 +768,7 @@ button.text-button:active,
 button.text-button:checked,
 button.font:active {
   /* button.osd:active { */
-  @include shadows.apply-shadow(inset, base02);
+  @include s.apply-shadow(inset, base02);
 }
 button.pill:active,
 button.pill:checked {
@@ -822,7 +822,7 @@ button.close:active {
 button.tab-close-button:active {
   padding: 1px 0px 0px 1px;
   background-color: color-mix(in oklab, currentColor 60%, black);
-  @include shadows.apply-shadow(inset-thin, base08-dull);
+  @include s.apply-shadow(inset-thin, base08-dull);
 }
 button.tab-close-button.flat:active {
   background-color: transparent;
@@ -830,7 +830,7 @@ button.tab-close-button.flat:active {
 }
 button.app-version:active {
   color: var(--base0C);
-  @include shadows.apply-shadow(inset, base0C-dull);
+  @include s.apply-shadow(inset, base0C-dull);
 }
 button.small-button:active,
 button.small-button:checked,
@@ -900,12 +900,12 @@ button separator.vertical {
 }
 button:hover separator,
 button:hover:checked separator {
-  @include shadows.apply-shadow(inset-extra-thin, base02);
+  @include s.apply-shadow(inset-extra-thin, base02);
 }
 button separator,
 button:checked separator,
 button:hover:active separator {
-  @include shadows.apply-shadow(inset-extra-thin, base02);
+  @include s.apply-shadow(inset-extra-thin, base02);
 }
 button row.activatable:hover:not(:selected):not(:active) {
   background-color: transparent;
@@ -955,15 +955,15 @@ splitbutton:hover:active:checked {
 splitbutton:hover {
   color: var(--base01);
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 splitbutton:hover:checked {
   margin: 0px;
   padding: 1px 0px 0px 1px;
-  @include shadows.apply-shadow(inset, base0D);
+  @include s.apply-shadow(inset, base0D);
 }
 splitbutton:hover > menubutton > button:checked {
-  @include shadows.apply-shadow(inset, base0D);
+  @include s.apply-shadow(inset, base0D);
 }
 splitbutton > menubutton > button:checked:not(:hover) {
   color: inherit;
@@ -980,7 +980,7 @@ splitbutton > separator.vertical {
 }
 splitbutton:hover > separator,
 splitbutton:hover:checked > separator {
-  @include shadows.apply-shadow(inset-extra-thin, base0D);
+  @include s.apply-shadow(inset-extra-thin, base0D);
 }
 splitbutton:active > separator {
   box-shadow: var(--shadow-inset-extra-thin);
@@ -989,7 +989,7 @@ splitbutton:active > separator {
 /*Ex: Copy version number in about dialogs*/
 toast {
   background-color: var(--base02);
-  @include shadows.apply-shadow(thin, base02);
+  @include s.apply-shadow(thin, base02);
 }
 toast label,
 toast image {
@@ -1050,7 +1050,7 @@ tab:hover {
   color: var(--base01);
 
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 tab:checked,
 tab:selected {
@@ -1084,7 +1084,7 @@ header.vertical > tabs > tab {
 }
 header.vertical > tabs > tab:hover {
   border-radius: 50px;
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 header.vertical > tabs > tab:checked {
   margin: 0px 5px 0px 5px;
@@ -1125,7 +1125,7 @@ tooltip {
   color: var(--base0D);
 
   background-color: var(--base03);
-  @include shadows.apply-shadow(wide, base03);
+  @include s.apply-shadow(wide, base03);
 }
 tooltip label {
   padding: 0px 6px 0px 6px;
@@ -1142,7 +1142,7 @@ treeview.view {
     sans-serif;
 
   background-color: transparent;
-  @include shadows.apply-shadow(separator-horizontal, base00-light);
+  @include s.apply-shadow(separator-horizontal, base00-light);
 }
 treeview.view.separator {
   min-height: 1px;
@@ -1229,19 +1229,19 @@ treeview .cell:hover:not(:focus) {
 }
 treeview.view check.cell:hover:not(:focus),
 treeview.view radio.cell:hover:not(:focus) {
-  @include shadows.apply-shadow(inset-thin, base0D);
+  @include s.apply-shadow(inset-thin, base0D);
 }
 treeview.view:hover:selected:not(:focus) {
-  @include shadows.apply-shadow(inset, base0D);
+  @include s.apply-shadow(inset, base0D);
 }
 treeview.view:selected:focus,
 treeview.view:selected {
-  @include shadows.apply-shadow(inset, base01);
+  @include s.apply-shadow(inset, base01);
 }
 
 scrolledwindow treeview.view:selected:focus,
 scrolledwindow treeview.view:selected {
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 .rubberband,
 rubberband,
@@ -1319,7 +1319,7 @@ scrollbar.overlay-indicator.vertical.hovering > range > trough > slider {
 }
 
 .sidebar-pane {
-  @include shadows.apply-shadow(thin, base01);
+  @include s.apply-shadow(thin, base01);
 }
 
 video {
@@ -1336,7 +1336,7 @@ video controls {
   background-color: transparent;
 }
 video controls button.image-button:hover:active {
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 
 searchbar revealer > box {
@@ -1375,22 +1375,22 @@ calendar > grid > label:hover,
 calendar > grid > label.day-number.other-month:hover {
   color: var(--base01);
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 calendar > grid > label:selected {
   color: var(--base0D);
   background-color: var(--base01);
-  @include shadows.apply-shadow(inset, base01);
+  @include s.apply-shadow(inset, base01);
 }
 calendar > grid > label.today {
   color: var(--base01);
   background-color: var(--base0B);
-  @include shadows.apply-shadow(thin, base0B);
+  @include s.apply-shadow(thin, base0B);
 }
 calendar > grid > label.today:selected {
   color: var(--base01);
   background-color: var(--base0B);
-  @include shadows.apply-shadow(inset, base0B);
+  @include s.apply-shadow(inset, base0B);
 }
 calendar > grid > label.day-number {
   margin: 3px 3px 2px 4px;
@@ -1455,7 +1455,7 @@ iconview {
 }
 iconview:selected {
   background-color: transparent;
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 iconview > .cell:hover {
   padding: 5px;
@@ -1464,7 +1464,7 @@ iconview > .cell:hover {
   color: var(--base01);
 
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 
 actionbar > revealer > box,
@@ -1476,7 +1476,7 @@ frame {
   margin: 6px;
   border-radius: 10px;
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 frame frame > label {
   margin: 4px;
@@ -1494,7 +1494,7 @@ scrolledwindow.frame,
 columnview.data-table {
   border-radius: 10px;
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 scrolledwindow.frame textview,
 frame textview {
@@ -1524,7 +1524,7 @@ textview {
   color: var(--base0D);
   /*background-color and box-shadow only applies when textview isn't inside a frame, otherwise it's overridden via more speicificity above*/
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 
 /*Ex; emoji popover*/
@@ -1533,7 +1533,7 @@ stack > box:not(#NautilusPathBar) > scrolledwindow:not(.frame) > viewport {
   margin-top: 6px;
   border-radius: 10px;
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 /*Why set box-shadow to none here? Because it affects the nautilus pathbar*/
 stack > box > scrolledwindow > viewport {
@@ -1548,14 +1548,14 @@ box.view > scrolledwindow:first-child > listview.view {
   background-color: var(--base01);
 }
 box.view > scrolledwindow:first-child > listview.view > row:selected {
-  @include shadows.apply-shadow(inset, base01);
+  @include s.apply-shadow(inset, base01);
 }
 box.view.horizontal separator.horizontal {
   all: unset;
 }
 box.view > stack > paned > scrolledwindow > listview.view {
   border-radius: 10px;
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 box.view > scrolledwindow:first-child + separator + stack {
   border-radius: 0px;
@@ -1575,7 +1575,7 @@ box.view > scrolledwindow:first-child + separator + stack > paned > paned > pict
   padding: 3px 1px 1px 3px;
   border-radius: 10px;
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 
 stacksidebar.sidebar {
@@ -1654,7 +1654,7 @@ popover modelbutton:hover:selected:focus:not(:active),
 popover > contents > box listview.view > row.activatable:hover:selected:not(:active) {
   color: var(--base01);
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 popover stack > box {
   /*inside the nautlius pathbar search with the two buttons*/
@@ -1690,7 +1690,7 @@ popover > contents {
   border-radius: 10px;
 
   background-color: var(--base01);
-  @include shadows.apply-shadow(wide, base01);
+  @include s.apply-shadow(wide, base01);
 }
 popover label,
 popover accelerator,
@@ -1763,7 +1763,7 @@ row.activatable:hover,
 child.activatable:hover {
   color: var(--base01);
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 row.activatable:active,
 row.activatable:selected,
@@ -1817,7 +1817,7 @@ row.activatable button.starred:hover,
 row.activatable:hover:selected button.starred:hover {
   color: var(--base01);
   background-color: var(--base0A);
-  @include shadows.apply-shadow(thin, base0A);
+  @include s.apply-shadow(thin, base0A);
 }
 row.activatable:hover:active button.starred,
 row.activatable:hover:selected button.starred {
@@ -1828,7 +1828,7 @@ row.activatable:hover button.starred {
 }
 row.activatable button.starred:hover:checked,
 row.activatable:hover:selected button.starred:hover:checked {
-  @include shadows.apply-shadow(inset, base0A);
+  @include s.apply-shadow(inset, base0A);
 }
 row.activatable:hover:active button.starred:active,
 row.activatable:hover:selected button.starred:active {
@@ -1909,7 +1909,7 @@ list.boxed-list .rich-list,
 list.boxed-list list.nested {
   margin: 8px;
   background-color: var(--base03);
-  @include shadows.apply-shadow(thin, base03);
+  @include s.apply-shadow(thin, base03);
 }
 list.boxed-list > row:first-child,
 list.content > row:first-child {
@@ -1942,7 +1942,7 @@ list.boxed-list list.boxed-list > row:not(.activatable) box > widget > scale > m
 list.boxed-list > row > box > frame {
   border: none;
   background-color: transparent;
-  @include shadows.apply-shadow(inset-thin, base02);
+  @include s.apply-shadow(inset-thin, base02);
 }
 row.expander > box > list > row.activatable {
   margin: -2px -15px -1px -14px;
@@ -2107,7 +2107,7 @@ box.pathbar {
   border-radius: 50px;
 
   background-color: var(--base02);
-  @include shadows.apply-shadow(thin, base02);
+  @include s.apply-shadow(thin, base02);
 }
 box.pathbar button {
   min-width: 16px;
@@ -2133,7 +2133,7 @@ viewswitcher,
   margin: 1px 0px 0px 1px;
   border-radius: 17px;
   background-color: var(--base02);
-  @include shadows.apply-shadow(thin, base02);
+  @include s.apply-shadow(thin, base02);
 }
 viewswitcher.narrow {
   border-radius: 10px;
@@ -2199,7 +2199,7 @@ viewswitcher > button:hover:checked,
 .linked > button:hover:checked,
 .linked > menubutton > button:hover:checked {
   padding: 2px 9px 2px 9px;
-  @include shadows.apply-shadow(inset, base0D);
+  @include s.apply-shadow(inset, base0D);
 }
 viewswitcher > button + button,
 .linked > button + button,
@@ -2233,7 +2233,7 @@ viewswitcher > button + button:hover,
 .linked > scrolledwindow + menubutton > button:hover {
   border-color: transparent;
   border-radius: 17px;
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 viewswitcher > button + button:active,
 viewswitcher > button + button.flat:checked,
@@ -2314,7 +2314,7 @@ viewswitcher > button:hover:checked {
 .linked > button.combo:hover:checked {
   color: var(--base01);
   background-color: var(--base0D);
-  @include shadows.apply-shadow(inset, base0D);
+  @include s.apply-shadow(inset, base0D);
 }
 viewswitcher > button:hover {
   border-left-color: transparent;
@@ -2327,14 +2327,14 @@ filechooser pathbar box.linked > button:not(#_):checked,
 filechooser pathbar box.linked > button:not(#_):hover:checked,
 viewswitcher > button.flat:checked {
   background-color: var(--base02);
-  @include shadows.apply-shadow(inset, base02);
+  @include s.apply-shadow(inset, base02);
 }
 .linked > button.text-button:nth-child(4n + 1):hover:not(:active):not(:checked),
 viewswitcher > button.flat:nth-child(4n + 1):hover:not(:active):not(:checked),
 filechooser pathbar box.linked > button:not(#_):nth-child(4n + 1):hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base0B);
-  @include shadows.apply-shadow(thin, base0B);
+  @include s.apply-shadow(thin, base0B);
 }
 .linked > button.text-button:nth-child(4n + 1),
 .linked > button.text-button:nth-child(4n + 1):active,
@@ -2354,7 +2354,7 @@ filechooser pathbar box.linked > button:not(#_):nth-child(4n + 2):hover:not(:act
 box.dialog-action-area > button.text-button:first-child:hover:not(:active) {
   color: var(--base01);
   background-color: var(--base08);
-  @include shadows.apply-shadow(thin, base08);
+  @include s.apply-shadow(thin, base08);
 }
 .linked > button.text-button:nth-child(4n + 2),
 .linked > button.text-button:nth-child(4n + 2):active,
@@ -2377,7 +2377,7 @@ filechooser pathbar box.linked > button:not(#_):nth-child(4n + 3):hover:not(:act
 viewswitcher > button.flat:nth-child(4n + 3):hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base0A);
-  @include shadows.apply-shadow(thin, base0A);
+  @include s.apply-shadow(thin, base0A);
 }
 .linked > button.text-button:nth-child(4n + 3),
 .linked > button.text-button:nth-child(4n + 3):active,
@@ -2395,7 +2395,7 @@ filechooser pathbar box.linked > button:not(#_):nth-child(4n + 4):hover:not(:act
 viewswitcher > button.flat:nth-child(4n + 4):hover:not(:active):not(:checked) {
   color: var(--base01);
   background-color: var(--base09);
-  @include shadows.apply-shadow(thin, base09);
+  @include s.apply-shadow(thin, base09);
 }
 .linked > button.text-button:nth-child(4n + 4),
 .linked > button.text-button:nth-child(4n + 4):active,
@@ -2434,14 +2434,14 @@ viewswitcher > button.flat:nth-child(4n + 4):checked {
 /*end*/
 #NautilusPathButton:active,
 button.current-dir:active {
-  @include shadows.apply-shadow(inset, base02);
+  @include s.apply-shadow(inset, base02);
 }
 
 widget.content-pane {
   margin: 0px;
   border-radius: 10px;
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 .nautilus-window .content-pane headerbar,
 .nautilus-window .sidebar-pane headerbar {
@@ -2481,7 +2481,7 @@ columnview.data-table {
 #NautilusQueryEditorTag,
 #NautilusQueryEditorTag button:active {
   background-color: var(--base02);
-  @include shadows.apply-shadow(inset, base02);
+  @include s.apply-shadow(inset, base02);
 }
 #NautilusPathBar undershoot.left,
 #NautilusPathBar > scrolledwindow > viewport {
@@ -2500,7 +2500,7 @@ columnview.data-table {
   color: var(--base0D);
 
   background-color: var(--base03);
-  @include shadows.apply-shadow(thin, base03);
+  @include s.apply-shadow(thin, base03);
 }
 
 /*****************/
@@ -2562,7 +2562,7 @@ multi-layout-view > box > widget > lpdragoverlay {
 window:not(.fullscreen) stack > widget > overlay > widget > widget > stack > box > scrolledwindow {
   border-radius: 10px;
   background-color: #242424; /*Same color as void space in lpimage in dark theme, wonder if same with light theme.*/
-  @include shadows.apply-shadow(inset, base01);
+  @include s.apply-shadow(inset, base01);
 }
 window:not(.fullscreen) stack > widget > overlay > widget > widget > stack > box > scrolledwindow > lpimage {
   margin: 8px;
@@ -2572,7 +2572,7 @@ window.fullscreen .top-bar headerbar {
   margin-bottom: 1px;
 }
 window.fullscreen .sidebar-pane {
-  @include shadows.apply-shadow(thin, base01);
+  @include s.apply-shadow(thin, base01);
 }
 revealer.bottom-properties {
   margin-top: -6px;
@@ -2580,7 +2580,7 @@ revealer.bottom-properties {
 .osd-box {
   border-radius: 10px;
   background-color: var(--base01);
-  @include shadows.apply-shadow(thin, base01);
+  @include s.apply-shadow(thin, base01);
 }
 
 /*****************/
@@ -2645,7 +2645,7 @@ filechooser #pathbarbox button.text-button.toggle:checked,
 filechooser #pathbarbox button.text-button.toggle:hover:active,
 filechooser #pathbarbox button.text-button.toggle:hover:checked {
   /*shadow-inset-base01*/
-  @include shadows.apply-shadow(inset, base01);
+  @include s.apply-shadow(inset, base01);
 }
 filechooser #pathbarbox button:not(#_):hover:checked {
   color: var(--base01);
@@ -2654,7 +2654,7 @@ filechooser #pathbarbox button:not(#_):hover:checked {
 /*   padding: 0px 0px 0px 4px; */
 /* } */
 /* filechooser #pathbarbox box.linked > * + * { */
-/*   @include shadows.apply-shadow(separator-vertical, base01); */
+/*   @include s.apply-shadow(separator-vertical, base01); */
 /* } */
 /* filechooser #pathbarbox box.linked > button:hover + *, */
 /* filechooser #pathbarbox box.linked > button:active + *, */
@@ -2669,7 +2669,7 @@ window.filechooser scrolledwindow > gridview {
   margin: 6px 6px 6px 0px;
   border-radius: 10px;
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 window.filechooser actionbar > revealer > box {
   margin-top: 2px;
@@ -2677,7 +2677,7 @@ window.filechooser actionbar > revealer > box {
   border-top: 1px solid var(--base01-black-80-dark);
 
   background-color: transparent;
-  @include shadows.apply-shadow(separator-horizontal, base01);
+  @include s.apply-shadow(separator-horizontal, base01);
 }
 window.filechooser placesview > actionbar > revealer > box {
   margin-top: 0px;
@@ -2694,14 +2694,14 @@ graphicsoffload + statuspage {
 window:not(.fullscreen) graphicsoffload + statuspage > scrolledwindow {
   margin: 0px;
   border-radius: 10px;
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 graphicsoffload + statuspage > scrolledwindow {
   background-color: var(--base00);
 }
 button.image-button.raised:active {
   background-color: transparent;
-  @include shadows.apply-shadow(inset, base01);
+  @include s.apply-shadow(inset, base01);
 }
 widget.background.osd {
   border: none;
@@ -2728,7 +2728,7 @@ window.fullscreen .control-box {
   border-width: 0px;
   border-radius: 10px;
   background-color: var(--base01);
-  @include shadows.apply-shadow(thin, base01);
+  @include s.apply-shadow(thin, base01);
 }
 window:not(.fullscreen) celluloid-video-area > toolbarview {
   background-color: var(--base01);
@@ -2766,11 +2766,11 @@ tabboxchild > tab:selected {
 }
 tabboxchild > tab > .tab-close-button:hover:active,
 tabboxchild > tab > .tab-indicator:hover:active {
-  @include shadows.apply-shadow(inset-thin, base0D);
+  @include s.apply-shadow(inset-thin, base0D);
 }
 tabboxchild > tab:hover:selected > .tab-close-button:hover:active,
 tabboxchild > tab:hover:selected > .tab-indicator:hover:active {
-  @include shadows.apply-shadow(inset-thin, base01);
+  @include s.apply-shadow(inset-thin, base01);
 }
 tabbox separator.vertical {
   margin: 0px 6px;
@@ -2791,10 +2791,10 @@ overlay.card > picture {
 toolbarview > overlay > scrolledwindow {
   margin: 0px 6px 6px 6px;
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 toolbarview > overlay > scrolledwindow + button:hover:active {
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 #title-box-container entry {
   /*Had to change minimum to 34, otherwise epiphany couldn't allocate 34px to menubutton in entry and would crash*/
@@ -2827,12 +2827,12 @@ button.bottom:active {
 }
 .navigation-box button:hover:checked > popover row:hover:not(:active):not(:selected):not(:checked) {
   background-color: var(--base0D);
-  @include shadows.apply-shadow(thin, base0D);
+  @include s.apply-shadow(thin, base0D);
 }
 .navigation-box button > popover row:not(#_):selected,
 .navigation-box button > popover row:not(#_):hover:active {
   background-color: var(--base01);
-  @include shadows.apply-shadow(inset, base01);
+  @include s.apply-shadow(inset, base01);
 }
 /* .navigation-box button > popover row:not(#_):hover:active *:not(#_) { */
 /*   color: var(--base0D); */
@@ -2901,7 +2901,7 @@ navigation-view-page#search {
 #albums > scrolledwindow > gridview {
   margin: 0px 6px 6px 6px;
   border-radius: 10px;
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 #albums > scrolledwindow > gridview > child {
   background-color: transparent;
@@ -2918,7 +2918,7 @@ navigation-view-page#search {
 revealer.bottom-bar.raised:not(.border) {
   margin-top: 1px;
   border-top: 1px solid var(--base01-black-80-dark);
-  @include shadows.apply-shadow(separator-horizontal, base01);
+  @include s.apply-shadow(separator-horizontal, base01);
 }
 button.toggle:hover:not(:active) > box > contents > box {
   color: var(--base01);
@@ -2952,10 +2952,10 @@ row.activatable.inactive:active image.bubble {
 }
 row.activatable.inactive:hover:not(:active) {
   background-color: var(--base0A);
-  @include shadows.apply-shadow(thin, base0A);
+  @include s.apply-shadow(thin, base0A);
 }
 row.activatable.inactive:hover:not(:active) progressbar trough {
-  @include shadows.apply-shadow(inset-thin, base0A);
+  @include s.apply-shadow(inset-thin, base0A);
 }
 
 /*****************/
@@ -2983,7 +2983,7 @@ stacksidebar + stack {
   margin: 0px 6px 6px 0px;
   border-radius: 10px;
   background-color: var(--base00);
-  @include shadows.apply-shadow(inset, base00);
+  @include s.apply-shadow(inset, base00);
 }
 /*recorder tab*/
 box.view,
@@ -3033,7 +3033,7 @@ overlay-split-view.gradient viewport {
   border-radius: 10px;
 }
 overlay-split-view.gradient > .sidebar-pane {
-  @include shadows.apply-shadow(thin, base01);
+  @include s.apply-shadow(thin, base01);
 }
 seekbar {
   margin: 6px;
