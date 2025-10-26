@@ -94,12 +94,12 @@ in {
           name = lib.mkOption {
             type = lib.types.str;
             default = "";
-            description = ''Default is "" to avoid infinite recursion. Will be instantiated with the actual name in config.'';
+            description = ''Default is "" to avoid infinite recursion. Will be instantiated with the actual name in the module's configuration.'';
           };
           package = lib.mkOption {
             type = lib.types.nullOr lib.types.package;
             default = null;
-            description = ''Default is null to avoid infinite recursion. Will be instantiated with the actual package in config.'';
+            description = ''Default is null to avoid infinite recursion. Will be instantiated with the actual package in the module's configuration.'';
           };
         };
       };
@@ -276,9 +276,10 @@ in {
         name = "base16-gtk";
         package = let
           defaultScheme = lib.head (lib.filter (scheme: (scheme.name == config.hm.tintednix.defaultSchemeName)) base16schemes);
-          colorsFile = this.lib.mkTargetFile defaultScheme "scss" ../.. "gtk4";
+          gtk3Colors = this.lib.mkTargetFile defaultScheme "scss" ../.. "gtk3";
+          gtk4Colors = this.lib.mkTargetFile defaultScheme "scss" ../.. "gtk4";
         in
-          (pkgs.callPackage ../../pkgs/themes {inherit colorsFile;}).base16-gtk;
+          (pkgs.callPackage ../../pkgs/themes {inherit gtk3Colors gtk4Colors;}).base16-gtk;
       };
     in
       lib.mkMerge [

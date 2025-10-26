@@ -37,7 +37,7 @@ $gtk-version: "gtk3" !default;
     color: inherit;
 
     background-color: transparent;
-    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-inset)"), s.shadow-value(inset, base01));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset), s.shadow-value(inset, base01));
   }
 
   @if $gtk-version == "gtk3" {
@@ -57,10 +57,10 @@ $gtk-version: "gtk3" !default;
   tab + tab {
     margin-left: 2px;
     padding-left: 15px;
-    border-left: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base01-black-80));
+    border-left: 1px solid if($gtk-version != "gtk3", var(--border-color), h.token-resolve(base01-black-80));
     border-radius: 0px;
 
-    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-vertical)"), s.shadow-value(separator-vertical, base02));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-separator-mimic-vertical), s.shadow-value(separator-vertical, base02));
   }
   tab + tab:checked {
     margin-left: 1px;
@@ -82,17 +82,17 @@ $gtk-version: "gtk3" !default;
     margin: 0px 5px 0px 5px;
     padding: 5px 17px 5px 17px;
     border-radius: 50px;
-    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-inset)"), s.shadow-value(inset, base01));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset), s.shadow-value(inset, base01));
   }
 
   @include h.emit-rule((if($gtk-version != "gtk3", "header.vertical > tabs > tab + tab", selector.nest("header.right, header.left", " > tabs > tab + tab")))) {
     margin-top: 2px;
     padding-top: 3px;
-    border-top: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base01-black-80));
+    border-top: 1px solid if($gtk-version != "gtk3", var(--border-color), h.token-resolve(base01-black-80));
     border-left: none;
     border-radius: 0px;
 
-    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-horizontal)"), s.shadow-value(separator-horizontal, base01));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-separator-mimic-horizontal), s.shadow-value(separator-horizontal, base01));
   }
 
   @include h.emit-rule((if($gtk-version != "gtk3", "header.vertical > tabs > tab + tab:hover", selector.nest("header.right, header.left", " > tabs > tab + tab:hover")))) {

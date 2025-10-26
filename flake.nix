@@ -20,12 +20,20 @@
       perSystem = {pkgs, ...}: {
         formatter = pkgs.alejandra;
 
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            gtk4
-            gst_all_1.gst-plugins-base
-            gtk3
-          ];
+        devShells = {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              gtk4
+              gst_all_1.gst-plugins-base
+              gtk3
+            ];
+          };
+          buildCss = pkgs.mkShell {
+            buildInputs = with pkgs; [dart-sass];
+            shellHook = ''
+              source $PWD/build.sh
+            '';
+          };
         };
       };
       flake = {

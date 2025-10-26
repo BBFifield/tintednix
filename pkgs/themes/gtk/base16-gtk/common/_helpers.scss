@@ -163,3 +163,14 @@ $css-var-prefix: "" !default;
     }
   }
 }
+
+/// Returns rgb(r, g, b) where r/g/b are integers. We do lose precision, but the difference is negligible
+@function to-rgb($c1, $c2, $weight) {
+  $mixed: color.mix($c1, $c2, $weight: $weight, $method: oklab);
+
+  $r: red($mixed);
+  $g: green($mixed);
+  $b: blue($mixed);
+
+  @return rgb($r, $g, $b);
+}

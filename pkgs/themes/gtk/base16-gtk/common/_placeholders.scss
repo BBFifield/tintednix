@@ -1,0 +1,13 @@
+@use "helpers" as h;
+@use "shadows" as s;
+
+@mixin slider-style() {
+  %slider {
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 100%;
+
+    background: h.token-resolve(base02);
+    @include s.apply-shadow(thin, base02);
+  }
+}

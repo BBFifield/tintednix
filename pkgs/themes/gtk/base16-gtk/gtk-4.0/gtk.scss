@@ -16,6 +16,25 @@
 @use "../common/tabs" as * with (
   $gtk-version: "gtk4"
 );
+@use "../common/placeholders" as placeholders;
+@use "../common/switches" as switches with (
+  $gtk-version: "gtk4"
+);
+@use "../common/bars" as * with (
+  $gtk-version: "gtk4"
+);
+@use "../common/treeview" as * with (
+  $gtk-version: "gtk4"
+);
+@use "../common/scrollbar" as * with (
+  $gtk-version: "gtk4"
+);
+@use "../common/separators" as * with (
+  $gtk-version: "gtk4"
+);
+@use "../common/list" as * with (
+  $gtk-version: "gtk4"
+);
 @import url("colors.css");
 
 :root {
@@ -203,7 +222,8 @@ headerbar windowhandle > box {
 
 /********************** General Typography * */
 label,
-text {
+text,
+treeview.view {
   font:
     normal 16px "jetbrainsmono nerd font",
     sans-serif;
@@ -360,231 +380,10 @@ banner {
   color: var(--base01);
 }
 
-progressbar,
-levelbar {
-  background-color: transparent;
-}
-progressbar text {
-  color: var(--base0D);
-}
-progressbar.vertical trough {
-  min-width: 8px;
-  min-height: 80px;
-}
-progressbar.vertical progress {
-  min-width: 8px;
-}
-progressbar.horizontal trough {
-  min-width: 150px;
-  min-height: 8px;
-}
-progressbar.horizontal trough,
-progressbar.horizontal progress,
-levelbar.horizontal block {
-  min-height: 8px;
-  border-radius: 99px;
-}
-levelbar.continuous block {
-  border-radius: 50px;
-}
-levelbar.discrete.horizontal block {
-  min-width: 26px;
-}
-levelbar.discrete block:first-child {
-  border-radius: 50px 0px 0px 50px;
-}
-levelbar.discrete block:last-child {
-  border-radius: 0px 50px 50px 0px;
-}
-levelbar.discrete block:not(:first-child):not(last-child) {
-  border-radius: 0px;
-}
-levelbar.discrete block.filled:not(:first-child) {
-  border-left: 1px solid var(--base01);
-}
-block.empty {
-  border: none;
-  background-color: transparent;
-  box-shadow: var(--shadow-inset-thin);
-}
-block.filled {
-  background-color: var(--base0B);
-}
-
-progressbar > trough:not(.full) > progress {
-  background-color: var(--base0D);
-}
-progressbar > trough.full > progress,
-levelbar block.filled {
-  background-color: var(--base0B);
-}
-progressbar progress {
-  margin: 0px -1px 0px -1px;
-  border-radius: 50px;
-}
-levelbar.discrete > trough > block:last-child {
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-progresscell progress {
-  border-radius: 50px;
-  background-color: var(--base0B);
-  @include s.apply-shadow(thin, base0B);
-}
-label.in-progress {
-  color: var(--base01);
-}
-
-scale slider,
-switch slider {
-  min-width: 20px;
-  min-height: 20px;
-  border-radius: 100%;
-
-  background: var(--base02);
-  @include s.apply-shadow(thin, base02);
-}
-
-/*experimental*/
-scale {
-  min-width: 125px;
-  min-height: 10px;
-  padding: 11px;
-}
-scale.vertical {
-  min-width: 10px;
-  min-height: 125px;
-}
-scale.marks-after {
-  padding: 10px 30px 0px 30px;
-}
-scale.marks-before {
-  padding: 0px 30px 10px 30px;
-}
-scale highlight {
-  border-radius: 99px;
-  background-color: var(--base0B);
-}
-scale slider {
-  margin: -8px;
-
-  background-color: var(--base02);
-  @include s.apply-shadow(thin, base02);
-
-  transition:
-    background-color 0.2s cubic-bezier(0, 0, 0.2, 1),
-    box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
-  animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-scale slider:hover {
-  @include s.apply-shadow(thin, base0D);
-  animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-scale value {
-  color: var(--base0D);
-}
-scale marks.bottom {
-  margin: 6px 0px 0px 0px;
-}
-scale marks.top {
-  margin: 0px 0px 6px 0px;
-}
-scale marks indicator {
-  min-width: 1px;
-  min-height: 6px;
-  background-color: currentColor;
-}
-scale marks mark:first-child {
-  color: var(--base08);
-}
-scale marks mark:only-child,
-scale marks mark {
-  color: var(--base0B);
-}
-
-progressbar trough,
-levelbar trough,
-progresscell trough,
-progresscell {
-  border-radius: 50px;
-  background-color: transparent;
-  box-shadow: var(--shadow-inset-thin);
-}
-scale trough {
-  border-radius: 50px;
-  background-color: transparent;
-  box-shadow: var(--shadow-inset-extra-thin);
-}
-scale.vertical trough {
-  min-width: 3px;
-}
-
-switch {
-  padding: 3px;
-  border-radius: 50px;
-
-  color: var(--base0B);
-
-  background: transparent;
-  box-shadow: var(--shadow-inset);
-
-  animation: slide-left 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-switch:checked {
-  color: var(--base0B);
-  @include s.apply-shadow(inset, base0B);
-  animation: slide-right 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-switch image {
-  color: transparent;
-}
-
-checkbutton {
-  padding: 4px;
-}
-checkbutton > label {
-  margin-right: 4px;
-  color: var(--base0D);
-}
-check,
-radio {
-  min-width: 14px;
-  min-height: 14px;
-  margin: 0px 4px 0px 4px;
-  padding: 3px;
-  border-width: 0px;
-
-  background-color: transparent;
-  box-shadow: var(--shadow-inset-thin);
-
-  animation: ripple-in-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-check:checked,
-check:indeterminate,
-radio:checked,
-radio:indeterminate {
-  color: var(--base01);
-  @include s.apply-shadow(inset-thin, base0D);
-  animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-radio {
-  border-radius: 100%;
-}
-radio:checked {
-  -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-symbolic.symbolic.png")), -gtk-recolor(url("assets/bullet@2-symbolic.symbolic.png")));
-}
-radio:indeterminate {
-  -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
-}
-check {
-  border-radius: 6px;
-}
-check:checked {
-  -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-symbolic.svg")), -gtk-recolor(url("assets/check-symbolic.symbolic.png")));
-}
-check:indeterminate {
-  -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
-}
+@include bar-styles();
+@include placeholders.slider-style();
+@include switches.switch-styles();
+@include switches.checkbutton-styles();
 
 /***************** button **************************/
 button,
@@ -747,7 +546,7 @@ menubutton.circular.popup > button:hover:checked {
 }
 button.star.starred:hover:checked,
 button.tab-indicator:hover:checked {
-  background-color: vaR(--base0A);
+  background-color: var(--base0A);
   @include s.apply-shadow(inset, base0A);
 }
 button.entry-icon:hover:checked:not(:active),
@@ -1017,26 +816,7 @@ box.toolbar.horizontal > button {
   outline-offset: 4px;
 }
 
-separator,
-paned.horizontal > separator.wide {
-  min-width: 3px;
-  min-height: 3px;
-  margin: 6px;
-  padding: 0px;
-  border-radius: 50px;
-}
-separator,
-paned > separator {
-  background-color: transparent;
-  box-shadow: var(--shadow-inset-extra-thin);
-}
-paned.horizontal > separator {
-  margin: 6px 0px;
-}
-paned.vertical > separator,
-box.toolbar.horizontal > separator.horizontal {
-  margin: 0px 6px;
-}
+@include separator-styles();
 
 @include tab-styles();
 
@@ -1055,113 +835,7 @@ tooltip label {
   padding: 0px 6px 0px 6px;
 }
 
-treeview.view {
-  margin-bottom: 2px;
-  padding: 5px 8px 5px 8px;
-  border-top-color: var(--base00-white-95-dark);
-  border-left-color: var(--base00-white-90-dark);
-
-  font:
-    normal 16px "jetbrainsmono nerd font",
-    sans-serif;
-
-  background-color: transparent;
-  @include s.apply-shadow(separator-horizontal, base00-light);
-}
-treeview.view.separator {
-  min-height: 1px;
-  color: var(--base00-black-85-dark);
-  box-shadow: none;
-}
-treeview.view:drop(active) {
-  box-shadow: none;
-}
-treeview.view:drop(active).after {
-  border-top-style: none;
-}
-treeview.view:drop(active).before {
-  border-bottom-style: none;
-}
-treeview.view > dndtarget:drop(active) {
-  border-color: var(--base01-black-80-dark);
-  border-style: solid none;
-  border-width: 1px;
-}
-treeview.view > dndtarget:drop(active).after {
-  border-top-style: none;
-}
-treeview.view > dndtarget:drop(active).before {
-  border-bottom-style: none;
-}
-treeview.view.expander {
-  min-width: 16px;
-  min-height: 16px;
-
-  color: var(--base0D-black-60);
-
-  transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
-}
-treeview.view.expander:checked {
-  -gtk-icon-transform: rotate(0.25turn);
-}
-treeview.view.expander:dir(rtl) {
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
-}
-treeview.view.expander:dir(rtl):checked {
-  -gtk-icon-transform: rotate(-0.25turn);
-}
-treeview.view.expander:hover {
-  color: var(--base01);
-}
-treeview.view.expander:hover:selected {
-  color: color-mix(var(--base0D), black 50%);
-}
-treeview.view.expander:selected:not(:hover) {
-  color: var(--base0D-black-60);
-}
-treeview.view.expander:disabled {
-  color: unquote("alpha(var(--base0D), 0.1)");
-}
-treeview.view.trough:selected:hover {
-  box-shadow: none;
-}
-treeview.view > header > button:not(:hover):not(:active) {
-  border-style: solid;
-  border-bottom-color: var(--base00-black-65-dark);
-  border-bottom-width: 1px;
-  border-radius: 0;
-}
-treeview.view > header > button:active {
-  color: var(--base0D);
-}
-treeview.view acceleditor > label {
-  background-color: var(--base0D);
-}
-treeview.view .cell {
-  color: var(--base0D);
-}
-treeview.view radio:checked,
-treeview.view check:checked {
-  color: var(--base01);
-  background-color: var(--base0D);
-}
-treeview .cell:hover:not(:focus) {
-  color: var(--base01);
-  background-color: unquote("alpha(var(--base0D), 0.85)");
-}
-treeview.view check.cell:hover:not(:focus),
-treeview.view radio.cell:hover:not(:focus) {
-  @include s.apply-shadow(inset-thin, base0D);
-}
-treeview.view:hover:selected:not(:focus) {
-  @include s.apply-shadow(inset, base0D);
-}
-treeview.view:selected:focus,
-treeview.view:selected {
-  @include s.apply-shadow(inset, base01);
-}
+@include treeview-styles();
 
 scrolledwindow treeview.view:selected:focus,
 scrolledwindow treeview.view:selected {
@@ -1191,56 +865,7 @@ grid.dim-label {
   opacity: 0.55;
 }
 
-scrollbar {
-  margin: 0px;
-  padding: 0px;
-  color: var(--base0D);
-}
-scrollbar > range {
-  margin: 0px;
-  padding: 0px;
-}
-scrollbar > range > trough {
-  border-radius: 50px;
-}
-scrollbar > range > trough > slider {
-  min-width: 8px;
-  min-height: 8px;
-  margin: -8px;
-  border: 8px solid transparent;
-  border-radius: 50px;
-
-  background-color: color-mix(in srgb, currentcolor 50%, transparent);
-  background-clip: padding-box;
-
-  transition: all 200ms linear;
-}
-scrollbar.bottom.horizontal > range > trough {
-  margin: 4px 9px 4px 9px;
-}
-scrollbar.right.vertical > range > trough {
-  margin: 9px 4px 9px 4px;
-}
-scrollbar > range > trough > slider:disabled {
-  opacity: 0;
-}
-scrollbar.overlay-indicator.horizontal:not(.hovering) > range > trough > slider {
-  min-width: 40px;
-  min-height: 3px;
-}
-scrollbar.overlay-indicator.vertical:not(.hovering) > range > trough > slider {
-  min-width: 3px;
-  min-height: 40px;
-}
-scrollbar.overlay-indicator.hovering > range > trough {
-  background-color: color-mix(in srgb, currentcolor 10%, transparent);
-}
-scrollbar.overlay-indicator.horizontal.hovering > range > trough > slider {
-  min-height: 8px;
-}
-scrollbar.overlay-indicator.vertical.hovering > range > trough > slider {
-  min-height: 40px;
-}
+@include scrollbar-styles();
 
 .sidebar-pane {
   @include s.apply-shadow(thin, base01);
@@ -1772,52 +1397,7 @@ stack:hover > row.activatable:hover {
   box-shadow: none;
   transition: none;
 }
-
-list,
-listview {
-  border-radius: 10px;
-  color: var(--base0D);
-}
-.suffixes > listview {
-  color: inherit;
-}
-list > row {
-  min-height: 35px;
-  margin: 1px 6px 2px 7px;
-  padding: 2px 15px 1px 14px;
-}
-list > row.activatable:hover {
-  margin: 1px 6px 1px 7px;
-  padding: 2px 15px 2px 14px;
-}
-list > row.activatable:active,
-list > row.activatable:selected {
-  margin: 0px 6px 0px 6px;
-  padding: 3px 15px;
-}
-
-list.navigation-sidebar > row,
-listview.navigation-sidebar > row {
-  border-bottom-color: transparent;
-  box-shadow: none;
-}
-list:not(.navigation-sidebar) > row,
-listview:not(.navigation-sidebar) > row {
-  border-radius: 0px;
-}
-list:not(.navigation-sidebar) > row.activatable:hover,
-listview:not(.navigation-sidebar) > row.activatable:hover {
-  border-radius: 50px;
-}
-list:not(.navigation-sidebar) > row.activatable:active,
-list:not(.navigation-sidebar) > row.activatable:selected,
-listview:not(.navigation-sidebar) > row.activatable:active,
-listview:not(.navigation-sidebar) > row.activatable:selected {
-  border-radius: 50px;
-}
-list:not(.navigation-sidebar) > separator {
-  all: unset;
-}
+@include list-styles();
 
 /*Ex: Global settings in inspector window*/
 list.boxed-list,
@@ -2077,7 +1657,7 @@ viewswitcher > button:hover {
   color: var(--base01);
 }
 
-@include linked-colors();
+@include linked-tabs();
 
 /*****************/
 /*Nautilus*/

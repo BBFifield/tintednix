@@ -1,0 +1,109 @@
+$gtk-version: "gtk3" !default;
+@use "helpers" as h;
+@use "shadows" as s;
+
+@mixin treeview-styles() {
+  treeview.view {
+    margin-bottom: 2px;
+    padding: 5px 8px 5px 8px;
+    border-top-color: h.token-resolve(base00-white-95-dark);
+    border-left-color: h.token-resolve(base00-white-90-dark);
+
+    background-color: transparent;
+    @include s.apply-shadow(separator-horizontal, base00-light);
+  }
+  treeview.view:drop(active) {
+    box-shadow: none;
+  }
+  treeview.view:drop(active).after {
+    border-top-style: none;
+  }
+  treeview.view:drop(active).before {
+    border-bottom-style: none;
+  }
+  treeview.view > dndtarget:drop(active) {
+    border-color: h.token-resolve(base01-black-80-dark);
+    border-style: solid none;
+    border-width: 1px;
+  }
+  treeview.view > dndtarget:drop(active).after {
+    border-top-style: none;
+  }
+  treeview.view > dndtarget:drop(active).before {
+    border-bottom-style: none;
+  }
+  treeview.view.separator {
+    min-height: 1px; // Was 5px in gtk3, test if this works instead
+    color: h.token-resolve(base00-black-85-dark);
+    box-shadow: none;
+  }
+  treeview.view .cell {
+    color: h.token-resolve(base0D);
+  }
+  treeview.view.expander {
+    min-width: 16px;
+    min-height: 16px;
+
+    color: h.token-resolve(base0D-black-60);
+
+    transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+  }
+  treeview.view.expander:checked {
+    -gtk-icon-transform: rotate(0.25turn);
+  }
+  treeview.view.expander:dir(rtl) {
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
+  }
+  treeview.view.expander:dir(rtl):checked {
+    -gtk-icon-transform: rotate(-0.25turn);
+  }
+  treeview.view.expander:hover {
+    color: h.token-resolve(base01);
+  }
+  treeview.view.expander:hover:selected {
+    color: h.token-resolve(base0D-black-50);
+  }
+  treeview.view.expander:selected:not(:hover) {
+    color: h.token-resolve(base0D-black-60);
+  }
+  treeview.view.expander:disabled {
+    color: unquote("alpha(var(--base0D), 0.1)");
+  }
+  treeview.view.trough:selected:hover {
+    box-shadow: none;
+  }
+  treeview.view > header > button:not(:hover):not(:active) {
+    border-style: solid;
+    border-bottom-color: h.token-resolve(base00-black-65-dark);
+    border-bottom-width: 1px;
+    border-radius: 0;
+  }
+  treeview.view > header > button:active {
+    color: h.token-resolve(base0D);
+  }
+  treeview.view acceleditor > label {
+    background-color: h.token-resolve(base0D);
+  }
+  treeview.view radio:checked,
+  treeview.view check:checked {
+    color: h.token-resolve(base01);
+    background-color: h.token-resolve(base0D);
+  }
+  treeview .cell:hover:not(:focus) {
+    color: h.token-resolve(base01);
+    background-color: unquote("alpha(var(--base0D), 0.85)");
+  }
+  treeview.view check.cell:hover:not(:focus),
+  treeview.view radio.cell:hover:not(:focus) {
+    @include s.apply-shadow(inset-thin, base0D);
+  }
+  treeview.view:hover:selected:not(:focus) {
+    @include s.apply-shadow(inset, base0D);
+  }
+  treeview.view:selected:focus,
+  treeview.view:selected {
+    @include s.apply-shadow(inset, base01);
+  }
+}

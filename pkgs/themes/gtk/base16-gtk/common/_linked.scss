@@ -133,9 +133,9 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
   ) {
     margin: 1px 0px 0px 2px;
     padding: 1px 9px 2px 8px;
-    border-left: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base02-black-90-dark));
+    border-left: 1px solid if($gtk-version != "gtk3", var(--border-color), h.token-resolve(base02-black-90-dark));
     border-radius: 0px;
-    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-vertical)"), s.shadow-value(separator-vertical, base02));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-separator-mimic-vertical), s.shadow-value(separator-vertical, base02));
   }
 
   /* vertical linked adjustments */
@@ -144,10 +144,10 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
   .linked.vertical > entry + entry {
     margin: 2px 0px 0px 1px;
     padding: 1px 9px 2px 8px;
-    border-top: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base02-black-90-dark));
+    border-top: 1px solid if($gtk-version != "gtk3", var(--border-color), h.token-resolve(base02-black-90-dark));
     border-left: 0px;
     border-radius: 0px;
-    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-horizontal)"), s.shadow-value(separator-horizontal, base02));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-separator-mimic-horizontal), s.shadow-value(separator-horizontal, base02));
   }
 
   /* hover separator shadow */
@@ -186,7 +186,7 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
     margin: 0px 0px 0px 2px;
     padding: 2px 9px 2px 9px;
     border-left-width: 0px;
-    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-inset)"), s.shadow-value(inset, base02));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset), s.shadow-value(inset, base02));
   }
 
   /* complex focus/hover/checked combos */
@@ -229,14 +229,14 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
   .linked.vertical > spinbutton {
     margin: 2px 0px 0px 0px;
     padding: 2px 0px 0px 0px;
-    border-top: 1px solid if($gtk-version != "gtk3", unquote("var(--border-color)"), h.token-resolve(base02-black-90-dark));
+    border-top: 1px solid if($gtk-version != "gtk3", var(--border-color), h.token-resolve(base02-black-90-dark));
     border-radius: 0px;
 
-    box-shadow: if($gtk-version != "gtk3", unquote("var(--shadow-separator-mimic-horizontal)"), s.shadow-value(separator-horizontal, base02));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-separator-mimic-horizontal), s.shadow-value(separator-horizontal, base02));
   }
 }
 
-@mixin linked-colors() {
+@mixin linked-tabs() {
   @include h.emit-rule(
     (
       if($gtk-version != "gtk3", "viewswitcher > button.flat:checked", null),

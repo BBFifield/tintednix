@@ -1,0 +1,156 @@
+$gtk-version: "gtk3" !default;
+@use "helpers" as h;
+@use "shadows" as s;
+
+@mixin bar-styles() {
+  progressbar,
+  levelbar {
+    background-color: transparent;
+  }
+  progressbar text {
+    color: h.token-resolve(base0D);
+  }
+  progressbar.vertical trough {
+    min-width: 8px;
+    min-height: 80px;
+  }
+  progressbar.vertical progress {
+    min-width: 8px;
+  }
+  progressbar.horizontal trough {
+    min-width: 150px;
+    min-height: 8px;
+  }
+  progressbar.horizontal trough,
+  progressbar.horizontal progress,
+  levelbar.horizontal block {
+    min-height: 8px;
+    border-radius: 99px;
+  }
+  levelbar.continuous block {
+    border-radius: 50px;
+  }
+  levelbar.discrete.horizontal block {
+    min-width: 26px;
+  }
+  levelbar.discrete block:first-child {
+    border-radius: 50px 0px 0px 50px;
+  }
+  levelbar.discrete block:last-child {
+    border-radius: 0px 50px 50px 0px;
+  }
+  levelbar.discrete block:not(:first-child):not(:last-child) {
+    border-radius: 0px;
+  }
+  levelbar.discrete block.filled:not(:first-child) {
+    border-left: 1px solid h.token-resolve(base01);
+  }
+  block.empty {
+    border: none;
+    background-color: transparent;
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset-thin), s.shadow-value(inset-thin, base01));
+  }
+  block.filled {
+    background-color: h.token-resolve(base0B);
+  }
+
+  progressbar > trough:not(.full) > progress {
+    background-color: h.token-resolve(base0D);
+  }
+  progressbar > trough.full > progress,
+  levelbar block.filled {
+    background-color: h.token-resolve(base0B);
+  }
+  progressbar progress {
+    margin: 0px -1px 0px -1px;
+    border-radius: 50px;
+  }
+  levelbar.discrete > trough > block:last-child {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+  progresscell progress {
+    border-radius: 50px;
+    background-color: h.token-resolve(base0B);
+    @include s.apply-shadow(thin, base0B);
+  }
+  label.in-progress {
+    color: h.token-resolve(base01);
+  }
+
+  /*experimental*/
+  scale {
+    min-width: 125px;
+    min-height: 10px;
+    padding: 11px;
+  }
+  scale.vertical {
+    min-width: 10px;
+    min-height: 125px;
+  }
+  scale.marks-after {
+    padding: 10px 30px 0px 30px;
+  }
+  scale.marks-before {
+    padding: 0px 30px 10px 30px;
+  }
+  scale highlight {
+    border-radius: 99px;
+    background-color: h.token-resolve(base0B);
+  }
+
+  scale slider {
+    @extend %slider;
+    margin: -8px;
+
+    background-color: h.token-resolve(base02);
+    @include s.apply-shadow(thin, base02);
+
+    transition:
+      background-color 0.2s cubic-bezier(0, 0, 0.2, 1),
+      box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
+    animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  scale slider:hover {
+    @include s.apply-shadow(thin, base0D);
+    animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+  scale value {
+    color: h.token-resolve(base0D);
+  }
+  scale marks.bottom {
+    margin: 6px 0px 0px 0px;
+  }
+  scale marks.top {
+    margin: 0px 0px 6px 0px;
+  }
+  scale marks indicator {
+    min-width: 1px;
+    min-height: 6px;
+    background-color: currentColor;
+  }
+  scale marks mark:first-child {
+    color: h.token-resolve(base08);
+  }
+  scale marks mark:only-child,
+  scale marks mark {
+    color: h.token-resolve(base0B);
+  }
+
+  progressbar trough,
+  levelbar trough,
+  progresscell trough,
+  progresscell {
+    border-radius: 50px;
+    background-color: transparent;
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset-thin), s.shadow-value(inset-thin, base01));
+  }
+  scale trough {
+    border-radius: 50px;
+    background-color: transparent;
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset-extra-thin), s.shadow-value(inset-extra-thin, base01));
+  }
+  scale.vertical trough {
+    min-width: 3px;
+  }
+}

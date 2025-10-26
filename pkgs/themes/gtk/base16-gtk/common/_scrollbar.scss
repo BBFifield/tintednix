@@ -1,0 +1,80 @@
+$gtk-version: "gtk3" !default;
+@use "helpers" as h;
+@use "shadows" as s;
+
+$immediate-child: if($gtk-version != "gtk3", "range", "content");
+
+@mixin scrollbar-styles() {
+  scrollbar {
+    margin: if($gtk-version != "gtk3", 0px, 0px -12px 0px 0px);
+    padding: 0px;
+    color: h.token-resolve(base0D);
+    @if $gtk-version == "gtk3" {
+      opacity: 0.5;
+    }
+  }
+  @if $gtk-version != "gtk3" {
+    scrollbar > range {
+      margin: 0px;
+      padding: 0px;
+    }
+  } @else {
+    scrollbar.bottom {
+      margin: 0px 0px -12px 0px;
+    }
+  }
+  scrollbar > #{$immediate-child} > trough {
+    border-radius: 50px;
+  }
+  scrollbar > #{$immediate-child} > trough > slider {
+    min-width: 8px;
+    min-height: 8px;
+    margin: -8px;
+    border: 8px solid transparent;
+    border-radius: 50px;
+
+    background-color: unquote("alpha(currentcolor, 0.5)");
+    background-clip: padding-box;
+
+    transition: all 200ms linear;
+  }
+  scrollbar.bottom.horizontal > #{$immediate-child} > trough {
+    margin: 4px 9px 4px 9px;
+  }
+  scrollbar.right.vertical > #{$immediate-child} > trough {
+    margin: 9px 4px 9px 4px;
+  }
+  scrollbar > #{$immediate-child} > trough > slider:disabled {
+    opacity: 0;
+  }
+  scrollbar.overlay-indicator.horizontal:not(.hovering) > #{$immediate-child} > trough > slider {
+    min-width: 40px;
+    min-height: 3px;
+  }
+  scrollbar.overlay-indicator.vertical:not(.hovering) > #{$immediate-child} > trough > slider {
+    min-width: 3px;
+    min-height: 40px;
+  }
+  scrollbar.overlay-indicator.hovering > #{$immediate-child} > trough {
+    background-color: unquote("alpha(currentcolor, 0.2)");
+  }
+  scrollbar.overlay-indicator.horizontal.hovering > #{$immediate-child} > trough > slider {
+    min-height: 8px;
+  }
+  scrollbar.overlay-indicator.vertical.hovering > #{$immediate-child} > trough > slider {
+    min-height: 40px;
+  }
+
+  @if $gtk-version == "gtk3" {
+    scrollbar button {
+      color: rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+    }
+    scrollbar .down {
+      margin-bottom: -50px;
+    }
+    scrollbar .up {
+      margin-top: -50px;
+    }
+  }
+}

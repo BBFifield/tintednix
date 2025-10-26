@@ -1,0 +1,26 @@
+$gtk-version: "gtk3" !default;
+@use "helpers" as h;
+@use "shadows" as s;
+
+@mixin separator-styles() {
+  separator,
+  paned.horizontal > separator.wide {
+    min-width: 3px;
+    min-height: 3px;
+    margin: 6px;
+    padding: 0px;
+    border-radius: 50px;
+  }
+  separator,
+  paned > separator {
+    background-color: transparent;
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset-extra-thin), s.shadow-value(inset-extra-thin, base01));
+  }
+  paned.horizontal > separator {
+    margin: 6px 0px;
+  }
+  paned.vertical > separator,
+  box.toolbar.horizontal > separator.horizontal {
+    margin: 0px 6px;
+  }
+}

@@ -1,0 +1,68 @@
+$gtk-version: "gtk3" !default;
+@use "helpers" as h;
+@use "shadows" as s;
+
+@mixin list-styles() {
+  @include h.emit-rule(("list", if($gtk-version != "gtk3", "listview", null))) {
+    border-radius: 10px;
+    color: h.token-resolve(base0D);
+  }
+  @if $gtk-version != "gtk3" {
+    .suffixes > listview {
+      color: inherit;
+    }
+  }
+  list > row {
+    min-height: 35px;
+    margin: 1px 6px 2px 7px;
+    padding: 2px 15px 1px 14px;
+    &.activatable {
+      &:hover {
+        margin-bottom: 1px;
+        padding-bottom: 2px;
+      }
+      &:active,
+      &:selected {
+        margin: 0px 6px 0px 6px;
+        padding: 3px 15px;
+      }
+    }
+  }
+
+  @if $gtk-version != "gtk3" {
+    list.navigation-sidebar > row,
+    listview.navigation-sidebar > row {
+      border-bottom-color: transparent;
+      box-shadow: none;
+    }
+    list:not(.navigation-sidebar),
+    listview:not(.navigation-sidebar) {
+      > row {
+        border-radius: 0px;
+        &.activatable {
+          &:hover,
+          &:active,
+          &:selected {
+            border-radius: 50px;
+          }
+        }
+      }
+    }
+    list:not(.navigation-sidebar) > separator {
+      all: unset;
+    }
+  } @else {
+    list {
+      > row:not(.sidebar-row) {
+        border-radius: 0px;
+        &.activatable {
+          &:hover,
+          &:active,
+          &:selected {
+            border-radius: 50px;
+          }
+        }
+      }
+    }
+  }
+}

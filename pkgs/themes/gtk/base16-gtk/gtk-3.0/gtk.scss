@@ -4,7 +4,15 @@
 @use "../common/spinbutton" as *;
 @use "../common/linked" as *;
 @use "../common/tabs" as *;
-@import url("file:///home/brandon/.config/gtk-3.0/colors.css");
+@use "../common/placeholders" as placeholders;
+@use "../common/switches" as switches;
+@use "../common/bars" as *;
+@use "../common/treeview" as *;
+@use "../common/separators" as *;
+@use "../common/scrollbar" as *;
+@use "../common/list" as *;
+@use "./local-paths" as paths;
+@import url(#{paths.$colors-url});
 
 /*Resets*/
 widget > box > scrolledwindow > viewport.frame > box > box > frame {
@@ -226,212 +234,10 @@ button:hover:not(:active) sort-indicator {
   color: h.token-resolve(base01);
 }
 
-progressbar,
-levelbar {
-  background-color: transparent;
-}
-progressbar text {
-  color: h.token-resolve(base0D);
-}
-progressbar.vertical trough {
-  min-width: 8px;
-  min-height: 80px;
-}
-progressbar.vertical progress {
-  min-width: 8px;
-}
-progressbar.horizontal trough {
-  min-width: 150px;
-  min-height: 8px;
-}
-progressbar.horizontal trough,
-progressbar.horizontal progress,
-levelbar.horizontal block {
-  min-height: 8px;
-  border-radius: 99px;
-}
-levelbar.continuous block {
-  border-radius: 50px;
-}
-levelbar.discrete.horizontal block {
-  min-width: 26px;
-}
-levelbar.discrete block:first-child {
-  border-radius: 50px 0px 0px 50px;
-}
-levelbar.discrete block:last-child {
-  border-radius: 0px 50px 50px 0px;
-}
-levelbar.discrete block:not(:first-child):not(last-child) {
-  border-radius: 0px;
-}
-levelbar.discrete block.filled:not(:first-child) {
-  border-left: 1px solid h.token-resolve(base01);
-}
-block.empty {
-  border: none;
-  background-color: transparent;
-  @include s.apply-shadow(inset-thin, base01);
-}
-block.filled {
-  background-color: h.token-resolve(base0B);
-}
-
-progressbar progress,
-levelbar block.filled {
-  background-color: h.token-resolve(base0B);
-}
-progressbar progress {
-  margin: 0px -1px 0px -1px;
-  border-radius: 50px;
-}
-levelbar.discrete > trough > block:last-child {
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-label.in-progress {
-  color: h.token-resolve(base01);
-}
-
-scale slider,
-switch slider {
-  min-width: 20px;
-  min-height: 20px;
-  border-radius: 100%;
-
-  background-color: h.token-resolve(base02);
-  @include s.apply-shadow(thin, base02);
-}
-
-scale {
-  min-width: 125px;
-  min-height: 10px;
-  padding: 11px;
-}
-scale.vertical {
-  min-width: 10px;
-  min-height: 125px;
-}
-scale.marks-after {
-  padding: 10px 30px 0px 30px;
-}
-scale.marks-before {
-  padding: 0px 30px 10px 30px;
-}
-scale highlight {
-  border-radius: 99px;
-  background-color: h.token-resolve(base0B);
-}
-scale slider {
-  margin: -8px;
-  color: h.token-resolve(base0D);
-  animation: ripple-in 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-scale slider:hover {
-  color: h.token-resolve(base0D);
-  @include s.apply-shadow(thin, base0D);
-  animation: ripple-out 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-scale value {
-  color: h.token-resolve(base0D);
-}
-scale marks.bottom {
-  margin: 6px 0px 0px 0px;
-}
-scale marks.top {
-  margin: 0px 0px 6px 0px;
-}
-scale marks indicator,
-scale marks mark:only-child indicator {
-  min-width: 1px;
-  min-height: 6px;
-  color: h.token-resolve(base0B);
-}
-scale marks mark:first-child indicator {
-  color: h.token-resolve(base08);
-}
-
-progressbar trough,
-levelbar trough,
-progresscell trough,
-progresscell,
-scale trough {
-  border-radius: 50px;
-  background-color: transparent;
-  @include s.apply-shadow(inset-thin, base01);
-}
-scale.vertical trough {
-  min-width: 3px;
-}
-
-switch {
-  padding: 3px;
-  border-radius: 50px;
-
-  color: h.token-resolve(base0B);
-
-  background: transparent;
-  @include s.apply-shadow(inset, base01);
-
-  animation: slide-left 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-switch:checked {
-  color: h.token-resolve(base0B);
-  @include s.apply-shadow(inset, base0B);
-  animation: slide-right 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-switch image {
-  color: transparent;
-}
-
-checkbutton,
-radiobutton {
-  padding: 4px;
-}
-checkbutton > label,
-radiobutton > label {
-  margin-right: 4px;
-  color: h.token-resolve(base0D);
-}
-check,
-radio {
-  min-width: 14px;
-  min-height: 14px;
-  margin: 0px 4px 0px 4px;
-  padding: 4px;
-  border-width: 0px;
-
-  background-color: transparent;
-  @include s.apply-shadow(inset-thin, base01);
-
-  animation: ripple-in-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-check:checked,
-check:indeterminate,
-radio:checked,
-radio:indeterminate {
-  color: h.token-resolve(base01);
-  @include s.apply-shadow(inset-thin, base0D);
-  animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-radio {
-  border-radius: 100%;
-}
-radio:checked {
-  -gtk-icon-source: image(-gtk-recolor(url("assets/bullet-symbolic.svg")), -gtk-recolor(url("assets/bullet-symbolic.symbolic.png")));
-}
-radio:indeterminate {
-  -gtk-icon-source: image(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
-}
-check {
-  border-radius: 6px;
-}
-check:checked {
-  -gtk-icon-source: image(-gtk-recolor(url("assets/check-symbolic.svg")), -gtk-recolor(url("assets/check-symbolic.symbolic.png")));
-}
-check:indeterminate {
-  -gtk-icon-source: image(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
-}
+@include bar-styles();
+@include placeholders.slider-style();
+@include switches.switch-styles();
+@include switches.checkbutton-styles();
 
 /***************** button **************************/
 button {
@@ -654,26 +460,7 @@ colorswatch {
   border-radius: 50px;
 }
 
-separator,
-paned.horizontal > separator.wide {
-  min-width: 3px;
-  min-height: 3px;
-  margin: 6px;
-  padding: 0px;
-  border-radius: 50px;
-}
-separator,
-paned > separator {
-  background-color: transparent;
-  @include s.apply-shadow(inset-extra-thin, base01);
-}
-paned.horizontal > separator {
-  margin: 6px 0px;
-}
-paned.vertical > separator,
-box.toolbar.horizontal > separator.horizontal {
-  margin: 0px 6px;
-}
+@include separator-styles();
 
 menubar {
   padding-bottom: 1px;
@@ -860,104 +647,8 @@ textview {
   box-shadow: none;
 }
 
-treeview.view {
-  margin-bottom: 2px;
-  padding: 5px 8px 5px 8px;
-  border-top-color: h.token-resolve(base00-white-95-dark);
-  border-left-color: h.token-resolve(base00-white-90-dark);
+@include treeview-styles();
 
-  background-color: transparent;
-  @include s.apply-shadow(separator-bottom-horizontal, base00);
-}
-treeview.view:drop(active) {
-  box-shadow: none;
-}
-treeview.view:drop(active).after {
-  border-top-style: none;
-}
-treeview.view:drop(active).before {
-  border-bottom-style: none;
-}
-treeview.view > dndtarget:drop(active) {
-  border-color: h.token-resolve(base01-black-80-dark);
-  border-style: solid none;
-  border-width: 1px;
-}
-treeview.view > dndtarget:drop(active).after {
-  border-top-style: none;
-}
-treeview.view > dndtarget:drop(active).before {
-  border-bottom-style: none;
-}
-/*separator rule overrides treeview.view > dndtarget:drop(active).before, not sure why*/
-treeview.view.separator {
-  min-height: 5px;
-  color: h.token-resolve(base00-black-85-dark);
-  box-shadow: none;
-}
-treeview.view .cell {
-  color: h.token-resolve(base0D);
-}
-treeview.view.expander {
-  min-width: 16px;
-  min-height: 16px;
-
-  color: h.token-resolve(base0D-black-60);
-
-  transition: -gtk-icon-transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
-}
-treeview.view.expander:checked {
-  -gtk-icon-transform: rotate(0.25turn);
-}
-treeview.view.expander:dir(rtl) {
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
-}
-treeview.view.expander:dir(rtl):checked {
-  -gtk-icon-transform: rotate(-0.25turn);
-}
-treeview.view.expander:hover {
-  color: h.token-resolve(base01);
-}
-treeview.view.expander:hover:selected {
-  color: unquote("mix(@base0D, black, 0.5)");
-}
-treeview.view.expander:selected:not(:hover) {
-  color: h.token-resolve(base0D-black-60);
-}
-treeview.view.expander:disabled {
-  color: unquote("alpha(@base0D, 0.1)");
-}
-treeview.view.trough:selected:hover {
-  box-shadow: none;
-}
-treeview.view > header > button:not(:hover):not(:active) {
-  border-style: solid;
-  border-bottom-color: h.token-resolve(base00-black-65-dark);
-  border-bottom-width: 1px;
-  border-radius: 0;
-}
-treeview.view acceleditor > label {
-  background-color: h.token-resolve(base0D);
-}
-treeview.view radio:checked,
-treeview.view check:checked,
-treeview .cell:hover:not(:focus) {
-  color: h.token-resolve(base01);
-  background-color: h.token-resolve(base0D);
-}
-treeview.view check.cell:hover:not(:focus),
-treeview.view radio.cell:hover:not(:focus) {
-  @include s.apply-shadow(inset-thin, base0D);
-}
-treeview.view:hover:selected:not(:focus) {
-  @include s.apply-shadow(inset, base0D);
-}
-treeview.view:selected:focus,
-treeview.view:selected {
-  @include s.apply-shadow(inset, base01);
-}
 scrolledwindow treeview.view:selected:focus,
 scrolledwindow treeview.view:selected {
   @include s.apply-shadow(inset, base00);
@@ -976,67 +667,7 @@ filechooser scrolledwindow {
   box-shadow: none;
 }
 
-scrollbar {
-  margin-right: -12px;
-  padding: 0px;
-  color: h.token-resolve(base0D);
-  opacity: 0.5;
-}
-scrollbar.bottom {
-  margin: 0px 0px -12px 0px;
-}
-scrollbar > contents > trough {
-  border-radius: 50px;
-}
-scrollbar > contents > trough > slider {
-  min-width: 8px;
-  min-height: 8px;
-  margin: -8px;
-  border: 8px solid transparent;
-  border-radius: 50px;
-
-  background-color: h.token-resolve(base0D);
-  background-clip: padding-box;
-
-  transition: all 200ms linear;
-}
-scrollbar.bottom.horizontal > contents > trough {
-  margin: 16px 9px 16px 9px;
-}
-scrollbar.right.vertical > contents > trough {
-  margin: 9px 16px 9px 16px;
-}
-scrollbar > contents > trough > slider:disabled {
-  opacity: 0;
-}
-scrollbar.overlay-indicator.horizontal:not(.hovering) > contents > trough > slider {
-  min-width: 40px;
-  min-height: 3px;
-}
-scrollbar.overlay-indicator.vertical:not(.hovering) > contents > trough > slider {
-  min-width: 3px;
-  min-height: 40px;
-}
-scrollbar.overlay-indicator.hovering > contents > trough {
-  /* This is rgb value of base0D */
-  background-color: rgba(137, 180, 250, 0.3);
-}
-scrollbar.overlay-indicator.horizontal.hovering > contents > trough > slider {
-  min-height: 8px;
-}
-scrollbar.overlay-indicator.vertical.hovering > contents > trough > slider {
-  min-height: 40px;
-}
-scrollbar button {
-  color: rgba(0, 0, 0, 0);
-  background-color: rgba(0, 0, 0, 0);
-}
-scrollbar .down {
-  margin-bottom: -50px;
-}
-scrollbar .up {
-  margin-top: -50px;
-}
+@include scrollbar-styles();
 
 tooltip {
   margin: 1px 30px 45px 15px;
@@ -1096,7 +727,7 @@ spinner {
   color: h.token-resolve(base0D);
 }
 
-@include linked-colors();
+@include linked-tabs();
 
 combobox arrow {
   -gtk-icon-source: -gtk-icontheme("go-next-symbolic");
@@ -1376,35 +1007,7 @@ row:not(.sidebar-row) ~ separator {
   all: unset;
 }
 
-list {
-  border-radius: 10px;
-  color: h.token-resolve(base0D);
-}
-list > row {
-  min-height: 35px;
-  margin: 1px 6px 2px 7px;
-  padding: 2px 15px 1px 14px;
-}
-list > row.activatable:hover {
-  margin: 1px 6px 1px 7px;
-  padding: 2px 15px 2px 14px;
-}
-list > row.activatable:active,
-list > row.activatable:selected {
-  margin: 0px 6px 0px 6px;
-  padding: 3px 15px;
-}
-
-list > row:not(.sidebar-row) {
-  border-radius: 0px;
-}
-list > row.activatable:not(.sidebar-row):hover {
-  border-radius: 50px;
-}
-list > row.activatable:not(.sidebar-row):active,
-list > row.activatable:not(.sidebar-row):selected {
-  border-radius: 50px;
-}
+@include list-styles();
 
 .sidebar {
   background-color: h.token-resolve(base01);
