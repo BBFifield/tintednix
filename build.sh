@@ -5,11 +5,6 @@ export SRC_DIR=$PWD/pkgs/themes/gtk/base16-gtk
 
 mkdir -p "$BUILD_DIR"
 
-home="$HOME"
-cat > "$SRC_DIR/gtk-3.0/_local-paths.scss" <<'EOF'
-$colors-url: "file://'"$home"'/.config/gtk-3.0/colors.css";
-EOF
-
 echo "\$colors-url: \"file://$HOME/.config/gtk-3.0/colors.css\";" > "$SRC_DIR/gtk-3.0/_local-paths.scss"
 
 echo "Generated $SRC_DIR/gtk3/_local-paths.scss"
