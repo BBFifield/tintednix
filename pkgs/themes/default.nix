@@ -12,14 +12,13 @@
 
     src = ./gtk/base16-gtk;
     installPhase = ''
-      sass=${dart-sass}/bin/sass;
       theme_dir=$out/share/themes/${pname};
       mkdir -p $theme_dir/{gtk-4.0,gtk-3.0};
 
       echo "\$colors-url: \"file://$HOME/.config/gtk-3.0/colors.css\";" > "$theme_dir/gtk-3.0/_local-paths.scss"
 
-      $sass $theme_dir/gtk-3.0/gtk.scss $theme_dir/gtk-3.0/gtk.css;
-      $sass $theme_dir/gtk-4.0/gtk.scss $theme_dir/gtk-4.0/gtk.css;
+      ${dart-sass}/bin/sass $theme_dir/gtk-3.0/gtk.scss $theme_dir/gtk-3.0/gtk.css;
+      ${dart-sass}/bin/sass $theme_dir/gtk-4.0/gtk.scss $theme_dir/gtk-4.0/gtk.css;
 
       cp -rf $src/index.theme $theme_dir;
       cp -rf $src/assets $theme_dir/gtk-3.0;
