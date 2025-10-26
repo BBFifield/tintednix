@@ -191,9 +191,10 @@ in {
         name = "base16-gtk";
         package = let
           defaultScheme = lib.head (lib.filter (scheme: (scheme.name == config.tintednix.defaultSchemeName)) base16schemes);
-          colorsFile = this.lib.mkTargetFile defaultScheme "scss" ../.. "gtk4";
+          gtk3Colors = this.lib.mkTargetFile defaultScheme "scss" ../.. "gtk3";
+          gtk4Colors = this.lib.mkTargetFile defaultScheme "scss" ../.. "gtk4";
         in
-          (pkgs.callPackage ../../pkgs/themes {inherit colorsFile;}).base16-gtk;
+          (pkgs.callPackage ../../pkgs/themes {inherit gtk3Colors gtk4Colors;}).base16-gtk;
       };
     in
       lib.mkMerge [
