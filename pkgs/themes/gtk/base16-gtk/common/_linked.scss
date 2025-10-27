@@ -17,7 +17,7 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
   }
 
   /* box background + margin */
-  @include h.emit-rule((if($gtk-version != "gtk3", "viewswitcher", null), "box.linked")) {
+  @include h.emit-rule((if($gtk-version != "gtk3", "viewswitcher", null), ".linked")) {
     margin: 1px 0px 0px 1px;
     border-radius: 17px;
     background-color: h.token-resolve(base02);
@@ -204,6 +204,7 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
       ".linked > entry + menubutton > button:checked",
       ".linked > entry:focus-within + button:not(:hover):not(:checked)",
       ".linked > entry:focus-within + menubutton > button:not(:hover):not(:checked)",
+      ".linked > entry:focus-within + entry",
       ".linked > entry:first-child:not(:focus-within)"
     )
   ) {

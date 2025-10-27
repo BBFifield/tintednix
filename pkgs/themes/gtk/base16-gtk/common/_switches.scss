@@ -16,7 +16,7 @@ $gtk-version: "gtk3" !default;
   }
   switch:checked {
     color: h.token-resolve(base0B);
-    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset), s.shadow-value(inset, base0B));
+    box-shadow: s.shadow-value(inset, base0B);
     animation: slide-right 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   switch image {
@@ -55,7 +55,7 @@ $gtk-version: "gtk3" !default;
   radio:checked,
   radio:indeterminate {
     color: h.token-resolve(base01);
-    box-shadow: if($gtk-version != "gtk3", var(--shadow-inset-thin), s.shadow-value(inset-thin, base0D));
+    box-shadow: s.shadow-value(inset-thin, base0D);
     animation: ripple-out-base0D 200ms cubic-bezier(0, 0, 0.2, 1) forwards;
   }
   radio {

@@ -200,6 +200,7 @@ arrow.up {
 
 window {
   color: var(--base0D);
+  background-color: var(--window-bg-color);
 }
 
 window:not(.fullscreen) {
@@ -564,15 +565,15 @@ toggle:checked {
   padding: 2px 9px 2px 9px;
   box-shadow: var(--shadow-inset);
 }
-/* stack > button:not(.image-button):not(.image-text-button):active, */
 stack > button:active,
 dropdown > button.toggle:active,
 dropdown > button.toggle:checked:not(:hover),
 button.file:active,
 button.text-button:active,
-button.text-button:checked,
+button.text-button:checked:not(:hover),
 button.font:active {
-  /* button.osd:active { */
+  color: var(--base0D);
+  background-color: var(--base02);
   @include s.apply-shadow(inset, base02);
 }
 button.pill:active,
@@ -598,9 +599,10 @@ button.circular.flat:active,
 menubutton.circular.popup > button.star:active,
 menubutton.circular.popup > button.flat:active,
 menubutton.circular.popup > button.star:checked,
-menubutton.circular.popup > button.flat:checked,
+menubutton.circular.popup > button.flat:checked:not(:hover),
 entry > menubutton.circular.popup > button:active,
 entry > menubutton.circular.popup > button:checked {
+  color: var(--base0D);
   background-color: transparent;
   box-shadow: var(--shadow-inset);
 }
