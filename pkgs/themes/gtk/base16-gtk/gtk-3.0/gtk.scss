@@ -12,7 +12,7 @@
 @use "../common/scrollbar" as *;
 @use "../common/list" as *;
 @use "./local-paths" as paths;
-@import url(#{paths.$colors-url});
+@import url("#{paths.$colors-url}");
 
 /*Resets*/
 widget > box > scrolledwindow > viewport.frame > box > box > frame {
@@ -204,26 +204,7 @@ label > link {
   color: h.token-resolve(base08);
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(1turn);
-  }
-}
-
-spinner {
-  color: h.token-resolve(base0D);
-  opacity: 0;
-  background: none;
-
-  -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
-}
-
-spinner:checked {
-  opacity: 1;
-  animation: spin 1s linear infinite;
-}
-
-/********************** Entry * */
+/************** Entry ***************/
 @include entry-styles();
 
 sort-indicator,
