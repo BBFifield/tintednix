@@ -198,7 +198,6 @@ in {
             _key=""
             _theme=""
             config_dir="$HOME/.config"
-            tintednix="/etc/profiles/per-user/$(whoami)/bin/tintednix"
 
             # 1) Pre-parse all options
             PARSED=$(getopt \
