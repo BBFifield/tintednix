@@ -101,6 +101,7 @@ in {
             default = null;
             description = ''Default is null to avoid infinite recursion. Will be instantiated with the actual package in the module's configuration.'';
           };
+          enableGimpTheme = lib.mkEnableOption "Install the associated gimp theme. Its purpose is to override gimp's internal styles declarations, which is only possible by defining the styles inside ~/.config/GIMP/3.0/gimp.css";
         };
       };
     };
@@ -176,99 +177,8 @@ in {
       targetFiles = lib.mkMerge (map this.lib.mkTargetFiles (lib.attrsToList cfg.targets));
       targetHooks = lib.mkMerge (this.lib.mkTargetHooks cfg.targets);
 
-      scriptParts = lib.mkMerge [
-        (lib.mkOrder 5
-          ''
-            #!/usr/bin/env bash
+      scriptParts = import ./scriptParts.nix {inherit lib;};
 
-            ### Usage / help function
-            usage() {
-              cat <<-EOF
-            Usage: $(basename "$0") [OPTIONS]
-
-            Options:
-              -g, --get KEY       print the value of KEY from settings.txt
-              -u, --update THEME  switch to THEME (propagate to all configs)
-              -h, --help          show this message and exit
-            EOF
-            }
-
-            ### Default vars
-            _action=""
-            _key=""
-            _theme=""
-            config_dir="$HOME/.config"
-
-            # 1) Pre-parse all options
-            PARSED=$(getopt \
-              --options g:u:h \
-              --longoptions get:,update:,help \
-              --name "$(basename "$0")" \
-              -- "$@"
-            ) || exit 1
-
-            # 2) Re-initialize the positional parameters
-            eval set -- "$PARSED"
-
-            # 3) Handle options
-            _action=""
-            _key=""
-            _theme=""
-            while true; do
-              case "$1" in
-                -g|--get)
-                  _action="get"
-                  _key="$2"
-                  shift 2
-                  ;;
-                -u|--update)
-                  _action="update"
-                  _theme="$2"
-                  shift 2
-                  ;;
-                -h|--help)
-                  usage
-                  exit 0
-                  ;;
-                --)
-                  shift
-                  break
-                  ;;
-                *)
-                  echo "Unhandled option: $1" >&2
-                  exit 1
-                  ;;
-              esac
-            done
-
-            # 4) Dispatch
-            case $_action in
-              get)
-                grep "$_key=" "$config_dir/tintednix/settings.txt" | cut -d '=' -f 2
-                ;;
-            update)
-              if [[ -z "$_theme" ]]; then
-                echo "Error: --update requires a theme name." >&2
-                usage
-                exit 1
-              fi
-
-              # Clear settings.txt and append the new theme’s file
-              sed -i '1,$d' "$config_dir/tintednix/settings.txt"
-              src_file_content=$(cat "$config_dir/tintednix/color-schemes/$_theme.txt")
-              gawk -i inplace -v src="$src_file_content" '{ print } ENDFILE { print src }' "$config_dir/tintednix/settings.txt" || echo "Failed to update settings"
-          '')
-        (lib.mkOrder 2000
-          ''
-                ;;
-              *)
-                echo "Error: no mode specified." >&2
-                usage
-                exit 1
-                ;;
-            esac
-          '')
-      ];
       targetHooks' = lib.mkMerge [targetHooks scriptParts];
 
       package = {
@@ -280,6 +190,18 @@ in {
         in
           (pkgs.callPackage ../../pkgs/themes {inherit gtk3Colors gtk4Colors;}).base16-gtk;
       };
+
+      sassFile = import ./config/style.nix config pkgs;
+      compiledSassFile =
+        pkgs.runCommand "style_gimp" {nativeBuildInputs = with pkgs; [dart-sass jq];}
+        ''
+          #!/usr/bin/env bash
+          mkdir -p $out
+          cat > "$out/styleGimp.scss" <<'EOF'
+          ${sassFile}
+          EOF
+          sass "$out/styleGimp.scss" "$out/.config/GIMP/3.0/gimp.css"
+        '';
     in
       lib.mkMerge [
         {
@@ -353,6 +275,12 @@ in {
             })
           ];
         }
+        (
+          lib.mkIf (cfg.gtkTheme.enable && cfg.enableGimpTheme) {
+            home.packages = [compiledSassFile];
+            xdg.configFile."GIMP.3.0/gimp.css".source = "${compiledSassFile}/.config/GIMP/3.0/gimp.css";
+          }
+        )
       ]
   );
 }

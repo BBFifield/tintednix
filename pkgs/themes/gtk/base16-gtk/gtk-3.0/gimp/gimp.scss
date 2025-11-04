@@ -1,8 +1,8 @@
-@use "../common/helpers" as h with (
-  $gtk-version: 3; $token-mode: "define-color"
-);
-@use "../shadows" as shadows;
-@use "../spinbutton" as *;
+@use "../common/helpers" as h;
+@use "../../common/shadows" as shadows;
+@use "../../common/spinbutton" as *;
+@use "../local-paths" as paths;
+@import url("#{paths.$colors-url}");
 
 /*base00*/
 GimpDock > box > box notebook > header {
