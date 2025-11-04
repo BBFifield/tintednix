@@ -191,16 +191,14 @@ in {
           (pkgs.callPackage ../../pkgs/themes {inherit gtk3Colors gtk4Colors;}).base16-gtk;
       };
 
-      sassFile = import ./config/style.nix config pkgs;
+      src = ../../pkgs/themes/gtk/base16-gtk;
       compiledSassFile =
-        pkgs.runCommand "style_gimp" {nativeBuildInputs = with pkgs; [dart-sass jq];}
+        pkgs.runCommand "style_gimp" {nativeBuildInputs = with pkgs; [dart-sass];}
         ''
           #!/usr/bin/env bash
-          mkdir -p $out
-          cat > "$out/styleGimp.scss" <<'EOF'
-          ${sassFile}
-          EOF
-          sass "$out/styleGimp.scss" "$out/.config/GIMP/3.0/gimp.css"
+          set -euo pipefail
+          mkdir -p "$out/.config/GIMP/3.0"
+          sass "${src}/gtk-3.0/gimp/gimp.scss" "$out/.config/GIMP/3.0/gimp.css"
         '';
     in
       lib.mkMerge [
@@ -276,7 +274,7 @@ in {
           ];
         }
         (
-          lib.mkIf (cfg.gtkTheme.enable && cfg.enableGimpTheme) {
+          lib.mkIf (cfg.gtkTheme.enable && cfg.gtkTheme.enableGimpTheme) {
             home.packages = [compiledSassFile];
             xdg.configFile."GIMP.3.0/gimp.css".source = "${compiledSassFile}/.config/GIMP/3.0/gimp.css";
           }
