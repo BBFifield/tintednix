@@ -11,11 +11,7 @@ let
     pkgs.runCommand name {nativeBuildInputs = with pkgs; [dart-sass jq];}
     ''
       #!/usr/bin/env bash
-      mkdir -p $out
-      cat > "$out/stylePre.scss" <<'EOF'
-      ${builtins.readFile generatedFile}
-      EOF
-      sass "$out/stylePre.scss" "$out/stylePost.css"
+      sass ${generatedFile} "$out/style.css"
     '';
 in rec {
   # This just generates an attribute set containing the scheme name and affiliated config file contents from a provided template.
@@ -30,7 +26,6 @@ in rec {
           templateRepo = builtins.fetchGit templateSrc;
           target = templateName;
         }
-      # else null;
       else
         (schemeAttrs.__functor schemeAttrs) {
           templateRepo = templateSrc;
@@ -42,7 +37,7 @@ in rec {
     cfg = mkConfigFromTemplate scheme templateSrc templateName;
     generatedFile =
       if fileExtension == "scss"
-      then "${compileSass scheme.name cfg.generatedFile}/stylePost.css"
+      then "${compileSass scheme.name cfg.generatedFile}/style.css"
       else cfg.generatedFile;
   in
     generatedFile;
