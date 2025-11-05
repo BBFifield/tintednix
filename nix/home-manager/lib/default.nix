@@ -11,7 +11,7 @@ let
     pkgs.runCommand name {nativeBuildInputs = with pkgs; [dart-sass jq];}
     ''
       #!/usr/bin/env bash
-      sass ${generatedFile} "$out/style.css"
+      sass "${generatedFile}" "$out/style.css"
     '';
 in rec {
   # This just generates an attribute set containing the scheme name and affiliated config file contents from a provided template.

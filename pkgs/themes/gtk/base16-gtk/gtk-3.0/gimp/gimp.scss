@@ -1,7 +1,7 @@
 @use "../../common/helpers" as h;
 @use "../../common/shadows" as shadows;
 @use "../../common/spinbutton" as *;
-@use "../local-paths" as paths;
+@use "./local-paths" as paths;
 @import url("#{paths.$colors-url}");
 
 /*base00*/
