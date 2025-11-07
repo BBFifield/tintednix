@@ -17,7 +17,11 @@
       mkdir -p "$out/partials";
       touch "$out/partials/_local-paths.scss"
 
-      echo "\$colors-url: \"file://$HOME/.config/gtk-3.0/colors.css\";" > "$out/partials/_local-paths.scss"
+      if [ "$HOME" === "/homeless-shelter" ]; then
+        echo "\$colors-url: \"colors.css\";" > "$out/partials/_local-paths.scss"
+      else
+        echo "\$colors-url: \"file://$HOME/.config/gtk-3.0/colors.css\";" > "$out/partials/_local-paths.scss"
+      fi
 
       ${dart-sass}/bin/sass  --load-path="$out/partials" "$src/gtk-3.0/gtk.scss" "$theme_dir/gtk-3.0/gtk.css";
       ${dart-sass}/bin/sass "$src/gtk-4.0/gtk.scss" "$theme_dir/gtk-4.0/gtk.css";
