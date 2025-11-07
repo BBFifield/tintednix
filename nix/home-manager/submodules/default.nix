@@ -13,7 +13,7 @@
             onActivation = lib.mkOption {
               type = lib.types.lines;
               default = "";
-              description = ''Specified commands to run upon home-manager activation. Usually used when you need a way to reset a program's state after it had been changed between rebuild iterations.'';
+              description = ''Specified commands to run upon home-manager activation. Usually only used when you need a way to reset a program's state after it has been changed between generations.'';
             };
           };
         };

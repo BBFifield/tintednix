@@ -198,11 +198,11 @@ in {
           #!/usr/bin/env bash
           set -euo pipefail
           mkdir -p "$out/.config/GIMP/3.0"
-          mkdir -p "$out/partials";
-          touch "$out/partials/_local-paths.scss"
+          mkdir -p "$out/gimp-partials";
+          touch "$out/gimp-partials/_local-paths.scss"
 
-          echo "\$colors-url: \"file://$HOME/.config/gtk-3.0/colors.css\";" > "$out/partials/_local-paths.scss"
-          sass --load-path="$out/partials" "${src}/gtk-3.0/gimp/gimp.scss" "$out/.config/GIMP/3.0/gimp.css"
+          echo "\$colors-url: \"file://$HOME/.config/gtk-3.0/colors.css\";" > "$out/gimp-partials/_local-paths.scss"
+          sass --load-path="$out/gimp-partials" "${src}/gtk-3.0/gimp/gimp.scss" "$out/.config/GIMP/3.0/gimp.css"
         '';
     in
       lib.mkMerge [

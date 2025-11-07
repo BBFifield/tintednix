@@ -422,7 +422,7 @@ button.pill {
 button.pill:not(:hover),
 button.circular:not(:hover),
 menubutton.circular.popup > button:not(:hover) {
-  background-color: color-mix(in oklab, currentColor 60%, black);
+  background-color: var(--base0D-black-60);
   @include s.apply-shadow(thin, base0D-dull);
 }
 button.circular.star:not(:hover),
@@ -443,7 +443,7 @@ button.suggested-action.pill {
 button.destructive-action,
 /*Ex: epiphany*/
 tabthumbnail button.tab-close-button {
-  background-color: color-mix(in oklab, currentColor 60%, black);
+  background-color: var(--base08-black-60);
   @include s.apply-shadow(thin, base08-dull);
 }
 button.tab-close-button {
@@ -478,7 +478,7 @@ menubutton.entry-icon > button {
 }
 button.app-version {
   color: var(--base0C);
-  background-color: color-mix(in oklab, currentColor 60%, black);
+  background-color: var(--base0C-black-60);
   @include s.apply-shadow(thin, base0C-dull);
 }
 
@@ -587,7 +587,7 @@ button.circular:active,
 button.circular:checked,
 menubutton.circular.popup > button:active,
 menubutton.circular.popup > button:checked {
-  background-color: color-mix(in oklab, currentColor 60%, black);
+  background-color: var(--base0D-black-60);
   @include s.apply-shadow(inset, base0D-dull);
 }
 stack > button.image-button:active,
@@ -611,7 +611,7 @@ button.default:active,
 button.default:checked,
 button.suggested-action:active,
 button.suggested-action:checked {
-  background-color: color-mix(in oklab, currentColor 60%, black);
+  background-color: var(--base0B-black-60);
   @include s.apply-shadow(inset, base0B-dull);
 }
 button.suggested-action.image-text-button:not(.pill):active,
@@ -621,7 +621,7 @@ button.suggested-action.image-text-button:not(.pill):checked {
 }
 button.destructive-action:active,
 button.destructive-action:checked {
-  background-color: color-mix(in oklab, currentColor 60%, black);
+  background-color: var(--base08-black-60);
   @include s.apply-shadow(inset, base08-dull);
 }
 button.close:active {
@@ -629,7 +629,7 @@ button.close:active {
 }
 button.tab-close-button:active {
   padding: 1px 0px 0px 1px;
-  background-color: color-mix(in oklab, currentColor 60%, black);
+  background-color: var(--base08-black-60);
   @include s.apply-shadow(inset-thin, base08-dull);
 }
 button.tab-close-button.flat:active {

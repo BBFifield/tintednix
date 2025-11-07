@@ -17,7 +17,7 @@
       mkdir -p "$out/partials";
       touch "$out/partials/_local-paths.scss"
 
-      if [ "$HOME" === "/homeless-shelter" ]; then
+      if [ "$HOME" = "/homeless-shelter" ]; then
         echo "\$colors-url: \"colors.css\";" > "$out/partials/_local-paths.scss"
       else
         echo "\$colors-url: \"file://$HOME/.config/gtk-3.0/colors.css\";" > "$out/partials/_local-paths.scss"
