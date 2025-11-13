@@ -280,7 +280,7 @@ in {
         (
           lib.mkIf (cfg.gtkTheme.enable && cfg.gtkTheme.enableGimpTheme) {
             home.packages = [compiledSassFile];
-            xdg.configFile."GIMP.3.0/gimp.css".source = "${compiledSassFile}/.config/GIMP/3.0/gimp.css";
+            xdg.configFile."GIMP/3.0/gimp.css".source = "${compiledSassFile}/.config/GIMP/3.0/gimp.css";
           }
         )
       ]
