@@ -113,10 +113,10 @@ menu_type_to_search=yes
 
 # Top bar with window controls and media title
 # Can be: never, no-border, always
-top_bar=no-border
-top_bar_size=40
+top_bar=always
+top_bar_size=35
 # Can be: `no` (hide), left or right
-top_bar_controls=right
+top_bar_controls=no
 # Can be: `no` (hide), `yes` (inherit title from mpv.conf), or a custom template string
 top_bar_title=yes
 # Template string to enable alternative top bar title. If alt title matches main title,
@@ -148,7 +148,7 @@ scale=1
 # Scale in fullscreen
 scale_fullscreen=1.3
 # Adjust the text scaling to fit your font
-font_scale=1
+font_scale=0.8
 # Border of text and icons when drawn directly on top of video
 text_border=1.2
 # Border radius of buttons, menus, and all other rectangles
@@ -159,7 +159,7 @@ color=foreground={{base0D-hex}},foreground_text={{base01-hex}},background={{base
 # A comma delimited list of opacity overrides for various UI element backgrounds and shapes.
 # This does not affect any text, which is always rendered fully opaque. Defaults:
 # timeline=0.9,position=1,chapters=0.8,slider=0.9,slider_gauge=1,controls=0,speed=0.6,menu=1,submenu=0.4,border=1,title=1,tooltip=1,thumbnail=1,curtain=0.8,idle_indicator=0.8,audio_indicator=0.5,buffering_indicator=0.3,playlist_position=0.8,heatmap=0.4
-opacity=curtain=0.0,submenu=0.8,speed=0.8
+opacity=curtain=0.0
 # A comma delimited list of features to refine at a cost of some performance impact.
 # text_width - Use a more accurate text width measurement that measures each text string individually
 #              instead of just measuring the width of known letters once and adding them up.
@@ -197,7 +197,7 @@ playlist_types=m3u,m3u8,pls,url,cue
 # Available: video,audio,image,playlist,same. `same` means the same type pool (not just extension) as currently open file.
 load_types=video,audio,image
 # Default open-file menu directory. Use `{drives}` to open drives menu on windows (defaults to `/` on unix).
-default_directory=~/
+default_directory=/
 # List hidden files when reading directories. Due to environment limitations, this currently only hides
 # files starting with a dot. Doesn't hide hidden files on windows (we have no way to tell they're hidden).
 show_hidden_files=no
@@ -220,7 +220,7 @@ adjust_osd_margins=yes
 # `{color}` => an RGB(A) HEX color code (`rrggbb`, or `rrggbbaa`)
 #
 # To exclude marking any of the range types, simply remove them from the list.
-chapter_ranges=openings:30abf964,endings:30abf964,ads:c54e4e80
+chapter_ranges=openings:{{base0D-hex}}64,endings:{{base0D-hex}}64,ads:{{base08-hex}}80
 # Add alternative lua patterns to identify beginnings of simple chapter ranges (except for `ads`)
 # Syntax: `{type}:{pattern}[,{patternN}][;{type}:{pattern}[,{patternN}]]`
 chapter_range_patterns=openings:オープニング;endings:エンディング
