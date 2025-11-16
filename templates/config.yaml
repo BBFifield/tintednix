@@ -10,3 +10,6 @@ epiphany:
 tauon:
     extension: .ttheme
     output: base16
+uosc:
+    extension: .conf
+    output: uosc
