@@ -84,10 +84,10 @@ in rec {
           (lib.mkBefore (
             if target.schemeExtension == "scss"
             then ''
-              cp -rf /etc/${target.path}/color-schemes/"$scheme".css /etc/${target.path}/${target.schemeFilename}.css
+              cp -Pf /etc/${target.path}/color-schemes/"$scheme".css /etc/${target.path}/${target.schemeFilename}.css
             ''
             else ''
-              cp -rf /etc/${target.path}/color-schemes/"$scheme".${target.schemeExtension} /etc/${target.path}/${target.schemeFilename}.${target.schemeExtension}
+              cp -Pf /etc/${target.path}/color-schemes/"$scheme".${target.schemeExtension} /etc/${target.path}/${target.schemeFilename}.${target.schemeExtension}
             ''
           ))
           (

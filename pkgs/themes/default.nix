@@ -26,10 +26,10 @@
       ${dart-sass}/bin/sass  --load-path="$out/partials" "$src/gtk-3.0/gtk.scss" "$theme_dir/gtk-3.0/gtk.css";
       ${dart-sass}/bin/sass "$src/gtk-4.0/gtk.scss" "$theme_dir/gtk-4.0/gtk.css";
 
-      cp -rf "$src/index.theme" "$theme_dir";
+      cp -f "$src/index.theme" "$theme_dir";
       cp -rf "$src/assets" "$theme_dir/gtk-3.0";
-      cp -rf "${gtk3Colors}" "$theme_dir/gtk-3.0/colors.css";
-      cp -rf "${gtk4Colors}" "$theme_dir/gtk-4.0/colors.css";
+      cp -f "${gtk3Colors}" "$theme_dir/gtk-3.0/colors.css";
+      cp -f "${gtk4Colors}" "$theme_dir/gtk-4.0/colors.css";
 
       ln -sf "$theme_dir/gtk-3.0/assets" "$theme_dir/gtk-4.0/assets";
       ln -sf "$theme_dir/gtk-4.0/gtk.css" "$theme_dir/gtk-4.0/gtk-dark.css";
