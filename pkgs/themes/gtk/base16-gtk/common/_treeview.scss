@@ -69,7 +69,7 @@ $gtk-version: "gtk3" !default;
     color: h.token-resolve(base0D-black-60);
   }
   treeview.view.expander:disabled {
-    color: unquote("alpha(#{h.token-resolve(base0D)}), 0.1)");
+    color: unquote("alpha(#{h.token-resolve(base0D)}, 0.1)");
   }
   treeview.view.trough:selected:hover {
     box-shadow: none;
