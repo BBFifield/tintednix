@@ -208,27 +208,30 @@ in {
       lib.mkMerge [
         {
           home = targetFiles;
-          xdg.configFile."tintednix/settings.txt".text = let
-            bases = schemeCommonAttrs.${cfg.defaultSchemeName}.colors;
-          in ''
-            color_scheme=${cfg.defaultSchemeName}
-            base00=#${bases.base00}
-            base01=#${bases.base01}
-            base02=#${bases.base02}
-            base03=#${bases.base03}
-            base04=#${bases.base04}
-            base05=#${bases.base05}
-            base06=#${bases.base06}
-            base07=#${bases.base07}
-            base08=#${bases.base08}
-            base09=#${bases.base09}
-            base0A=#${bases.base0A}
-            base0B=#${bases.base0B}
-            base0C=#${bases.base0C}
-            base0D=#${bases.base0D}
-            base0E=#${bases.base0E}
-            base0F=#${bases.base0F}
-          '';
+          xdg.configFile."tintednix/settings.txt" = {
+            text = let
+              bases = schemeCommonAttrs.${cfg.defaultSchemeName}.colors;
+            in ''
+              color_scheme=${cfg.defaultSchemeName}
+              base00=#${bases.base00}
+              base01=#${bases.base01}
+              base02=#${bases.base02}
+              base03=#${bases.base03}
+              base04=#${bases.base04}
+              base05=#${bases.base05}
+              base06=#${bases.base06}
+              base07=#${bases.base07}
+              base08=#${bases.base08}
+              base09=#${bases.base09}
+              base0A=#${bases.base0A}
+              base0B=#${bases.base0B}
+              base0C=#${bases.base0C}
+              base0D=#${bases.base0D}
+              base0E=#${bases.base0E}
+              base0F=#${bases.base0F}
+            '';
+            force = true;
+          };
         }
         {
           home = let

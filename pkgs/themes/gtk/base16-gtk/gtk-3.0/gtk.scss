@@ -445,6 +445,8 @@ colorswatch {
 
 menubar {
   padding-bottom: 1px;
+  /*Ex: firefox menubar in downloads window*/
+  background-color: h.token-resolve(base01);
 }
 menubar > menuitem {
   margin: 3px;
