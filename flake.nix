@@ -28,6 +28,7 @@
               gtk3
             ];
           };
+          # Enter devshell like "nix develop .#buildCss"
           buildCss = pkgs.mkShell {
             buildInputs = with pkgs; [dart-sass];
             shellHook = ''
@@ -35,12 +36,12 @@
             '';
           };
         };
+        packages.default = pkgs.callPackage ./pkgs/base16-schemes {};
       };
       flake = {
         overlays.default = final: prev: {
           base16 = final.callPackage ./pkgs/base16-schemes {};
         };
-        packages.default = {pkgs, ...}: pkgs.callPackage ./pkgs/base16-schemes {};
         homeManagerModules.default = import ./nix/home-manager/hm-module.nix inputs;
         nixosModules.default = import ./nix/nixos/nixos-module.nix inputs;
       };
