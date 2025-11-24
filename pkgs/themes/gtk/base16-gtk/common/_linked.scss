@@ -202,10 +202,10 @@ $focus-pseudo: if($gtk-version == "gtk3", "focus", "focus-within");
       ".linked > combobox:hover + spinbutton",
       ".linked > scrolledwindow:hover + menubutton",
       ".linked > entry + menubutton > button:checked",
-      ".linked > entry:focus-within + button:not(:hover):not(:checked)",
-      ".linked > entry:focus-within + menubutton > button:not(:hover):not(:checked)",
-      ".linked > entry:focus-within + entry",
-      ".linked > entry:first-child:not(:focus-within)"
+      ".linked > entry:#{$focus-pseudo} + button:not(:hover):not(:checked)",
+      ".linked > entry:#{$focus-pseudo} + menubutton > button:not(:hover):not(:checked)",
+      ".linked > entry:#{$focus-pseudo} + entry",
+      ".linked > entry:first-child:not(:#{$focus-pseudo})"
     )
   ) {
     border-color: transparent;
