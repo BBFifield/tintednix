@@ -2,7 +2,7 @@ $gtk-version: "gtk3" !default;
 @use "helpers" as h;
 @use "shadows" as s;
 
-$immediate-child: if($gtk-version != "gtk3", "range", "content");
+$immediate-child: if($gtk-version != "gtk3", "range", "contents");
 
 @mixin scrollbar-styles() {
   scrollbar {

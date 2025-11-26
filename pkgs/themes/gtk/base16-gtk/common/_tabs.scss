@@ -60,7 +60,7 @@ $gtk-version: "gtk3" !default;
     border-left: 1px solid if($gtk-version != "gtk3", var(--border-color), h.token-resolve(base01-black-80));
     border-radius: 0px;
 
-    box-shadow: if($gtk-version != "gtk3", var(--shadow-separator-mimic-vertical), s.shadow-value(separator-vertical, base02));
+    box-shadow: if($gtk-version != "gtk3", var(--shadow-separator-mimic-vertical), s.shadow-value(separator-vertical, base01));
   }
   tab + tab:checked {
     margin-left: 1px;

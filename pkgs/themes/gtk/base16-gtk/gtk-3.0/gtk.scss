@@ -171,9 +171,8 @@ textview,
 spinbutton,
 popover,
 window {
-  font:
-    normal 16px "JetBrainsMono Nerd Font",
-    sans-serif;
+  font-style: normal;
+  font-size: 16px;
 }
 sort-indicator,
 cellview,
@@ -999,35 +998,34 @@ row:not(.sidebar-row) ~ separator {
   border-radius: 0px;
   background-color: transparent;
 }
-.sidebar > scrolledwindow > viewport > list {
+.sidebar viewport > list {
   background-color: h.token-resolve(base01);
 }
-.sidebar > scrolledwindow > viewport > list > header {
+.sidebar viewport > list > header {
   padding-right: 12px;
   padding-left: 12px;
 }
-.sidebar > scrolledwindow > viewport > list > separator.horizontal {
-  all: unset;
-}
 list > row.sidebar-row,
-.sidebar > scrolledwindow > viewport > list > row {
+.sidebar viewport > list > row {
   border-bottom-color: transparent;
   box-shadow: none;
 }
 list > row.sidebar-row,
 list > row.sidebar-row:hover,
-.sidebar > scrolledwindow > viewport > list > row,
-.sidebar > scrolledwindow > viewport > list > row:hover {
+.sidebar viewport > list > row,
+.sidebar viewport > list > row:hover {
   min-height: 35px;
-  margin: 1px 6px 1px 7px;
-  padding: 0px 1px 0px 0px;
+  margin: 1px 6px 0px 7px;
+  padding: 2px 1px 3px 0px;
 }
-.sidebar > scrolledwindow > viewport > list > row:active,
-.sidebar > scrolledwindow > viewport > list > row:selected,
+.sidebar viewport > list > row:active,
+.sidebar viewport > list > row:selected,
 scrolledwindow > viewport list > row.sidebar-row:active,
-scrolledwindow > viewport list > row.sidebar-row:selected {
+scrolledwindow > viewport list > row.sidebar-row:selected,
+stacksidebar > scrolledwindow > viewport > list > row.activatable:active,
+stacksidebar > scrolledwindow > viewport > list > row.activatable:selected {
   margin: 0px 6px 0px 6px;
-  padding: 1px;
+  padding: 3px 1px 3px 1px;
   background-color: transparent;
   @include s.apply-shadow(inset, base01);
 }
@@ -1119,7 +1117,7 @@ frame list > row.activatable:selected {
 
 /*Ex: file picker*/
 .sidebar list row {
-  min-height: 36px;
+  min-height: 35px;
 }
 .sidebar list > row > label {
   padding: 0px 6px 0px 6px;
@@ -1161,8 +1159,12 @@ filechooser #pathbarbox {
 #pathbarbox button {
   background-color: transparent;
 }
-#pathbarbox .path-bar.linked > button:not(.slider-button) + button,
-#pathbarbox .path-bar.linked > button:not(.slider-button) + button:not(.slider-button) {
+#pathbarbox .path-bar.linked > button + button.slider-button,
+#pathbarbox .path-bar.linked > button.slider-button + button:not(:hover):not(:active):not(:checked) {
+  border-color: transparent;
+}
+#pathbarbox .path-bar.linked > button:not(.slider-button):not(:hover):not(active):not(:checked) + button:not(.slider-button):not(:hover):not(active):not(:checked) {
+  border-color: h.token-resolve(base01-black-80);
   @include s.apply-shadow(separator-vertical, base01);
 }
 #pathbarbox .path-bar.linked > button.slider-button + button:not(:hover):not(:active):not(:checked),
@@ -1179,13 +1181,15 @@ filechooser #pathbarbox {
   padding: 1px 9px 2px 8px;
   border-radius: 50px;
 }
+#pathbarbox button.slider-button:hover {
+  border-color: h.token-resolve(base0D);
+  background-color: h.token-resolve(base0D);
+  @include s.apply-shadow(thin, base0D);
+}
 #pathbarbox button.slider-button:active,
 #pathbarbox button.slider-button:checked {
   margin: 0px 1px 0px 1px;
   padding: 2px 9px;
-}
-#pathbarbox button.slider-button:hover {
-  @include s.apply-shadow(thin, base0D);
 }
 #pathbarbox button.text-button.radio,
 #pathbarbox button.text-button.toggle {
@@ -1200,11 +1204,11 @@ filechooser #pathbarbox {
 #pathbarbox button:hover:checked {
   color: h.token-resolve(base01);
 }
-#pathbarbox button *,
-#pathbarbox button:hover:active *,
-#pathbarbox button:hover:checked * {
-  color: h.token-resolve(base0D);
-}
+// #pathbarbox button *,
+// #pathbarbox button:hover:active *,
+// #pathbarbox button:hover:checked * {
+//   color: h.token-resolve(base0D);
+// }
 #pathbarbox button:not(#_):hover:not(:active):not(:checked) * {
   color: h.token-resolve(base01);
 }
